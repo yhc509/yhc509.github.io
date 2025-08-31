@@ -1,0 +1,165 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Gatsby 5.14.1"/><style data-href="/styles.9e907bc32054b7771552.css" data-identity="gatsby-global-css">code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#ccc;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;white-space:pre;word-break:normal;word-spacing:normal}pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#2d2d2d}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.block-comment,.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#999}.token.punctuation{color:#ccc}.token.attr-name,.token.deleted,.token.namespace,.token.tag{color:#e2777a}.token.function-name{color:#6196cc}.token.boolean,.token.function,.token.number{color:#f08d49}.token.class-name,.token.constant,.token.property,.token.symbol{color:#f8c555}.token.atrule,.token.builtin,.token.important,.token.keyword,.token.selector{color:#cc99cd}.token.attr-value,.token.char,.token.regex,.token.string,.token.variable{color:#7ec699}.token.entity,.token.operator,.token.url{color:#67cdcc}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.inserted{color:green}</style><link rel="canonical" href="https://yhc509.github.io/langchain/4_conversation/" data-baseprotocol="https:" data-basehost="yhc509.github.io"/><link rel="sitemap" type="application/xml" href="/sitemap-index.xml"/><meta name="google-site-verification" content="0V6Pp62k0qLSCFq479si1XrTMvN4NjFR8estP6u-Zds"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><style data-emotion="css 13ku56z">.css-13ku56z{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;height:100%;}</style><main class="css-13ku56z e1strnqo0"><style data-emotion="css-global 17bu09z">@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap');*{padding:0;margin:0;box-sizing:border-box;font-family:'Hahmlet',serif;color:inherit;-webkit-text-decoration:none;text-decoration:none;}html,body,#___gatsby{width:100%;height:auto;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;}a,a:visited,a:active{-webkit-text-decoration:none;text-decoration:none;color:inherit;}a:hover{color:inherit;-webkit-text-decoration:none;text-decoration:none;cursor:pointer;}img{position:relative;display:block;margin-left:auto;margin-right:auto;max-width:768px;text-align:left;}</style><style data-emotion="css 1u7ncg7">.css-1u7ncg7{width:100%;background-image:linear-gradient(60deg, #29323c 0%, #485563 100%);color:#ffffff;}</style><div class="css-1u7ncg7 e160b013"><style data-emotion="css 5c3sm8">.css-5c3sm8{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:768px;height:80px;margin:0 auto;}padding-bottom:12px@media (max-width: 768px){.css-5c3sm8{width:100%;height:80px;padding:0 12px;}}</style><div class="css-5c3sm8 e160b012"><style data-emotion="css 9p6ebr">.css-9p6ebr{margin-top:5px;font-size:24px;font-weight:700;}@media (max-width: 768px){.css-9p6ebr{font-size:20px;margin-left:16px;}}</style><div class="css-9p6ebr e160b010">yhc509`s Dev Journey</div></div></div><style data-emotion="css 183vxbl">.css-183vxbl{position:relative;width:100%;}@media (max-width: 768px){.css-183vxbl{width:100%;}}</style><div class="css-183vxbl e1opi4mu1"><style data-emotion="css uadz8j">.css-uadz8j{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;height:100%;margin:0 auto;padding:30px 0;}@media (max-width: 768px){.css-uadz8j{width:100%;padding:24px 16px;}}</style><div class="css-uadz8j e1st1jau5"><style data-emotion="css 1g6v2wt">.css-1g6v2wt{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#ffffff;color:#000000;font-size:22px;cursor:pointer;box-shadow:0 0 10px rgba(0, 0, 0, 0.3);}@media (max-width: 768px){.css-1g6v2wt{width:30px;height:30px;font-size:16px;}}</style><div class="css-1g6v2wt e1st1jau4"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></div><style data-emotion="css 1twr1m2">.css-1twr1m2{display:-webkit-box;overflow:hidden;overflow-wrap:break-word;margin-top:auto;text-overflow:ellipsis;white-space:normal;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:32px;font-weight:800;}@media (max-width: 768px){.css-1twr1m2{font-size:24px;}}</style><div class="css-1twr1m2 e1st1jau3">LangChain (4) - Conversation</div><style data-emotion="css yijt7k">.css-yijt7k{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin-top:10px;font-size:14px;font-weight:700;}@media (max-width: 768px){.css-yijt7k{-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-align-items:flex-start;-webkit-box-align:flex-start;-ms-flex-align:flex-start;align-items:flex-start;font-size:14px;font-weight:400;}}</style><div class="css-yijt7k e1st1jau2"><style data-emotion="css 1bobky6">.css-1bobky6{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-top:10px;margin:10px -5px;}</style><div class="css-1bobky6 e1st1jau1"><style data-emotion="css 1e9ac4l">.css-1e9ac4l{margin:2.5px 5px;padding:3px 5px;border-radius:3px;background:black;font-size:12px;font-weight:700;color:white;}</style><div class="css-1e9ac4l e1st1jau0">LangChain</div></div><div>2024.04.18.</div></div></div></div><style data-emotion="css 12iq82c">.css-12iq82c{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;margin:0 auto;padding:100px 0;word-break:break-all;line-height:1.8;font-size:16px;font-weight:400;}.css-12iq82c p{padding:3px 0;}.css-12iq82c h1,.css-12iq82c h2,.css-12iq82c h3{font-weight:800;margin-bottom:18px;}.css-12iq82c *+h1,.css-12iq82c *+h2,.css-12iq82c *+h3{margin-top:16px;margin-bottom:0px;}.css-12iq82c hr+h1,.css-12iq82c hr+h2,.css-12iq82c hr+h3{margin-top:0;}.css-12iq82c h1{font-size:28px;}.css-12iq82c h2{font-size:24px;}.css-12iq82c h3{font-size:20px;}.css-12iq82c blockquote{margin:10px 0;padding:5px 5px;border-left:2px solid #000000;font-weight:800;}.css-12iq82c ol,.css-12iq82c ul{margin-left:20px;padding:4px 0;}.css-12iq82c hr{border:1px solid #646464;margin:64px 0;}.css-12iq82c a{color:#4263eb;-webkit-text-decoration:underline;text-decoration:underline;}.css-12iq82c pre[class*='language-']{margin:5px 0;padding:10px;font-size:14px;}.css-12iq82c pre[class*='language-']::-webkit-scrollbar-thumb{background:rgba(255, 255, 255, 0.5);border-radius:10px;}.css-12iq82c code[class*='language-'],.css-12iq82c pre[class*='language-']{tab-size:2;}@media (max-width: 768px){.css-12iq82c{width:100%;padding:40px 16px;line-height:1.6;font-size:14px;}.css-12iq82c h1{font-size:23px;}.css-12iq82c h2{font-size:20px;}.css-12iq82c h3{font-size:17px;}.css-12iq82c hr{margin:50px 0;}}</style><div class="css-12iq82c e1ijh0y10"><p>사람끼리 대화를 할 때는 이전 맥락을 알아야 한다. LLM도 마찬가지다. 체인 실행 전의 상황을 기억하기 위해 memory를 사용한다. 여기에는 여러 가지 전략이 있다.</p>
+<hr>
+<h2>ConversationBufferMemory</h2>
+<p>대화 내용을 그대로 기억한다.</p>
+<div class="gatsby-highlight" data-language="python3"><pre class="language-python3"><code class="language-python3">from langchain.chains import ConversationChain
+from langchain.memory import ConversationBufferMemory
+
+memory = ConversationBufferMemory()
+
+conversation = ConversationChain(
+    llm=llm,
+    memory=memory,
+    verbose=True
+)
+output = conversation.predict(input=&quot;내 이름은 timu야.&quot;)
+output = conversation.predict(input=&quot;내 이름이 뭐라고 했지?&quot;)
+print(output)</code></pre></div>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">Human: 내 이름은 timu야.
+AI: 안녕 timu<span class="token operator">!</span> 나는 AI야. 너의 이름은 멋져<span class="token operator">!</span> 어떻게 지내?
+Human: 내 이름이 뭐라고 했지?
+AI:  네 이름은 timu야. 정말 멋지다<span class="token operator">!</span> 지금 어떻게 지내고 있니?</code></pre></div>
+<h2><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/56ce88ab494376b4c3d38b7562cd12a2/5b101/ConversationBufferMemory.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 40.10416666666667%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAAAsTAAALEwEAmpwYAAABoUlEQVR42j1Sy3abMBTkdxpjwAGEQEJIYDAPG+w6jbGTk3bRLPr4/+3kojpd3DOjuUcj3YcTxwm4MAi5QZRkYFwiFZo0BZEblNsW26a3aKodlN5aPS8qFKa2Z6nKf0ia4649pJIM5YiYC0osyYoulMhkYbmpGrq8tZxnOYLHGJuQ2fjkj1FiubNy1wiYhBcpEhiSTCFmHEIqcM7JNEeaCbAkhcwVclXcUSPLMqpGQhWGtAKCuOMGHExPYGZGrJ/ByzN0fUTdP2F8+o5+nDEcX7A7XNATtuMVw+kV07cflH9Du39GN11tbneY6YdhCVmdoA/vEM0bTHfDOP/G8foX7defGC+/cLr9QX9+h2wuULsbdPfyP/J6vmuvFp2HlYu152HDFPxQwA8CKo+j0AbalBYFlW3KypbK0xQJtSKKmQ2WJIQxwiiiFqVk6G7g+RvqB7cTjhKJnJrfDSP24xnD4YSm3aNuB+JHqy9TFblGGHN8WflYrQMbD26wGPrWMKWX40QgYqmdZjdM6PcTrUxnTZq74aJVdWu3YDH1ghCLx6fpBwhQFuEcEG5HAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/56ce88ab494376b4c3d38b7562cd12a2/a59e9/ConversationBufferMemory.webp 192w,
+/static/56ce88ab494376b4c3d38b7562cd12a2/0ca9f/ConversationBufferMemory.webp 384w,
+/static/56ce88ab494376b4c3d38b7562cd12a2/dc9b9/ConversationBufferMemory.webp 768w,
+/static/56ce88ab494376b4c3d38b7562cd12a2/f2e9b/ConversationBufferMemory.webp 773w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/56ce88ab494376b4c3d38b7562cd12a2/3b721/ConversationBufferMemory.png 192w,
+/static/56ce88ab494376b4c3d38b7562cd12a2/66595/ConversationBufferMemory.png 384w,
+/static/56ce88ab494376b4c3d38b7562cd12a2/fe486/ConversationBufferMemory.png 768w,
+/static/56ce88ab494376b4c3d38b7562cd12a2/5b101/ConversationBufferMemory.png 773w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/56ce88ab494376b4c3d38b7562cd12a2/fe486/ConversationBufferMemory.png"
+            alt="ConversationBufferMemory"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></h2>
+<h2>ConversationBufferWindowMemory</h2>
+<p>최근 k개의 대화 내용을 기억한다.</p>
+<div class="gatsby-highlight" data-language="python3"><pre class="language-python3"><code class="language-python3">from langchain.chains import ConversationChain
+from langchain.memory import ConversationBufferWindowMemory
+
+memory = ConversationBufferWindowMemory(k=1)
+
+conversation = ConversationChain(
+    llm=llm,
+    memory=memory,
+    verbose=True
+)
+output = conversation.predict(input=&quot;내 이름은 timu야.&quot;)
+output = conversation.predict(input=&quot;안녕?&quot;)
+output = conversation.predict(input=&quot;내 이름이 뭐라고 했지?&quot;)
+print(output)</code></pre></div>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">Human: 내 이름은 timu야.
+AI:  안녕 timu<span class="token operator">!</span> 나는 AI야. 너의 이름은 잘 지었습니다. 
+Human: 안녕?
+AI:  안녕<span class="token operator">!</span> 오늘은 날씨가 매우 좋아요. 지금 서울은 <span class="token number">28</span>도이고 햇빛이 화사해요. 당신은 오늘 무엇을 하고 싶으세요?
+Human: 내 이름이 뭐라고 했지?
+AI: 죄송하지만, 제가 당신의 이름을 기억하지 못해요. 제가 도와드릴 수 있는 다른 것이 있나요?</code></pre></div>
+<hr>
+<h2>ConversationTokenBufferMemory</h2>
+<p>대화 내용을 최대 토큰 범위 내에서 기억한다.</p>
+<div class="gatsby-highlight" data-language="python3"><pre class="language-python3"><code class="language-python3">from langchain.chains import ConversationChain
+from langchain.memory import ConversationTokenBufferMemory
+
+memory = ConversationTokenBufferMemory(llm=llm, max_token_limit=1000)
+
+conversation = ConversationChain(
+    llm=llm,
+    memory=memory,
+    verbose=True
+)
+output = conversation.predict(input=&quot;내 이름은 timu야.&quot;)
+output = conversation.predict(input=&quot;안녕?&quot;)
+output = conversation.predict(input=&quot;내 이름이 뭐라고 했지?&quot;)
+print(output)</code></pre></div>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">Human: 내 이름은 timu야.
+AI: 안녕 timu야<span class="token operator">!</span> 반가워요. 내 이름은 AI입니다. 오늘 날씨는 매우 화창하고 맑아요. 지금 온도는 섭씨 <span class="token number">25</span>도이며 습도는 <span class="token number">50</span>%입니다. 무슨 얘기를 나눠볼까요?
+Human: 안녕?
+AI: 안녕하세요<span class="token operator">!</span> 오늘은 어떤 주제로 대화를 나누어볼까요? 저는 여러 분야에 대해 알고 있습니다.부탁하시면 궁금한 것에 대해 설명해드릴게요.
+Human: 내 이름이 뭐라고 했지?
+AI: timu님이신가요?</code></pre></div>
+<p>max_token_limit을 100 정도로 하면 내 이름을 기억하지 못한다.</p>
+<hr>
+<h2>ConversationSummaryMemory</h2>
+<p>대화 내용을 요약해서 기억한다.</p>
+<div class="gatsby-highlight" data-language="python3"><pre class="language-python3"><code class="language-python3">from langchain.chains import ConversationChain
+from langchain.memory import ConversationSummaryMemory
+
+memory = ConversationSummaryMemory(llm=llm)
+
+conversation = ConversationChain(
+    llm=llm,
+    memory=memory,
+    verbose=True
+)
+output = conversation.predict(input=&quot;내 이름은 timu야.&quot;)
+output = conversation.predict(input=&quot;안녕?&quot;)
+output = conversation.predict(input=&quot;내 이름이 뭐라고 했지?&quot;)
+print(output)</code></pre></div>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">Human: 내 이름이 뭐라고 했지?
+AI: 당신은 timu라고 말씀하셨네요. 행복한 하루 되세요<span class="token operator">!</span></code></pre></div>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">The human introduces themselves as timu, prompting the AI to respond <span class="token keyword">in</span> Korean by greeting timu and identifying as an OpenAI language model ready to help. The AI asks timu what assistance they need with a friendly <span class="token string">"무엇을 도와드릴까요?"</span> When asked about the human's name, the AI confirms it as timu and wishes them a happy day.</code></pre></div>
+<hr>
+<h2>ConversationSummaryBufferMemory</h2>
+<p>ConversationTokenBufferMemory과 ConversationSummaryMemory 이 결합된 형태.</p>
+<p>대화 내용을 요약해서 기억한다. 그리고 최근 대화를 최대 토큰 범위 내에서 기억한다.</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">from langchain.chains <span class="token function">import</span> ConversationChain
+from langchain.memory <span class="token function">import</span> ConversationSummaryBufferMemory
+
+memory <span class="token operator">=</span> ConversationSummaryBufferMemory<span class="token punctuation">(</span>llm<span class="token operator">=</span>llm, <span class="token assign-left variable">max_token_limit</span><span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">)</span>
+
+conversation <span class="token operator">=</span> ConversationChain<span class="token punctuation">(</span>
+    <span class="token assign-left variable">llm</span><span class="token operator">=</span>llm,
+    <span class="token assign-left variable">memory</span><span class="token operator">=</span>memory,
+    <span class="token assign-left variable">verbose</span><span class="token operator">=</span>True
+<span class="token punctuation">)</span>
+output <span class="token operator">=</span> conversation.predict<span class="token punctuation">(</span>input<span class="token operator">=</span><span class="token string">"내 이름은 timu야."</span><span class="token punctuation">)</span>
+output <span class="token operator">=</span> conversation.predict<span class="token punctuation">(</span>input<span class="token operator">=</span><span class="token string">"안녕?"</span><span class="token punctuation">)</span>
+output <span class="token operator">=</span> conversation.predict<span class="token punctuation">(</span>input<span class="token operator">=</span><span class="token string">"내 이름이 뭐라고 했지?"</span><span class="token punctuation">)</span>
+print<span class="token punctuation">(</span>output<span class="token punctuation">)</span></code></pre></div>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token string">'System: The human introduces themselves as timu. The AI responds warmly and asks how it can help timu.
+Human: 안녕?
+AI: 안녕하세요! 오늘 기분이 어떠신가요?
+Human: 내 이름이 뭐라고 했지?
+AI: timu님이라고 했어요. 좋은 이름이에요!'</span></code></pre></div>
+<hr>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://python.langchain.com/docs/modules/memory/types/buffer/" target="_blank" rel="nofollow">Conversation Buffer</a></li>
+</ul></div><style data-emotion="css hx9xpc">@media (max-width: 768px){.css-hx9xpc{padding:0 20px;}}</style><div class="css-hx9xpc e1gqsjds0"></div><style data-emotion="css lffphe">.css-lffphe{display:grid;place-items:center;margin-top:auto;padding:36px 0;font-size:15px;text-align:center;line-height:1.5;}@media (max-width: 768px){.css-lffphe{font-size:13px;}}</style><footer class="css-lffphe e1oae0v80">© 2025 yhc509, All rights reserved.</footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/langchain/4_conversation/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx.js\"],\"component---src-pages-info-tsx\":[\"/component---src-pages-info-tsx.js\"],\"component---src-templates-post-template-tsx\":[\"/component---src-templates-post-template-tsx.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="41fb7f600fa9551db4d9";</script><script src="/webpack-runtime.js" async></script><script src="/framework.js" async></script><script src="/app.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>

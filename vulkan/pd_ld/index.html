@@ -1,0 +1,87 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Gatsby 5.14.1"/><style data-href="/styles.9e907bc32054b7771552.css" data-identity="gatsby-global-css">code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#ccc;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;white-space:pre;word-break:normal;word-spacing:normal}pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#2d2d2d}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.block-comment,.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#999}.token.punctuation{color:#ccc}.token.attr-name,.token.deleted,.token.namespace,.token.tag{color:#e2777a}.token.function-name{color:#6196cc}.token.boolean,.token.function,.token.number{color:#f08d49}.token.class-name,.token.constant,.token.property,.token.symbol{color:#f8c555}.token.atrule,.token.builtin,.token.important,.token.keyword,.token.selector{color:#cc99cd}.token.attr-value,.token.char,.token.regex,.token.string,.token.variable{color:#7ec699}.token.entity,.token.operator,.token.url{color:#67cdcc}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.inserted{color:green}</style><link rel="canonical" href="https://yhc509.github.io/vulkan/pd_ld/" data-baseprotocol="https:" data-basehost="yhc509.github.io"/><link rel="sitemap" type="application/xml" href="/sitemap-index.xml"/><meta name="google-site-verification" content="0V6Pp62k0qLSCFq479si1XrTMvN4NjFR8estP6u-Zds"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><style data-emotion="css 13ku56z">.css-13ku56z{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;height:100%;}</style><main class="css-13ku56z e1strnqo0"><style data-emotion="css-global 17bu09z">@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap');*{padding:0;margin:0;box-sizing:border-box;font-family:'Hahmlet',serif;color:inherit;-webkit-text-decoration:none;text-decoration:none;}html,body,#___gatsby{width:100%;height:auto;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;}a,a:visited,a:active{-webkit-text-decoration:none;text-decoration:none;color:inherit;}a:hover{color:inherit;-webkit-text-decoration:none;text-decoration:none;cursor:pointer;}img{position:relative;display:block;margin-left:auto;margin-right:auto;max-width:768px;text-align:left;}</style><style data-emotion="css 1u7ncg7">.css-1u7ncg7{width:100%;background-image:linear-gradient(60deg, #29323c 0%, #485563 100%);color:#ffffff;}</style><div class="css-1u7ncg7 e160b013"><style data-emotion="css 5c3sm8">.css-5c3sm8{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:768px;height:80px;margin:0 auto;}padding-bottom:12px@media (max-width: 768px){.css-5c3sm8{width:100%;height:80px;padding:0 12px;}}</style><div class="css-5c3sm8 e160b012"><style data-emotion="css 9p6ebr">.css-9p6ebr{margin-top:5px;font-size:24px;font-weight:700;}@media (max-width: 768px){.css-9p6ebr{font-size:20px;margin-left:16px;}}</style><div class="css-9p6ebr e160b010">yhc509`s Dev Journey</div></div></div><style data-emotion="css 183vxbl">.css-183vxbl{position:relative;width:100%;}@media (max-width: 768px){.css-183vxbl{width:100%;}}</style><div class="css-183vxbl e1opi4mu1"><style data-emotion="css uadz8j">.css-uadz8j{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;height:100%;margin:0 auto;padding:30px 0;}@media (max-width: 768px){.css-uadz8j{width:100%;padding:24px 16px;}}</style><div class="css-uadz8j e1st1jau5"><style data-emotion="css 1g6v2wt">.css-1g6v2wt{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#ffffff;color:#000000;font-size:22px;cursor:pointer;box-shadow:0 0 10px rgba(0, 0, 0, 0.3);}@media (max-width: 768px){.css-1g6v2wt{width:30px;height:30px;font-size:16px;}}</style><div class="css-1g6v2wt e1st1jau4"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></div><style data-emotion="css 1twr1m2">.css-1twr1m2{display:-webkit-box;overflow:hidden;overflow-wrap:break-word;margin-top:auto;text-overflow:ellipsis;white-space:normal;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:32px;font-weight:800;}@media (max-width: 768px){.css-1twr1m2{font-size:24px;}}</style><div class="css-1twr1m2 e1st1jau3">Physical device &amp; Logical device</div><style data-emotion="css yijt7k">.css-yijt7k{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin-top:10px;font-size:14px;font-weight:700;}@media (max-width: 768px){.css-yijt7k{-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-align-items:flex-start;-webkit-box-align:flex-start;-ms-flex-align:flex-start;align-items:flex-start;font-size:14px;font-weight:400;}}</style><div class="css-yijt7k e1st1jau2"><style data-emotion="css 1bobky6">.css-1bobky6{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-top:10px;margin:10px -5px;}</style><div class="css-1bobky6 e1st1jau1"><style data-emotion="css 1e9ac4l">.css-1e9ac4l{margin:2.5px 5px;padding:3px 5px;border-radius:3px;background:black;font-size:12px;font-weight:700;color:white;}</style><div class="css-1e9ac4l e1st1jau0">Vulkan</div></div><div>2022.08.04.</div></div></div></div><style data-emotion="css 12iq82c">.css-12iq82c{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;margin:0 auto;padding:100px 0;word-break:break-all;line-height:1.8;font-size:16px;font-weight:400;}.css-12iq82c p{padding:3px 0;}.css-12iq82c h1,.css-12iq82c h2,.css-12iq82c h3{font-weight:800;margin-bottom:18px;}.css-12iq82c *+h1,.css-12iq82c *+h2,.css-12iq82c *+h3{margin-top:16px;margin-bottom:0px;}.css-12iq82c hr+h1,.css-12iq82c hr+h2,.css-12iq82c hr+h3{margin-top:0;}.css-12iq82c h1{font-size:28px;}.css-12iq82c h2{font-size:24px;}.css-12iq82c h3{font-size:20px;}.css-12iq82c blockquote{margin:10px 0;padding:5px 5px;border-left:2px solid #000000;font-weight:800;}.css-12iq82c ol,.css-12iq82c ul{margin-left:20px;padding:4px 0;}.css-12iq82c hr{border:1px solid #646464;margin:64px 0;}.css-12iq82c a{color:#4263eb;-webkit-text-decoration:underline;text-decoration:underline;}.css-12iq82c pre[class*='language-']{margin:5px 0;padding:10px;font-size:14px;}.css-12iq82c pre[class*='language-']::-webkit-scrollbar-thumb{background:rgba(255, 255, 255, 0.5);border-radius:10px;}.css-12iq82c code[class*='language-'],.css-12iq82c pre[class*='language-']{tab-size:2;}@media (max-width: 768px){.css-12iq82c{width:100%;padding:40px 16px;line-height:1.6;font-size:14px;}.css-12iq82c h1{font-size:23px;}.css-12iq82c h2{font-size:20px;}.css-12iq82c h3{font-size:17px;}.css-12iq82c hr{margin:50px 0;}}</style><div class="css-12iq82c e1ijh0y10"><p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/60fe30efd0d3821e44e46b4aa45cbecc/95fbb/pd_ld.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsSAAALEgHS3X78AAACrElEQVR42h1SS2sTURidf+FCEN0oUqgI0rqqCCJudOFG0IUrxYWCLsSNKBTUjQXBR6VqjW1Nk0ya9ySTzCvz6mQm72fbpIWKCNKFf+F4MovL5X73fueexyfcvT4Pzyhgp+uh17DQDUy0awYcNc8lwVYKqFVl+NUyPL2IuqVAl1LIxiLYXF3Gt49LePfmJV48fYhH925DuHX1PBszGLYctDwddbuC/WEL+ztd5MUNiD++QMmJCFjv102M+K7DDz2jiB7Pv8Zt/D0c4vekg92OBeHa/BlokohR20XTVeFbMsYE/Hf0B161BEvJIbDKMEppVLIJaIUkagTzTRkma3Yli4ZdxrBpci9CuDJ3Gmo+xoJDdgp8XloK5WoFNpVDZq1tnTZweRp6gUEmLmsaxMgKur6OIa0aNEw07RKEuZmTlBRFy9VQycQhp+PIxtchbW2SFX93lFDiiCDjfi0E2x/4lG7DIfspoCWnoBficMpJCDcvz6KSXkffN2GVM8gnNlBKxSizQp9k+maj4xuoEnwqeafthCx9swRXoxJK9k0JppyEq6Yg3FiYQSkZwaTnk6WKpqNy19GkpH7dCiXbtEDNi0xaxuFeM5SeiUZQSKyhN5XcrKJbU1HTM/TwwileruCgF8Au8zcGMRkEmPR9SgvCs0vA4laUoAkyTWGXAbqVHCQCGkURg7qB9jYV6WkIC7PHORofcNAP0CbDvl/lhRSOhcHmWlXCuLdNNuv0N0pZeYw7HuqUnFj9RN9/hmB1q8jE6eGlcyew+v41kzJZLIUPLY6DnIryQY6BaOFI7BF0r8tguEYtk3WFclWytTCi5GFD49jkIVw8ewyLzx4wjK/4vLSIteW3TCwGSYzA1wuhvGkQU9BBw2AgWuhXl4C2vIU07frOnlfPn+Dx/Tv4D3g/shqi2rnKAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/60fe30efd0d3821e44e46b4aa45cbecc/a59e9/pd_ld.webp 192w,
+/static/60fe30efd0d3821e44e46b4aa45cbecc/0ca9f/pd_ld.webp 384w,
+/static/60fe30efd0d3821e44e46b4aa45cbecc/dc9b9/pd_ld.webp 768w,
+/static/60fe30efd0d3821e44e46b4aa45cbecc/e2c2f/pd_ld.webp 1152w,
+/static/60fe30efd0d3821e44e46b4aa45cbecc/e0c4a/pd_ld.webp 1172w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/60fe30efd0d3821e44e46b4aa45cbecc/3b721/pd_ld.png 192w,
+/static/60fe30efd0d3821e44e46b4aa45cbecc/66595/pd_ld.png 384w,
+/static/60fe30efd0d3821e44e46b4aa45cbecc/fe486/pd_ld.png 768w,
+/static/60fe30efd0d3821e44e46b4aa45cbecc/d2d74/pd_ld.png 1152w,
+/static/60fe30efd0d3821e44e46b4aa45cbecc/95fbb/pd_ld.png 1172w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/60fe30efd0d3821e44e46b4aa45cbecc/fe486/pd_ld.png"
+            alt="pd_ld"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<ul>
+<li>어플리케이션에서는 Vulkan API Core Instance를 생성하여 사용한다.</li>
+<li>Physical device는 장치 하드웨어(GPU 등)를 말한다. 하나의 PC에 여러개의 장치가 연결될 수 있으므로, Physical device도 여러개가 존재할 수 있다.</li>
+<li>Core는 Physical device가 Vulkan을 지원하는지 확인한다.
+<ul>
+<li>Vulkan을 지원하는지</li>
+<li>지원하는 Vulkan 버전</li>
+<li>하드웨어 기능 (Texture composition / VR capabilities / Dedicated GPU / Integrated GPU)</li>
+</ul>
+</li>
+<li>Physical device가 사용하려는 명령어를 지원하는지 확인해야 한다. (queue families)
+<ul>
+<li>Graphics / Compute / Transfer / Sparse memory</li>
+</ul>
+</li>
+<li>사용할 Physical device가 결정되면 인터페이스할 Logical device를 생성한다.
+<ul>
+<li>당연하게도 Logical device를 생성하려면 Physical device가 필요하다.</li>
+<li>사용 목적에 따라 하나의 Physical Device가 여러개의 Logical Device를 가질 수 있다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>참고 자료</h2>
+<ul>
+<li>
+<p><a href="https://www.youtube.com/watch?v=DRl-3c3OJLU" target="_blank" rel="nofollow">Youtube Cuda Education - Vulkan API Discussion | Physical Device &#x26; Logical Device | Cuda Education</a></p>
+</li>
+<li>
+<p><a href="https://vulkan-tutorial.com/Drawing_a_triangle/Setup/Physical_devices_and_queue_families" target="_blank" rel="nofollow">Vulkan Tutorial - Physical devices and queue families</a></p>
+</li>
+<li>
+<p><a href="https://vulkan-tutorial.com/Drawing_a_triangle/Setup/Logical_device_and_queues" target="_blank" rel="nofollow">Vulkan Tutorial - Logical device and queues</a></p>
+</li>
+</ul></div><style data-emotion="css hx9xpc">@media (max-width: 768px){.css-hx9xpc{padding:0 20px;}}</style><div class="css-hx9xpc e1gqsjds0"></div><style data-emotion="css lffphe">.css-lffphe{display:grid;place-items:center;margin-top:auto;padding:36px 0;font-size:15px;text-align:center;line-height:1.5;}@media (max-width: 768px){.css-lffphe{font-size:13px;}}</style><footer class="css-lffphe e1oae0v80">© 2025 yhc509, All rights reserved.</footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/vulkan/pd_ld/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx.js\"],\"component---src-pages-info-tsx\":[\"/component---src-pages-info-tsx.js\"],\"component---src-templates-post-template-tsx\":[\"/component---src-templates-post-template-tsx.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="41fb7f600fa9551db4d9";</script><script src="/webpack-runtime.js" async></script><script src="/framework.js" async></script><script src="/app.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>

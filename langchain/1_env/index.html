@@ -1,0 +1,197 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Gatsby 5.14.1"/><style data-href="/styles.9e907bc32054b7771552.css" data-identity="gatsby-global-css">code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#ccc;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;white-space:pre;word-break:normal;word-spacing:normal}pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#2d2d2d}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.block-comment,.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#999}.token.punctuation{color:#ccc}.token.attr-name,.token.deleted,.token.namespace,.token.tag{color:#e2777a}.token.function-name{color:#6196cc}.token.boolean,.token.function,.token.number{color:#f08d49}.token.class-name,.token.constant,.token.property,.token.symbol{color:#f8c555}.token.atrule,.token.builtin,.token.important,.token.keyword,.token.selector{color:#cc99cd}.token.attr-value,.token.char,.token.regex,.token.string,.token.variable{color:#7ec699}.token.entity,.token.operator,.token.url{color:#67cdcc}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.inserted{color:green}</style><link rel="canonical" href="https://yhc509.github.io/langchain/1_env/" data-baseprotocol="https:" data-basehost="yhc509.github.io"/><link rel="sitemap" type="application/xml" href="/sitemap-index.xml"/><meta name="google-site-verification" content="0V6Pp62k0qLSCFq479si1XrTMvN4NjFR8estP6u-Zds"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><style data-emotion="css 13ku56z">.css-13ku56z{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;height:100%;}</style><main class="css-13ku56z e1strnqo0"><style data-emotion="css-global 17bu09z">@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap');*{padding:0;margin:0;box-sizing:border-box;font-family:'Hahmlet',serif;color:inherit;-webkit-text-decoration:none;text-decoration:none;}html,body,#___gatsby{width:100%;height:auto;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;}a,a:visited,a:active{-webkit-text-decoration:none;text-decoration:none;color:inherit;}a:hover{color:inherit;-webkit-text-decoration:none;text-decoration:none;cursor:pointer;}img{position:relative;display:block;margin-left:auto;margin-right:auto;max-width:768px;text-align:left;}</style><style data-emotion="css 1u7ncg7">.css-1u7ncg7{width:100%;background-image:linear-gradient(60deg, #29323c 0%, #485563 100%);color:#ffffff;}</style><div class="css-1u7ncg7 e160b013"><style data-emotion="css 5c3sm8">.css-5c3sm8{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:768px;height:80px;margin:0 auto;}padding-bottom:12px@media (max-width: 768px){.css-5c3sm8{width:100%;height:80px;padding:0 12px;}}</style><div class="css-5c3sm8 e160b012"><style data-emotion="css 9p6ebr">.css-9p6ebr{margin-top:5px;font-size:24px;font-weight:700;}@media (max-width: 768px){.css-9p6ebr{font-size:20px;margin-left:16px;}}</style><div class="css-9p6ebr e160b010">yhc509`s Dev Journey</div></div></div><style data-emotion="css 183vxbl">.css-183vxbl{position:relative;width:100%;}@media (max-width: 768px){.css-183vxbl{width:100%;}}</style><div class="css-183vxbl e1opi4mu1"><style data-emotion="css uadz8j">.css-uadz8j{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;height:100%;margin:0 auto;padding:30px 0;}@media (max-width: 768px){.css-uadz8j{width:100%;padding:24px 16px;}}</style><div class="css-uadz8j e1st1jau5"><style data-emotion="css 1g6v2wt">.css-1g6v2wt{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#ffffff;color:#000000;font-size:22px;cursor:pointer;box-shadow:0 0 10px rgba(0, 0, 0, 0.3);}@media (max-width: 768px){.css-1g6v2wt{width:30px;height:30px;font-size:16px;}}</style><div class="css-1g6v2wt e1st1jau4"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></div><style data-emotion="css 1twr1m2">.css-1twr1m2{display:-webkit-box;overflow:hidden;overflow-wrap:break-word;margin-top:auto;text-overflow:ellipsis;white-space:normal;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:32px;font-weight:800;}@media (max-width: 768px){.css-1twr1m2{font-size:24px;}}</style><div class="css-1twr1m2 e1st1jau3">LangChain (1) - 환경 세팅</div><style data-emotion="css yijt7k">.css-yijt7k{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin-top:10px;font-size:14px;font-weight:700;}@media (max-width: 768px){.css-yijt7k{-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-align-items:flex-start;-webkit-box-align:flex-start;-ms-flex-align:flex-start;align-items:flex-start;font-size:14px;font-weight:400;}}</style><div class="css-yijt7k e1st1jau2"><style data-emotion="css 1bobky6">.css-1bobky6{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-top:10px;margin:10px -5px;}</style><div class="css-1bobky6 e1st1jau1"><style data-emotion="css 1e9ac4l">.css-1e9ac4l{margin:2.5px 5px;padding:3px 5px;border-radius:3px;background:black;font-size:12px;font-weight:700;color:white;}</style><div class="css-1e9ac4l e1st1jau0">LangChain</div></div><div>2024.04.02.</div></div></div></div><style data-emotion="css 12iq82c">.css-12iq82c{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;margin:0 auto;padding:100px 0;word-break:break-all;line-height:1.8;font-size:16px;font-weight:400;}.css-12iq82c p{padding:3px 0;}.css-12iq82c h1,.css-12iq82c h2,.css-12iq82c h3{font-weight:800;margin-bottom:18px;}.css-12iq82c *+h1,.css-12iq82c *+h2,.css-12iq82c *+h3{margin-top:16px;margin-bottom:0px;}.css-12iq82c hr+h1,.css-12iq82c hr+h2,.css-12iq82c hr+h3{margin-top:0;}.css-12iq82c h1{font-size:28px;}.css-12iq82c h2{font-size:24px;}.css-12iq82c h3{font-size:20px;}.css-12iq82c blockquote{margin:10px 0;padding:5px 5px;border-left:2px solid #000000;font-weight:800;}.css-12iq82c ol,.css-12iq82c ul{margin-left:20px;padding:4px 0;}.css-12iq82c hr{border:1px solid #646464;margin:64px 0;}.css-12iq82c a{color:#4263eb;-webkit-text-decoration:underline;text-decoration:underline;}.css-12iq82c pre[class*='language-']{margin:5px 0;padding:10px;font-size:14px;}.css-12iq82c pre[class*='language-']::-webkit-scrollbar-thumb{background:rgba(255, 255, 255, 0.5);border-radius:10px;}.css-12iq82c code[class*='language-'],.css-12iq82c pre[class*='language-']{tab-size:2;}@media (max-width: 768px){.css-12iq82c{width:100%;padding:40px 16px;line-height:1.6;font-size:14px;}.css-12iq82c h1{font-size:23px;}.css-12iq82c h2{font-size:20px;}.css-12iq82c h3{font-size:17px;}.css-12iq82c hr{margin:50px 0;}}</style><div class="css-12iq82c e1ijh0y10"><h2>랭체인</h2>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/ac1b7aca70f224bab80d6ef5433a25ef/5b101/langchain.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 93.75%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAACXBIWXMAAAsTAAALEwEAmpwYAAAELUlEQVR42o2UaUzbZRzHSXzntXFfpeUqPSgbV1ugENoCMlkiLCYbA6+pYUMDOMMLTTQZcmsyfaWMoyPqthcukqjJjNuiw8E2xdkFCh0wGJRjg61rC+Vs/19/z9MxQkyM/+ST//N/jm+/v6OPn92xDrtzBbYpD8x/rML85wosZg+Gb3n/F9ZBgTNyS8DdccBv4YEb84sO2Ca8uHrZgd8v2TE4QJtv4j8Z+duH+bqAm9cE/NUv0DkBfg7XOpaXPRgYHMXZny7h/M+/4cyPF/HtD7/8C7Z+jmDr3d9fQM/FXowMrWPMAtwZAUYtJDi/4MID+wp6Ll9BQ3s7Tn79DT5pO4W6r4i2bdhcc6cJLV0mNHZ04sOTX6DV1AXL0BJmJ4HZuwImR0nw4aM1OFwe/HrDjLov6VC7CU1bdJjQ3HGa08Jh3ya0dnajoa0TXed7MDm2gWnK3QyJTtwmwXuLy3j4aJM2dqOwogKHamuR99bb0B958wm5bxzBvqOVKKp8h3gXhUePIfe111FSXYWBgUXMkZhtUvAJOhwbcC0JuNB7AxUf16GqvhnVDc2oaWjx0bjNe42tvndTKypP1JPTLnK4udOhy7WJtVXgg08/h+yFAugOHkJ8Xh5i9HrCwIkzGjmxBiMSGDSW5hqQXvwSrl+b4w6nJzwkSG1jt69iYXEVVXWN8E9MRFymDpFp6YhMTYNYrUFUugYhe/YiSJXECSZCk/YgQKGEzGhAX/8s7lg3MDzk3HYoeIDjFN6zCjnEmgxEaTQQqdUQa7WQaDMQnpKK0OSUJ4SlpiKQhBUFeegnwYnbm7BaXD6HbupB9tQ2f4ZoCjO95ABURUVILS6GND8f4VmZEOXk+MjOhling0SXDUmWDqoXC9HXN0Pt4sHoiJveLGRqG/bU1DchMFEFKYUcQr8enpICEYUrTlMjmOZZqBGUilhyHKvRIlCuhCLPyB0yQatlyReybc4Oh3OdCz4dF4cwOhggkyGIRFgeo4lgZSKCiFDKZQi92Z5d8VLIjXouODUmYMy64hOcueeAc2kT1XUNPNkKCieMxIKUSojJYbLeyEUD5QqE7U3ma2y8mwuyoszg/hRrm60+JHfsOU699ww5i9ZmIpQOsuSLqMqsKKzSbC6CvkXpaj72J6esKCyH8yRom3gsuOLeWZS0khIk7d+PGIMBEVlZnEgqRtTjokiIaBpLsrKpKPtwtc+2U5BdDF4v8D79AwJUKsiycyClCsaQU4laS44zeKghlA5GGOWRfbOcKgvyechbgvxymLvvxBpFfeyjE3hKJEI4JTxQLvcVgpqXFYEVaZdUCv8EGZ6Pi8fuhAQ8FxtPLjNwpXea3zZT4166wkjQ7fbykE+d+w4ZB15Gfvmr0B8ug6G0HPrSMo7hcPkOjGWvIOdgKUpramAddmJ8mO7CIS8P+R+33dnLkRgFrQAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/ac1b7aca70f224bab80d6ef5433a25ef/a59e9/langchain.webp 192w,
+/static/ac1b7aca70f224bab80d6ef5433a25ef/0ca9f/langchain.webp 384w,
+/static/ac1b7aca70f224bab80d6ef5433a25ef/dc9b9/langchain.webp 768w,
+/static/ac1b7aca70f224bab80d6ef5433a25ef/f2e9b/langchain.webp 773w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/ac1b7aca70f224bab80d6ef5433a25ef/3b721/langchain.png 192w,
+/static/ac1b7aca70f224bab80d6ef5433a25ef/66595/langchain.png 384w,
+/static/ac1b7aca70f224bab80d6ef5433a25ef/fe486/langchain.png 768w,
+/static/ac1b7aca70f224bab80d6ef5433a25ef/5b101/langchain.png 773w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/ac1b7aca70f224bab80d6ef5433a25ef/fe486/langchain.png"
+            alt="langchain"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>언어 모델로 구동되는 애플리케이션을 개발하기 위한 프레임워크.</p>
+<p>문맥 인식: 언어 모델을 문맥 소스(프롬프트 지침, 몇 가지 예시, 응답의 근거가 되는 콘텐츠 등)에 연결.</p>
+<p>추론: 언어 모델에 의존하여 추론(제공된 컨텍스트에 따라 답변하는 방법, 취해야 할 조치 등)</p>
+<h2>구성</h2>
+<p>LangChain 라이브러리: 파이썬과 자바스크립트 라이브러리.</p>
+<p>LangChain 템플릿: 다양한 작업을 위해 쉽게 배포할 수 있는 참조 아키텍처 모음.</p>
+<p>LangServe: LangChain 체인을 REST API로 배포하기 위한 라이브러리.</p>
+<p>LangSmith: 모든 LLM 프레임워크에 구축된 체인을 디버그, 테스트, 평가, 모니터링할 수 있는 개발자 플랫폼</p>
+<p>LangGraph: 상태 저장, 멀티액터 애플리케이션을 구축하기 위한 라이브러리로, LangChain 위에 구축되어, 함께 사용하도록 고안되었음. 여러 계산 단계에 걸쳐 여러 체인(또는 액터)을 주기적으로 조정할 수 있는 기능으로 LangChain 표현 언어를 확장함.</p>
+<p><a href="https://github.com/langchain-ai/langchain" target="_blank" rel="nofollow">LangChain Github</a></p>
+<hr>
+<h2>환경 세팅</h2>
+<p>OpenAI의 GPT API를 사용해본다.</p>
+<h3>랭체인 설치</h3>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">pip <span class="token function">install</span> langchain</code></pre></div>
+<h3>OpenAI 의존성 패키지 설치</h3>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">pip <span class="token function">install</span> langchain-openai
+pip <span class="token function">install</span> tiktoken</code></pre></div>
+<hr>
+<h2>OpenAI API Key 세팅</h2>
+<p><a href="https://platform.openai.com/api-keys" target="_blank" rel="nofollow">OpenAI API</a>에서 API Key를 발급받는다.</p>
+<p>해당 페이지에서 <strong>[Create new secret key]</strong> 버튼을 누르면</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 528px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/252a0b2e846c8489a40c3af9b67dbcb2/2d709/createkey.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.77083333333333%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAABlklEQVR42o2SzU7CQBSFeQVBTUABY8FOZ6a0lFbaQilFNyjgD0YTH8CVW2PC0qUbfePjnUFqiH8svtxZzJw5955bMFkLUZx9MtR0w4Gm1xvB68SweBtceH8ipA+jYaEgpIfzyTUur+50nc7mmF3cYDKdY35zj2w0BrNcSNunR51fkXaA5pFAweIuoiiD64bwvBhuO9QCjLkwmaPd/SX0Jeij2SRBkwTT6RUGZzMk4yk66Qn4cZxjBdFGiG4PTWajcMQdyH4Kf3iaizE/3FhIQ/d51EfDIkEu2ogpkJgCUMGoWditJaqNVd24ZT3DhNx1++DktlY3UK5UUdmro1YzUKnUdXrqozURex1JHy9naNqQfoRaw0SptIu9/QMUt7ZRLO5in847O2VUSVg5VRuROxLr2MqhSplZDoRYXly1J1c1Pwd5W5L2TVC1OqGenSagGZKpfG2+tfMDannTbIzZ5BZedgrn5RHJ2wLh6xN67wu0nh9gMEkpm1K3osL5j5ZzjDbtqXAC8CSBTIeQgwFEmkL0ExwaDB9N7lrvBbPouAAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/252a0b2e846c8489a40c3af9b67dbcb2/a59e9/createkey.webp 192w,
+/static/252a0b2e846c8489a40c3af9b67dbcb2/0ca9f/createkey.webp 384w,
+/static/252a0b2e846c8489a40c3af9b67dbcb2/08530/createkey.webp 528w"
+              sizes="(max-width: 528px) 100vw, 528px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/252a0b2e846c8489a40c3af9b67dbcb2/3b721/createkey.png 192w,
+/static/252a0b2e846c8489a40c3af9b67dbcb2/66595/createkey.png 384w,
+/static/252a0b2e846c8489a40c3af9b67dbcb2/2d709/createkey.png 528w"
+            sizes="(max-width: 528px) 100vw, 528px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/252a0b2e846c8489a40c3af9b67dbcb2/2d709/createkey.png"
+            alt="createkey"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>적당한 Name 입력하고 **[Create secret key]**를 누른다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 524px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/1f42526e34e3aa29b25d29669f18116c/6d924/savekey.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 64.0625%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB0UlEQVR42p1T2U7bUBD1Y7PAD/QJKSFerpfYcWICoZAEJ3YWk0BTVQKe+lL+AMFH9I9PZ+Y6i1QV1D4c3Znx3HNn5oyNlunBdkJCW+B6HTgqhGkFUG5HvrHN0Hl7X2K2vmfZARoNG0bcHeDx6QfWd99R3G6w2Twgy24l2VFRSRId2Nrn8zDmerEQG2wwaSe+QBj1NTrn8NsJ/KCHdngmCMjfnpJDNn8Pyjx+hKs0OGkyLTAaz5BOCkyzFab5CvPFvdjzxVdk+Rr5bI2bdEFYysl30rTAhLpJyY6oIO7K4BfSyRJjSsqIIMtXOwK+NJvfib8svkmeJlxicJlKZ1GQIPKpaq8Hiwn14PeDNS1/d5okGNuMbQ7HWbRG00HjVMEaXcPOUpg3Q1iKZtgyfXyq1ASVah21+jFqtWPU60elfSSolhCf4tVKFZ9PmghffuLq1yuCt2c0vRCG53fR7V2il3xBRGJYdluwVY+VfA82dWi5ZPuxFoUV41nxXK6HGSnZF+Ktoh8ROvwoQalSZZa8fz6SCpOzK7KHgovBWPwPCdV+J4VwFyhb/NeWGXoXE02o3Fh+sT1i/Bn7O/jHyGf3NLJCCjFaB6vxv+B14lVqnjr4DewZm+vtWrjdAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/1f42526e34e3aa29b25d29669f18116c/a59e9/savekey.webp 192w,
+/static/1f42526e34e3aa29b25d29669f18116c/0ca9f/savekey.webp 384w,
+/static/1f42526e34e3aa29b25d29669f18116c/08739/savekey.webp 524w"
+              sizes="(max-width: 524px) 100vw, 524px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/1f42526e34e3aa29b25d29669f18116c/3b721/savekey.png 192w,
+/static/1f42526e34e3aa29b25d29669f18116c/66595/savekey.png 384w,
+/static/1f42526e34e3aa29b25d29669f18116c/6d924/savekey.png 524w"
+            sizes="(max-width: 524px) 100vw, 524px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/1f42526e34e3aa29b25d29669f18116c/6d924/savekey.png"
+            alt="savekey"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>API key가 나오는데 잘 적어둔다. 다른 사람에게 공유되면 안 되니 주의.</p>
+<div class="gatsby-highlight" data-language="python3"><pre class="language-python3"><code class="language-python3">import os
+os.environ[&#39;OPENAI_API_KEY&#39;] = &#39;발급 받은 API-KEY를 입력한다&#39;</code></pre></div>
+<hr>
+<h2>GPT에게 간단한 질의하기</h2>
+<p>프롬프트 입력 -> LLM에게 전달 -> 응답 대기 -> 응답의 순서로 진행된다.</p>
+<p>아래는 ChatGPT의 gpt-3.5-turbo에게 질의하는 예제.</p>
+<div class="gatsby-highlight" data-language="python3"><pre class="language-python3"><code class="language-python3">from langchain_openai import ChatOpenAI
+
+# model
+llm = ChatOpenAI(model=&quot;gpt-3.5-turbo-0125&quot;)
+
+# chain 실행
+question = &quot;너의 이름은 뭐지?&quot;
+print(&quot;Q. &quot; + question)
+
+answer = llm.invoke(question)
+print(&quot;A. &quot; + answer.content)</code></pre></div>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">Q. 너의 이름은 뭐지?
+A. 저는 AI 어시스턴트이므로 이름이 따로 없습니다. 단지 <span class="token string">"어시스턴트"</span>로 불러주세요.</code></pre></div>
+<p>토큰 단위로 요금이 부과되는데, 일반적으로 질의나 답변이 길어질수록 토큰을 많이 사용하게 된다.</p>
+<p><code class="language-text">tiktoken</code>을 통해 토큰 수를 예상할 수 있다.</p>
+<div class="gatsby-highlight" data-language="python3"><pre class="language-python3"><code class="language-python3">import tiktoken
+encoding = tiktoken.encoding_for_model(&quot;gpt-3.5-turbo-0125&quot;)
+print(len(encoding.encode(&quot;너의 이름은 뭐지?&quot;)))</code></pre></div>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token number">9</span></code></pre></div>
+<p>지원모델과 비용은 아래 링크에서 확인하자</p>
+<ul>
+<li>
+<p><a href="https://platform.openai.com/docs/models" target="_blank" rel="nofollow">지원 모델 종류 확인</a></p>
+</li>
+<li>
+<p>​<a href="https://openai.com/pricing" target="_blank" rel="nofollow">모델별 비용 확인</a></p>
+</li>
+<li>
+<p><a href="https://platform.openai.com/usage" target="_blank" rel="nofollow">현재 사용한 토큰 비용 확인하기</a></p>
+</li>
+</ul>
+<hr></div><style data-emotion="css hx9xpc">@media (max-width: 768px){.css-hx9xpc{padding:0 20px;}}</style><div class="css-hx9xpc e1gqsjds0"></div><style data-emotion="css lffphe">.css-lffphe{display:grid;place-items:center;margin-top:auto;padding:36px 0;font-size:15px;text-align:center;line-height:1.5;}@media (max-width: 768px){.css-lffphe{font-size:13px;}}</style><footer class="css-lffphe e1oae0v80">© 2025 yhc509, All rights reserved.</footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/langchain/1_env/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx.js\"],\"component---src-pages-info-tsx\":[\"/component---src-pages-info-tsx.js\"],\"component---src-templates-post-template-tsx\":[\"/component---src-templates-post-template-tsx.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="41fb7f600fa9551db4d9";</script><script src="/webpack-runtime.js" async></script><script src="/framework.js" async></script><script src="/app.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>

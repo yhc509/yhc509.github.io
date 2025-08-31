@@ -1,0 +1,753 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Gatsby 5.14.1"/><style data-href="/styles.9e907bc32054b7771552.css" data-identity="gatsby-global-css">code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#ccc;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;white-space:pre;word-break:normal;word-spacing:normal}pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#2d2d2d}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.block-comment,.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#999}.token.punctuation{color:#ccc}.token.attr-name,.token.deleted,.token.namespace,.token.tag{color:#e2777a}.token.function-name{color:#6196cc}.token.boolean,.token.function,.token.number{color:#f08d49}.token.class-name,.token.constant,.token.property,.token.symbol{color:#f8c555}.token.atrule,.token.builtin,.token.important,.token.keyword,.token.selector{color:#cc99cd}.token.attr-value,.token.char,.token.regex,.token.string,.token.variable{color:#7ec699}.token.entity,.token.operator,.token.url{color:#67cdcc}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.inserted{color:green}</style><link rel="canonical" href="https://yhc509.github.io/deeplearning/2_case/" data-baseprotocol="https:" data-basehost="yhc509.github.io"/><link rel="sitemap" type="application/xml" href="/sitemap-index.xml"/><meta name="google-site-verification" content="0V6Pp62k0qLSCFq479si1XrTMvN4NjFR8estP6u-Zds"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><style data-emotion="css 13ku56z">.css-13ku56z{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;height:100%;}</style><main class="css-13ku56z e1strnqo0"><style data-emotion="css-global 17bu09z">@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap');*{padding:0;margin:0;box-sizing:border-box;font-family:'Hahmlet',serif;color:inherit;-webkit-text-decoration:none;text-decoration:none;}html,body,#___gatsby{width:100%;height:auto;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;}a,a:visited,a:active{-webkit-text-decoration:none;text-decoration:none;color:inherit;}a:hover{color:inherit;-webkit-text-decoration:none;text-decoration:none;cursor:pointer;}img{position:relative;display:block;margin-left:auto;margin-right:auto;max-width:768px;text-align:left;}</style><style data-emotion="css 1u7ncg7">.css-1u7ncg7{width:100%;background-image:linear-gradient(60deg, #29323c 0%, #485563 100%);color:#ffffff;}</style><div class="css-1u7ncg7 e160b013"><style data-emotion="css 5c3sm8">.css-5c3sm8{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:768px;height:80px;margin:0 auto;}padding-bottom:12px@media (max-width: 768px){.css-5c3sm8{width:100%;height:80px;padding:0 12px;}}</style><div class="css-5c3sm8 e160b012"><style data-emotion="css 9p6ebr">.css-9p6ebr{margin-top:5px;font-size:24px;font-weight:700;}@media (max-width: 768px){.css-9p6ebr{font-size:20px;margin-left:16px;}}</style><div class="css-9p6ebr e160b010">yhc509`s Dev Journey</div></div></div><style data-emotion="css 183vxbl">.css-183vxbl{position:relative;width:100%;}@media (max-width: 768px){.css-183vxbl{width:100%;}}</style><div class="css-183vxbl e1opi4mu1"><style data-emotion="css uadz8j">.css-uadz8j{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;height:100%;margin:0 auto;padding:30px 0;}@media (max-width: 768px){.css-uadz8j{width:100%;padding:24px 16px;}}</style><div class="css-uadz8j e1st1jau5"><style data-emotion="css 1g6v2wt">.css-1g6v2wt{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#ffffff;color:#000000;font-size:22px;cursor:pointer;box-shadow:0 0 10px rgba(0, 0, 0, 0.3);}@media (max-width: 768px){.css-1g6v2wt{width:30px;height:30px;font-size:16px;}}</style><div class="css-1g6v2wt e1st1jau4"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></div><style data-emotion="css 1twr1m2">.css-1twr1m2{display:-webkit-box;overflow:hidden;overflow-wrap:break-word;margin-top:auto;text-overflow:ellipsis;white-space:normal;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:32px;font-weight:800;}@media (max-width: 768px){.css-1twr1m2{font-size:24px;}}</style><div class="css-1twr1m2 e1st1jau3">DeepLearning - CNN Case Studies</div><style data-emotion="css yijt7k">.css-yijt7k{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin-top:10px;font-size:14px;font-weight:700;}@media (max-width: 768px){.css-yijt7k{-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-align-items:flex-start;-webkit-box-align:flex-start;-ms-flex-align:flex-start;align-items:flex-start;font-size:14px;font-weight:400;}}</style><div class="css-yijt7k e1st1jau2"><style data-emotion="css 1bobky6">.css-1bobky6{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-top:10px;margin:10px -5px;}</style><div class="css-1bobky6 e1st1jau1"><style data-emotion="css 1e9ac4l">.css-1e9ac4l{margin:2.5px 5px;padding:3px 5px;border-radius:3px;background:black;font-size:12px;font-weight:700;color:white;}</style><div class="css-1e9ac4l e1st1jau0">DeepLearning</div></div><div>2024.06.27.</div></div></div></div><style data-emotion="css 12iq82c">.css-12iq82c{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;margin:0 auto;padding:100px 0;word-break:break-all;line-height:1.8;font-size:16px;font-weight:400;}.css-12iq82c p{padding:3px 0;}.css-12iq82c h1,.css-12iq82c h2,.css-12iq82c h3{font-weight:800;margin-bottom:18px;}.css-12iq82c *+h1,.css-12iq82c *+h2,.css-12iq82c *+h3{margin-top:16px;margin-bottom:0px;}.css-12iq82c hr+h1,.css-12iq82c hr+h2,.css-12iq82c hr+h3{margin-top:0;}.css-12iq82c h1{font-size:28px;}.css-12iq82c h2{font-size:24px;}.css-12iq82c h3{font-size:20px;}.css-12iq82c blockquote{margin:10px 0;padding:5px 5px;border-left:2px solid #000000;font-weight:800;}.css-12iq82c ol,.css-12iq82c ul{margin-left:20px;padding:4px 0;}.css-12iq82c hr{border:1px solid #646464;margin:64px 0;}.css-12iq82c a{color:#4263eb;-webkit-text-decoration:underline;text-decoration:underline;}.css-12iq82c pre[class*='language-']{margin:5px 0;padding:10px;font-size:14px;}.css-12iq82c pre[class*='language-']::-webkit-scrollbar-thumb{background:rgba(255, 255, 255, 0.5);border-radius:10px;}.css-12iq82c code[class*='language-'],.css-12iq82c pre[class*='language-']{tab-size:2;}@media (max-width: 768px){.css-12iq82c{width:100%;padding:40px 16px;line-height:1.6;font-size:14px;}.css-12iq82c h1{font-size:23px;}.css-12iq82c h2{font-size:20px;}.css-12iq82c h3{font-size:17px;}.css-12iq82c hr{margin:50px 0;}}</style><div class="css-12iq82c e1ijh0y10"><p>아래와 같은 모델을 예시로 보면서 공부한다.</p>
+<ul>
+<li>Classic Networks
+<ul>
+<li>LeNet-5</li>
+<li>AlexNet</li>
+<li>VGG-16</li>
+</ul>
+</li>
+<li>ResNet</li>
+<li>Inception</li>
+</ul>
+<hr>
+<h2>Classic Networks</h2>
+<h3>LeNet-5</h3>
+<ul>
+<li>논문 작성 당시에는 ReLU를 사용하지 않는 분위기라 Sigmoid와 tanh만 사용함.</li>
+</ul>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/5da784a2f1c4283a56334a83e6cd088f/a91f8/lenet5.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAABvklEQVR42m1SuW4UQRCdP+MLyPgDckLEkfAHICMSQiQQhGQWSCAChC0IQDYWrL3Y8rJez87ZVx1d3TPUaA0S4ApKr1r9qvu9qqLrusPZ7Pj4JITQdf04jpKzpBwlK0h5Aqx1HjTGv6MAgNW6qpomJUEiyYPki2tKSXlCJGkDRAQRmTnGeEE21iLSOObd/fLm1rtPe/PDk/WDpx/Luq862Hq22zTNz7J/vr23rtt1VZdVbfpeHyu0UwgQgl+dl9duv7py/cnB9x/3Hu9cvfHidLG88+j9rfvbbdvcffj25Zt9JrTWN3VdN+1Z1RYB4LxcO+f0i68/HO18mY9ZDmbL+aIU5s/flqqIonw9WkUmZurajhCtDwZioWJqE4DEU1RjYsrsvBAgR+xNYnIuJCIgtsA5Zx+Ao0SRSbO645AdsGaP0QLh6tyfLti6BMC9EYBoHTk//nZ72ISStfAswOKR1VXFmrU3UNRfOI8b6/+f07ghB+vBOL3NSL6zfWejJOgtUQySxsti+EMWa0XXYxiS98m6jDjhAGKMnkfrh5wvbVGgczrxmNI0eF2ClDRPB8OA1rnlmQr+h6wSdC+NMb8ApGJu5NyesMwAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/5da784a2f1c4283a56334a83e6cd088f/a59e9/lenet5.webp 192w,
+/static/5da784a2f1c4283a56334a83e6cd088f/0ca9f/lenet5.webp 384w,
+/static/5da784a2f1c4283a56334a83e6cd088f/dc9b9/lenet5.webp 768w,
+/static/5da784a2f1c4283a56334a83e6cd088f/a6361/lenet5.webp 960w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/5da784a2f1c4283a56334a83e6cd088f/3b721/lenet5.png 192w,
+/static/5da784a2f1c4283a56334a83e6cd088f/66595/lenet5.png 384w,
+/static/5da784a2f1c4283a56334a83e6cd088f/fe486/lenet5.png 768w,
+/static/5da784a2f1c4283a56334a83e6cd088f/a91f8/lenet5.png 960w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/5da784a2f1c4283a56334a83e6cd088f/fe486/lenet5.png"
+            alt="LeNet-5"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<h3>AlexNet</h3>
+<ul>
+<li>LeNet과 비슷하지만 더 커졌다. (6만개 파라메터 → 6천만개 파라매터)</li>
+<li>ReLU를 사용한다.</li>
+</ul>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/df7d5079fc91f0011dfd005a8ac08e42/a91f8/alexnet.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAACFklEQVR42lVRzW7TQBD2O8ANCfWAxIPwKEEqf1ceAMQZISSuSPyIH0VqgQYBbRMoqIWqNE2jlrYJJU4bO97s2rvrXa/ttddmnJQDs9LM7Dfzzc7MWpiyvjf5dTIaOW5RFCVIYcqZFIXJsjMsN0Wel/+LtfX86eP52qNb86vbW3A/tIONtq3TFPKPBoQFAsA/Tlj/uJvECvz2gdc5dMExRWF1a9c2zl1Ymrv0fn21P+RXri/cvPeGBZP6yv783SXOw98n/tU7jbetPRH66zv2/WffaaimbZVWp3Zj7fzFxbnLrc0vuz18+0GrN3B1mjx8sbnXc8pSv/rQXVjpQjIPZf1Td+yRijidxfJ/tvsvXw8bjVMXVYBJTz1KOdTOZaRUogEDC8yQc0F95DjYQ1mWVWQzLdLsOF+3B+DYLn/ybgdSs7xYbB7Yp2PXI83N4yTVhBBEAuyzIGAqiowxlmDB2sbR8rfDTMcI0/ryPqEi1+rzlt0+cEPGWj/6mEFqzhgHGmgpJPLQaDSylFLH9ljKaqupzn0KMaF1FkVKiBAODqiMIugTeTAPpUGAMQZ+rGKrnI5OQjXhSucGsYgKFaqUyRgxmeiMUigRxToPRAwGNIBn/zwznIbMZ5mIsjQrDOyhUnluEsbV8CTFpFqlqQKzHZ2RkzhOdaoIESOHDWzhITFGAiGJicQ4lpK74wiT4t9rsyrQPuf8Ly0OUqKuJ9W4AAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/df7d5079fc91f0011dfd005a8ac08e42/a59e9/alexnet.webp 192w,
+/static/df7d5079fc91f0011dfd005a8ac08e42/0ca9f/alexnet.webp 384w,
+/static/df7d5079fc91f0011dfd005a8ac08e42/dc9b9/alexnet.webp 768w,
+/static/df7d5079fc91f0011dfd005a8ac08e42/a6361/alexnet.webp 960w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/df7d5079fc91f0011dfd005a8ac08e42/3b721/alexnet.png 192w,
+/static/df7d5079fc91f0011dfd005a8ac08e42/66595/alexnet.png 384w,
+/static/df7d5079fc91f0011dfd005a8ac08e42/fe486/alexnet.png 768w,
+/static/df7d5079fc91f0011dfd005a8ac08e42/a91f8/alexnet.png 960w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/df7d5079fc91f0011dfd005a8ac08e42/fe486/alexnet.png"
+            alt="AlexNet"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<h3>VGG-16</h3>
+<ul>
+<li>많은 파라메터를 갖고 있지만 더 간단한 네트워크를 사용해서 convolution layer에만 집중한다.</li>
+</ul>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/d98becbbd17bf753b56aef5c07f51c94/a91f8/vcg16.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB00lEQVR42kVRu4oUURDtD/ADNhZDEyN/YtHPMTM28QNMFwQ1EkEFRRBhkwUzHXBEV2d3pvtO39v3/X60p0d3LepCdVXXOYdT3UTZ+utKCzkiKJ3nWTuvfQy5zFdRaguptLbUPiblfG1NWt8RJU7P159+/vhyvun3o1A6xAgUzrkQUiqTc1Yu/CKTBWJKo9RUaun8wFW3Ojl5fnz85P69Vx/eATgWMLSUc0jZxQxONFOpENLqXEqlykkXhfWXTHbfHzw8u3H0/ujmi2dPJ+8228uLHWGTECDmYFZSyj0byUiM0krhaYwga2S8+/bo8cdbt9/cufv29csNoVCaS4FUxnhZ2FrwYdvvpFZzm/FptEUHBbJTu/732We2WicPG2a4Aqlt/h9tiaUfUwXaofUvOwBQPu32PZ34ODJCxt1ApolLLgfSb/stw0BISpmQaqmEagvJYbnmPA6DmOhCUJvHGWrFIKeM2xlrlv/m5r1PKS3V1eayjAdL2MTgBNJoA4usMUAJOLjSKOCQNTb6KGDkJK6VL8uEkIEOfyGdtc55F1KMWVt7QXo0QwjO2JQrzg6Uazs6iCmIXFJMSGj2PlKulPWAgbMYwXxAaxeYsvXgM4cpQv4B8mJolfdckZYAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/d98becbbd17bf753b56aef5c07f51c94/a59e9/vcg16.webp 192w,
+/static/d98becbbd17bf753b56aef5c07f51c94/0ca9f/vcg16.webp 384w,
+/static/d98becbbd17bf753b56aef5c07f51c94/dc9b9/vcg16.webp 768w,
+/static/d98becbbd17bf753b56aef5c07f51c94/a6361/vcg16.webp 960w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/d98becbbd17bf753b56aef5c07f51c94/3b721/vcg16.png 192w,
+/static/d98becbbd17bf753b56aef5c07f51c94/66595/vcg16.png 384w,
+/static/d98becbbd17bf753b56aef5c07f51c94/fe486/vcg16.png 768w,
+/static/d98becbbd17bf753b56aef5c07f51c94/a91f8/vcg16.png 960w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/d98becbbd17bf753b56aef5c07f51c94/fe486/vcg16.png"
+            alt="VGG-16"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<hr>
+<h2>ResNet</h2>
+<p>아주 깊은 신경망은 훈련시키기 어렵다. (기울기 소실, 폭발 유형의 문제)</p>
+<p>한 계층에서 activation을 가져와서 깊은 다른 계층으로 갑자기 전달할 수 있는 건너뛰기 연결을 배운다. 그리고 이를 이용해서 ResNet을 구축한다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/c1f50ff6cf9a92f6e342691a7ad176f5/a91f8/resnet_1.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAABaUlEQVR42m1RSXLbMBDk/5/nmw5S2cXIlEwRO2YFIA+ViipR3NUHLLN2T/M8n06n4/G4LMv7x8fhcDhfrtSGr5SQt4KkzSit3e/jhVOtNYTgg08p5Zy9cy6kBOyc/3X+fDvOiIQsKJb8iun/p8qylXpdb5fr+va+OKtp+fpT8viDPoZqMxJrShgTpIDX1ebh4IBILeb+GPefzs1WeqyltplROxcuEVMAyiQgXFlJLebvttLGVFi9xWUqZF0Ha3eVA7IHcVW0DzsnUm79soQMdKt4KxiRllSnKOipBsQNAZtA49qoKDnJm6SNUxEOjNxNM+aukWkD8AxJcB+7AKRd6xRiMMEBIJeyus3lWNC+ckwxhJhzgVp9rvOXO32u59XtycAawVyVTGzeisnWemuj9dH7qCS3jPbuKq0ZzLNLrF8JgOUHq574LaxFw4MR2QS35U0U02JXWx8QERV9Yr+qvhR6mmTjeOdDCN/BF33U/z3PMwAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/c1f50ff6cf9a92f6e342691a7ad176f5/a59e9/resnet_1.webp 192w,
+/static/c1f50ff6cf9a92f6e342691a7ad176f5/0ca9f/resnet_1.webp 384w,
+/static/c1f50ff6cf9a92f6e342691a7ad176f5/dc9b9/resnet_1.webp 768w,
+/static/c1f50ff6cf9a92f6e342691a7ad176f5/a6361/resnet_1.webp 960w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/c1f50ff6cf9a92f6e342691a7ad176f5/3b721/resnet_1.png 192w,
+/static/c1f50ff6cf9a92f6e342691a7ad176f5/66595/resnet_1.png 384w,
+/static/c1f50ff6cf9a92f6e342691a7ad176f5/fe486/resnet_1.png 768w,
+/static/c1f50ff6cf9a92f6e342691a7ad176f5/a91f8/resnet_1.png 960w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/c1f50ff6cf9a92f6e342691a7ad176f5/fe486/resnet_1.png"
+            alt="ResNet"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>ResNet은 잔류블록이라는 것으로 만들어져있다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/e6c9a6304dd156bac2003c14553af6aa/a91f8/resnet_2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAABeklEQVR42l1SiZakIAzs///H0R5blEuQ+2Y3Su/0vskzvFhYRZH4WJZlmuZ5njDGz+/n9PW1rutznkspf+6wsbhcVMgmvpGfeATv+SEQppgf+BCYHfQQK2EuZp+Ki8lctKxDsiG5lAH/kFOp0gXGDq30c6OMC6PUvNGNUEBeO1kxleIS3cldEBogfLjINkR+aoR2QthrI2jHhNAF4QXtQsgVyDsBAqhiwinl24a1Njlf5z8ga+ux1Fib9V47MFtjLvBAEe411+ZClMr4mADpP7Z7v2rvHazGGHWeUAxwBDSl1uZD4IyNAz93hmy1Tq8l1nLTLma/+UNi33dpbPtH+E922C5lfi0i+gGV2rHyIdfxihByLoTSWm+/RwUJZhBadY46Z7AIU5XJh/Z2CGOPIUKRas+tg0pp/UOGkELC3ag4Nk6Nt8RwGc3YOs/TGGus5YxLpbdDKXt5BIEH/Em11nTHKcTBeE6p5AKNGOTWLrfhbhh8M5BTSqXUX3iSeZRWlsOuAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/e6c9a6304dd156bac2003c14553af6aa/a59e9/resnet_2.webp 192w,
+/static/e6c9a6304dd156bac2003c14553af6aa/0ca9f/resnet_2.webp 384w,
+/static/e6c9a6304dd156bac2003c14553af6aa/dc9b9/resnet_2.webp 768w,
+/static/e6c9a6304dd156bac2003c14553af6aa/a6361/resnet_2.webp 960w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/e6c9a6304dd156bac2003c14553af6aa/3b721/resnet_2.png 192w,
+/static/e6c9a6304dd156bac2003c14553af6aa/66595/resnet_2.png 384w,
+/static/e6c9a6304dd156bac2003c14553af6aa/fe486/resnet_2.png 768w,
+/static/e6c9a6304dd156bac2003c14553af6aa/a91f8/resnet_2.png 960w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/e6c9a6304dd156bac2003c14553af6aa/fe486/resnet_2.png"
+            alt="ResNet"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>위는 5개의 잔류블록으로 구성된 ResNet이다. 일반적으로 모델이 거대해질 수록 훈련의 효율이 떨어지는데, ResNet은 훈련 오류의 성능이 계속 낮아질 수 있다.</p>
+<p>ResNet은 왜 잘 작동할까?</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/eedc2067ede046e327be187ee3558f15/a91f8/resnet_3.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAABhklEQVR42l2R2ZLiMAxF+f8vpLonVAOBbI43yYtsORmFeRgaucq7ro+uT31/P5/P0zQ9ntIeXdfdb7dpGq/Xa9/3f7pOjoZhuFwugLD/jhMRWWsB0XuYVvOYln6cHYDSZlnN+JxjiojY3warIUAGJxtUCre2nURg2zaqnGtTPk02Sl8qQywYKKUKQHInydKlQhVsdBq9DbXyaXtFa60yKxuUQQfJQ7r+TN1l0jb8XJXRCJgA87btx83KonJg/6MXikR1hbhCWlyEVNysv7+eg4Kvy3zvZOJXG7jyr5rfFxaz8rHWJlXEwgGPCq0JzI2pJO3k0ZbzxvyZLEjysotZ5i6QjVRzFpzwIpTgnEnritiofCbHRJiobTumYiA4bbzSalYWQiaSzBpiBDwc2vfKTcb/ycV5oTpUiGfnb+s4GL14c9dzKKlicM9RjYt8kw159QLGb9iVX6K7iMaSjVieow4ulBhrxOwpYDHmVVSGXD4New8SixrxYVGpRy/avL3QhHldtXPuL1Nceka+lAN4AAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/eedc2067ede046e327be187ee3558f15/a59e9/resnet_3.webp 192w,
+/static/eedc2067ede046e327be187ee3558f15/0ca9f/resnet_3.webp 384w,
+/static/eedc2067ede046e327be187ee3558f15/dc9b9/resnet_3.webp 768w,
+/static/eedc2067ede046e327be187ee3558f15/a6361/resnet_3.webp 960w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/eedc2067ede046e327be187ee3558f15/3b721/resnet_3.png 192w,
+/static/eedc2067ede046e327be187ee3558f15/66595/resnet_3.png 384w,
+/static/eedc2067ede046e327be187ee3558f15/fe486/resnet_3.png 768w,
+/static/eedc2067ede046e327be187ee3558f15/a91f8/resnet_3.png 960w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/eedc2067ede046e327be187ee3558f15/fe486/resnet_3.png"
+            alt="ResNet"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>a[l+2] = a[l]이라는 항등식이 도출되므로 잔류블록을 학습하기 쉽기 때문.</p>
+<hr>
+<h2>Networks in Networks and 1x1 Convolutions</h2>
+<p>1 x 1 컨볼루션을 왜 사용할까?</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/59dd24ed1139e83d468736155b0c3607/e6e97/1x1conv.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAACJ0lEQVR42l1Su47TQBTNt/EBSIiKlhZRIPGo0BZbUVKwEloaOqBAwEoUVNsgVihCoF0lThx249jxc2Zie56eh821HSHY64euZ3zuOffMnRhjuq5r23Z8j8kY/346a51z3f8xmU6nSRL7vr8O1nme5XlOCAk2we/Vaun7nuctl8swDCFpGnUdvKvoKojCOMmytKoqoAIGrbVSqhkCEmM052JX1WVVU0phcQ+uKZv+PJ95i/l8Fsfx3xauBYCTDMVpVhSIMz7+M+GMrXwfRHreIkuzkRnYyrKEbT3EAOYYoRzkpSmt6Z6ZcT6bzRaL5Xw+j8JoXFXaCgXaWri6QYcQsiorggnGWAixZwYSKJdtw22UgIq9z4PTjW2105WqkCBSqW2ebNIQ7myXG9ef0QQeY927U+/45Ozrr2Do2UFZqUVZn2mjpG2wIEJKtCM5QYjgokLSyAHcds8//Xj2/unB0e3D44+dDhpVw0aSPbm8fAj9WtuTMMbBqjCOtnGMS8KaXuPk26x48Orx28+3bty99+bLCyEC6zpMDhb+fdUY51o9TBH0CRYihDBGuCJCix783UvvHL68+ejo9ckHLGPbt6spPQWDQH0p5I7L0e0sy5I0jaMAFRs3uDjRxs6vdhf+Ji8KrR2UBDjjDcIFrSssSUyTxmkm2VWyvorX56uLCEWMMcF577bup0hCbViSup9Ba2Gq4Dy0a50yyrZufwRdC7k2DcwipfQP4u3Utu/RZR8AAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/59dd24ed1139e83d468736155b0c3607/a59e9/1x1conv.webp 192w,
+/static/59dd24ed1139e83d468736155b0c3607/0ca9f/1x1conv.webp 384w,
+/static/59dd24ed1139e83d468736155b0c3607/dc9b9/1x1conv.webp 768w,
+/static/59dd24ed1139e83d468736155b0c3607/97885/1x1conv.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/59dd24ed1139e83d468736155b0c3607/3b721/1x1conv.png 192w,
+/static/59dd24ed1139e83d468736155b0c3607/66595/1x1conv.png 384w,
+/static/59dd24ed1139e83d468736155b0c3607/fe486/1x1conv.png 768w,
+/static/59dd24ed1139e83d468736155b0c3607/e6e97/1x1conv.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/59dd24ed1139e83d468736155b0c3607/fe486/1x1conv.png"
+            alt="Networks in Networks and 1x1 Convolutions"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>input이 하나의 채널일 때에는 의미가  없다. 단순히 곱한 값이 된다. 하지만 채널이 여러개라면, 여러 채널에 대해 연산을 처리할 수 있다. network in network 라고 부른다.</p>
+<p>1 x 1 컨볼루션은 채널의 크기를 축소하거나 원하는 채널 수로 늘리거나 유지하는데 사용할 수 있다. 파라메터 수를 줄여서 계산량을 감소시킨다.</p>
+<hr>
+<h2>Inception Network Motivation</h2>
+<p>특정 필터나 풀링을 선택하는 것이 아니라 여러 작업을 수행하고 출력을 연결하는 개념.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/fae7bbe6da33c6a9a7170115c14e7f46/e6e97/inception1.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAACNUlEQVR42nVSzWsTQRTf/0HPQu8eRP+HoodAzAcEkpogiFAU8SKCIEF6UQRtvVhBJaUHU4qXqnixFylRsGBViGKjm/1M9yvJ7s7szszOrm/SmgrS38wOj/fe7/1m3lupWq1emKBer89NAHaj0dj3TENwVv+D1O12NU3rK7BVRVFN07AsS1EUWZbBD7aua6qq/pJlQmmWZSmsv5AwjiiljBISC4MQghCyPNsduX6IxIcjhDAjBLIZZ+k/kMC15+HF9W7z+eeVNztZmsQxGQZAdUHK8xFlDHJ2h8bidvvBVkt1dKGfCn3JHUc3l7fLzfen5p41br8AckRi1/fcsYcIDXDMGfluJOfb/TMrOzO35j/93AIa51yQrzzsnL3xbvZa+8S5hcfrHSiKo6g3GJiu7SOs26PQ2f24dv3to0uz808qT186np5OlU9ffn3y4quZ/NK91iZPObQAlunZztAJMHJQZn5bSzeODVeP31m4+8PC0JdhGO83Tbq69KHc3Ly/2kkSlnAODxbKpmE4eyiKfZyETm/8ddn+0jL1fsS4F0ZeGEOqIA/9sKca6sCyHTuetDREwW9Dk01Fs63eYBREFHT4ZESIMMY5BRE+uTZNUj9iY0xjxvcHAF6oHUEgyyBPeFJujwPdCwZjNMLkcM4QS/jh3EUvIDdNRXFhHiDh4lWwaSLqHZDhJjFlyQRAmBrZ0YBa4r9iTCoWi+VyuVQqFQoFsMEoFsRZPQK1Wq1SqeRyuXw+/wekrXzJx8oZ5wAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/fae7bbe6da33c6a9a7170115c14e7f46/a59e9/inception1.webp 192w,
+/static/fae7bbe6da33c6a9a7170115c14e7f46/0ca9f/inception1.webp 384w,
+/static/fae7bbe6da33c6a9a7170115c14e7f46/dc9b9/inception1.webp 768w,
+/static/fae7bbe6da33c6a9a7170115c14e7f46/97885/inception1.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/fae7bbe6da33c6a9a7170115c14e7f46/3b721/inception1.png 192w,
+/static/fae7bbe6da33c6a9a7170115c14e7f46/66595/inception1.png 384w,
+/static/fae7bbe6da33c6a9a7170115c14e7f46/fe486/inception1.png 768w,
+/static/fae7bbe6da33c6a9a7170115c14e7f46/e6e97/inception1.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/fae7bbe6da33c6a9a7170115c14e7f46/fe486/inception1.png"
+            alt="Inception Network Motivation"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>계산 비용에 문제가 있다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/870b8e8f375503b89c7b5ecd0b6203c5/e6e97/inception2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB4klEQVR42o2Sy4vTUBTG86/MzoW4ceNmVsqsLHYj1ObRgg907chsFUFQ0cUwCIK4mZUDsxAVlNrZOCpaHygiPqZhkrZJ2rSTpje5r9ybeiZxwDBV/HE5ud/hfueec4lSrVbr9XqtVlNVFaKu65qug4akYRggYaNpmpGhFlFM03Q9z7Yt2Dh79Hq9drtt2fa2ZVuW5XouZFyvn6bp9A8Uxjgl2OkHzgCNxohlYIzDyUQIThllu4vRjLSIAgWa75xzt96cWHpyd70FUso0jz86Yeu7P9iJQRav3Lu5+b5Xvbp56srG3PEb1+9vQIpSBvFB0zx5+cX8hbU7a69BCiFnmI9efLZwqXGosnLEWP7a9jwXBu4GiC4sNg6ffzpXur36uPVX88HTjw7UHs6fvfdlywFtbnf6vj/ByZmbL48tNpZWnkeEZm3P6FtZXv98bfXt5kczwjHhYuD7w9FQpNMP36xXn36aHccPQjlr4F1zRGKEwnEYbnW9iDCwQQmawHcacxHEFCTmIqIcEZ4Um1egnXzlwIGYJXAOMhHhIaZcSCjhBhFEloiCWWbASBChxgiR7gghwjDj/XG0ExEh5XCC4RnyyXN+m6f/gSw+FyjOeZIkiroPTVP/AfznlUqlVCqVy+VfG+yEB9NpWLsAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/870b8e8f375503b89c7b5ecd0b6203c5/a59e9/inception2.webp 192w,
+/static/870b8e8f375503b89c7b5ecd0b6203c5/0ca9f/inception2.webp 384w,
+/static/870b8e8f375503b89c7b5ecd0b6203c5/dc9b9/inception2.webp 768w,
+/static/870b8e8f375503b89c7b5ecd0b6203c5/97885/inception2.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/870b8e8f375503b89c7b5ecd0b6203c5/3b721/inception2.png 192w,
+/static/870b8e8f375503b89c7b5ecd0b6203c5/66595/inception2.png 384w,
+/static/870b8e8f375503b89c7b5ecd0b6203c5/fe486/inception2.png 768w,
+/static/870b8e8f375503b89c7b5ecd0b6203c5/e6e97/inception2.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/870b8e8f375503b89c7b5ecd0b6203c5/fe486/inception2.png"
+            alt="Inception Network Motivation"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>28 x 28 x 192 input을 5 x 5 same 32으로 CONV하여 28 x 28 x 32의 결과를 얻으려고 한다면, 계산 비용은 28 * 28 * 32 * 5 * 5 * 192 = 120M</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/86b4285bacaa88dbf3df56312dc7dcd8/e6e97/inception3.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAACRklEQVR42m1SS2sTURSev+FWEARBt7pxoYIIBgIukswjjVo34qqgLivWTQXxBUKhCG5EhKLNQhCTVgMKVdKKIESrnU5qMtNJk3kkM/c1D79JC93043A5z3vP+c6VFEWpVCqqqkLRNA26Nka5XMYJb1lDUNXGGbKslGRZywwN+ZK+sbFpGNvbluMMbNveardN0zIMQ9d1x3HTNBVxAsRpEicpi5MoTT0muBgiJFHKCAnMnmcNAtcPAUopgRASRSJgvOeHAeVeSJmIYlyQphyBiONGCUat2Zl8sJK7/W5u4SvM3QxgMKRDwnf1ZOwzd4IP38yl1Y4/ItnL9WZHnmnId+qHL96ffV6HC73gnKu2lJlPU4+WXD8Y9x1Z/fD6wy8XbtVOXp5v6VZWfG7q/fmbtROFp6e0x63NXteyjH9dBPLTjUOFxbM3XvUdzzDaacLfNIwj6tvjE6/PXHvWc0ZZ8bEr1aMTi6cn53+uZzW/NjtWbwfDzb5sXp1dnq+uEUr+6G1M8/F799L0snK39nlNz6bDzE8Wftx7sdJY/csFBz3gqY9GCUNNSIIdPwgItR0PpjcKf29119um7fq7REggljFiO77Zz1w+YUmyRxjARDykwg0ZFVFABWERKByM2cqKfcL7I+qFbET5kGaLgc6jmDCB3UDvj8iQMMheDsFFYq8YPEIAHHgT06IGgmUSxm0vcAMsPIIfkm063u9LSg8CFYnPsrTkoCje4JwLISTlIJRKcqFYyv60qox//T7gKhaKuVwun8//B09id58G8rGRAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/86b4285bacaa88dbf3df56312dc7dcd8/a59e9/inception3.webp 192w,
+/static/86b4285bacaa88dbf3df56312dc7dcd8/0ca9f/inception3.webp 384w,
+/static/86b4285bacaa88dbf3df56312dc7dcd8/dc9b9/inception3.webp 768w,
+/static/86b4285bacaa88dbf3df56312dc7dcd8/97885/inception3.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/86b4285bacaa88dbf3df56312dc7dcd8/3b721/inception3.png 192w,
+/static/86b4285bacaa88dbf3df56312dc7dcd8/66595/inception3.png 384w,
+/static/86b4285bacaa88dbf3df56312dc7dcd8/fe486/inception3.png 768w,
+/static/86b4285bacaa88dbf3df56312dc7dcd8/e6e97/inception3.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/86b4285bacaa88dbf3df56312dc7dcd8/fe486/inception3.png"
+            alt="Inception Network Motivation"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>중간에 1 x 1 CONV을 추가하면 계산 비용을 줄일 수 있다. 이를 병목현상 레이어라고 한다.</p>
+<ul>
+<li>28 x 28 x 16 x 192 = 2.4M</li>
+<li>28 x 28 x 32 x 5 x 5 x 16 = 10.0M</li>
+<li>총 12.4M</li>
+</ul>
+<hr>
+<h2>Inception Network</h2>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/57c71c0a99f760abd66fd294729c3ffb/e6e97/inception4.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAACf0lEQVR42mWSz08TQRTH93/y5sUQvBmBg4j9XaMt4MUIYiH8PIixCYaDiSDalBaCoCEeFBGiBQRioiFRhIO0um2ldrfbsm13d37t7K6zbY0xfDIzmbz3vvNm3hvO5/P5/X5vDbZnq8fjcbvdrhoOpz2cTpfX4/Z5Pczidnv9Hn/dy2Uy6Ww2y/O8IOQZyWSSWRBClmWZpmn9xbAsbJiGaZkWNi1UN3IQQlVVAQCoAYQIYUIR1inBcwlxbFFY/CBJVS0vK1LFDG38OD8zkRV5W1w/o5HENAkhVEeWgQxKdAx6I+nmsexgPGNSwvzizuDkiONG5L1OtX9i+2KGAQEkBEtlfJSDx0U7eudQfrEt7RyUIASGYdHvk+KnsFwB9Xwcm1VQLVVKuUKurFaZ9d5S5kzfT8cDvlA8CUXT54bTQ/PHmqooQDsBpIIpJKB+UQ4RFIoNdE53B6aCQ3OjFIPVz4X7y+LTdbGswuVdKbwsPNvKJ4/L4cXpzsfdgUdd06tTjcwAo5GFuz3R0K1of/j5BNKqL3eF0Gzu4au8TvRYohCK/44nBIr0yEq0Z7bvTqx/Zi1iP5OJFUhS+VIqX0wJRQCxRcHka6lpXAw8EYWiPDyXvjCeGV34lRWklCDLilrVNEFWSgpiQq5eZ7M2GKxzqb39L+929zc/Yk3bPqzMb0hb+yVV02pN/g9bbLLmm6zYlL0DYrJ5M7B+sWmttVk+Orgdz58d4HsjPNUxIlSFuBbfOISzTpF+++ZwaWkvFq9K0spXMLupJr4BVmdB0QsqgdROxb6Druuc6xS+QNAT7HReD15yuFzOjq5rrsBV1xUnw/a2dzjaL3e0tLS0trX9AUs/ZKbe+ZJmAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/57c71c0a99f760abd66fd294729c3ffb/a59e9/inception4.webp 192w,
+/static/57c71c0a99f760abd66fd294729c3ffb/0ca9f/inception4.webp 384w,
+/static/57c71c0a99f760abd66fd294729c3ffb/dc9b9/inception4.webp 768w,
+/static/57c71c0a99f760abd66fd294729c3ffb/97885/inception4.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/57c71c0a99f760abd66fd294729c3ffb/3b721/inception4.png 192w,
+/static/57c71c0a99f760abd66fd294729c3ffb/66595/inception4.png 384w,
+/static/57c71c0a99f760abd66fd294729c3ffb/fe486/inception4.png 768w,
+/static/57c71c0a99f760abd66fd294729c3ffb/e6e97/inception4.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/57c71c0a99f760abd66fd294729c3ffb/fe486/inception4.png"
+            alt="Inception Network"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<hr>
+<h2>MobileNet</h2>
+<p>낮은 계산 환경에서도 작동하는 네트워크를 만들 수 있게 해준다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/8eedfcd5cc103b3937315dc43f4519cf/a91f8/mobilenet1.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB30lEQVR42m1Su27UQBR1ywdQU5AGiYqSJqIKDXwCNEg8ixQJJQUioUPhE5CoQxWJBiFtg4QjZK9Zx961vU6867fX7xnPeOxh7F1WFuJII925c8+ce88MRyklhLQ9aI+mabYBS7JTFm9Ph+DYchyH53lRFNXJxFCnM1UVBEGWZZ7/aRg6g6IokiSxAk3TtldvyAAAy7J8z/vtLIQ4NNMMFGXdoatkyhjjuiYQVhDCf5U3Hdf16cuDk90Hr569WJYZS2TlqRedEFKzOEkzZaYbpsVG+Q8Z5cV4517A7Rzv7in5ipJ24R5q5iHTZ8q266maoRmXw+E7Mu33DazUh0+ubt//sv86bDHL4Bo0DV7XZXkeRquqQustuwIh3JGLovDD0AxjYTYXRN0yLABg7zZFiA3cDJ3+OyJJ04xby5a2+2n/4P3jR28+fLQjtIrgSJ5+lwwICSjqxIKYdCbHSTrT564XbNpue+uTc1G8fuf82s3j50/dhoY/xl+P3o4upK6vURafBQlCFcT6/PJiql0t7HULHO3JqTCRb+39unH387ujklJ7rKln38qShTR0kzjN86LrP4hWQRghhAaGsU8Gq2JqsNfAafdIaVFry9J2yhK0SzefmzEAZDi27/txHP8BU4ZUMMTzZnEAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/8eedfcd5cc103b3937315dc43f4519cf/a59e9/mobilenet1.webp 192w,
+/static/8eedfcd5cc103b3937315dc43f4519cf/0ca9f/mobilenet1.webp 384w,
+/static/8eedfcd5cc103b3937315dc43f4519cf/dc9b9/mobilenet1.webp 768w,
+/static/8eedfcd5cc103b3937315dc43f4519cf/a6361/mobilenet1.webp 960w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/8eedfcd5cc103b3937315dc43f4519cf/3b721/mobilenet1.png 192w,
+/static/8eedfcd5cc103b3937315dc43f4519cf/66595/mobilenet1.png 384w,
+/static/8eedfcd5cc103b3937315dc43f4519cf/fe486/mobilenet1.png 768w,
+/static/8eedfcd5cc103b3937315dc43f4519cf/a91f8/mobilenet1.png 960w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/8eedfcd5cc103b3937315dc43f4519cf/fe486/mobilenet1.png"
+            alt="MobileNet"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<h3>Depthwise Convolution</h3>
+<ul>
+<li>6 x 6 x3 * 3 x 3 = 4 x 4 x 3</li>
+<li>총 계산량 = filter params(3 * 3 )* filter positions(4 * 4) * num of filters(3) = 432</li>
+</ul>
+<h3>Pointwise Convolution</h3>
+<ul>
+<li>4 x 4 x 3 * 1 x 1 x 3 = 4 x 4</li>
+<li>nc` filter로 4 x 4 x 5</li>
+<li>총 계산량 = filter params(1 * 1 * 3) * filter positions(4 * 4) * num of filters(5) = 240</li>
+</ul>
+<p>그러므로,</p>
+<h3>Depthwise separable convolution</h3>
+<ul>
+<li>총 계산량 = 432 + 240 = 672</li>
+</ul>
+<h3>Normal Convolution</h3>
+<ul>
+<li>총 계산량 = 2160</li>
+</ul>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/83172dbc4ea80d086071ee5febc354ef/a91f8/mobilenet2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB8UlEQVR42m2Qy24TMRSGs+EJkFghHoAVW1jzDIgnYFmegD1UKlJXrCmXTZYgIcpVDSARlECapCRNL8lM4rl4POPx+O7xDJ5kU4ke2dL5bX/nt/5WXdflujZNVVX1hbK2zonJsHHN/9Vy2/O8b53O0Xjc7/cmk8lFnhQmggqEOoj05TBl1IdJRKgpbWnM5mIzAqU6TrQwVZY3/pfApRBvnuxsbz1s77/fYHZNLgPQn80ptzxSSpRCNV8npKSsTLGJE9PARRD1rt5627q2u/3YDeeccSm1Nt0X7e6gb1W9eh1wJqVRQkmUsZwIxsokLRtY4vz4waNf97e6Xw4aZ2srU5JcQlCQVONUQSQJUVaV7lwqm2GdpNpFvHamFKAcM+moJmGlFWWKyfOz+E/vZDr2x4MF8NKSC1Uwf14wbqV0r6oGroz5+GH/2cu9g8NDJzVljFFd2SRlbo0WwWgWUu6StELwAjEuHNH4rNOO4u83br+6cn336U4jEc4JPxkWpxNaG/n5+d5f4Ne8Zl8xgkWRkRTLIFRhpBuYQzS7c+/nzbvv2m0nRV4gSLudk+EAxAAd//hNKSVBMf10BiGGgC4D6fnOwLRQmiYQhrNT/2gaA4ASlGc4AaE3Xy29MPTD80W0nK+SMM655kRpbUEoh6NzjLN/lfxamgI1IUUAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/83172dbc4ea80d086071ee5febc354ef/a59e9/mobilenet2.webp 192w,
+/static/83172dbc4ea80d086071ee5febc354ef/0ca9f/mobilenet2.webp 384w,
+/static/83172dbc4ea80d086071ee5febc354ef/dc9b9/mobilenet2.webp 768w,
+/static/83172dbc4ea80d086071ee5febc354ef/a6361/mobilenet2.webp 960w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/83172dbc4ea80d086071ee5febc354ef/3b721/mobilenet2.png 192w,
+/static/83172dbc4ea80d086071ee5febc354ef/66595/mobilenet2.png 384w,
+/static/83172dbc4ea80d086071ee5febc354ef/fe486/mobilenet2.png 768w,
+/static/83172dbc4ea80d086071ee5febc354ef/a91f8/mobilenet2.png 960w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/83172dbc4ea80d086071ee5febc354ef/fe486/mobilenet2.png"
+            alt="MobileNet"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/ff736862ea8bd8f31af444ad65b67d77/a91f8/mobilenetv2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAACDElEQVR42m1SO28TQRB2Q8Xf4FfkD1ClQlCkh1QgUYBIlQIqCwoqECIICTcRRAiQLAhICAcFlBDZss/xI0T2+ZG7s/du77Xvu13mbCIaRruj0UjfY2a3ZIzJIFRWFHmutV529CKgXub/RgnuZDL5vrfXbraODg+PLWtij5v1Rv3oV6tR73c73bYlOTfAC4zn5x84V4pFcRonBHIYQaZxOvg97R0PTvt2rzPCKJaU8YTylLKUKEJzLs7BXDDGZKYWdGCyIA4wcT08n0euFxImc6OlUdroPM8ZFxllUC3AjFNCuJDW6VmvjnqfyLeKu/n4492t6jvbfduebDyrlstV88Xs1wbVfYtzrpZgYEqCUDL6szW8dOXBxvXPO+vu6ur2xZVbN2/cq314unbn0YWV2/cvv1br4uq1V2ubLzBmkR8qKQtlRZjJdRDRnd2+O081MZX37fKTr+ygZRqdN9v7D5//YJbQiTkZhmOHFBBQzrICnLFimZTmgyGP4yx0YQwYxcCOat0uisGmUUaLExoiCS5TWsyts7ykFzTwsinJCFf2MK5VR0JKIHUOGrsvK+OgkMIOa27Zgc8GY2JPOZgtwMV+YW6wIYTJFJ7509GUJUQLleDQP/NSnBipkItbHRu5oTOOfTfWomAv+YuIwhDNkeO4s9ksxBgh5Hke9JEPJYImxljnoPL3z0En8P0/HVZTRY1adUQAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/ff736862ea8bd8f31af444ad65b67d77/a59e9/mobilenetv2.webp 192w,
+/static/ff736862ea8bd8f31af444ad65b67d77/0ca9f/mobilenetv2.webp 384w,
+/static/ff736862ea8bd8f31af444ad65b67d77/dc9b9/mobilenetv2.webp 768w,
+/static/ff736862ea8bd8f31af444ad65b67d77/a6361/mobilenetv2.webp 960w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/ff736862ea8bd8f31af444ad65b67d77/3b721/mobilenetv2.png 192w,
+/static/ff736862ea8bd8f31af444ad65b67d77/66595/mobilenetv2.png 384w,
+/static/ff736862ea8bd8f31af444ad65b67d77/fe486/mobilenetv2.png 768w,
+/static/ff736862ea8bd8f31af444ad65b67d77/a91f8/mobilenetv2.png 960w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/ff736862ea8bd8f31af444ad65b67d77/fe486/mobilenetv2.png"
+            alt="MobileNet"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<hr>
+<h2>EfficientNet</h2>
+<p>특정 장치의 신경망을 자동으로 확장하거나 축소하는 기능을 제공함.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/fc55e91a779211abf2c1565587ce6fe8/a91f8/efficientnet.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAACG0lEQVR42n2QXWsTQRSG80v0B3jhlXjVK+8Eq3gnaMEWUURKFWoRrB8ERJAKCUUr/bA2lBiopRaLaS20pImmbaQmKTEfNe4m22Y3Ozuzm81udiY7G2fTSlDElxk4M/M+nDOvp9VqUUoJIa22bNtu/VeO465DedgWBCEajWYymVQqlUx+43m+bXL+wppNx7b/uHThumGKACIVW5ZtWWwKF2RW06SGSQ99hmnzZUsG5EDEFQlb2DmCN2NLwWnvp+hXf3ArHMutxgvL0cx2mi+WlSrApOn6dL3JYEkmmZxZ0+1O55XFidDAyfmZyXNDQd/s6tjcxuL6TjpfKvD7SLXMhtscIpLbM6QqKXINsUo6MIQK9yNX05Dj0H/E87tmUeL2jyh1OjDGTdXEIlCnF2LxNBeOZde2C4KIBAkVBVmGeo6TWL2T5fO8VBTA959iA5Mj+Es8MvXy/sdI7Hj3s95Hs6d6fBfuTF66F+h/GjrbPzb4/F33Lf/dkbmuK082EvmtXX49UZChSqntwsvh+fHrJz5MjR676Ot7GDjd4zt/e+LMjRfXHge6+vy9w2+uDr/2vlq66Z1JZkufk8W1RF6UIbXbMKrVhYpYOpAvP3g7GooMjLz3jq/EUxwbb3OX3yvLWr2hm1bDIjLS96sqV4GYuIF7EEKaphl1HQCgKIAdFUWBENZUVVORodd0TVPYCxNQgCzXdZ2FJklVCNEvF406QkIe2c4AAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/fc55e91a779211abf2c1565587ce6fe8/a59e9/efficientnet.webp 192w,
+/static/fc55e91a779211abf2c1565587ce6fe8/0ca9f/efficientnet.webp 384w,
+/static/fc55e91a779211abf2c1565587ce6fe8/dc9b9/efficientnet.webp 768w,
+/static/fc55e91a779211abf2c1565587ce6fe8/a6361/efficientnet.webp 960w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/fc55e91a779211abf2c1565587ce6fe8/3b721/efficientnet.png 192w,
+/static/fc55e91a779211abf2c1565587ce6fe8/66595/efficientnet.png 384w,
+/static/fc55e91a779211abf2c1565587ce6fe8/fe486/efficientnet.png 768w,
+/static/fc55e91a779211abf2c1565587ce6fe8/a91f8/efficientnet.png 960w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/fc55e91a779211abf2c1565587ce6fe8/fe486/efficientnet.png"
+            alt="EfficientNet"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<hr>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://www.coursera.org/learn/convolutional-neural-networks" target="_blank" rel="nofollow">Coursera - Convolution Neural Networks</a></li>
+<li><a href="https://hwiyong.tistory.com/45" target="_blank" rel="nofollow">1x1 convolution이란,</a></li>
+<li><a href="https://velog.io/@lighthouse97/ResNet%EC%9D%98-%EC%9D%B4%ED%95%B4" target="_blank" rel="nofollow">ResNet의 이해</a></li>
+<li><a href="https://techblog-history-younghunjo1.tistory.com/132" target="_blank" rel="nofollow">[ML] ResNet &#x26; Inception Network란?</a></li>
+</ul></div><style data-emotion="css hx9xpc">@media (max-width: 768px){.css-hx9xpc{padding:0 20px;}}</style><div class="css-hx9xpc e1gqsjds0"></div><style data-emotion="css lffphe">.css-lffphe{display:grid;place-items:center;margin-top:auto;padding:36px 0;font-size:15px;text-align:center;line-height:1.5;}@media (max-width: 768px){.css-lffphe{font-size:13px;}}</style><footer class="css-lffphe e1oae0v80">© 2025 yhc509, All rights reserved.</footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/deeplearning/2_case/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx.js\"],\"component---src-pages-info-tsx\":[\"/component---src-pages-info-tsx.js\"],\"component---src-templates-post-template-tsx\":[\"/component---src-templates-post-template-tsx.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="41fb7f600fa9551db4d9";</script><script src="/webpack-runtime.js" async></script><script src="/framework.js" async></script><script src="/app.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>

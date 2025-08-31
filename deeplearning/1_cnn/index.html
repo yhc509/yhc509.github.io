@@ -1,0 +1,810 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Gatsby 5.14.1"/><style data-href="/styles.9e907bc32054b7771552.css" data-identity="gatsby-global-css">code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#ccc;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;white-space:pre;word-break:normal;word-spacing:normal}pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#2d2d2d}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.block-comment,.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#999}.token.punctuation{color:#ccc}.token.attr-name,.token.deleted,.token.namespace,.token.tag{color:#e2777a}.token.function-name{color:#6196cc}.token.boolean,.token.function,.token.number{color:#f08d49}.token.class-name,.token.constant,.token.property,.token.symbol{color:#f8c555}.token.atrule,.token.builtin,.token.important,.token.keyword,.token.selector{color:#cc99cd}.token.attr-value,.token.char,.token.regex,.token.string,.token.variable{color:#7ec699}.token.entity,.token.operator,.token.url{color:#67cdcc}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.inserted{color:green}</style><link rel="canonical" href="https://yhc509.github.io/deeplearning/1_cnn/" data-baseprotocol="https:" data-basehost="yhc509.github.io"/><link rel="sitemap" type="application/xml" href="/sitemap-index.xml"/><meta name="google-site-verification" content="0V6Pp62k0qLSCFq479si1XrTMvN4NjFR8estP6u-Zds"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><style data-emotion="css 13ku56z">.css-13ku56z{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;height:100%;}</style><main class="css-13ku56z e1strnqo0"><style data-emotion="css-global 17bu09z">@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap');*{padding:0;margin:0;box-sizing:border-box;font-family:'Hahmlet',serif;color:inherit;-webkit-text-decoration:none;text-decoration:none;}html,body,#___gatsby{width:100%;height:auto;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;}a,a:visited,a:active{-webkit-text-decoration:none;text-decoration:none;color:inherit;}a:hover{color:inherit;-webkit-text-decoration:none;text-decoration:none;cursor:pointer;}img{position:relative;display:block;margin-left:auto;margin-right:auto;max-width:768px;text-align:left;}</style><style data-emotion="css 1u7ncg7">.css-1u7ncg7{width:100%;background-image:linear-gradient(60deg, #29323c 0%, #485563 100%);color:#ffffff;}</style><div class="css-1u7ncg7 e160b013"><style data-emotion="css 5c3sm8">.css-5c3sm8{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:768px;height:80px;margin:0 auto;}padding-bottom:12px@media (max-width: 768px){.css-5c3sm8{width:100%;height:80px;padding:0 12px;}}</style><div class="css-5c3sm8 e160b012"><style data-emotion="css 9p6ebr">.css-9p6ebr{margin-top:5px;font-size:24px;font-weight:700;}@media (max-width: 768px){.css-9p6ebr{font-size:20px;margin-left:16px;}}</style><div class="css-9p6ebr e160b010">yhc509`s Dev Journey</div></div></div><style data-emotion="css 183vxbl">.css-183vxbl{position:relative;width:100%;}@media (max-width: 768px){.css-183vxbl{width:100%;}}</style><div class="css-183vxbl e1opi4mu1"><style data-emotion="css uadz8j">.css-uadz8j{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;height:100%;margin:0 auto;padding:30px 0;}@media (max-width: 768px){.css-uadz8j{width:100%;padding:24px 16px;}}</style><div class="css-uadz8j e1st1jau5"><style data-emotion="css 1g6v2wt">.css-1g6v2wt{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#ffffff;color:#000000;font-size:22px;cursor:pointer;box-shadow:0 0 10px rgba(0, 0, 0, 0.3);}@media (max-width: 768px){.css-1g6v2wt{width:30px;height:30px;font-size:16px;}}</style><div class="css-1g6v2wt e1st1jau4"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></div><style data-emotion="css 1twr1m2">.css-1twr1m2{display:-webkit-box;overflow:hidden;overflow-wrap:break-word;margin-top:auto;text-overflow:ellipsis;white-space:normal;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:32px;font-weight:800;}@media (max-width: 768px){.css-1twr1m2{font-size:24px;}}</style><div class="css-1twr1m2 e1st1jau3">DeepLearning - CNN</div><style data-emotion="css yijt7k">.css-yijt7k{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin-top:10px;font-size:14px;font-weight:700;}@media (max-width: 768px){.css-yijt7k{-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-align-items:flex-start;-webkit-box-align:flex-start;-ms-flex-align:flex-start;align-items:flex-start;font-size:14px;font-weight:400;}}</style><div class="css-yijt7k e1st1jau2"><style data-emotion="css 1bobky6">.css-1bobky6{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-top:10px;margin:10px -5px;}</style><div class="css-1bobky6 e1st1jau1"><style data-emotion="css 1e9ac4l">.css-1e9ac4l{margin:2.5px 5px;padding:3px 5px;border-radius:3px;background:black;font-size:12px;font-weight:700;color:white;}</style><div class="css-1e9ac4l e1st1jau0">DeepLearning</div></div><div>2024.06.23.</div></div></div></div><style data-emotion="css 12iq82c">.css-12iq82c{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;margin:0 auto;padding:100px 0;word-break:break-all;line-height:1.8;font-size:16px;font-weight:400;}.css-12iq82c p{padding:3px 0;}.css-12iq82c h1,.css-12iq82c h2,.css-12iq82c h3{font-weight:800;margin-bottom:18px;}.css-12iq82c *+h1,.css-12iq82c *+h2,.css-12iq82c *+h3{margin-top:16px;margin-bottom:0px;}.css-12iq82c hr+h1,.css-12iq82c hr+h2,.css-12iq82c hr+h3{margin-top:0;}.css-12iq82c h1{font-size:28px;}.css-12iq82c h2{font-size:24px;}.css-12iq82c h3{font-size:20px;}.css-12iq82c blockquote{margin:10px 0;padding:5px 5px;border-left:2px solid #000000;font-weight:800;}.css-12iq82c ol,.css-12iq82c ul{margin-left:20px;padding:4px 0;}.css-12iq82c hr{border:1px solid #646464;margin:64px 0;}.css-12iq82c a{color:#4263eb;-webkit-text-decoration:underline;text-decoration:underline;}.css-12iq82c pre[class*='language-']{margin:5px 0;padding:10px;font-size:14px;}.css-12iq82c pre[class*='language-']::-webkit-scrollbar-thumb{background:rgba(255, 255, 255, 0.5);border-radius:10px;}.css-12iq82c code[class*='language-'],.css-12iq82c pre[class*='language-']{tab-size:2;}@media (max-width: 768px){.css-12iq82c{width:100%;padding:40px 16px;line-height:1.6;font-size:14px;}.css-12iq82c h1{font-size:23px;}.css-12iq82c h2{font-size:20px;}.css-12iq82c h3{font-size:17px;}.css-12iq82c hr{margin:50px 0;}}</style><div class="css-12iq82c e1ijh0y10"><h2>Computer Vision</h2>
+<p>컴퓨터 비전 문제</p>
+<ul>
+<li>이미지 구분 (고양이인가? 0 or 1)</li>
+<li>물체 감지 (자율주행)</li>
+<li>신경 스타일 전달 (컨텐츠 이미지 + 스타일 이미지 → 새로운 스타일의 컨텐츠 이미지)</li>
+</ul>
+<p>이미지는 입력의 크기가 크다. 64 x 64 크기의 이미지는 64 x 64 x 3 = 12288 바이트이다. (RGB 채널 3바이트)</p>
+<p>1000 x 1000 사이즈를 학습시키면 입력의 크기는 3,000,000 바이트가 된다. 은닉 계층 Layer1의 사이즈가 1,000 이라고 하면 Layer 0 → Layer 1의 매개변수는 3,000,000,000 개가 된다. 매개변수 30억인 신경망을 훈련하기 위해 계산적, 물리적 요구사항은 실행 불가능하다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/1b17ae77ecc84071e82a323d59548d94/e6e97/cnn1.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAACBklEQVR42n1SS2sTURSeX+QvcOc6WKTGcTLJJOAqboq4UGoRhaIEK6XEhQWhulFxIwi6KC1diKIFsQuh1WQemUcSM9OZZB73NXfGk4xIINJvcS7nu/ecc893jlCtVhVFkWW5Xq/XajWw4BakUleAaTQaQMKDygKEk+Njy7J7PVPXDcu0dF3v9/vD4bDT6di2PRgMut2uqqoIoTzPsyzL5yAkSUIIBp5zTikJw3DKUBrNQAgBC2SaptkCBEjwS3P2Px8dfPrm+ePF9GdgGry6+aa5creyLL7b+wJughDGGOrHcXx2GgEz9mhn7/3rF9dqysu3u0BBe8E4GLkj13WLX4BBNOU8+0/l/cPuzvNXzZW1r0cn4Dp+TFhaXBfPQ0SA5LM++VxTAvhhFA2hkOeDMIxnE0QYn7751/xogiBfhFkQkzGoORNvGqwbZnujdaO+3JQvtR+35ur9heX0rcHvjmZoqgqNMJ5DPIYDglXDat+/efvqeenCua31VcpzP0JwDfWLH7p+oGlGz3SKmXmuxyjFCBNCha6mb7fufHi69vDW9Y31eyCKGyb2aRhhWgzT8wPLGWimDfLDCKA4KBrHMBMkwDI923zw88f33Y+H20+2FudxGiYhZoSyCaKgebEIDJAyAVa0XL4MEMtl8Uq5WFppfoNlWZIqsOVS4ciyKIqlUmlp6eIfWDeEgtY0P4sAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/1b17ae77ecc84071e82a323d59548d94/a59e9/cnn1.webp 192w,
+/static/1b17ae77ecc84071e82a323d59548d94/0ca9f/cnn1.webp 384w,
+/static/1b17ae77ecc84071e82a323d59548d94/dc9b9/cnn1.webp 768w,
+/static/1b17ae77ecc84071e82a323d59548d94/97885/cnn1.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/1b17ae77ecc84071e82a323d59548d94/3b721/cnn1.png 192w,
+/static/1b17ae77ecc84071e82a323d59548d94/66595/cnn1.png 384w,
+/static/1b17ae77ecc84071e82a323d59548d94/fe486/cnn1.png 768w,
+/static/1b17ae77ecc84071e82a323d59548d94/e6e97/cnn1.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/1b17ae77ecc84071e82a323d59548d94/fe486/cnn1.png"
+            alt="computer vision"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>이를 해결하기 위해서는 CNN(합성곱 신경망)의 기본 구성 요소 중 하나인 합성곱 연산을 잘 구현해야 한다.</p>
+<hr>
+<h2>Edge Detection Example</h2>
+<p>엣지 탐지 예제를 통해 합성곱 연산이 어떻게 작동하는지 살펴보자.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/eb9418b868f4e1ae7df664c8112de4d4/e6e97/cnn2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAACHklEQVR42oVS3W4SQRjd2FewvITpleml+gJiuAMWKGgBIVpJVQpRiFoopRhJb6SXRqUxmvAE3EuagBYQSnBBEHaXLsQuLOsu+4ffLgZTE/RkMpmcfOd835wZxGq1OhyONQ1ms9lms9ntdhRFrRrgbFkMpN1ud7sdWIPBgKKoVqtFkiSO410cbzQaBEHIsjxdAGQ4Zqt17FOpUq7WwIbnOIblCLKHYRiu6VmWlZXpkBmDe7+vNqBpGhwVRUFYXtyOxTcf+N23vXc2fGcjBizT6cPgViCxtxd6HCoUCsAUi+X9F/uJ3cROJPb61RtRFNXOE1EOP3mGWqwmI3rTsd7r/wD28G068nT7USDou3vvKHcEzEmlGovsJp8n4ztx2EVBUMXQvoY185+Pj8tfSpUaN1FZkiCrlRMCJ5pYkz6jgRkNR9hXrN3+3vrWgohgZlU8XYxZBdz86pVrq5dXVy6tpF6mgJEk6XdgsyJFDUAGtj8Y9Hqn1CnFMIwkSgIv1Gv15YvLSxeWEATZ2rwP9YIg/hHPmwAb9fs31l3OW6737z4IEwGCAYtSsZTP53MfczDwvPhvMc/zQZ9vzWjUX79xkDoAhvvJDemh/6Hf6XTBz8lkMkDOXx5RzkOSZVGSZs842zudjk6nQzQEAgFtQOFc538ENh6Pk8lkNBoNhcPZbHYWGOjhRojlf4Bp3W631+v1eDzw/4ExmUx6vd5gMPwCP5ZNXcpPUd8AAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/eb9418b868f4e1ae7df664c8112de4d4/a59e9/cnn2.webp 192w,
+/static/eb9418b868f4e1ae7df664c8112de4d4/0ca9f/cnn2.webp 384w,
+/static/eb9418b868f4e1ae7df664c8112de4d4/dc9b9/cnn2.webp 768w,
+/static/eb9418b868f4e1ae7df664c8112de4d4/97885/cnn2.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/eb9418b868f4e1ae7df664c8112de4d4/3b721/cnn2.png 192w,
+/static/eb9418b868f4e1ae7df664c8112de4d4/66595/cnn2.png 384w,
+/static/eb9418b868f4e1ae7df664c8112de4d4/fe486/cnn2.png 768w,
+/static/eb9418b868f4e1ae7df664c8112de4d4/e6e97/cnn2.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/eb9418b868f4e1ae7df664c8112de4d4/fe486/cnn2.png"
+            alt="Edge Detection"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>이미지의 Vertical Edge와 Horizontal Edge를 검출한다. 검출할 때는 필터라는 매트릭스를 곱한다.</p>
+<p>6x6 이미지를 예로 들어보자. 필터의 크기는 3x3이고 결과물의 크기는 4x4가 된다. 각 요소들을 곱한 후 더해주는 아다마르 곱을 실행한다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/7d727894b4560883b1c133bfd1e95b4b/e6e97/cnn3.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAABwElEQVR42pWTXYvTQBSG8wcLvSxs0/4fRcV7EbxR6q3oP9gFV7r1Qq1g2Xabj0lmJjOZzFcm06SeNFtRkIV9GcIZOM95z5xDgul0OpvNwjCchuF8Ph/i2VkXDyrY7yM4cRxnWbZe/0QIbbfbJEl2u11RFMcHFeScZgUhJWWSpwTlHBNBsSBFxbgsha1krW1T28Ye2sPfZNd1wZuPq1cflq8/rb79uuWMoQzxkrfHzjhfGodKVfue6frkrm3bw1k9/HJx/Wzx5enbq89fv5M8z7JcCOHbzjpf105po7VpmgZ4aVVSIOecOcl7H7x4f/18sXzy7mq13jBKMbygLAGWxgJJWYkpg1SAKyNjkkJcndS4Jri82dz8SC+Xm9tdRAiGUXHOXeNFJW3teCUpFzW4aQNHSqm1BhK6g3aCNIlEyQjO4jiilALMGAMf6EpImVOekUKfnKEEMNYY2dMnZ8jGmMCq7u72KE33UfRnQ+Cfsgq+MJuhHNgKpSupIOjfDKlQD+U4x/1r4aqUGmDftrnQzv+zIV375tDe73mYO1dWWTcsAvbRnXXs/q97+Ph4AQzT6tu+eKTgX5hMJqPRaDwe/waeaJoHI8eddQAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/7d727894b4560883b1c133bfd1e95b4b/a59e9/cnn3.webp 192w,
+/static/7d727894b4560883b1c133bfd1e95b4b/0ca9f/cnn3.webp 384w,
+/static/7d727894b4560883b1c133bfd1e95b4b/dc9b9/cnn3.webp 768w,
+/static/7d727894b4560883b1c133bfd1e95b4b/97885/cnn3.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/7d727894b4560883b1c133bfd1e95b4b/3b721/cnn3.png 192w,
+/static/7d727894b4560883b1c133bfd1e95b4b/66595/cnn3.png 384w,
+/static/7d727894b4560883b1c133bfd1e95b4b/fe486/cnn3.png 768w,
+/static/7d727894b4560883b1c133bfd1e95b4b/e6e97/cnn3.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/7d727894b4560883b1c133bfd1e95b4b/fe486/cnn3.png"
+            alt="Edge Detection"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>6x6 입력을 3x3으로 쪼갠 후 필터와 곱한 모든 값을 더하면 아다마르 곱이 된다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/60427e0569898e91072eafe9093633e7/e6e97/cnn4.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAByUlEQVR42pWRy27TQBSG/YKFLiPFTh4IAQ8AFdANGySExIIHgKpIqEohohUg4jj2OL7M/WLP+BKO4wSxQJX6L0aj0fnmnPP/nu/7s9ksCAI/CObz+XifHTW9U14E2mziON5utzc3t2marlarOEHrMMQY7+6UhwXJKC4ZLTlNcpTRvOBlzgvMCVWMVULWunZ15eq2awHoj2Tf9946Tl5/WJ6///bi3eL7z7goMkJJt+uNbZixiOm6GRko7jtQ07R7DXAYJc/eLB6/vHh09vHq62+CC8Z40/WVdXVtlTZaG+cc8LLSKItMlg1PxjRN423i9Pnb5dPzz09eXS6WK0YxoxRgqY1SuiQsLwmUDrBRcRrxNBWcCyGctR64dX2bfPry4+Lq13oDfiFKqHWOC1nVlgpVUlZbq/eSEkYxgHLOoQbgiFFS5NsUxQTjJEkIIdAHphJSQtttgfW+s7UWoMqYAeUcdvEShPI8h6jCcI0Qgtz+JmRdg4iAE7wZv1NKcaWFVIedoZRxlmZ5loNVDJdYSTXCTddlHFxv/80W3Hdtd8h59J2qSlW264Y7xNEftev/rwO8u78AhoWHsaf3lD/1J5PJyYOT04enfwAgE5mqIfzz1AAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/60427e0569898e91072eafe9093633e7/a59e9/cnn4.webp 192w,
+/static/60427e0569898e91072eafe9093633e7/0ca9f/cnn4.webp 384w,
+/static/60427e0569898e91072eafe9093633e7/dc9b9/cnn4.webp 768w,
+/static/60427e0569898e91072eafe9093633e7/97885/cnn4.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/60427e0569898e91072eafe9093633e7/3b721/cnn4.png 192w,
+/static/60427e0569898e91072eafe9093633e7/66595/cnn4.png 384w,
+/static/60427e0569898e91072eafe9093633e7/fe486/cnn4.png 768w,
+/static/60427e0569898e91072eafe9093633e7/e6e97/cnn4.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/60427e0569898e91072eafe9093633e7/fe486/cnn4.png"
+            alt="Edge Detection"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>다음 요소는 오른쪽으로 한칸 이동한 후에 아다마르 곱을 행한다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/c1e19357dff173839eaf7c101af0b66b/e6e97/cnn5.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB9UlEQVR42n1SXXPbIBDUH2ymeXNs2f7FnT40jVvHkWQQoA9AIAmBkHB6tpy+ZCY3NxpAt+yxe1Ecx7vdbrvdxtvtfr9f1ruP2HwZEUIIY5znOSvY4XCglKVpmhNyzjIhxPuXEYlWQqpOq14zzmpVc80rVcNh0ys96M71zjvr7RxmAFyWvEVEKGGUFoyd0izL6TFDFefwe/BeDY6p3k0L5lod5jlMUwgz5A1MSEHI2/H44+ev52Py/JpVXITLux29dWNnBmPgHg/4zhlWY1MUjW5Lqb2fIsaY4Byfs99/Ty+n8yFBZX0F94PtjOGNqrgchgHAUrXHw4nnpBINroQbxyjHWAqJsjRN/uQ4RfhN8tKNk9Ktda5pO95o50ZrrWp0luSlkLQoWFmNo48QRlwIxnKMEpCXEio5Ax5oVbcdlBa1MDfm3vSE5Nc2oc/kxZguopTWNacEoeyVMobO50YWixN+mjDXbvSgDWydc1JKeEVZlRQfB9NGwKaUSjDJUNaIkldEKW598HNoB38qlfXT4tASjRmtn+8+g+jTNKWVJrIHI4CEiO5UNLwbam1o0/P22nO4GRtCAMvuLoNVn+fGzZfOXyYQ3Ac7Xz4XAAwUAcpomdL1fVrjeBOv15unp/Xm9o03m218Pfw/z7BZrVYP3x4evz/+A+wTmeYtycI9AAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/c1e19357dff173839eaf7c101af0b66b/a59e9/cnn5.webp 192w,
+/static/c1e19357dff173839eaf7c101af0b66b/0ca9f/cnn5.webp 384w,
+/static/c1e19357dff173839eaf7c101af0b66b/dc9b9/cnn5.webp 768w,
+/static/c1e19357dff173839eaf7c101af0b66b/97885/cnn5.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/c1e19357dff173839eaf7c101af0b66b/3b721/cnn5.png 192w,
+/static/c1e19357dff173839eaf7c101af0b66b/66595/cnn5.png 384w,
+/static/c1e19357dff173839eaf7c101af0b66b/fe486/cnn5.png 768w,
+/static/c1e19357dff173839eaf7c101af0b66b/e6e97/cnn5.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/c1e19357dff173839eaf7c101af0b66b/fe486/cnn5.png"
+            alt="Edge Detection"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>끝까지 모두 행해준다.</p>
+<p>Vertical Edge Detection은 무슨 의미일까?</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/a937c2a50a9ac58c1ff44c72a910b812/e6e97/cnn6.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAACAklEQVR42n1S23KaUBTlB+vYJjGNUv2Mtj/VTpqHJmY605kmLxqnDoqAcOAc7sglAnIRxHYTqmNfsh5g73PO2nvtC0XTdL/f//CCwWAA3+akQe9VUJpewzRN27EFQbAsmxBiGAYm2Pf9P6+CwiYhuoo1TExV0zTXdW3bTpIkz/OiKODF/n80tMamlkjkuAU7n895VlWJbVmKojS06oh9BW6+zd3Q858DULRer7fbLYWwLIqSuBR5SYASVquVqqoNOY5jUOF5XhRFtZvEEkEMywCAAXwKEcRzi8V8xvGsoWnwVDcM0AyqguAZYwwd8YNgt9ulaQqhEUJLUYQC401MyYrMPI1/P40WM0aXJJANDcuyDMQGQaDIiq5roBPI0AhoJMfOZ7MZklEYhpSuqQLD8ByHREmXZdBJyEF2FOmGZVjOJo7BzfLcNAx+PGanU0xIBGSVkMV0CoWIvKAul47jHGsGlNW+2FWNXe2qLM3C1WoTRUmalkVJJZtN5Hlr1yUy9h0nSRPoE2hu5lGW5emE6hBwlGf/5ny4qa7vfn75et1wIDNMAuybbze9bu84WDi/H94Pb29tx6nJ9cVLmB+Po+93w9OtAPvXw+PHT5+PaSHrZDIZj8aWZdVkWFGa7l2+v2q9PWufXRzWFhacht+7887lVfd0n7vdbuei03rTarfbfwEx44nZRNNwVQAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/a937c2a50a9ac58c1ff44c72a910b812/a59e9/cnn6.webp 192w,
+/static/a937c2a50a9ac58c1ff44c72a910b812/0ca9f/cnn6.webp 384w,
+/static/a937c2a50a9ac58c1ff44c72a910b812/dc9b9/cnn6.webp 768w,
+/static/a937c2a50a9ac58c1ff44c72a910b812/97885/cnn6.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/a937c2a50a9ac58c1ff44c72a910b812/3b721/cnn6.png 192w,
+/static/a937c2a50a9ac58c1ff44c72a910b812/66595/cnn6.png 384w,
+/static/a937c2a50a9ac58c1ff44c72a910b812/fe486/cnn6.png 768w,
+/static/a937c2a50a9ac58c1ff44c72a910b812/e6e97/cnn6.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/a937c2a50a9ac58c1ff44c72a910b812/fe486/cnn6.png"
+            alt="Edge Detection"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>바로 이미지의 경계 부분을 검출하는 것이다.</p>
+<hr>
+<h2>More Edge Detection</h2>
+<p>밝은색 → 어두운색으로 바뀌는 것과 어두운색→밝은색으로 바뀌는 것이 구분된다. 구분되지 않으려면 절대값을 씌운다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/0eb07f92d874f78fe9a963888fd42aae/e6e97/cnn7.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB8UlEQVR42m1S2Y7aQBD0FyJ42EjZEML+aFbaLM+IBRvf4wvjAL6Nx+c4NRixipKSjHpKU91TRQvz+XyxWHy/YblcjvXihh83gMQvjt/+geDc4Hnu8XiUJMn3fUIszzvYtvU7CHB0XFdVVc/zGGPD3xCqqrJsy9B1tNB0PUmSpmlA1jdQWpVlWRT5tSzzssqutCirgtZ10w2MCehnmKYsy4QQ27aLokBLSunpdMqyDPU4ru76OEk1VVMVNUrSpuM0F5uEQGyapmVZEIOJ41jXdRjBjb7vm6ZuehZFMcSKrFzCuO2HuxiWJFHEZMMw8jwH27btarUKjgGfzK2yuu2zvBC3O2knpnlRPybHcSIp6nq9TpMUPscwzucznH8+u+kaNkiyopukw7Ht7uIwjEzLxst9/4B4hv+BT0ZgZRVm10t2vacNS8jZIkTTtM1mg7TBwrnjOmEUfj6bB5bA3W67Dc6c52lD7LquaRiKIouimKYp+CiK9vu9fzjwwBjDn4eEwihGqIqi+KfL2FTous52HKSF2D4+NsiZP7Kuf76+HkZxj2RZWbclpav3919vb2lxvYvxIVvPDyCuKEU9+oF59H147niLQcdoQlBgh3BTwIpidZ+evsxmM6wxVn3cW5CPGkD99fmZL/rLCy5PJpPpdPoH1bCVJ9cGV5wAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/0eb07f92d874f78fe9a963888fd42aae/a59e9/cnn7.webp 192w,
+/static/0eb07f92d874f78fe9a963888fd42aae/0ca9f/cnn7.webp 384w,
+/static/0eb07f92d874f78fe9a963888fd42aae/dc9b9/cnn7.webp 768w,
+/static/0eb07f92d874f78fe9a963888fd42aae/97885/cnn7.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/0eb07f92d874f78fe9a963888fd42aae/3b721/cnn7.png 192w,
+/static/0eb07f92d874f78fe9a963888fd42aae/66595/cnn7.png 384w,
+/static/0eb07f92d874f78fe9a963888fd42aae/fe486/cnn7.png 768w,
+/static/0eb07f92d874f78fe9a963888fd42aae/e6e97/cnn7.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/0eb07f92d874f78fe9a963888fd42aae/fe486/cnn7.png"
+            alt="More Edge Detection"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>Vertical Edge</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>0</th>
+<th>-1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>-1</td>
+</tr>
+</tbody>
+</table>
+<p>Horizontal Edge</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>1</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>-1</td>
+<td>-1</td>
+</tr>
+</tbody>
+</table>
+<p>아다마르 곱의 절대값이 클 수록, 명암의 변화가 크다는 뜻이다.</p>
+<p>다양한 필터를 사용해서 엣지를 찾을 수 있다.</p>
+<p>Sobel Filter</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>0</th>
+<th>-1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>0</td>
+<td>-2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>-1</td>
+</tr>
+</tbody>
+</table>
+<p>Scharr Filter</p>
+<table>
+<thead>
+<tr>
+<th>3</th>
+<th>0</th>
+<th>-3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>0</td>
+<td>-10</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0</td>
+<td>-3</td>
+</tr>
+</tbody>
+</table>
+<p>딥러닝에서는 역전파를 통해 적합한 필터를 찾아서 사용한다.</p>
+<hr>
+<h2>Padding</h2>
+<p>n x n 이미지를 f x f 필터와 컨볼루션하면 (n-f+1) x (n-f+1) 결과물이 나온다. 그런데 다음과 같은 단점이 있다.</p>
+<ul>
+<li>합성곱 연산을 할 때마다 이미지가 줄어든다.</li>
+<li>가장자리의 픽셀은 결과의 일부에만 사용된다. 중간에 있는 픽셀은 겹치는 영역이 많이 있기 때문에 더 많이 사용된다. 가장자리에서 많은 정보가 버려지는 것이다.</li>
+</ul>
+<p>이를 해결하기 위해 패딩을 한다.</p>
+<ul>
+<li>6 x 6 이미지에 1픽셀씩 패딩을 하면 8 x 8 이미지가 된다.</li>
+<li>(8 x 8) * (3 x 3) = (6 x 6) 이 된다.</li>
+<li>n x n 이미지를 p 만큼 패딩하고 f x f 필터에 컨볼루션하면 (n + (2 * p) - f) x (n + (2 * p) - f)</li>
+</ul>
+<p>Valid와 Same 컨볼루션</p>
+<ul>
+<li>Valid : no padding
+<ul>
+<li>(n x n) * (f x f) = (n-f+1) x (n-f+1)</li>
+</ul>
+</li>
+<li>Same : 결과물 크기를 입력 크기와 같게 하기 위해 padding을 한다.
+<ul>
+<li>(n x n) * (f x f) = (n + (2 * p) - f) x (n + (2 * p) - f)</li>
+<li>p의 크기는 (f - 1) / 2</li>
+<li>컴퓨터 비전계에서 f는 대부분 홀수이며 짝수로 된 필터는 보기도 어렵다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>Strided Convolutions</h2>
+<p>스트라이드 컨볼루션은 컨볼루션의 기본 구성 요소 중 하나. 넘어가는 칸 수. Stride가 2라면 두칸씩 넘어간다. (7 x 7) * (3 x 3) = (3 x 3)</p>
+<ul>
+<li>(n x n) * (f x f) = ((n + 2p - f) / s + 1) x  ((n + 2p - f) / s + 1)</li>
+<li>(n + 2p - f) / s + 1이 정수가 아닌 경우는 반올림하는 것이 좋음.</li>
+</ul>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/ec61fc9de5554e006ec68b0e8207e4c2/a91f8/cnn8.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA+ElEQVR42qWS2Y6EIBRE+f8/NPbEKC6NcUdxxzndJGaW6DxMPRCgLG7VvYqu66SMlHqCsizzPH++kaZplmVKqXVdjwuIeZ6LoqjruqoqrXXbttUb3DRNA7Usy6XYWot+mqZhGFBu28bXHNmj53hcQ+z73vc9NakmpRyN4S0eIg7Ox3G8E1M5juPHxwMlGq6MGYIgQGntftzC2Z6waoxx8fDChj6x+UP89cBDN5/+Zl9iDHueF4YhsamPYfpEzwgPG0WR7/usDBI2SZJzeC/bDBMZKxzNg3Y9Bzhn5rDMnI441okRiuMfEGeeM9KPbPY7uFmWmR9Ra/0J7/eAfXwj1QQAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/ec61fc9de5554e006ec68b0e8207e4c2/a59e9/cnn8.webp 192w,
+/static/ec61fc9de5554e006ec68b0e8207e4c2/0ca9f/cnn8.webp 384w,
+/static/ec61fc9de5554e006ec68b0e8207e4c2/dc9b9/cnn8.webp 768w,
+/static/ec61fc9de5554e006ec68b0e8207e4c2/a6361/cnn8.webp 960w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/ec61fc9de5554e006ec68b0e8207e4c2/3b721/cnn8.png 192w,
+/static/ec61fc9de5554e006ec68b0e8207e4c2/66595/cnn8.png 384w,
+/static/ec61fc9de5554e006ec68b0e8207e4c2/fe486/cnn8.png 768w,
+/static/ec61fc9de5554e006ec68b0e8207e4c2/a91f8/cnn8.png 960w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/ec61fc9de5554e006ec68b0e8207e4c2/fe486/cnn8.png"
+            alt="Strided Convolutions"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>(A * B) * C = A * (B * C)가 성립한다.</p>
+<hr>
+<h2>Convolutions Over Volume</h2>
+<p>RGB 이미지는 3개의 채널이 있다. 6 x 6 이미지의 크기는 6 x 6 x 3이 된다. 필터 또한 3개의 채널로 3 x 3 x 3을 사용한다. 채널의 수는 반드시 동일해야 한다. 결과물에는 채널이 없다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/a3821e92996722b588a959fb78c2b0d4/e6e97/cnn9.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAACZ0lEQVR42o1Sy04VQRCdH3BJjNGwQMSg+AAX/oFxA5GbAHfuDCxIdGOMiT+ga1cu3KAxEtEdEiGYCCsTNdGNMTF4eV2cyzzvvF/dM9OPGWvAD+Ck0unTVV3VXXUECSDLYE1RBJNn54BLJ4PQbre1Q9XSdNs09a4aOA4p8upkEGiG3m6sPlpYeLK09Hhp8eGrd201AAcvy4JWmJRpRjgHVh5fgA0/AmyEaHPz88j5jRvD66PD30YGxqXbH3ccCCqK2DBeaPpTLzKAohQ5Pdf3QoTzJCN+giGZEK6saP0D9tUx7co1PDR8f35ybdusWBUGLz2jz+qeSZLfjFdBEFhWz/eDKEqjjHTdmHEuhKtr+4MXlNGxneujzqXLd+cb67s9KOU4i7Z+09IfUJoCDfxQU3XTtHwvUtxkS/MyQoVgeXm/77Q6eHFvcMg9e26+devTgQ/R26r5c3t3q2v7mPGSM8b/7CkHh2YUYprTEBUU/px8+apNNxVR6kiyOd388f6NzevGJF6nu3Gv86EROB2gMc5U27PCOEJ5EGEHOOMCOCBH1/UU12dHLcWEIFZFv57Zr09pi/2p3Sa0CuLYdZwwDP0UIcrSgkK7Beh9xetaIcq9GFMGGWqqb63trUrK9+fsyOsn6EDVDw3LT/HxwOo554QSygpKY5Q5fgKhBdCCGG6iulgPcsI4ZITD9l9VMXrHs64XuIxombMSU54WLE4JHKW09FOKMIWIjHJEeFwwTEsvoynh8DAAIYRSKszNyiDtptgCYbdqjcstSZoRW61a8vJsTf9LfWpGbEzNNKabzaY4MT4xeWfyH/SKZO55rR4yAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/a3821e92996722b588a959fb78c2b0d4/a59e9/cnn9.webp 192w,
+/static/a3821e92996722b588a959fb78c2b0d4/0ca9f/cnn9.webp 384w,
+/static/a3821e92996722b588a959fb78c2b0d4/dc9b9/cnn9.webp 768w,
+/static/a3821e92996722b588a959fb78c2b0d4/97885/cnn9.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/a3821e92996722b588a959fb78c2b0d4/3b721/cnn9.png 192w,
+/static/a3821e92996722b588a959fb78c2b0d4/66595/cnn9.png 384w,
+/static/a3821e92996722b588a959fb78c2b0d4/fe486/cnn9.png 768w,
+/static/a3821e92996722b588a959fb78c2b0d4/e6e97/cnn9.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/a3821e92996722b588a959fb78c2b0d4/fe486/cnn9.png"
+            alt="Convolutions Over Volume"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>여러 개의 필터를 중첩하면 그 수 만큼 결과물의 레이어가 생긴다.</p>
+<hr>
+<h2>One Layer of a Convolutional Network</h2>
+<p>합성곱을 치루고 나온 결과물에 편향(bias)을 더해야 함</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/e2f344901809f31476b4bdce0846455b/e6e97/cnn10.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAACjUlEQVR42i1SS2sUQRCem3d/gIoPEHQV9OIDQUJuRiISzc7s7O49kmAEwYOCHvQiXrx49xJFk0DIxUuEgGc1GM3DbLLZnZmd93P73dPWJBZN0139VddX9ZXWbDZb7XbDNI2GqRuGaZrtdrvVapkN8Jmwg8EOTwYgmpWvrhsH7obW+bvjOwNrrxv7QRJFVmX9KPSJKBMsqFRgTJRYlEKWgkvwcFmqA9O8yH27vPR8bv7VwuKb5dUwGRYFitLcCf0gKwAhZemnw6QgiDA3zCgXjIsCU6VKbfvli0+XTy9cu/Dx+qnR2am9CN4Ku/9wvzPiel+EUK4b97pB4CUEszAuGBOBl3pOUmW2HkzvnzjjnL/Uq51tPXm05tAs7Qx6F/u7R217kVFlW2G34/l2TDCNUgRfuFbU3/OAkdabntk8dnzrXO1P7eSd2anfLmYMDbyVMF7FjEipgGcY5mkyhEJjRCGGA3PG4RfNfvqse+Vqd2R0++aNz/PvI6YwYcH60uDb69j+JZRClOWUUyEJl35By1LFmHEpKWEajuLu+sbm97XMtgVlQ67cQceaq3XfHbF+fgi52o1zQENad0iDIQ0x++HlMeGcMg3qjjArmERccAGkVBx7/a+PnZWZxN+RlU7CLUhKRUZYikE11c8J8GeQmUBzMc2GBPQIMsSEpFzuR3Q3YhgELStJwwz1/CzKcYZoySUhDA2hHVKjjENkXGAnzjNEDtGI0l6QEMow5WGOOShLeWfL2dgB7izJEVRdSQU0gBvmJf8/NtUAYSFDVDWJyTKCgywBkybYAm+pgoImBRJCaIcz3GpW62CWTV1v3K/rk3UdbjDSE5M6XHXdqBuNsbtwNCbuTd4auz0+fucf7m11Q8wRSywAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/e2f344901809f31476b4bdce0846455b/a59e9/cnn10.webp 192w,
+/static/e2f344901809f31476b4bdce0846455b/0ca9f/cnn10.webp 384w,
+/static/e2f344901809f31476b4bdce0846455b/dc9b9/cnn10.webp 768w,
+/static/e2f344901809f31476b4bdce0846455b/97885/cnn10.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/e2f344901809f31476b4bdce0846455b/3b721/cnn10.png 192w,
+/static/e2f344901809f31476b4bdce0846455b/66595/cnn10.png 384w,
+/static/e2f344901809f31476b4bdce0846455b/fe486/cnn10.png 768w,
+/static/e2f344901809f31476b4bdce0846455b/e6e97/cnn10.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/e2f344901809f31476b4bdce0846455b/fe486/cnn10.png"
+            alt="One Layer of a Convolutional Network"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>신경망 한 레이어에 3 x 3 x 3 크기의 필터를 10개가 있다면 이 레이어는 몇 개의 매개변수를 가질까요?</p>
+<ul>
+<li>3 x 3 x 3 = 27개</li>
+<li>bias = 1개</li>
+<li>즉, 한 필터당 28개</li>
+<li>필터 10개이므로 280개.</li>
+</ul>
+<hr>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/9dacc3d5cf2766b91f14d655f587ddd0/e6e97/cnn11.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB0UlEQVR42m1SyXLaQBCdH3Q4BiO2D84hOaRcFUJMQJIFktAyS8+uPKGYIhV3tZbp7fXrabZarbbb7WazSZJkuVyu16vFIlmv18mDfJ4/z58X9+MUhjf7ud+n6Wm32xVFked5lmWHw+F8KYdhiHGYRLnow3AX72PLrQuRKSLORdP11jpnrTH62susaocpO0brfc0VJzNZQoxpWn9/SQUZ1krTky17Uga1Itf2KnQltPMBDzI7ZRAjtBVkOVTZ46kuyh6lGHLwge/10l06JbRpia5cdUof614aWwl5KBtt3FXqWhAZ+yMvfhcNkWWtUj1RK3V2FQCRxnxLs9e3quP6rRVgVkt+LCsuSFl36RU6akm2grR27OWt+HrMfmV10cpzp1wIFScgoJe8kROdiRpcwjgc3fv02KnmwKzBxgdwNj7kjTj3yofo/KiN1ACkG7uqkZgIfpCPaTK0qq2P92vBTYRw8/21jCUjrmo8nkv+ZX8pOaEijGyKmAJ7ZdC8vIF8KE2nOqn35w4Ex7anwhNOrzA2zkkrY5338V9BZFFjObyB3mizx8IwOHQYB2j8DxYWcgGucXPGlXLscYexr6txZ5fjK/lAbs7lfD5/+vQ0m83+ADQDpvuyqqGGAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/9dacc3d5cf2766b91f14d655f587ddd0/a59e9/cnn11.webp 192w,
+/static/9dacc3d5cf2766b91f14d655f587ddd0/0ca9f/cnn11.webp 384w,
+/static/9dacc3d5cf2766b91f14d655f587ddd0/dc9b9/cnn11.webp 768w,
+/static/9dacc3d5cf2766b91f14d655f587ddd0/97885/cnn11.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/9dacc3d5cf2766b91f14d655f587ddd0/3b721/cnn11.png 192w,
+/static/9dacc3d5cf2766b91f14d655f587ddd0/66595/cnn11.png 384w,
+/static/9dacc3d5cf2766b91f14d655f587ddd0/fe486/cnn11.png 768w,
+/static/9dacc3d5cf2766b91f14d655f587ddd0/e6e97/cnn11.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/9dacc3d5cf2766b91f14d655f587ddd0/fe486/cnn11.png"
+            alt="One Layer of a Convolutional Network"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>Convolutional network의 레이어 타입들</p>
+<ul>
+<li>Convolution</li>
+<li>Pooling</li>
+<li>Fully connected</li>
+</ul>
+<hr>
+<h2>Pooling Layer</h2>
+<p>Pooling을 사용하여 표현 크기를 줄여 계산 속도를 높이고 특성을 더 잘 검출할 수 있다.</p>
+<p>Max pooling은 각 구역에서 최대값을 고르는 것. 특성이 강하면 큰 값이 남을 것이다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/b2ba2a61bd0f824339f7c10e14c604e8/e6e97/cnn12.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB60lEQVR42pVS32vTUBTOH2ihj6FpbRBf5mDDgo4x3MOc2umYD8oYMhQVEZYhKL6MobQbburmy36g68+0tmmcWdKkN8n9mXiT1m0qMvZx4V6+c79z7jnfFSRJuhgjk8nIspxOp1OplByDc9lslvPSfyCodbVcrtTraqPRbGnaoWHs7O232u221qnWat8OSgCAMAyDIAj/gYAQopRg5GO3R0CPU57XMy3DtHs2cI+6NoSISyll0WIsOAWBQrTxufLuQ/l9cWdlr/r2q1rS9KhUeDYEjNDUwtr1+Y83Hry+srqfXi2/+HLAA+yUGkKstXTt0NIswAg9EUPHyS9u3XlUuL+o5Iqly+uqsluLxQGmDMdXm03j5txKbml7dL2KXfd4BILftSaX50eX7957cmv72vjmSK766k0kpgwRCnzEz5VOY0jJP58c+3R1gqKICftizMh4ceZSYWL65ZglikeJC/bTZ1GYseMK3+3O7a3Hmwt5Z2aWxfzg2YTRqeLDkUJ+TpnWh4ZbWdlYUvq5fzrej67XdRFvgdEQkID+NTCe24HA9J22rvkdnZgWdb1+DBFmAqhbAGESjT8Iwj/dFgbucycJZL9jfRv5zmfmAA9DFER9nDg8EIfnBxdjjAkhgnRO8M8vimIikUgmk78A92KBts6AqR0AAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/b2ba2a61bd0f824339f7c10e14c604e8/a59e9/cnn12.webp 192w,
+/static/b2ba2a61bd0f824339f7c10e14c604e8/0ca9f/cnn12.webp 384w,
+/static/b2ba2a61bd0f824339f7c10e14c604e8/dc9b9/cnn12.webp 768w,
+/static/b2ba2a61bd0f824339f7c10e14c604e8/97885/cnn12.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/b2ba2a61bd0f824339f7c10e14c604e8/3b721/cnn12.png 192w,
+/static/b2ba2a61bd0f824339f7c10e14c604e8/66595/cnn12.png 384w,
+/static/b2ba2a61bd0f824339f7c10e14c604e8/fe486/cnn12.png 768w,
+/static/b2ba2a61bd0f824339f7c10e14c604e8/e6e97/cnn12.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/b2ba2a61bd0f824339f7c10e14c604e8/fe486/cnn12.png"
+            alt="Pooling Layer"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>Average Pooling은 평균값을 고른다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/19db70a74d3aae921ab2cd0216d6a24d/e6e97/cnn13.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 62.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAIAAAAmMtkJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB2UlEQVR42pVSz2sTQRSev05BDOQgNbBJNtabolACSou/Wqmo9SJW8VSNtiloBbVQQYppIdqDpD2YarVLkzS7rrVNNt1MZnfnzcz6mqYaNCD9LvPefPO9b96bIZqmJdtIJBKpVCoej2Og6zrGehv7qdYLpFwurxvGBi6VzU3TqjlO1bJs+3upVLJt2zRNwzAqlQoAhP+ABEEgIOCBJ4GLgIVKACae16TNFqWMMd/3XdflAEIqKVU3COZLq1uLK3au+HOuyl6V6WrNx6oq/D8IFhzJFNL3Pgw8Wk6+s0/M/3i61kBCdqldFjSo7zDOuPhLrG5PfbrysDA49fn0RxpbamY3WLcYq9+dXL48WUzmd6bXd7spAlJcffP47Oz49ex4fnB0YeDSt9m3SAgASil2KYQcfjF38cnLsQevc/niXkeqoyZcwtDCrf7c0I3pC42TffXjx3YzmT1GdgwEiPT7sWvZ9PbRI+7EhGpTf5xHFu+fz92883x068w5Uz+182wmPDiBE+YgvmyX1qpfncIKs6ywbd0R4x1cnzpe0225UHegVhctFh6M2+NQo55UvWdPVC/i90vitFoBegP2rgCUEPv7HXF4eKCYc/w1QLRDAj9/LBaLRCLRaPQXIs2CpHAMMrcAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/19db70a74d3aae921ab2cd0216d6a24d/a59e9/cnn13.webp 192w,
+/static/19db70a74d3aae921ab2cd0216d6a24d/0ca9f/cnn13.webp 384w,
+/static/19db70a74d3aae921ab2cd0216d6a24d/dc9b9/cnn13.webp 768w,
+/static/19db70a74d3aae921ab2cd0216d6a24d/97885/cnn13.webp 864w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/19db70a74d3aae921ab2cd0216d6a24d/3b721/cnn13.png 192w,
+/static/19db70a74d3aae921ab2cd0216d6a24d/66595/cnn13.png 384w,
+/static/19db70a74d3aae921ab2cd0216d6a24d/fe486/cnn13.png 768w,
+/static/19db70a74d3aae921ab2cd0216d6a24d/e6e97/cnn13.png 864w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/19db70a74d3aae921ab2cd0216d6a24d/fe486/cnn13.png"
+            alt="Pooling Layer"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<hr>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/70045e88b20fd45068c0cab519b536f6/a91f8/cnn14.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAABd0lEQVR42mVR23bDIAzj//9x7bqkbRqaGzjcbMgE2V42Hw5xAEuyrIbXcP28dl03DEPfdX3f375uWuvH4365fCBPLNbHt9mNCy7xcRy5lHIcnEUF7601Nax96jf2GkT3l36NmqzZQ3qtFLmWSS6j2XGChRPlY9p84lz2yN1kk2Q8CiyPhbAjb7Ruc4FCwg4gF9N9NuSjMs4/Z3sb19k6ve3DYoeFAKw3moxbyKMAO/CfC5FP0A/Ex2yRKPJBNyU+cmXYA15HlnUPYIZOXKE4JEHCkh3kSgbNuJISEXR/Bp7qDQpjlFqWy88NlGsoTIKmsLjeZuCpnKt5OLI+GRebGQxOkIMNBch9o8Vv5Ax7kkiqAKJKye0dw4PVVc1Yp4qTt9TAYLIL6Ze5mgpWlbj2gKNxrZOcyaNban3CC3AC5Zxts6AKxV7RwQyToZZi6mc7VVcFM8Md4Nps4snzP2CJss7b3bPwRrDaA1la4FPAgK7kb0DrhHhP3zyafPHhLWRkAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/70045e88b20fd45068c0cab519b536f6/a59e9/cnn14.webp 192w,
+/static/70045e88b20fd45068c0cab519b536f6/0ca9f/cnn14.webp 384w,
+/static/70045e88b20fd45068c0cab519b536f6/dc9b9/cnn14.webp 768w,
+/static/70045e88b20fd45068c0cab519b536f6/a6361/cnn14.webp 960w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/70045e88b20fd45068c0cab519b536f6/3b721/cnn14.png 192w,
+/static/70045e88b20fd45068c0cab519b536f6/66595/cnn14.png 384w,
+/static/70045e88b20fd45068c0cab519b536f6/fe486/cnn14.png 768w,
+/static/70045e88b20fd45068c0cab519b536f6/a91f8/cnn14.png 960w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/70045e88b20fd45068c0cab519b536f6/fe486/cnn14.png"
+            alt="Pooling Layer"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<hr>
+<h2>Wht Convolutions?</h2>
+<ul>
+<li>파라메터 공유 : 이미지 한 부분의 특징 탐지기(필터)는 다른 부분에서도 유용할 수 있다.</li>
+<li>연결 희소성 : 각 레이어의 출력값은 소수의 입력값에 의존한다.</li>
+</ul>
+<hr>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://www.coursera.org/learn/convolutional-neural-networks" target="_blank" rel="nofollow">Coursera - Convolution Neural Networks</a></li>
+</ul></div><style data-emotion="css hx9xpc">@media (max-width: 768px){.css-hx9xpc{padding:0 20px;}}</style><div class="css-hx9xpc e1gqsjds0"></div><style data-emotion="css lffphe">.css-lffphe{display:grid;place-items:center;margin-top:auto;padding:36px 0;font-size:15px;text-align:center;line-height:1.5;}@media (max-width: 768px){.css-lffphe{font-size:13px;}}</style><footer class="css-lffphe e1oae0v80">© 2025 yhc509, All rights reserved.</footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/deeplearning/1_cnn/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx.js\"],\"component---src-pages-info-tsx\":[\"/component---src-pages-info-tsx.js\"],\"component---src-templates-post-template-tsx\":[\"/component---src-templates-post-template-tsx.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="41fb7f600fa9551db4d9";</script><script src="/webpack-runtime.js" async></script><script src="/framework.js" async></script><script src="/app.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Gatsby 5.14.1"/><style data-href="/styles.9e907bc32054b7771552.css" data-identity="gatsby-global-css">code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#ccc;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;white-space:pre;word-break:normal;word-spacing:normal}pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#2d2d2d}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.block-comment,.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#999}.token.punctuation{color:#ccc}.token.attr-name,.token.deleted,.token.namespace,.token.tag{color:#e2777a}.token.function-name{color:#6196cc}.token.boolean,.token.function,.token.number{color:#f08d49}.token.class-name,.token.constant,.token.property,.token.symbol{color:#f8c555}.token.atrule,.token.builtin,.token.important,.token.keyword,.token.selector{color:#cc99cd}.token.attr-value,.token.char,.token.regex,.token.string,.token.variable{color:#7ec699}.token.entity,.token.operator,.token.url{color:#67cdcc}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.inserted{color:green}</style><link rel="canonical" href="https://yhc509.github.io/opengl/opengl_02/" data-baseprotocol="https:" data-basehost="yhc509.github.io"/><link rel="sitemap" type="application/xml" href="/sitemap-index.xml"/><meta name="google-site-verification" content="0V6Pp62k0qLSCFq479si1XrTMvN4NjFR8estP6u-Zds"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><style data-emotion="css 13ku56z">.css-13ku56z{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;height:100%;}</style><main class="css-13ku56z e1strnqo0"><style data-emotion="css-global 17bu09z">@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap');*{padding:0;margin:0;box-sizing:border-box;font-family:'Hahmlet',serif;color:inherit;-webkit-text-decoration:none;text-decoration:none;}html,body,#___gatsby{width:100%;height:auto;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;}a,a:visited,a:active{-webkit-text-decoration:none;text-decoration:none;color:inherit;}a:hover{color:inherit;-webkit-text-decoration:none;text-decoration:none;cursor:pointer;}img{position:relative;display:block;margin-left:auto;margin-right:auto;max-width:768px;text-align:left;}</style><style data-emotion="css 1u7ncg7">.css-1u7ncg7{width:100%;background-image:linear-gradient(60deg, #29323c 0%, #485563 100%);color:#ffffff;}</style><div class="css-1u7ncg7 e160b013"><style data-emotion="css 5c3sm8">.css-5c3sm8{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:768px;height:80px;margin:0 auto;}padding-bottom:12px@media (max-width: 768px){.css-5c3sm8{width:100%;height:80px;padding:0 12px;}}</style><div class="css-5c3sm8 e160b012"><style data-emotion="css 9p6ebr">.css-9p6ebr{margin-top:5px;font-size:24px;font-weight:700;}@media (max-width: 768px){.css-9p6ebr{font-size:20px;margin-left:16px;}}</style><div class="css-9p6ebr e160b010">yhc509`s Dev Journey</div></div></div><style data-emotion="css 183vxbl">.css-183vxbl{position:relative;width:100%;}@media (max-width: 768px){.css-183vxbl{width:100%;}}</style><div class="css-183vxbl e1opi4mu1"><style data-emotion="css uadz8j">.css-uadz8j{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;height:100%;margin:0 auto;padding:30px 0;}@media (max-width: 768px){.css-uadz8j{width:100%;padding:24px 16px;}}</style><div class="css-uadz8j e1st1jau5"><style data-emotion="css 1g6v2wt">.css-1g6v2wt{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#ffffff;color:#000000;font-size:22px;cursor:pointer;box-shadow:0 0 10px rgba(0, 0, 0, 0.3);}@media (max-width: 768px){.css-1g6v2wt{width:30px;height:30px;font-size:16px;}}</style><div class="css-1g6v2wt e1st1jau4"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></div><style data-emotion="css 1twr1m2">.css-1twr1m2{display:-webkit-box;overflow:hidden;overflow-wrap:break-word;margin-top:auto;text-overflow:ellipsis;white-space:normal;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:32px;font-weight:800;}@media (max-width: 768px){.css-1twr1m2{font-size:24px;}}</style><div class="css-1twr1m2 e1st1jau3">OpenGL Super Bible- 기초</div><style data-emotion="css yijt7k">.css-yijt7k{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin-top:10px;font-size:14px;font-weight:700;}@media (max-width: 768px){.css-yijt7k{-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-align-items:flex-start;-webkit-box-align:flex-start;-ms-flex-align:flex-start;align-items:flex-start;font-size:14px;font-weight:400;}}</style><div class="css-yijt7k e1st1jau2"><style data-emotion="css 1bobky6">.css-1bobky6{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-top:10px;margin:10px -5px;}</style><div class="css-1bobky6 e1st1jau1"><style data-emotion="css 1e9ac4l">.css-1e9ac4l{margin:2.5px 5px;padding:3px 5px;border-radius:3px;background:black;font-size:12px;font-weight:700;color:white;}</style><div class="css-1e9ac4l e1st1jau0">OpenGL</div></div><div>2025.02.20.</div></div></div></div><style data-emotion="css 12iq82c">.css-12iq82c{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;margin:0 auto;padding:100px 0;word-break:break-all;line-height:1.8;font-size:16px;font-weight:400;}.css-12iq82c p{padding:3px 0;}.css-12iq82c h1,.css-12iq82c h2,.css-12iq82c h3{font-weight:800;margin-bottom:18px;}.css-12iq82c *+h1,.css-12iq82c *+h2,.css-12iq82c *+h3{margin-top:16px;margin-bottom:0px;}.css-12iq82c hr+h1,.css-12iq82c hr+h2,.css-12iq82c hr+h3{margin-top:0;}.css-12iq82c h1{font-size:28px;}.css-12iq82c h2{font-size:24px;}.css-12iq82c h3{font-size:20px;}.css-12iq82c blockquote{margin:10px 0;padding:5px 5px;border-left:2px solid #000000;font-weight:800;}.css-12iq82c ol,.css-12iq82c ul{margin-left:20px;padding:4px 0;}.css-12iq82c hr{border:1px solid #646464;margin:64px 0;}.css-12iq82c a{color:#4263eb;-webkit-text-decoration:underline;text-decoration:underline;}.css-12iq82c pre[class*='language-']{margin:5px 0;padding:10px;font-size:14px;}.css-12iq82c pre[class*='language-']::-webkit-scrollbar-thumb{background:rgba(255, 255, 255, 0.5);border-radius:10px;}.css-12iq82c code[class*='language-'],.css-12iq82c pre[class*='language-']{tab-size:2;}@media (max-width: 768px){.css-12iq82c{width:100%;padding:40px 16px;line-height:1.6;font-size:14px;}.css-12iq82c h1{font-size:23px;}.css-12iq82c h2{font-size:20px;}.css-12iq82c h3{font-size:17px;}.css-12iq82c hr{margin:50px 0;}}</style><div class="css-12iq82c e1ijh0y10"><p>개발 환경은 Windows &#x26; VSCode에서 진행하였다.</p>
+<h2>VSCode에서 C++ 환경을 구성하기 위한 플러그인 및 프로그램</h2>
+<ul>
+<li>VSCode Plugins 설치
+<ul>
+<li>C/C++</li>
+<li>C/C++ Extension Pack</li>
+<li>C/C++ Themes</li>
+</ul>
+</li>
+<li><a href="https://www.msys2.org/" target="_blank" rel="nofollow">MSYS2</a> 설치
+<ul>
+<li>MSY2 Terminal에서 아래 명령어를 입력하여 추가 설치 진행</li>
+</ul>
+</li>
+</ul>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">pacman <span class="token parameter variable">-S</span> mingw-w64-ucrt-x86_64-gcc
+
+Packages <span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span> mingw-w64-ucrt-x86_64-binutils-2.43.1-1
+              mingw-w64-ucrt-x86_64-crt-git-12.0.0.r423.g8bcd5fc1a-1
+              mingw-w64-ucrt-x86_64-gcc-libs-14.2.0-2
+              mingw-w64-ucrt-x86_64-gettext-runtime-0.22.5-2  mingw-w64-ucrt-x86_64-gmp-6.3.0-2
+              mingw-w64-ucrt-x86_64-headers-git-12.0.0.r423.g8bcd5fc1a-1
+              mingw-w64-ucrt-x86_64-isl-0.27-1  mingw-w64-ucrt-x86_64-libiconv-1.17-4
+              mingw-w64-ucrt-x86_64-libwinpthread-git-12.0.0.r423.g8bcd5fc1a-1
+              mingw-w64-ucrt-x86_64-mpc-1.3.1-2  mingw-w64-ucrt-x86_64-mpfr-4.2.1-2
+              mingw-w64-ucrt-x86_64-windows-default-manifest-6.4-4
+              mingw-w64-ucrt-x86_64-winpthreads-git-12.0.0.r423.g8bcd5fc1a-1
+              mingw-w64-ucrt-x86_64-zlib-1.3.1-1  mingw-w64-ucrt-x86_64-zstd-1.5.6-2
+              mingw-w64-ucrt-x86_64-gcc-14.2.0-2
+
+Total Download Size:    <span class="token number">65.75</span> MiB
+Total Installed Size:  <span class="token number">517.33</span> MiB
+
+:: Proceed with installation? <span class="token punctuation">[</span>Y/n<span class="token punctuation">]</span>
+</code></pre></div>
+<ul>
+<li>MSYS2 환경 변수 세팅</li>
+</ul>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 527px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/9b808e2d6dbdce1bc097bc713dc443a4/c6c03/msys2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 95.3125%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAACXBIWXMAAA7DAAAOwwHHb6hkAAACw0lEQVR42qVUW07bQBT1L0pYAGID0M30q6KCPfSnX6VLadWHWoUAivJBu4PuAGLHTuLE8SN+23FeIEJOz0wS+gAkaEc6On7NmXPPXI/ybHcXOzs72CVvb29jY2MDm+VNlMvlW5TKJZRK90O83xTf8HprawtKtVpFvV5HrVbDyckJKpUjiGdHR9UVL++Pj4/vhXhXqVQkn56eQkmyDEmSYOAPEAQBwjCU8H0f+bBA6Aco8hHuG9fX1xgOc/iBj5Qas+kMSr9vo9ftotnUoDd1aJpKNKE2GuhZFllFu92BP+CkNEWWZpKHXGw0HpOHcGxbmsjzHIrjuLD7fRiGgXarQ9bRpKBAp2PKRbpmB5qqomW0uJgGYaKgUJ4PuUDK+z7CIMRoVEBxKejYDie3YZomRVtoCXCyZXEh3aCgeM73XMBzPWSMaUDHURTTuQfX8345dPlBr9eTK+ucrLH0Bss8P7+gOwONC5VudYRRxEkRpsxpscpQlDwmXNeROYprxXFZsu0uHZg95tWWmRl02KdzmxUMuEFhGCOJU8zncywWa8GJdCUcCxZ5SsFOp0tHKgyyzhxVOjpvaNwUGyk/TJJcCgZ0GLJMUWqcZjLDKArhsWTX8ZYlGz0Hb787eF23cPjNxpszB4dnFl7VLBx8NbH/pY2Xn1vY+6hj75OBFx807JOfv9fx7oeDLBqwEpvoy/ZTREnp9AYJEU/n5Lm8jyc3CMc3iARPlvwnFgizsexXUaXIMWLOisjv7ljgMWMymci2EaWmK2aG3lKCST8FYowp6HliU210u6ZseraN+++CbBPhUOzyGv8vuGqZNW4FnzJ+L/mOoOM4mF1eYjqbPQqT6VTy5dXV8l+moDgo1g0uHYoOT//K4iFE6RB+nMNy+S/nPG2KEWK2izx9RqOlw6Io7lh/CHFW3ArGPCeFYBgGUjBNE/wETNxQszURgE0AAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/9b808e2d6dbdce1bc097bc713dc443a4/a59e9/msys2.webp 192w,
+/static/9b808e2d6dbdce1bc097bc713dc443a4/0ca9f/msys2.webp 384w,
+/static/9b808e2d6dbdce1bc097bc713dc443a4/9ce6a/msys2.webp 527w"
+              sizes="(max-width: 527px) 100vw, 527px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/9b808e2d6dbdce1bc097bc713dc443a4/3b721/msys2.png 192w,
+/static/9b808e2d6dbdce1bc097bc713dc443a4/66595/msys2.png 384w,
+/static/9b808e2d6dbdce1bc097bc713dc443a4/c6c03/msys2.png 527w"
+            sizes="(max-width: 527px) 100vw, 527px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/9b808e2d6dbdce1bc097bc713dc443a4/c6c03/msys2.png"
+            alt="msys2"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<ul>
+<li>VSCode 단축키 설정
+<ul>
+<li>Ctrl + K + S를 눌러 keymap 설정 창을 연다.</li>
+<li><code class="language-text">Tasks: Run Task</code> => Ctrl + Shift + B</li>
+<li>컴파일 (<code class="language-text">Tasks: Run Build Task</code>) => Ctrl + Alt + C</li>
+<li>실행 (<code class="language-text">Tasks: Run Test Task</code>) => Ctrl + Alt + B</li>
+</ul>
+</li>
+</ul>
+<h2>폴더 구성</h2>
+<ul>
+<li><code class="language-text">builds</code> / <code class="language-text">dependencies</code> / <code class="language-text">resources</code> / <code class="language-text">src</code> 폴더 추가</li>
+</ul>
+<hr>
+<h2>GLFW</h2>
+<ul>
+<li>Window, Context, Input 등 플랫폼 관련 처리를 돕는 라이브러리</li>
+<li><a href="https://www.glfw.org/" target="_blank" rel="nofollow">[GLFW]</a>
+<ul>
+<li>3.4 버전</li>
+</ul>
+</li>
+<li><code class="language-text">include</code>, <code class="language-text">lib-mingw-w64</code>를 <code class="language-text">dependencies</code> 폴더로 복사</li>
+<li><code class="language-text">lib-static-ucrt/glfw3.dll</code>을 <code class="language-text">builds</code> 폴더로 복사</li>
+</ul>
+<h2>GLAD</h2>
+<ul>
+<li>함수 포인터 처리를 도와주는 라이브러리</li>
+<li><a href="https://glad.dav1d.de/" target="_blank" rel="nofollow">[GLAD]</a>
+<ul>
+<li>API GL : 4.6 / Profile : Core / Generate a loader 체크 -> Generate</li>
+</ul>
+</li>
+<li><code class="language-text">include</code>, <code class="language-text">src</code>을 <code class="language-text">dependencies</code> 폴더로 복사</li>
+</ul>
+<h2>GLM</h2>
+<ul>
+<li>벡터, 행렬 등 수학 라이브러리</li>
+<li><a href="https://glm.g-truc.net/0.9.9/index.html" target="_blank" rel="nofollow">[GLM]</a>
+<ul>
+<li>Downloads -> 1.0.1</li>
+</ul>
+</li>
+<li><code class="language-text">glm</code>를 <code class="language-text">dependencies</code>폴더로 복사</li>
+</ul>
+<hr>
+<h2>vscode 설정</h2>
+<ul>
+<li>c_cpp_properties.json</li>
+</ul>
+<div class="gatsby-highlight" data-language="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"configurations"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Win32"</span><span class="token punctuation">,</span>
+            <span class="token property">"includePath"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"${workspaceFolder}"</span><span class="token punctuation">,</span>
+                <span class="token string">"${workspaceFolder}/dependencies/GLFW/include"</span><span class="token punctuation">,</span>
+                <span class="token string">"${workspaceFolder}/dependencies/GLAD/include"</span><span class="token punctuation">,</span>
+                <span class="token string">"${workspaceFolder}/dependencies/GLM"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"defines"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"_DEBUG"</span><span class="token punctuation">,</span>
+                <span class="token string">"UNICODE"</span><span class="token punctuation">,</span>
+                <span class="token string">"_UNICODE"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"compilerPath"</span><span class="token operator">:</span> <span class="token string">"C:\\msys64\\mingw64\\bin\\g++.exe"</span><span class="token punctuation">,</span>
+            <span class="token property">"cStandard"</span><span class="token operator">:</span> <span class="token string">"gnu11"</span><span class="token punctuation">,</span>
+            <span class="token property">"cppStandard"</span><span class="token operator">:</span> <span class="token string">"gnu++14"</span><span class="token punctuation">,</span>
+            <span class="token property">"intelliSenseMode"</span><span class="token operator">:</span> <span class="token string">"gcc-x64"</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"version"</span><span class="token operator">:</span> <span class="token number">4</span>
+<span class="token punctuation">}</span></code></pre></div>
+<ul>
+<li>launch.json</li>
+</ul>
+<div class="gatsby-highlight" data-language="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"0.2.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"configurations"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"g++.exe - 활성 파일 빌드 및 디버그"</span><span class="token punctuation">,</span>
+            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"cppdbg"</span><span class="token punctuation">,</span>
+            <span class="token property">"request"</span><span class="token operator">:</span> <span class="token string">"launch"</span><span class="token punctuation">,</span>
+            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"${workspaceRoot}/builds/main"</span><span class="token punctuation">,</span>
+            <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"stopAtEntry"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}"</span><span class="token punctuation">,</span>
+            <span class="token property">"environment"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"externalConsole"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token property">"MIMode"</span><span class="token operator">:</span> <span class="token string">"gdb"</span><span class="token punctuation">,</span>
+            <span class="token property">"miDebuggerPath"</span><span class="token operator">:</span> <span class="token string">"C:\\msys64\\mingw64\\bin\\gdb.exe"</span><span class="token punctuation">,</span>
+            <span class="token property">"setupCommands"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"gdb에 자동 서식 지정 사용"</span><span class="token punctuation">,</span>
+                    <span class="token property">"text"</span><span class="token operator">:</span> <span class="token string">"-enable-pretty-printing"</span><span class="token punctuation">,</span>
+                    <span class="token property">"ignoreFailures"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"preLaunchTask"</span><span class="token operator">:</span> <span class="token string">"C/C++: g++.exe build active file"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span></code></pre></div>
+<ul>
+<li>task.json</li>
+</ul>
+<div class="gatsby-highlight" data-language="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"2.0.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"runner"</span><span class="token operator">:</span> <span class="token string">"terminal"</span><span class="token punctuation">,</span>
+    <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"shell"</span><span class="token punctuation">,</span>
+    <span class="token property">"echoCommand"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">"presentation"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"reveal"</span><span class="token operator">:</span> <span class="token string">"always"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"tasks"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"save and compile for C++"</span><span class="token punctuation">,</span>
+            <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"g++"</span><span class="token punctuation">,</span>
+            <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"${workspaceRoot}/src/main.cpp"</span><span class="token punctuation">,</span>
+                <span class="token string">"${workspaceRoot}/dependencies/GLAD/src/glad.c"</span><span class="token punctuation">,</span>
+                <span class="token string">"-g"</span><span class="token punctuation">,</span>
+                <span class="token string">"-I${workspaceRoot}/dependencies/GLFW/include"</span><span class="token punctuation">,</span>
+                <span class="token string">"-I${workspaceFolder}/dependencies/GLAD/include"</span><span class="token punctuation">,</span>
+                <span class="token string">"-I${workspaceFolder}/dependencies/GLM"</span><span class="token punctuation">,</span>
+                <span class="token string">"-lopengl32"</span><span class="token punctuation">,</span>
+                <span class="token string">"-L${workspaceRoot}/dependencies/GLFW/lib-mingw-w64"</span><span class="token punctuation">,</span>
+                <span class="token string">"-static"</span><span class="token punctuation">,</span>
+                <span class="token string">"-lglfw3dll"</span><span class="token punctuation">,</span>
+                <span class="token string">"-o"</span><span class="token punctuation">,</span>
+                <span class="token string">"${workspaceRoot}/builds/main"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"group"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">"kind"</span><span class="token operator">:</span> <span class="token string">"build"</span><span class="token punctuation">,</span>
+                <span class="token property">"isDefault"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token property">"problemMatcher"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">"fileLocation"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                    <span class="token string">"relative"</span><span class="token punctuation">,</span>
+                    <span class="token string">"${workspaceRoot}"</span>
+                <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token property">"pattern"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                    <span class="token property">"regexp"</span><span class="token operator">:</span> <span class="token string">"^(.*):(\\d+):(\\d+):\\s+(warning error):\\s+(.*)$"</span><span class="token punctuation">,</span>
+                    <span class="token property">"file"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+                    <span class="token property">"line"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+                    <span class="token property">"column"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+                    <span class="token property">"severity"</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+                    <span class="token property">"message"</span><span class="token operator">:</span> <span class="token number">5</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"execute"</span><span class="token punctuation">,</span>
+            <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"cmd"</span><span class="token punctuation">,</span>
+            <span class="token property">"group"</span><span class="token operator">:</span> <span class="token string">"test"</span><span class="token punctuation">,</span>
+            <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"/C"</span><span class="token punctuation">,</span>
+                <span class="token string">"${workspaceRoot}/builds\\${fileBasenameNoExtension}"</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"cppbuild"</span><span class="token punctuation">,</span>
+            <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"C/C++: g++.exe build active file"</span><span class="token punctuation">,</span>
+            <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"C:\\msys64\\mingw64\\bin\\g++.exe"</span><span class="token punctuation">,</span>
+            <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"-fdiagnostics-color=always"</span><span class="token punctuation">,</span>
+                <span class="token string">"-g"</span><span class="token punctuation">,</span>
+                <span class="token string">"${file}"</span><span class="token punctuation">,</span>
+                <span class="token string">"-o"</span><span class="token punctuation">,</span>
+                <span class="token string">"${fileDirname}\\${fileBasenameNoExtension}.exe"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"options"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"${fileDirname}"</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token property">"problemMatcher"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"$gcc"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"group"</span><span class="token operator">:</span> <span class="token string">"build"</span><span class="token punctuation">,</span>
+            <span class="token property">"detail"</span><span class="token operator">:</span> <span class="token string">"Task generated by Debugger."</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span></code></pre></div>
+<hr>
+<h2>main.cpp</h2>
+<ul>
+<li><code class="language-text">src</code>폴더 안에 <code class="language-text">main.cpp</code> 코드 작성</li>
+</ul>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;glad/glad.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;GLFW/glfw3.h></span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Hello world!"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<hr>
+<h2>Build &#x26; Run</h2>
+<ul>
+<li>Build : <code class="language-text">Terminal - Run Task - save and compile for C++</code></li>
+<li>Run : <code class="language-text">Terminal - Run Task - execute</code></li>
+<li>Compile Error가 발생하지 않고 빌드가 잘 되어서 Hello World! 라는 텍스트가 정상적으로 출력되는 것을 확인.</li>
+</ul>
+<hr>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://pasongsong.tistory.com/543" target="_blank" rel="nofollow">VScode C++ 환경 구성하기</a></li>
+<li><a href="https://songsmir.tistory.com/5" target="_blank" rel="nofollow">Code OpenGL 개발 환경 설정</a></li>
+<li><a href="https://rinthel.github.io/opengl_course/" target="_blank" rel="nofollow">OpenGL Course</a></li>
+</ul></div><style data-emotion="css hx9xpc">@media (max-width: 768px){.css-hx9xpc{padding:0 20px;}}</style><div class="css-hx9xpc e1gqsjds0"></div><style data-emotion="css lffphe">.css-lffphe{display:grid;place-items:center;margin-top:auto;padding:36px 0;font-size:15px;text-align:center;line-height:1.5;}@media (max-width: 768px){.css-lffphe{font-size:13px;}}</style><footer class="css-lffphe e1oae0v80">© 2025 yhc509, All rights reserved.</footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/opengl/opengl_02/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx.js\"],\"component---src-pages-info-tsx\":[\"/component---src-pages-info-tsx.js\"],\"component---src-templates-post-template-tsx\":[\"/component---src-templates-post-template-tsx.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="41fb7f600fa9551db4d9";</script><script src="/webpack-runtime.js" async></script><script src="/framework.js" async></script><script src="/app.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>

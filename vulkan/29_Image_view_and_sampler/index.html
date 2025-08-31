@@ -1,0 +1,311 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Gatsby 5.14.1"/><style data-href="/styles.9e907bc32054b7771552.css" data-identity="gatsby-global-css">code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#ccc;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;white-space:pre;word-break:normal;word-spacing:normal}pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#2d2d2d}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.block-comment,.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#999}.token.punctuation{color:#ccc}.token.attr-name,.token.deleted,.token.namespace,.token.tag{color:#e2777a}.token.function-name{color:#6196cc}.token.boolean,.token.function,.token.number{color:#f08d49}.token.class-name,.token.constant,.token.property,.token.symbol{color:#f8c555}.token.atrule,.token.builtin,.token.important,.token.keyword,.token.selector{color:#cc99cd}.token.attr-value,.token.char,.token.regex,.token.string,.token.variable{color:#7ec699}.token.entity,.token.operator,.token.url{color:#67cdcc}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.inserted{color:green}</style><link rel="canonical" href="https://yhc509.github.io/vulkan/29_Image_view_and_sampler/" data-baseprotocol="https:" data-basehost="yhc509.github.io"/><link rel="sitemap" type="application/xml" href="/sitemap-index.xml"/><meta name="google-site-verification" content="0V6Pp62k0qLSCFq479si1XrTMvN4NjFR8estP6u-Zds"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><style data-emotion="css 13ku56z">.css-13ku56z{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;height:100%;}</style><main class="css-13ku56z e1strnqo0"><style data-emotion="css-global 17bu09z">@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap');*{padding:0;margin:0;box-sizing:border-box;font-family:'Hahmlet',serif;color:inherit;-webkit-text-decoration:none;text-decoration:none;}html,body,#___gatsby{width:100%;height:auto;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;}a,a:visited,a:active{-webkit-text-decoration:none;text-decoration:none;color:inherit;}a:hover{color:inherit;-webkit-text-decoration:none;text-decoration:none;cursor:pointer;}img{position:relative;display:block;margin-left:auto;margin-right:auto;max-width:768px;text-align:left;}</style><style data-emotion="css 1u7ncg7">.css-1u7ncg7{width:100%;background-image:linear-gradient(60deg, #29323c 0%, #485563 100%);color:#ffffff;}</style><div class="css-1u7ncg7 e160b013"><style data-emotion="css 5c3sm8">.css-5c3sm8{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:768px;height:80px;margin:0 auto;}padding-bottom:12px@media (max-width: 768px){.css-5c3sm8{width:100%;height:80px;padding:0 12px;}}</style><div class="css-5c3sm8 e160b012"><style data-emotion="css 9p6ebr">.css-9p6ebr{margin-top:5px;font-size:24px;font-weight:700;}@media (max-width: 768px){.css-9p6ebr{font-size:20px;margin-left:16px;}}</style><div class="css-9p6ebr e160b010">yhc509`s Dev Journey</div></div></div><style data-emotion="css 183vxbl">.css-183vxbl{position:relative;width:100%;}@media (max-width: 768px){.css-183vxbl{width:100%;}}</style><div class="css-183vxbl e1opi4mu1"><style data-emotion="css uadz8j">.css-uadz8j{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;height:100%;margin:0 auto;padding:30px 0;}@media (max-width: 768px){.css-uadz8j{width:100%;padding:24px 16px;}}</style><div class="css-uadz8j e1st1jau5"><style data-emotion="css 1g6v2wt">.css-1g6v2wt{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#ffffff;color:#000000;font-size:22px;cursor:pointer;box-shadow:0 0 10px rgba(0, 0, 0, 0.3);}@media (max-width: 768px){.css-1g6v2wt{width:30px;height:30px;font-size:16px;}}</style><div class="css-1g6v2wt e1st1jau4"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></div><style data-emotion="css 1twr1m2">.css-1twr1m2{display:-webkit-box;overflow:hidden;overflow-wrap:break-word;margin-top:auto;text-overflow:ellipsis;white-space:normal;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:32px;font-weight:800;}@media (max-width: 768px){.css-1twr1m2{font-size:24px;}}</style><div class="css-1twr1m2 e1st1jau3">Vulkan Tutorial (29) - Texture mapping - Image view and sampler</div><style data-emotion="css yijt7k">.css-yijt7k{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin-top:10px;font-size:14px;font-weight:700;}@media (max-width: 768px){.css-yijt7k{-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-align-items:flex-start;-webkit-box-align:flex-start;-ms-flex-align:flex-start;align-items:flex-start;font-size:14px;font-weight:400;}}</style><div class="css-yijt7k e1st1jau2"><style data-emotion="css 1bobky6">.css-1bobky6{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-top:10px;margin:10px -5px;}</style><div class="css-1bobky6 e1st1jau1"><style data-emotion="css 1e9ac4l">.css-1e9ac4l{margin:2.5px 5px;padding:3px 5px;border-radius:3px;background:black;font-size:12px;font-weight:700;color:white;}</style><div class="css-1e9ac4l e1st1jau0">Vulkan</div></div><div>2022.10.03.</div></div></div></div><style data-emotion="css 12iq82c">.css-12iq82c{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;margin:0 auto;padding:100px 0;word-break:break-all;line-height:1.8;font-size:16px;font-weight:400;}.css-12iq82c p{padding:3px 0;}.css-12iq82c h1,.css-12iq82c h2,.css-12iq82c h3{font-weight:800;margin-bottom:18px;}.css-12iq82c *+h1,.css-12iq82c *+h2,.css-12iq82c *+h3{margin-top:16px;margin-bottom:0px;}.css-12iq82c hr+h1,.css-12iq82c hr+h2,.css-12iq82c hr+h3{margin-top:0;}.css-12iq82c h1{font-size:28px;}.css-12iq82c h2{font-size:24px;}.css-12iq82c h3{font-size:20px;}.css-12iq82c blockquote{margin:10px 0;padding:5px 5px;border-left:2px solid #000000;font-weight:800;}.css-12iq82c ol,.css-12iq82c ul{margin-left:20px;padding:4px 0;}.css-12iq82c hr{border:1px solid #646464;margin:64px 0;}.css-12iq82c a{color:#4263eb;-webkit-text-decoration:underline;text-decoration:underline;}.css-12iq82c pre[class*='language-']{margin:5px 0;padding:10px;font-size:14px;}.css-12iq82c pre[class*='language-']::-webkit-scrollbar-thumb{background:rgba(255, 255, 255, 0.5);border-radius:10px;}.css-12iq82c code[class*='language-'],.css-12iq82c pre[class*='language-']{tab-size:2;}@media (max-width: 768px){.css-12iq82c{width:100%;padding:40px 16px;line-height:1.6;font-size:14px;}.css-12iq82c h1{font-size:23px;}.css-12iq82c h2{font-size:20px;}.css-12iq82c h3{font-size:17px;}.css-12iq82c hr{margin:50px 0;}}</style><div class="css-12iq82c e1ijh0y10"><p>-<a href="https://docs.vulkan.org/tutorial/latest/00_Introduction.html" target="_blank" rel="nofollow">Khronos Vulkan Tutorial</a></p>
+<p>이 챕터에서는 그래픽 파이프라인이 이미지를 샘플링하는데 필요한 리소스를 두개 더 만들 것입니다. 첫번째 리소스는 이전에 스왑체인 이미지로 작업하는 동안 본 것이지만, 두번째 리소스는 새로운 것입니다. 그것은 셰이더가 이미지에서 텍셀을 읽는 방법과 관련이 있습니다.</p>
+<h1>텍스쳐 이미지 뷰</h1>
+<p>이전에 스왑체인 이미지와 프레임 버퍼를 사용하여 이미지에 직접 접근하지 않고 이미지 뷰를 통해 접근하는 것을 봤습니다. 우리는 또한 텍스쳐 이미지에 대해 이러한 이미지 뷰를 생성해야 합니다.</p>
+<p>텍스쳐 이미지에 대한 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkImageView.html" target="_blank" rel="nofollow"><code class="language-text">VkImageView</code></a>를 보유할 클래스 멤버를 추가하고, 이를 생성할 새 함수 <code class="language-text">createTextureImageView</code>를 만듭니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkImageView textureImageView<span class="token punctuation">;</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token keyword">void</span> <span class="token function">initVulkan</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token function">createTextureImage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">createTextureImageView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">createVertexBuffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token keyword">void</span> <span class="token function">createTextureImageView</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span></code></pre></div>
+<p>이 함수의 코드는 <code class="language-text">createImageViews</code>를 기반으로 할 수 있습니다. <code class="language-text">format</code>과 <code class="language-text">image</code>만 바꾸면 됩니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkImageViewCreateInfo viewInfo<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+viewInfo<span class="token punctuation">.</span>sType <span class="token operator">=</span> VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO<span class="token punctuation">;</span>
+viewInfo<span class="token punctuation">.</span>image <span class="token operator">=</span> textureImage<span class="token punctuation">;</span>
+viewInfo<span class="token punctuation">.</span>viewType <span class="token operator">=</span> VK_IMAGE_VIEW_TYPE_2D<span class="token punctuation">;</span>
+viewInfo<span class="token punctuation">.</span>format <span class="token operator">=</span> VK_FORMAT_R8G8B8A8_SRGB<span class="token punctuation">;</span>
+viewInfo<span class="token punctuation">.</span>subresourceRange<span class="token punctuation">.</span>aspectMask <span class="token operator">=</span> VK_IMAGE_ASPECT_COLOR_BIT<span class="token punctuation">;</span>
+viewInfo<span class="token punctuation">.</span>subresourceRange<span class="token punctuation">.</span>baseMipLevel <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+viewInfo<span class="token punctuation">.</span>subresourceRange<span class="token punctuation">.</span>levelCount <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+viewInfo<span class="token punctuation">.</span>subresourceRange<span class="token punctuation">.</span>baseArrayLayer <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+viewInfo<span class="token punctuation">.</span>subresourceRange<span class="token punctuation">.</span>layerCount <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span></code></pre></div>
+<p>명시적인 <code class="language-text">viewInfo.components</code> 초기화를 생략했습니다. <code class="language-text">Vk_COMPONENT_SWIZZLE_IDENTITY</code>가 <code class="language-text">0</code>으로 정의되기 때문입니다. <a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/vkCreateImageView.html" target="_blank" rel="nofollow"><code class="language-text">vkCreateImageView</code></a>를 호출하여 이미지 뷰 생성을 끝냅니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">vkCreateImageView</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> <span class="token operator">&amp;</span>viewInfo<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>textureImageView<span class="token punctuation">)</span> <span class="token operator">!=</span> VK_SUCCESS<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> std<span class="token double-colon punctuation">::</span><span class="token function">runtime_error</span><span class="token punctuation">(</span><span class="token string">"failed to create texture image view!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>많은 로직이 <code class="language-text">createImageViews</code>에서 복제되므로, 새 <code class="language-text">createImageView</code> 함수로 추상화하기를 원합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkImageView <span class="token function">createImageView</span><span class="token punctuation">(</span>VkImage image<span class="token punctuation">,</span> VkFormat format<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    VkImageViewCreateInfo viewInfo<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    viewInfo<span class="token punctuation">.</span>sType <span class="token operator">=</span> VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO<span class="token punctuation">;</span>
+    viewInfo<span class="token punctuation">.</span>image <span class="token operator">=</span> image<span class="token punctuation">;</span>
+    viewInfo<span class="token punctuation">.</span>viewType <span class="token operator">=</span> VK_IMAGE_VIEW_TYPE_2D<span class="token punctuation">;</span>
+    viewInfo<span class="token punctuation">.</span>format <span class="token operator">=</span> format<span class="token punctuation">;</span>
+    viewInfo<span class="token punctuation">.</span>subresourceRange<span class="token punctuation">.</span>aspectMask <span class="token operator">=</span> VK_IMAGE_ASPECT_COLOR_BIT<span class="token punctuation">;</span>
+    viewInfo<span class="token punctuation">.</span>subresourceRange<span class="token punctuation">.</span>baseMipLevel <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    viewInfo<span class="token punctuation">.</span>subresourceRange<span class="token punctuation">.</span>levelCount <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    viewInfo<span class="token punctuation">.</span>subresourceRange<span class="token punctuation">.</span>baseArrayLayer <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    viewInfo<span class="token punctuation">.</span>subresourceRange<span class="token punctuation">.</span>layerCount <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+    VkImageView imageView<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">vkCreateImageView</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> <span class="token operator">&amp;</span>viewInfo<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>imageView<span class="token punctuation">)</span> <span class="token operator">!=</span> VK_SUCCESS<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> std<span class="token double-colon punctuation">::</span><span class="token function">runtime_error</span><span class="token punctuation">(</span><span class="token string">"failed to create texture image view!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> imageView<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p><code class="language-text">createTextureImageView</code> 함수는 다음과 같이 간소화할 수 있습니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">createTextureImageView</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    textureImageView <span class="token operator">=</span> <span class="token function">createImageView</span><span class="token punctuation">(</span>textureImage<span class="token punctuation">,</span> VK_FORMAT_R8G8B8A8_SRGB<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>그리고 <code class="language-text">createImageViews</code>는 이렇게 간소화할 수 있습니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">createImageViews</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    swapChainImageViews<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span>swapChainImages<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">uint32_t</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> swapChainImages<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        swapChainImageViews<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">createImageView</span><span class="token punctuation">(</span>swapChainImages<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> swapChainImageFormat<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>이미지 자체를 파괴하기 직전에 프로그램 끝에서 이미지 뷰를 파괴해야 합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">cleanup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">cleanupSwapChain</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">vkDestroyImageView</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> textureImageView<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">vkDestroyImage</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> textureImage<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">vkFreeMemory</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> textureImageMemory<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<h1>샘플러 (Samplers)</h1>
+<p>셰이더가 이미지에서 직접 텍셀을 읽는 것이 가능하지만, 텍스쳐로 사용될 때는 일반적이지 않습니다. 텍스쳐는 일반적으로 검색되는 마지막 색상을 계산하기 위해 필더링이나 변환을 적용하는 샘플러를 통해 접근됩니다.</p>
+<p>이러한 필터는 오버샘플링 같은 문제를 처리하는데 유용합니다. 텍셀보다 조각이 더 많은 지오메트리에 매핑되는 텍스쳐를 생각해봅시다. 각 조각의 텍스쳐 좌표에 대해 가장 가까운 텍셀을 취하기만 하면 첫번째 이미지 같은 결과를 얻게 됩니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 542px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/c6bc2381c6b0ef745782704264449671/47f85/texture_filtering.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 58.854166666666664%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAIAAADtbgqsAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAC1klEQVR42mP4DwN///z59fPH39+////79x8D/Prx/e+f379/oChgOHzh2op9x9YfOzd/x4Epa7f2r96y+MDJ9cfPrdp/YvepixsPnVq069CSfccmrt3au3Jj79ptnSs2Lth1aOHOQztOnGdwyWtkMA9i9ktjCMtliCvnjsqV8oti8k9jsAvXji5QCclmsA1j9E0BycaUCoSlSvpHMwEVWwRZpVUxuFb3MngnM6dUcGRW6qSlBAS7+Lo7cicWMwRlaWfWqqZUMgRlMqZU8KSXmaTEB/naO3u4sieWMPilWZe0M7g2TWIIz+XMqQnKTZvZlNJZEOlmYSkSk8WQUKpT2KyaU88QW8SfVRGbnzKrJbUlN8LF2kYgLpchusC6uofBtX0aQ1yhc0727KbszUs6ju+a05aTpOThz5BepVPeoVLcwpBc7J+dMrc1b+uyzgMbp9YkR0r5hDAkl1k3TGBw6pnFFpaUGuK1ZUnHmlnV/WVJ7Vkp1la2DHF52jU9SuXtwqHxuZF+25Z3LZtS1l+RWp8UY2TjxBCTa9UyhcFzwlwOv8hga9PlU6s3LGrrr8xty0wLMTBkC4zTrO3Vru4S8Q2PdLBcNqVq2bTa3vKc+vgYL0MThoB4y9bJDGH9s/mSi9RdPBO8HAojPNrTI3P9fKys7RmiMrUrOi2rO0VSirSc3ZJ8nYsiPFtTI1I9PQ0c3BjCM6wbJzDE984UTC1lL2pIL88r9Hct9fP0CY5iyaxiiCvSLmhyrGgXzqzkK6jNLs0qCHAt8fN2DolhzqpmiMi1qupmcKnuZvCKZYgtiK0q7i+OL4sMSwgNtUuK1oiOj6ysU08tY/BLYojNS64q6CmILYsKjw8PdUyO1o2KyW7rYDhy9dbKI6dXnzx/8tKlhzcvPrh99d61c48vHXly7czrR3cOX7mx5cylbReuXrpx7cnda4/u3nh489KTG2ee3Lr09vkjAIcoVbYDiXuYAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/c6bc2381c6b0ef745782704264449671/a59e9/texture_filtering.webp 192w,
+/static/c6bc2381c6b0ef745782704264449671/0ca9f/texture_filtering.webp 384w,
+/static/c6bc2381c6b0ef745782704264449671/535ba/texture_filtering.webp 542w"
+              sizes="(max-width: 542px) 100vw, 542px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/c6bc2381c6b0ef745782704264449671/3b721/texture_filtering.png 192w,
+/static/c6bc2381c6b0ef745782704264449671/66595/texture_filtering.png 384w,
+/static/c6bc2381c6b0ef745782704264449671/47f85/texture_filtering.png 542w"
+            sizes="(max-width: 542px) 100vw, 542px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/c6bc2381c6b0ef745782704264449671/47f85/texture_filtering.png"
+            alt="texture_filtering.png"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>선형 보간을 통해 가장 가까운 4개의 텍셀을 결합하면 오른쪽 같이 더 부드러운 결과를 얻을 수 있습니다. 물론 어플리케이션에 따라서는 왼쪽 스타일이 더 적합할 수 있습니다. 마인크래프트 같은 것 말이죠. 보통 그래픽 어플리케이션에서는 오른쪽이 선호됩니다. 샘플러 객체는 텍스쳐에서 색상을 읽을 때 자동으로 이 필터링을 적용합니다.</p>
+<p>언더샘플링은 조각보다 텍셀이 더 많은 반대의 경우입니다. 예리한 각도에서 바둑판 텍스쳐 같은 고주파수 패턴을 샘플링할 때 아티팩트를 발생시킵니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/8eef0c96377463da2db4330c8f1e537a/a27c6/af.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 39.0625%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAIAAAB2/0i6AAAACXBIWXMAAA7DAAAOwwHHb6hkAAABUUlEQVR42mWQP6/BYBjFX2LzdcQgUUPTaAcJEe6NVidLky6NS5WwSohZ0m9hENzEVkM7digTajfooIjhnryNG7n3Nzw5zznP+5fcbrfL5XI6nY7Ho+/7h8MB7f1+v16vz+czDEMMnM9nDPiU/X4fBAHMx+NBBoOBruvNZrPdbnc6nS9Kv98fDoe73W48Hne7XThIdYqmaYZh9Hq91WpFFEWBarVaBiUSmIbYbrfYFPrXjwTOazQa8/mcoOF5XpIkURRrtZosy6VSqVAojEYjLJ5MJtVqFU69XhcpEBzHqaq6Xq/JYrFwHAf1+8VyuXRdN3Kw2PO89xS33Ww2tm1jjAiC8PnGB6VYLFYqFcT5fL5cLv9JIViWNU2TgHg8Tv6RTCZnsxkqdCwWe48SiQQq/oKk02mGYbLZLEPJUdDiIyzLwvMymUyU5l7g2FQqNZ1OfwCswuKKIo8DRQAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/8eef0c96377463da2db4330c8f1e537a/a59e9/af.webp 192w,
+/static/8eef0c96377463da2db4330c8f1e537a/0ca9f/af.webp 384w,
+/static/8eef0c96377463da2db4330c8f1e537a/84c6d/af.webp 700w"
+              sizes="(max-width: 700px) 100vw, 700px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/8eef0c96377463da2db4330c8f1e537a/3b721/af.png 192w,
+/static/8eef0c96377463da2db4330c8f1e537a/66595/af.png 384w,
+/static/8eef0c96377463da2db4330c8f1e537a/a27c6/af.png 700w"
+            sizes="(max-width: 700px) 100vw, 700px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/8eef0c96377463da2db4330c8f1e537a/a27c6/af.png"
+            alt="anisotropic_filtering.png"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>왼쪽 이미지 같이 텍스쳐가 멀리서 흐릿하게 변합니다. 이에 대한 해결 방법은 샘플러에 의해 자동으로 적용될 수 있는 <a href="https://en.wikipedia.org/wiki/Anisotropic_filtering" target="_blank" rel="nofollow">이방성 필터링</a>입니다.</p>
+<p>이러한 필터 외에도 샘플러는 변환을 처리할 수 있습니다. 주소 지정 모드를 통해 이미지 외부의 텍셀을 읽으려고 할 때 결과를 결정합니다. 아래 이미지는 몇가지 케이스를 보여줍니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/5ff9bc5537dc198129a52056921b04c1/a27c6/texture_addressing.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 28.125%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAIAAABM9SnKAAAACXBIWXMAAA7DAAAOwwHHb6hkAAABeUlEQVR42gFuAZH+AOLt8dTY2t7q7vH2+Pb4+dHd4dnd39La3d7o6/z8/dvm6tTc39na3OLk5vv7++Xt8NDb3tzd3dnZ2fLy8gBFZmYHVGlAaWlRfIVvoq9EaGcTVmcrW2RHdHZ4p7ZGcnQvXGQATGQAQlp0nqxSgog7Y2YFJjAAAABDREUAc2JWE1lncGhbY3l7cKOrd2lbJ1pkTl9db3Vrc6q2b25jSl1eAFdtAEthbKKwcIWBbGlhAygwAAAAPj4/ADheYRFbbSxfZld7gnSksFthXT1kalBhYVhwb3WotVh5eJSFboGEeoKDd7O3szJFSSAjIRAWFwAAAEFBQQBmYVUGTmBmZ1pWcnltnadwZ1YZTlxBVVZsdGlpm6xcenazkGqjjHeokHnFurAhIyQAAAAEBAQAAAA9PT0AlI6JY5GZipCNnKall7zGYouRVoeUXomSaZWcnLzIjqekyLOcvLGkv7Om1dDKZmdoSkpKUVFRREREeHh4blSsUEyrgA8AAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/5ff9bc5537dc198129a52056921b04c1/a59e9/texture_addressing.webp 192w,
+/static/5ff9bc5537dc198129a52056921b04c1/0ca9f/texture_addressing.webp 384w,
+/static/5ff9bc5537dc198129a52056921b04c1/84c6d/texture_addressing.webp 700w"
+              sizes="(max-width: 700px) 100vw, 700px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/5ff9bc5537dc198129a52056921b04c1/3b721/texture_addressing.png 192w,
+/static/5ff9bc5537dc198129a52056921b04c1/66595/texture_addressing.png 384w,
+/static/5ff9bc5537dc198129a52056921b04c1/a27c6/texture_addressing.png 700w"
+            sizes="(max-width: 700px) 100vw, 700px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/5ff9bc5537dc198129a52056921b04c1/a27c6/texture_addressing.png"
+            alt="texture_addressing.png"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>새로운 함수 <code class="language-text">createTextureSampler</code>를 만들어서 샘플러 객체를 설정하겠습니다. 나중에 샘플러를 사용해서 셰이더의 텍스쳐에서 색상을 읽을 것입니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">initVulkan</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token function">createTextureImage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">createTextureImageView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">createTextureSampler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token keyword">void</span> <span class="token function">createTextureSampler</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span></code></pre></div>
+<p>샘플러는 적용해야 하는 모든 필터와 변환을 지정하는 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkSamplerCreateInfo.html" target="_blank" rel="nofollow"><code class="language-text">VkSamplerCreateInfo</code></a> 구조체를 통해 구성됩니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkSamplerCreateInfo samplerInfo<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+samplerInfo<span class="token punctuation">.</span>sType <span class="token operator">=</span> VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO<span class="token punctuation">;</span>
+samplerInfo<span class="token punctuation">.</span>magFilter <span class="token operator">=</span> VK_FILTER_LINEAR<span class="token punctuation">;</span>
+samplerInfo<span class="token punctuation">.</span>minFilter <span class="token operator">=</span> VK_FILTER_LINEAR<span class="token punctuation">;</span></code></pre></div>
+<p><code class="language-text">magFilter</code>와 <code class="language-text">minFilter</code> 필드는 확대 또는 축소된 텍셀을 보간하는 방법을 지정합니다. 확대는 위에서 설명한 오버샘플링 문제, 축소는 언더샘플링 문제와 관련됩니다. 위의 이미지에 표시된 모드에 해당하는 <code class="language-text">VK_FILTER_NEAREST</code>나 <code class="language-text">VK_FILTER_LINEAR</code> 중에 선택할 수 있습니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">samplerInfo<span class="token punctuation">.</span>addressModeU <span class="token operator">=</span> VK_SAMPLER_ADDRESS_MODE_REPEAT<span class="token punctuation">;</span>
+samplerInfo<span class="token punctuation">.</span>addressModeV <span class="token operator">=</span> VK_SAMPLER_ADDRESS_MODE_REPEAT<span class="token punctuation">;</span>
+samplerInfo<span class="token punctuation">.</span>addressModeW <span class="token operator">=</span> VK_SAMPLER_ADDRESS_MODE_REPEAT<span class="token punctuation">;</span></code></pre></div>
+<p><code class="language-text">addressMode</code> 필드를 사용하여 축마다 주소 지정 모드를 지정할 수 있습니다. 사용 가능한 값은 아래에 나열되어 있습니다. 이들 대부분은 위의 이미지에 나와있습니다. 축은 X,Y,Z 대신 U,V,W로 부릅니다. 이것은 텍스쳐 공간 좌표에 대한 규칙입니다.</p>
+<ul>
+<li><code class="language-text">VK_SAMPLER_ADDRESS_MODE_REPEAT</code>: 이미지 치수를 초과할 때 텍스쳐를 반복합니다.</li>
+<li><code class="language-text">VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT</code>: repeat와 비슷하지만, 차원을 넘어갈 때 이미지를 미러링하기 위해 좌표를 반전합니다.</li>
+<li><code class="language-text">VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>: 이미지 치수를 넘어서면 가장자리의 색상을 가져옵니다.</li>
+<li><code class="language-text">VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE</code>: clamp to edge와 비슷하지만 가장 가까운 가장자리의 반대쪽 가장자리를 사용합니다.</li>
+<li><code class="language-text">VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER</code>: 이미지 크기 이상으로 샘플링할 때 단색을 반환합니다.</li>
+</ul>
+<p>여기서 사용하는 주소 지정 모드는 중요하지 않습니다. 이 튜토리얼에서는 이미지 외부를 샘플링하지 않을 것이기 때문입니다. 그러나 반복 모드는 바닥, 벽 같은 질감을 타일링하는데 사용할 수 있기 때문에 제일 일반적인 모드일 것입니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">samplerInfo<span class="token punctuation">.</span>anisotropyEnable <span class="token operator">=</span> VK_TRUE<span class="token punctuation">;</span>
+samplerInfo<span class="token punctuation">.</span>maxAnisotropy <span class="token operator">=</span> <span class="token operator">?</span><span class="token operator">?</span><span class="token operator">?</span><span class="token punctuation">;</span></code></pre></div>
+<p>이 두 필드는 등방성 필터링을 사용해야 하는지 여부를 지정합니다. 성능이 문제가 되지 않는 한 이것을 사용하지 않을 이유는 없습니다. <code class="language-text">maxAnisotropy</code> 필드는 최종 색상을 계산하는데 사용할 수 있는 텍셀 샘플의 양을 제한합니다. 값이 낮을 수록 성능은 향상되지만 품질은 낮아집니다. 어떤 값을 사용할 수 있는지 알아내려면 다음과 같이 물리적 장치의 속성을 검색해야 합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkPhysicalDeviceProperties properties<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token function">vkGetPhysicalDeviceProperties</span><span class="token punctuation">(</span>physicalDevice<span class="token punctuation">,</span> <span class="token operator">&amp;</span>properties<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkPhysicalDeviceProperties.html" target="_blank" rel="nofollow"><code class="language-text">VkPhysicalDeviceProperties</code></a> 구조에 대한 문서를 보면 <code class="language-text">limits</code>라는 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkPhysicalDeviceLimits.html" target="_blank" rel="nofollow"><code class="language-text">VkPhysicalDeviceLimits</code></a> 멤버가 있습니다. 이 구조체에는 <code class="language-text">maxSamplerAnisotropy</code>라는 멤버가 있으며, <code class="language-text">maxAnisotropy</code>에 대해 지정할 수 있는 최대 값입니다. 최대 품질을 원하면 해당 값을 직접 사용할 수 있습니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">samplerInfo<span class="token punctuation">.</span>maxAnisotropy <span class="token operator">=</span> properties<span class="token punctuation">.</span>limits<span class="token punctuation">.</span>maxSamplerAnisotropy<span class="token punctuation">;</span></code></pre></div>
+<p>프로그램 시작 부분에서 속성을 쿼리하고 속성을 필요로 하는 함수에 전달하거나, <code class="language-text">createTextureSampler</code> 함수 자체에서 쿼리할 수 있습니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">samplerInfo<span class="token punctuation">.</span>borderColor <span class="token operator">=</span> VK_BORDER_COLOR_INT_OPAQUE_BLACK<span class="token punctuation">;</span></code></pre></div>
+<p><code class="language-text">borderColor</code> 필드는 테두리 주소 지정 모드로 clamp를 사용하여 이미지 너머를 샘플링할 때 반환되는 색상을 지정합니다. float, int 형식으로 검정 또는 흰색, 투명을 반환하는 것이 가능합니다. 임의의 색상을 지정할 수는 없습니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">samplerInfo<span class="token punctuation">.</span>unnormalizedCoordinates <span class="token operator">=</span> VK_FALSE<span class="token punctuation">;</span></code></pre></div>
+<p><code class="language-text">unnormalizedCoordinates</code> 필드는 이미지의 텍셀을 처리하는데 사용할 좌표계를 지정합니다. 이 필드가 <code class="language-text">VK_TRUE</code>이면 간단히 <code class="language-text">[0, texWidth)</code>, <code class="language-text">[0, texHieght)</code> 범위 내에서 좌표를 사용할 수 있습니다. <code class="language-text">VK_FALSE</code>이면 모든 축에서 <code class="language-text">[0, 1)</code> 범위를 사용하여 텍셀의 주소가 지정됩니다. 실제 어플리케이션은 거의 항상 정규화된 좌표를 사용합니다. 그러면 정확히 동일한 좌표로 다양한 해상도의 텍스쳐를 사용할 수 있기 때문입니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">samplerInfo<span class="token punctuation">.</span>compareEnable <span class="token operator">=</span> VK_FALSE<span class="token punctuation">;</span>
+samplerInfo<span class="token punctuation">.</span>compareOp <span class="token operator">=</span> VK_COMPARE_OP_ALWAYS<span class="token punctuation">;</span></code></pre></div>
+<p>비교 기능이 활성화되면 텍셀이 먼저 값과 비교되고 해당 비교 결과가 필터링 작업에 사용됩니다. 이는 그림자 맵에서 주로 <a href="https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch11.html" target="_blank" rel="nofollow">근접한 비율 필터링</a>에 사용됩니다. 이에 대해서는 다음 챕터에서 살펴보겠습니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">samplerInfo<span class="token punctuation">.</span>mipmapMode <span class="token operator">=</span> VK_SAMPLER_MIPMAP_MODE_LINEAR<span class="token punctuation">;</span>
+samplerInfo<span class="token punctuation">.</span>mipLodBias <span class="token operator">=</span> <span class="token number">0.0f</span><span class="token punctuation">;</span>
+samplerInfo<span class="token punctuation">.</span>minLod <span class="token operator">=</span> <span class="token number">0.0f</span><span class="token punctuation">;</span>
+samplerInfo<span class="token punctuation">.</span>maxLod <span class="token operator">=</span> <span class="token number">0.0f</span><span class="token punctuation">;</span></code></pre></div>
+<p>이 모든 필드는 밉매핑에 적용됩니다. <a href="https://vulkan-tutorial.com/Generating_Mipmaps" target="_blank" rel="nofollow">이후 챕터</a>에서 밉매핑을 볼 것인데, 기본적으로 적용할 수 있는 또 다른 유형의 필터일 것입니다.</p>
+<p>이제 샘플러의 기능이 완전히 정의되었습니다. 샘플러 객체의 핸들을 보유할 클래스 멤버를 추가하고 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/vkCreateSampler.html" target="_blank" rel="nofollow"><code class="language-text">vkCreateSampler</code></a>로 샘플러를 만듭시다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkImageView textureImageView<span class="token punctuation">;</span>
+VkSampler textureSampler<span class="token punctuation">;</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token keyword">void</span> <span class="token function">createTextureSampler</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">vkCreateSampler</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> <span class="token operator">&amp;</span>samplerInfo<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>textureSampler<span class="token punctuation">)</span> <span class="token operator">!=</span> VK_SUCCESS<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> std<span class="token double-colon punctuation">::</span><span class="token function">runtime_error</span><span class="token punctuation">(</span><span class="token string">"failed to create texture sampler!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>샘플러는 어디에서나 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkImage.html" target="_blank" rel="nofollow"><code class="language-text">VkImage</code></a>를 참조하지 않습니다. 샘플러는 텍스쳐에서 색상을 추출하는 인터페이스를 제공하는 별개의 객체입니다. 1D, 2D, 3D 등 원하는 모든 이미지에 적용할 수 있습니다. 이는 텍스쳐 이미지와 필터링을 단일 상태로 결합한 이전 API 들과는 다릅니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">cleanup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">cleanupSwapChain</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">vkDestroySampler</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> textureSampler<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">vkDestroyImageView</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> textureImageView<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span></code></pre></div>
+<h1>이방성 장치 기능 (Anisotropy device feature)</h1>
+<p>지금 프로그램을 실행하면 다음과 같은 유효성 검사 레이어 메세지가 표시됩니다.</p>
+<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7fad0cfc-f620-4e22-8ee1-e8f2bcc3199c/validation_layer_anisotropy.png" alt="validation_layer_anisotropy.png"></p>
+<p>이는 이방성 필터링이 실제로 선택적 장치 기능이기 때문입니다. 요청하려면 <code class="language-text">createLogicalDevice</code> 함수를 수정해야 합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkPhysicalDeviceFeatures deviceFeatures<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+deviceFeatures<span class="token punctuation">.</span>samplerAnisotropy <span class="token operator">=</span> VK_TRUE<span class="token punctuation">;</span></code></pre></div>
+<p>최신 그래픽 카드가 지원하지 않을 가능성은 거의 없지만 <code class="language-text">isDeviceSuitable</code>을 수정하여 사용 가능한지 확인해야 합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">isDeviceSuitable</span><span class="token punctuation">(</span>VkPhysicalDevice device<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    VkPhysicalDeviceFeatures supportedFeatures<span class="token punctuation">;</span>
+    <span class="token function">vkGetPhysicalDeviceFeatures</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> <span class="token operator">&amp;</span>supportedFeatures<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> indices<span class="token punctuation">.</span><span class="token function">isComplete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> extensionsSupported <span class="token operator">&amp;&amp;</span> swapChainAdequate <span class="token operator">&amp;&amp;</span> supportedFeatures<span class="token punctuation">.</span>samplerAnisotropy<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/vkGetPhysicalDeviceFeatures.html" target="_blank" rel="nofollow"><code class="language-text">vkGetPhysicalDeviceFeatures</code></a>는 boolean 값을 설정하여 요청하지 않고, 지원되는 기능을 나타내기 위해 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkPhysicalDeviceFeatures.html" target="_blank" rel="nofollow"><code class="language-text">VkPhysicalDeviceFeatures</code></a> 구조체를 변경합니다.</p>
+<p>등방성 필터링의 가용성을 적용하는 대신, 조건부로 설정하여 단순히 사용하지 않을 수도 있습니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">samplerInfo<span class="token punctuation">.</span>anisotropyEnable <span class="token operator">=</span> VK_FALSE<span class="token punctuation">;</span>
+samplerInfo<span class="token punctuation">.</span>maxAnisotropy <span class="token operator">=</span> <span class="token number">1.0f</span><span class="token punctuation">;</span></code></pre></div>
+<p>다음 챕터에서는 이미지와 샘플러 객체를 셰이더에 노출시켜 정사각형에 텍스쳐를 그릴 것입니다.</p>
+<p><a href="https://vulkan-tutorial.com/code/25_sampler.cpp" target="_blank" rel="nofollow">C++ code</a> / <a href="https://vulkan-tutorial.com/code/22_shader_ubo.vert" target="_blank" rel="nofollow">Vertex shader</a> / <a href="https://vulkan-tutorial.com/code/22_shader_ubo.frag" target="_blank" rel="nofollow">Fragment shader</a></p></div><style data-emotion="css hx9xpc">@media (max-width: 768px){.css-hx9xpc{padding:0 20px;}}</style><div class="css-hx9xpc e1gqsjds0"></div><style data-emotion="css lffphe">.css-lffphe{display:grid;place-items:center;margin-top:auto;padding:36px 0;font-size:15px;text-align:center;line-height:1.5;}@media (max-width: 768px){.css-lffphe{font-size:13px;}}</style><footer class="css-lffphe e1oae0v80">© 2025 yhc509, All rights reserved.</footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/vulkan/29_Image_view_and_sampler/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx.js\"],\"component---src-pages-info-tsx\":[\"/component---src-pages-info-tsx.js\"],\"component---src-templates-post-template-tsx\":[\"/component---src-templates-post-template-tsx.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="41fb7f600fa9551db4d9";</script><script src="/webpack-runtime.js" async></script><script src="/framework.js" async></script><script src="/app.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>

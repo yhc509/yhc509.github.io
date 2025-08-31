@@ -1,0 +1,147 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Gatsby 5.14.1"/><style data-href="/styles.9e907bc32054b7771552.css" data-identity="gatsby-global-css">code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#ccc;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;white-space:pre;word-break:normal;word-spacing:normal}pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#2d2d2d}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.block-comment,.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#999}.token.punctuation{color:#ccc}.token.attr-name,.token.deleted,.token.namespace,.token.tag{color:#e2777a}.token.function-name{color:#6196cc}.token.boolean,.token.function,.token.number{color:#f08d49}.token.class-name,.token.constant,.token.property,.token.symbol{color:#f8c555}.token.atrule,.token.builtin,.token.important,.token.keyword,.token.selector{color:#cc99cd}.token.attr-value,.token.char,.token.regex,.token.string,.token.variable{color:#7ec699}.token.entity,.token.operator,.token.url{color:#67cdcc}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.inserted{color:green}</style><link rel="canonical" href="https://yhc509.github.io/aws/6_rds/" data-baseprotocol="https:" data-basehost="yhc509.github.io"/><link rel="sitemap" type="application/xml" href="/sitemap-index.xml"/><meta name="google-site-verification" content="0V6Pp62k0qLSCFq479si1XrTMvN4NjFR8estP6u-Zds"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><style data-emotion="css 13ku56z">.css-13ku56z{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;height:100%;}</style><main class="css-13ku56z e1strnqo0"><style data-emotion="css-global 17bu09z">@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap');*{padding:0;margin:0;box-sizing:border-box;font-family:'Hahmlet',serif;color:inherit;-webkit-text-decoration:none;text-decoration:none;}html,body,#___gatsby{width:100%;height:auto;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;}a,a:visited,a:active{-webkit-text-decoration:none;text-decoration:none;color:inherit;}a:hover{color:inherit;-webkit-text-decoration:none;text-decoration:none;cursor:pointer;}img{position:relative;display:block;margin-left:auto;margin-right:auto;max-width:768px;text-align:left;}</style><style data-emotion="css 1u7ncg7">.css-1u7ncg7{width:100%;background-image:linear-gradient(60deg, #29323c 0%, #485563 100%);color:#ffffff;}</style><div class="css-1u7ncg7 e160b013"><style data-emotion="css 5c3sm8">.css-5c3sm8{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:768px;height:80px;margin:0 auto;}padding-bottom:12px@media (max-width: 768px){.css-5c3sm8{width:100%;height:80px;padding:0 12px;}}</style><div class="css-5c3sm8 e160b012"><style data-emotion="css 9p6ebr">.css-9p6ebr{margin-top:5px;font-size:24px;font-weight:700;}@media (max-width: 768px){.css-9p6ebr{font-size:20px;margin-left:16px;}}</style><div class="css-9p6ebr e160b010">yhc509`s Dev Journey</div></div></div><style data-emotion="css 183vxbl">.css-183vxbl{position:relative;width:100%;}@media (max-width: 768px){.css-183vxbl{width:100%;}}</style><div class="css-183vxbl e1opi4mu1"><style data-emotion="css uadz8j">.css-uadz8j{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;height:100%;margin:0 auto;padding:30px 0;}@media (max-width: 768px){.css-uadz8j{width:100%;padding:24px 16px;}}</style><div class="css-uadz8j e1st1jau5"><style data-emotion="css 1g6v2wt">.css-1g6v2wt{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#ffffff;color:#000000;font-size:22px;cursor:pointer;box-shadow:0 0 10px rgba(0, 0, 0, 0.3);}@media (max-width: 768px){.css-1g6v2wt{width:30px;height:30px;font-size:16px;}}</style><div class="css-1g6v2wt e1st1jau4"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></div><style data-emotion="css 1twr1m2">.css-1twr1m2{display:-webkit-box;overflow:hidden;overflow-wrap:break-word;margin-top:auto;text-overflow:ellipsis;white-space:normal;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:32px;font-weight:800;}@media (max-width: 768px){.css-1twr1m2{font-size:24px;}}</style><div class="css-1twr1m2 e1st1jau3">AWS (6) - RDS + Aurora + ElasticCache</div><style data-emotion="css yijt7k">.css-yijt7k{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin-top:10px;font-size:14px;font-weight:700;}@media (max-width: 768px){.css-yijt7k{-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-align-items:flex-start;-webkit-box-align:flex-start;-ms-flex-align:flex-start;align-items:flex-start;font-size:14px;font-weight:400;}}</style><div class="css-yijt7k e1st1jau2"><style data-emotion="css 1bobky6">.css-1bobky6{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-top:10px;margin:10px -5px;}</style><div class="css-1bobky6 e1st1jau1"><style data-emotion="css 1e9ac4l">.css-1e9ac4l{margin:2.5px 5px;padding:3px 5px;border-radius:3px;background:black;font-size:12px;font-weight:700;color:white;}</style><div class="css-1e9ac4l e1st1jau0">AWS</div></div><div>2023.11.06.</div></div></div></div><style data-emotion="css 12iq82c">.css-12iq82c{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;margin:0 auto;padding:100px 0;word-break:break-all;line-height:1.8;font-size:16px;font-weight:400;}.css-12iq82c p{padding:3px 0;}.css-12iq82c h1,.css-12iq82c h2,.css-12iq82c h3{font-weight:800;margin-bottom:18px;}.css-12iq82c *+h1,.css-12iq82c *+h2,.css-12iq82c *+h3{margin-top:16px;margin-bottom:0px;}.css-12iq82c hr+h1,.css-12iq82c hr+h2,.css-12iq82c hr+h3{margin-top:0;}.css-12iq82c h1{font-size:28px;}.css-12iq82c h2{font-size:24px;}.css-12iq82c h3{font-size:20px;}.css-12iq82c blockquote{margin:10px 0;padding:5px 5px;border-left:2px solid #000000;font-weight:800;}.css-12iq82c ol,.css-12iq82c ul{margin-left:20px;padding:4px 0;}.css-12iq82c hr{border:1px solid #646464;margin:64px 0;}.css-12iq82c a{color:#4263eb;-webkit-text-decoration:underline;text-decoration:underline;}.css-12iq82c pre[class*='language-']{margin:5px 0;padding:10px;font-size:14px;}.css-12iq82c pre[class*='language-']::-webkit-scrollbar-thumb{background:rgba(255, 255, 255, 0.5);border-radius:10px;}.css-12iq82c code[class*='language-'],.css-12iq82c pre[class*='language-']{tab-size:2;}@media (max-width: 768px){.css-12iq82c{width:100%;padding:40px 16px;line-height:1.6;font-size:14px;}.css-12iq82c h1{font-size:23px;}.css-12iq82c h2{font-size:20px;}.css-12iq82c h3{font-size:17px;}.css-12iq82c hr{margin:50px 0;}}</style><div class="css-12iq82c e1ijh0y10"><h2>RDS</h2>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/068e9b5bd2a2701d470c8b059ab34e13/ac7a9/rds.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.25%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAABnUlEQVR42o1SXUrDQBDuUTyA+OAJvIA38AS+ewMP4A1EEF/EB19UEMGHgghCH0TE1krUNmmTJtkkm2y2u5vP2aTWH6w6sH/M7DfffDMtkBVFgTiOkWUZOOfI6S2EQJ7n4LTsaWOqqsJf1rKbBQmCAFEcwfd9+HRnjGEymczf9m6M+R/gr0asKj2tzx9ciwGtsympqs/38opoBD7oQjB/McpvDI2xyA24oaUl6Rm6MErWPq11nTSMBFyPk7ZqEcMm+Pbag+9m9EVbXMg0RD5+xpQzFKKstbQNa1+94vT8BY/9ZP7/G8MKUkrcdzyMBjG0UTWgFhlE8AJT5rDktVYQpYQ34rjp+Lh/CL8o0fqsie1sGIXEIkBBo2JNZhHE2IEkhrXCs05HEcNDt0+Twf7Z5VmiMgmoZAeKx2jEJc0qTXoqKNIVTZoPwCIZocxTKncKRcltfjMLsU1x3AmehiFS8fcM1oDJ7hKS/WVaK0gOVsEO18CO15GebCC92ERyuYXsahvZzQ7E3R5k7wjSOYMatqH8DnTcg+EuKpnCaIU37txQTuBeeBkAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/068e9b5bd2a2701d470c8b059ab34e13/a59e9/rds.webp 192w,
+/static/068e9b5bd2a2701d470c8b059ab34e13/0ca9f/rds.webp 384w,
+/static/068e9b5bd2a2701d470c8b059ab34e13/dc9b9/rds.webp 768w,
+/static/068e9b5bd2a2701d470c8b059ab34e13/e2c2f/rds.webp 1152w,
+/static/068e9b5bd2a2701d470c8b059ab34e13/f3efb/rds.webp 1536w,
+/static/068e9b5bd2a2701d470c8b059ab34e13/0b34d/rds.webp 1920w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/068e9b5bd2a2701d470c8b059ab34e13/3b721/rds.png 192w,
+/static/068e9b5bd2a2701d470c8b059ab34e13/66595/rds.png 384w,
+/static/068e9b5bd2a2701d470c8b059ab34e13/fe486/rds.png 768w,
+/static/068e9b5bd2a2701d470c8b059ab34e13/d2d74/rds.png 1152w,
+/static/068e9b5bd2a2701d470c8b059ab34e13/e8464/rds.png 1536w,
+/static/068e9b5bd2a2701d470c8b059ab34e13/ac7a9/rds.png 1920w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/068e9b5bd2a2701d470c8b059ab34e13/fe486/rds.png"
+            alt="RDS Solution Architecture"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<ul>
+<li>RDS = Relational Database Service</li>
+<li>관계형 데이터베이스를 위한 서비스
+<ul>
+<li>Postgres</li>
+<li>MySQL</li>
+<li>MariaDB</li>
+<li>Oracle</li>
+<li>Microsoft SQL Server</li>
+<li>Aurora (AWS거)</li>
+</ul>
+</li>
+<li>자동 프로비저닝, OS 패치</li>
+<li>지정 시간 복구가 가능하도록 지속적인 백업, 복원 옵션 존재</li>
+<li>모니터링 대시보드</li>
+<li>읽기 전용 복제본을 생성하여 읽기 퍼포먼스 향상</li>
+<li>다중 AZ로 재해 복구 계획 수립</li>
+<li>업그레이드에 대한 유지보수 설정</li>
+<li>수직, 수평 스케일링</li>
+<li>gp2, io1 볼륨 EBS로 구현</li>
+</ul>
+<h2>RDS 읽기 전용 복제본</h2>
+<ul>
+<li>데이터베이스의 복제본이 생기고, 애플리케이션이 복제본으로부터 읽기 작업을 할 수 있음</li>
+<li>읽기 권한을 여러 RDS에 분산시키게 된다. 최대 5개.</li>
+<li>쓰기 작업은 오직 메인 데이터베이스에서만 이루어진다.</li>
+</ul>
+<h2>다중 AZ</h2>
+<ul>
+<li>AZ 운영정지 같은 장애가 발생했을 때 유용하게 쓰임. (높은 가용성)</li>
+<li>장애가 생겨서 메인 RDS가 멈추면 장애조치가 트리거되고, 애플리케이션은 복제된 개발자 데이터베이스에서 장애조치를 실시함.</li>
+<li>메인 데이터베이스에서만 읽고 쓸 수 있으며 장애 조치 DB는 수동적 DB로, 메인 데이터베이스에 문제가 생겼을 때만 접근 가능.</li>
+<li>하나의 AZ만 장애 조치 AZ로 설정 가능.</li>
+</ul>
+<h2>다중 리전</h2>
+<ul>
+<li>읽기 전용 복제본을 여러 리전에 두는 것.</li>
+<li>각 리전마다 read 가능하지만, write는 메인 RDS에 해야함. 리전간 쓰기 작업 수행.</li>
+<li>한 리전에 문제가 생겼을 때를 대비한 재해 복구 전략이 필요하기 때문에 사용.</li>
+<li>Read할 때는 각 리전에서 하기 때문에 지연 시간이 짧다는 장점.</li>
+<li>복제할 때 리전간 네트워크 전송 비용이 든다.</li>
+</ul>
+<hr>
+<h2>Amazon Aurora</h2>
+<ul>
+<li>AWS에서 만든 데이터베이스. 오픈 소스가 아님</li>
+<li>PostgreSQL와 MySQL을 지원함</li>
+<li>클라우드에 최적화되어 RDS의 MySQL보다 5배, Postgres보다 3배 향상된 성능</li>
+<li>스토리지가 자동으로 10GB~128TB까지 증가함</li>
+<li>RDS보다 20%정도 비싸지만 더 효율적임</li>
+<li>프리티어에 없음</li>
+</ul>
+<h2>가용성, 읽기 스케일링링</h2>
+<h2>Aurora DB Cluster</h2>
+<h2>Aurora 고급 개념</h2>
+<hr>
+<h2>RDS &#x26; Aurora</h2>
+<h2>RDS Proxy</h2>
+<hr>
+<h2>ElastiCache</h2>
+<ul>
+<li>ElastiCache를 이용하여 관리형 Redis나 Memcached를 사용.</li>
+<li>캐시는 높은 성능과 짧은 지연시간을 자랑하는 인메모리 데이터베이스.</li>
+<li>읽기 집중적인 워크로드의 데이터베이스로부터 워크로드를 줄일 때 용이함.</li>
+<li>RDS에서 항상 동일한 쿼리를 수행하면 부하가 생기는데 이럴 때 캐시를 활용</li>
+<li>관리형 데이터베이스이므로 AWS가 모든 운영체제 유지 보수와 패치, 최적화, 구성, 모니터링을 책임짐.</li>
+</ul>
+<h2>Memcached</h2>
+<hr>
+<!-- 
+## DynamoDB
+- 완전 관리형 고가용성 데이터베이스
+- 세 개의 가용영역에 걸쳐 복제본을 두고 운영됨.
+- NoSQL
+- 막대한 작업량 소화 가능, 분산된 **서버리스** 데이터베이스. 서버에 프로비저닝할 필요가 없다.
+- 초당 수백만 건의 요청, 조 단위가 넘는 행, 수백 테라바이트 스토리지까지 확장해도 신속하고 한결같은 성능
+- **검색 지연 시간이 한 자리수 밀리초**인 성능을 필요로 할 때 적합한 데이터베이스
+- 보안, 인증, 관리상 IAM과 통합되어 있음
+- 비용이 적고 오토 스케일링 기능 갖추고 있다.
+- 비용 절감을 위해 데이터를 분류하는 방식에 따른 Standard & Infrequent Access (IA) 테이블 클래스가 있다.
+- key / value 데이터베이스
+
+### DynamoDB Accelerator - DAX
+
+- DynamoDB를 위한 완전 관리형 인메모리 캐시
+- DynamoDB 전용. ElastiCache를 사용할 필요는 없다. 성능이 열 배는 향상된다. 마이크로초 지연 시간.
+- 보안 완벽, 확장성과 가용성 모두 높다.
+
+### DynamoDB Global Tables
+
+- 짧은 지연시간으로 DynamoDB 테이블에 액세스 할 수 있도록 하는 기능. 여러 리전에서 가능하다.
+- Active-Active 복제 (여러 리전에서 read/write가 가능함) --></div><style data-emotion="css hx9xpc">@media (max-width: 768px){.css-hx9xpc{padding:0 20px;}}</style><div class="css-hx9xpc e1gqsjds0"></div><style data-emotion="css lffphe">.css-lffphe{display:grid;place-items:center;margin-top:auto;padding:36px 0;font-size:15px;text-align:center;line-height:1.5;}@media (max-width: 768px){.css-lffphe{font-size:13px;}}</style><footer class="css-lffphe e1oae0v80">© 2025 yhc509, All rights reserved.</footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/aws/6_rds/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx.js\"],\"component---src-pages-info-tsx\":[\"/component---src-pages-info-tsx.js\"],\"component---src-templates-post-template-tsx\":[\"/component---src-templates-post-template-tsx.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="41fb7f600fa9551db4d9";</script><script src="/webpack-runtime.js" async></script><script src="/framework.js" async></script><script src="/app.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>

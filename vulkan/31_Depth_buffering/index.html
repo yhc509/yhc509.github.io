@@ -1,0 +1,452 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Gatsby 5.14.1"/><style data-href="/styles.9e907bc32054b7771552.css" data-identity="gatsby-global-css">code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#ccc;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;white-space:pre;word-break:normal;word-spacing:normal}pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#2d2d2d}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.block-comment,.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#999}.token.punctuation{color:#ccc}.token.attr-name,.token.deleted,.token.namespace,.token.tag{color:#e2777a}.token.function-name{color:#6196cc}.token.boolean,.token.function,.token.number{color:#f08d49}.token.class-name,.token.constant,.token.property,.token.symbol{color:#f8c555}.token.atrule,.token.builtin,.token.important,.token.keyword,.token.selector{color:#cc99cd}.token.attr-value,.token.char,.token.regex,.token.string,.token.variable{color:#7ec699}.token.entity,.token.operator,.token.url{color:#67cdcc}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.inserted{color:green}</style><link rel="canonical" href="https://yhc509.github.io/vulkan/31_Depth_buffering/" data-baseprotocol="https:" data-basehost="yhc509.github.io"/><link rel="sitemap" type="application/xml" href="/sitemap-index.xml"/><meta name="google-site-verification" content="0V6Pp62k0qLSCFq479si1XrTMvN4NjFR8estP6u-Zds"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><style data-emotion="css 13ku56z">.css-13ku56z{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;height:100%;}</style><main class="css-13ku56z e1strnqo0"><style data-emotion="css-global 17bu09z">@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap');*{padding:0;margin:0;box-sizing:border-box;font-family:'Hahmlet',serif;color:inherit;-webkit-text-decoration:none;text-decoration:none;}html,body,#___gatsby{width:100%;height:auto;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;}a,a:visited,a:active{-webkit-text-decoration:none;text-decoration:none;color:inherit;}a:hover{color:inherit;-webkit-text-decoration:none;text-decoration:none;cursor:pointer;}img{position:relative;display:block;margin-left:auto;margin-right:auto;max-width:768px;text-align:left;}</style><style data-emotion="css 1u7ncg7">.css-1u7ncg7{width:100%;background-image:linear-gradient(60deg, #29323c 0%, #485563 100%);color:#ffffff;}</style><div class="css-1u7ncg7 e160b013"><style data-emotion="css 5c3sm8">.css-5c3sm8{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:768px;height:80px;margin:0 auto;}padding-bottom:12px@media (max-width: 768px){.css-5c3sm8{width:100%;height:80px;padding:0 12px;}}</style><div class="css-5c3sm8 e160b012"><style data-emotion="css 9p6ebr">.css-9p6ebr{margin-top:5px;font-size:24px;font-weight:700;}@media (max-width: 768px){.css-9p6ebr{font-size:20px;margin-left:16px;}}</style><div class="css-9p6ebr e160b010">yhc509`s Dev Journey</div></div></div><style data-emotion="css 183vxbl">.css-183vxbl{position:relative;width:100%;}@media (max-width: 768px){.css-183vxbl{width:100%;}}</style><div class="css-183vxbl e1opi4mu1"><style data-emotion="css uadz8j">.css-uadz8j{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;height:100%;margin:0 auto;padding:30px 0;}@media (max-width: 768px){.css-uadz8j{width:100%;padding:24px 16px;}}</style><div class="css-uadz8j e1st1jau5"><style data-emotion="css 1g6v2wt">.css-1g6v2wt{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#ffffff;color:#000000;font-size:22px;cursor:pointer;box-shadow:0 0 10px rgba(0, 0, 0, 0.3);}@media (max-width: 768px){.css-1g6v2wt{width:30px;height:30px;font-size:16px;}}</style><div class="css-1g6v2wt e1st1jau4"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></div><style data-emotion="css 1twr1m2">.css-1twr1m2{display:-webkit-box;overflow:hidden;overflow-wrap:break-word;margin-top:auto;text-overflow:ellipsis;white-space:normal;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:32px;font-weight:800;}@media (max-width: 768px){.css-1twr1m2{font-size:24px;}}</style><div class="css-1twr1m2 e1st1jau3">Vulkan Tutorial (31) - Depth buffering</div><style data-emotion="css yijt7k">.css-yijt7k{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin-top:10px;font-size:14px;font-weight:700;}@media (max-width: 768px){.css-yijt7k{-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-align-items:flex-start;-webkit-box-align:flex-start;-ms-flex-align:flex-start;align-items:flex-start;font-size:14px;font-weight:400;}}</style><div class="css-yijt7k e1st1jau2"><style data-emotion="css 1bobky6">.css-1bobky6{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-top:10px;margin:10px -5px;}</style><div class="css-1bobky6 e1st1jau1"><style data-emotion="css 1e9ac4l">.css-1e9ac4l{margin:2.5px 5px;padding:3px 5px;border-radius:3px;background:black;font-size:12px;font-weight:700;color:white;}</style><div class="css-1e9ac4l e1st1jau0">Vulkan</div></div><div>2022.10.10.</div></div></div></div><style data-emotion="css 12iq82c">.css-12iq82c{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;margin:0 auto;padding:100px 0;word-break:break-all;line-height:1.8;font-size:16px;font-weight:400;}.css-12iq82c p{padding:3px 0;}.css-12iq82c h1,.css-12iq82c h2,.css-12iq82c h3{font-weight:800;margin-bottom:18px;}.css-12iq82c *+h1,.css-12iq82c *+h2,.css-12iq82c *+h3{margin-top:16px;margin-bottom:0px;}.css-12iq82c hr+h1,.css-12iq82c hr+h2,.css-12iq82c hr+h3{margin-top:0;}.css-12iq82c h1{font-size:28px;}.css-12iq82c h2{font-size:24px;}.css-12iq82c h3{font-size:20px;}.css-12iq82c blockquote{margin:10px 0;padding:5px 5px;border-left:2px solid #000000;font-weight:800;}.css-12iq82c ol,.css-12iq82c ul{margin-left:20px;padding:4px 0;}.css-12iq82c hr{border:1px solid #646464;margin:64px 0;}.css-12iq82c a{color:#4263eb;-webkit-text-decoration:underline;text-decoration:underline;}.css-12iq82c pre[class*='language-']{margin:5px 0;padding:10px;font-size:14px;}.css-12iq82c pre[class*='language-']::-webkit-scrollbar-thumb{background:rgba(255, 255, 255, 0.5);border-radius:10px;}.css-12iq82c code[class*='language-'],.css-12iq82c pre[class*='language-']{tab-size:2;}@media (max-width: 768px){.css-12iq82c{width:100%;padding:40px 16px;line-height:1.6;font-size:14px;}.css-12iq82c h1{font-size:23px;}.css-12iq82c h2{font-size:20px;}.css-12iq82c h3{font-size:17px;}.css-12iq82c hr{margin:50px 0;}}</style><div class="css-12iq82c e1ijh0y10"><p>-<a href="https://docs.vulkan.org/tutorial/latest/00_Introduction.html" target="_blank" rel="nofollow">Khronos Vulkan Tutorial</a></p>
+<h1>소개</h1>
+<p>지금까지 작업한 지오메트리는 3D로 투영되지만 여전히 완전히 평평합니다. 이 챕터에서는 3D 메쉬를 준비하기 위해 위치에 Z 좌표를 추가해줄 것입니다. 기하학이 깊이별로 정렬되지 않을 때 발생하는 문제를 보기 위해, 이 세번째 좌표를 사용하여 현재 정사각형 위에 정사각형을 배치하겠습니다.</p>
+<h1>3D 지오메트리</h1>
+<p><code class="language-text">Vertex</code> 구조체를 수정하여 position에 3D vector를 사용하도록 하고, <a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkVertexInputAttributeDescription.html" target="_blank" rel="nofollow"><code class="language-text">VkVertexInputAttributeDescription</code></a>에서 <code class="language-text">format</code>을 업데이트 합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">Vertex</span> <span class="token punctuation">{</span>
+    glm<span class="token double-colon punctuation">::</span>vec3 pos<span class="token punctuation">;</span>
+    glm<span class="token double-colon punctuation">::</span>vec3 color<span class="token punctuation">;</span>
+    glm<span class="token double-colon punctuation">::</span>vec2 texCoord<span class="token punctuation">;</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token keyword">static</span> std<span class="token double-colon punctuation">::</span>array<span class="token operator">&lt;</span>VkVertexInputAttributeDescription<span class="token punctuation">,</span> <span class="token number">3</span><span class="token operator">></span> <span class="token function">getAttributeDescriptions</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token double-colon punctuation">::</span>array<span class="token operator">&lt;</span>VkVertexInputAttributeDescription<span class="token punctuation">,</span> <span class="token number">3</span><span class="token operator">></span> attributeDescriptions<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+        attributeDescriptions<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>binding <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        attributeDescriptions<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>location <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        attributeDescriptions<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>format <span class="token operator">=</span> VK_FORMAT_R32G32B32_SFLOAT<span class="token punctuation">;</span>
+        attributeDescriptions<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>offset <span class="token operator">=</span> <span class="token function">offsetof</span><span class="token punctuation">(</span>Vertex<span class="token punctuation">,</span> pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<p>다음으로, 정점 셰이더를 업데이트하여 3D 좌표를 입력으로 받아들이도록 합니다. 다시 컴파일하는 것을 잊지 마세요!</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token function">layout</span><span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span> in vec3 inPosition<span class="token punctuation">;</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    gl_Position <span class="token operator">=</span> ubo<span class="token punctuation">.</span>proj <span class="token operator">*</span> ubo<span class="token punctuation">.</span>view <span class="token operator">*</span> ubo<span class="token punctuation">.</span>model <span class="token operator">*</span> <span class="token function">vec4</span><span class="token punctuation">(</span>inPosition<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    fragColor <span class="token operator">=</span> inColor<span class="token punctuation">;</span>
+    fragTexCoord <span class="token operator">=</span> inTexCoord<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>마지막으로 Z 좌표를 포함하도록 <code class="language-text">vertices</code>를 업데이트합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>Vertex<span class="token operator">></span> vertices <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<p>지금 어플리케이션을 실행하면 이전과 정확히 동일한 결과를 볼 수 있습니다. 장면을 더 흥미롭게 만들고, 이 챕터에서 다룰 문제를 보여주기 위해 몇가지 지오메트리를 추가할 때입니다. 정점을 복제하여 다음과 같이 현재 사각형 바로 아래에 있는 사각형의 위치를 정의합니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 336px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/bd00aa1913ee8d095bf1624e98269a23/3fee3/geometry.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 66.14583333333334%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAABMElEQVR42q2T6W6DMBCE/f5PmD9BIYG6HAEbc1/TWUTTpCqSW3UlhGXj2W92WQWfWFf4hsIvYvUQVl501gDL4kV/KDjPM+q6hjEG7hrCFgVsVcE5h77vD2m/BNsWPQXcLiJP13WYSLamKdZhwDBNGPhumgamLJFw310uQHF/0KpHbd41yusVOknQUXyh0ECSikRVEKDMM9QUaiUx9wsSlxSd2ubFtnryuNVJssdxjIAiWmu0pNwujON2lpIqiiLkeQ5jLZroBmTpN0IpuH7DPQw3kZGXJSZaNCQ0tGVPJxiWY5HEDKFM6KYlKSTpUVOkRmJHavgpLPbnfS3nQifN+akx6qX9Tx+ImKUlERcRoZWaSaJ5p/zTfzgzSZ2xIefz1uX/mRQSsiNe0+I9er7T/AFuUf5M0fnYjwAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/bd00aa1913ee8d095bf1624e98269a23/a59e9/geometry.webp 192w,
+/static/bd00aa1913ee8d095bf1624e98269a23/0bb19/geometry.webp 336w"
+              sizes="(max-width: 336px) 100vw, 336px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/bd00aa1913ee8d095bf1624e98269a23/3b721/geometry.png 192w,
+/static/bd00aa1913ee8d095bf1624e98269a23/3fee3/geometry.png 336w"
+            sizes="(max-width: 336px) 100vw, 336px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/bd00aa1913ee8d095bf1624e98269a23/3fee3/geometry.png"
+            alt="geometry.png"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p><code class="language-text">-0.5f</code>의 Z좌표를 사용하고 정사각형에 적절한 인덱스를 추가합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>Vertex<span class="token operator">></span> vertices <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+    <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">uint16_t</span><span class="token operator">></span> indices <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">4</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<p>프로그램을 실행하면 아래와 같이 보입니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/41fad7afe9450e4708b31eb5a7f23263/6535c/depth_issues.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 78.64583333333333%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAAA7DAAAOwwHHb6hkAAABM0lEQVR42t2SS0vDQBSF56FtYrQltpil1YXQVkEX4hMEQXeaKNT4ABNjsUhVjP4Hly7c+SMEBbU0ttZ/dpymPlYRU2fl4jDcmTsfZ85c8nB/h9rTI95aTbReG12p2QgQ1Gt4CeogPZyBECJPnNH/AKSih7ajoX8AUhJCqDjnomZfYCrBYa8GMjQCklBBRU1/gkYBqbhMckX0rW6g5G5jxqmAr2yCpPTvGH4H7NQsKYBmGQtn57i+uoTpeJhbt6G7pzCGc9HQSIftdWoJmUMf9pGDMduDsXuMwvwsBjQ1/pPDT1guYaLq4/nmArcne5i2dqBY+0j1azEdisbQYXoQxpaHxXIFfvUArrWG/OQ4FCXZzdh09tXRPJjpIlsoQktwGYP94fYzWylzGEeGriKTVpCVpHfQs4sRlCckoAAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/41fad7afe9450e4708b31eb5a7f23263/a59e9/depth_issues.webp 192w,
+/static/41fad7afe9450e4708b31eb5a7f23263/0ca9f/depth_issues.webp 384w,
+/static/41fad7afe9450e4708b31eb5a7f23263/dc9b9/depth_issues.webp 768w,
+/static/41fad7afe9450e4708b31eb5a7f23263/66151/depth_issues.webp 802w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/41fad7afe9450e4708b31eb5a7f23263/3b721/depth_issues.png 192w,
+/static/41fad7afe9450e4708b31eb5a7f23263/66595/depth_issues.png 384w,
+/static/41fad7afe9450e4708b31eb5a7f23263/fe486/depth_issues.png 768w,
+/static/41fad7afe9450e4708b31eb5a7f23263/6535c/depth_issues.png 802w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/41fad7afe9450e4708b31eb5a7f23263/fe486/depth_issues.png"
+            alt="depth_issues.png"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<p>문제는 아래쪽의 사각형 조각이 위쪽 사각형 조각 위에 그려지는 것입니다. 단순히 인덱스 배열이 나중에 오기 때문입니다. 이 문제를 해결하는 두가지 방법이 있습니다.</p>
+<ul>
+<li>모든 드로우콜을 뒤에서 앞으로 깊이에 따라 정렬</li>
+<li>깊이 버퍼로 깊이 테스트 사용</li>
+</ul>
+<p>첫번째 접근 방식은 일반적으로 투명 객체를 그리는데 사용됩니다. 순서 독립적 투명도는 해결하기 어려운 문제이기 때문입니다. 그러나 깊이별로 조각을 정렬하는 문제는 깊이 버퍼를 사용하여 훨씬 더 일반적으로 해결됩니다. 깊이 버퍼는 색상 attachment가 모든 위치의 색상을 저장하는 것처럼, 모든 위치에 대한 깊이를 저장하는 추가 attachment입니다. 래스터라이저가 조각을 생성할 때마다 깊이 테스트는 새 조각이 이전 조각보다 가까운지 확인합니다. 그렇지 않은 경우, 새 조각이 삭제됩니다. 깊이 테스트를 통과한 조각은 자체 깊이를 깊이 버퍼에 씁니다. 색상 출력을 조작할 수 있는 것처럼, 조각 셰이더에서 이 값을 조작할 수 있습니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">GLM_FORCE_RADIANS</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">GLM_FORCE_DEPTH_ZERO_TO_ONE</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;glm/glm.hpp></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;glm/gtc/matrix_transform.hpp></span></span></code></pre></div>
+<p>GLM에서 생성된 원근 투영 행렬은 기본적으로 <code class="language-text">-1.0 ~ 1.0</code>의 OpenGL 깊이 범위를 사용합니다. <code class="language-text">GLM_FORCE_DEPTH_ZERO_TO_ONE</code> 디파인을 사용하여 <code class="language-text">0.0 ~ 1.0</code>의 Vulkan 범위를 사용하도록 구성해야 합니다.</p>
+<h1>깊이 이미지와 뷰</h1>
+<p>깊이 attachment는 색상 attachment와 마찬가지로, 이미지를 기반으로 합니다. 차이점은 스왑체인이 자동으로 깊이 이미지를 생성하지 않는다는 것입니다. 한 번에 하나의 그리기 작업만 실행되기 때문에, 하나의 깊이 이미지만 필요합니다. 깊이 이미지에는 이미지, 메모리, 이미지 뷰의 세가지 리소스가 필요합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkImage depthImage<span class="token punctuation">;</span>
+VkDeviceMemory depthImageMemory<span class="token punctuation">;</span>
+VkImageView depthImageView<span class="token punctuation">;</span></code></pre></div>
+<p>다음 릿소스를 설정하려면 <code class="language-text">createDepthResources</code> 함수를 만듭니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">initVulkan</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token function">createCommandPool</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">createDepthResources</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">createTextureImage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token keyword">void</span> <span class="token function">createDepthResources</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span></code></pre></div>
+<p>깊이 이미지를 만드는 것은 매우 간단합니다. 스왑체인 범위, 깊이 첨부에 적합한 이미지 사용, 최적의 타일링 및 장치 로컬 메모리로 정의된 색상 attachment와 동일한 해상도를 가져야 합니다. 유일한 의문은 깊이 이미지에 적합한 형식이 무엇인가? 입니다. 형식은 <code class="language-text">VK_FORMAT_</code>에서 <code class="language-text">_D??_</code>로 표시됩 깊이 구성 요소를 포함해야 합니다.</p>
+<p>텍스쳐 이미지와 다르게 프로그램에서 텍셀에 직접 접근하지 않기 땜누에 특정 형식이 반드시 필요한 것은 아닙니다. 적절한 정확도만 있으면 되며, 실제 어플리케이션에서는 최소 24비트가 일반적입니다. 이 요구사항에 맞는 여러 형식이 있습니다.</p>
+<ul>
+<li><code class="language-text">VK_FORMAT_D32_SFLOAT</code>: 깊이를 위한 32비트 float</li>
+<li><code class="language-text">VK_FORMAT_D32_SFLOAT_S8_UINT</code>: 32비트 부호있는 float와 8비트 스텐실 컴포넌트</li>
+<li><code class="language-text">VK_FORMAT_D24_UNORM_S8_UINT</code>: 24비트 float과 8비트 스텐실 컴포넌트</li>
+</ul>
+<p>스텐실 컴포넌트는 깊이 테스트와 결합할 수 있는 추가 테스트인, <a href="https://en.wikipedia.org/wiki/Stencil_buffer" target="_blank" rel="nofollow">스텐실 테스트</a>에 사용됩니다. 이에 대해서는 다음 챕터에서 보겠습니다.</p>
+<p><code class="language-text">VK_FORMAT_D32_SFLOAT</code> 형식에 대한 지원은 매우 일반적입니다. (하드웨어 데이터베이스를 참고하세요.) 그러므로 그냥 <code class="language-text">VK_FORMAT_D32_SFLOAT</code> 형식을 사용할 수 있지만, 어플리케이션에 유연성을 추가하는 것이 좋습니다. 가장 바람직한 것부터 가장 바람직하지 않은 것 순으로 후보 형식 목록을 취하고, 어떤 것이 지원되는 첫번째 형식인지 확인하는 함수인 <code class="language-text">findSupportedFormat</code>을 작성하겠습니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkFormat <span class="token function">findSupportedFormat</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>VkFormat<span class="token operator">></span><span class="token operator">&amp;</span> candidates<span class="token punctuation">,</span> VkImageTiling tiling<span class="token punctuation">,</span> VkFormatFeatureFlags features<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span></code></pre></div>
+<p>형식 지원은 타일링 모드 및 사용법에 따라 다르므로, 이를 매개변수로 포함해야 합니다. <a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/vkGetPhysicalDeviceFormatProperties.html" target="_blank" rel="nofollow"><code class="language-text">vkGetPhysicalDeviceFormatProperties</code></a> 함수를 사용하여 형식 지원을 쿼리할 수 있습니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span>VkFormat format <span class="token operator">:</span> candidates<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    VkFormatProperties props<span class="token punctuation">;</span>
+    <span class="token function">vkGetPhysicalDeviceFormatProperties</span><span class="token punctuation">(</span>physicalDevice<span class="token punctuation">,</span> format<span class="token punctuation">,</span> <span class="token operator">&amp;</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p><a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkFormatProperties.html" target="_blank" rel="nofollow"><code class="language-text">VkFormatProperties</code></a> 구조체에는 다음 세가지 필드가 있습니다.</p>
+<ul>
+<li><code class="language-text">linearTilingFeatures</code>: 선형 타일링으로 지원되는 사용 케이스</li>
+<li><code class="language-text">optimalTilingFeatures</code>: 최적의 타일링으로 지원되는 사용 케이스</li>
+<li><code class="language-text">bufferFeatures</code>: 버퍼에 대해 지원되는 사용 케이스</li>
+</ul>
+<p>여기서는 처음 두개만 관련이 있으며, 확힌하는 항목은 함수의 <code class="language-text">tiling</code> 매개변수에 따라 다릅니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">if</span> <span class="token punctuation">(</span>tiling <span class="token operator">==</span> VK_IMAGE_TILING_LINEAR <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>props<span class="token punctuation">.</span>linearTilingFeatures <span class="token operator">&amp;</span> features<span class="token punctuation">)</span> <span class="token operator">==</span> features<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> format<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>tiling <span class="token operator">==</span> VK_IMAGE_TILING_OPTIMAL <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>props<span class="token punctuation">.</span>optimalTilingFeatures <span class="token operator">&amp;</span> features<span class="token punctuation">)</span> <span class="token operator">==</span> features<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> format<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>후보 형식이 원하는 사용법을 지원하지 않으면, 특수 값을 반환하거나 그냥 예외를 throw 할 수 있습니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkFormat <span class="token function">findSupportedFormat</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>VkFormat<span class="token operator">></span><span class="token operator">&amp;</span> candidates<span class="token punctuation">,</span> VkImageTiling tiling<span class="token punctuation">,</span> VkFormatFeatureFlags features<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>VkFormat format <span class="token operator">:</span> candidates<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        VkFormatProperties props<span class="token punctuation">;</span>
+        <span class="token function">vkGetPhysicalDeviceFormatProperties</span><span class="token punctuation">(</span>physicalDevice<span class="token punctuation">,</span> format<span class="token punctuation">,</span> <span class="token operator">&amp;</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>tiling <span class="token operator">==</span> VK_IMAGE_TILING_LINEAR <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>props<span class="token punctuation">.</span>linearTilingFeatures <span class="token operator">&amp;</span> features<span class="token punctuation">)</span> <span class="token operator">==</span> features<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> format<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>tiling <span class="token operator">==</span> VK_IMAGE_TILING_OPTIMAL <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>props<span class="token punctuation">.</span>optimalTilingFeatures <span class="token operator">&amp;</span> features<span class="token punctuation">)</span> <span class="token operator">==</span> features<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> format<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">throw</span> std<span class="token double-colon punctuation">::</span><span class="token function">runtime_error</span><span class="token punctuation">(</span><span class="token string">"failed to find supported format!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>이제 이 함수를 사용하여 <code class="language-text">findDepthFormat</code> 헬퍼 함수를 만들어서 깊이 attachment로 사용을 지원하는 깊이 컴포넌트가 있는 형식을 취합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkFormat <span class="token function">findDepthFormat</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">findSupportedFormat</span><span class="token punctuation">(</span>
+        <span class="token punctuation">{</span>VK_FORMAT_D32_SFLOAT<span class="token punctuation">,</span> VK_FORMAT_D32_SFLOAT_S8_UINT<span class="token punctuation">,</span> VK_FORMAT_D24_UNORM_S8_UINT<span class="token punctuation">}</span><span class="token punctuation">,</span>
+        VK_IMAGE_TILING_OPTIMAL<span class="token punctuation">,</span>
+        VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>이 경우 <code class="language-text">VK_IMAGE_USAGE_</code> 대신 <code class="language-text">VK_FORMAT_FEATURE</code> 플래그를 사용해야 합니다. 이러한 모든 후보 형식에는 깊이 컴포넌트가 포함되어 있지만, 후자의 두 형식에는 스텐실 컴포넌트도 포함되어 있습니다. 아직 사용하지 않겠지만, 이러한 형식의 이미지에 레이아웃 전환을 수행할 때 고려해야 합니다. 선택한 깊이 형식에 스텐실 컴포넌트가 포함되어 있는지 알려주는 간단한 헬퍼 함수를 추가합시다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">hasStencilComponent</span><span class="token punctuation">(</span>VkFormat format<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> format <span class="token operator">==</span> VK_FORMAT_D32_SFLOAT_S8_UINT <span class="token operator">||</span> format <span class="token operator">==</span> VK_FORMAT_D24_UNORM_S8_UINT<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>함수를 호출하여 <code class="language-text">createDepthResources</code>에서 깊이 형식을 찾읍시다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkFormat depthFormat <span class="token operator">=</span> <span class="token function">findDepthFormat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<p><code class="language-text">createImage</code>와 <code class="language-text">createImageView</code> 헬퍼 함수를 호출하는데 필요한 모든 정보가 있습니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token function">createImage</span><span class="token punctuation">(</span>swapChainExtent<span class="token punctuation">.</span>width<span class="token punctuation">,</span> swapChainExtent<span class="token punctuation">.</span>height<span class="token punctuation">,</span> depthFormat<span class="token punctuation">,</span> VK_IMAGE_TILING_OPTIMAL<span class="token punctuation">,</span> VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT<span class="token punctuation">,</span> VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT<span class="token punctuation">,</span> depthImage<span class="token punctuation">,</span> depthImageMemory<span class="token punctuation">)</span><span class="token punctuation">;</span>
+depthImageView <span class="token operator">=</span> <span class="token function">createImageView</span><span class="token punctuation">(</span>depthImage<span class="token punctuation">,</span> depthFormat<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<p>그러나 <code class="language-text">createImageView</code> 함수는 현재 하위 리소스가 항상 <code class="language-text">VK_IMAGE_ASPECT_COLOR_BIT</code>라고 가정하므로 해당 필드를 매개변수로 바꿔야 합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkImageView <span class="token function">createImageView</span><span class="token punctuation">(</span>VkImage image<span class="token punctuation">,</span> VkFormat format<span class="token punctuation">,</span> VkImageAspectFlags aspectFlags<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    viewInfo<span class="token punctuation">.</span>subresourceRange<span class="token punctuation">.</span>aspectMask <span class="token operator">=</span> aspectFlags<span class="token punctuation">;</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>이 함수를 사용하는 모든 호출부분을 업데이트합시다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">swapChainImageViews<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">createImageView</span><span class="token punctuation">(</span>swapChainImages<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> swapChainImageFormat<span class="token punctuation">,</span> VK_IMAGE_ASPECT_COLOR_BIT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+depthImageView <span class="token operator">=</span> <span class="token function">createImageView</span><span class="token punctuation">(</span>depthImage<span class="token punctuation">,</span> depthFormat<span class="token punctuation">,</span> VK_IMAGE_ASPECT_DEPTH_BIT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+textureImageView <span class="token operator">=</span> <span class="token function">createImageView</span><span class="token punctuation">(</span>textureImage<span class="token punctuation">,</span> VK_FORMAT_R8G8B8A8_SRGB<span class="token punctuation">,</span> VK_IMAGE_ASPECT_COLOR_BIT<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<p>이것이 깊이 이미지를 만드는 방법입니다. 색상 attachment와 같이, 렌더 패스의 시작 부분에서 지우기 땜누에 매핑하거나 다른 이미지를 복사할 필요가 없습니다.</p>
+<h1>깊이 이미지 명시적으로 전환</h1>
+<p>렌더패스에서 처리할 것이기 때문에 이미지 레이아웃을 깊이 attachment로 명시적으로 전환할 필요가 없습니다. 그러나 완전성을 위해 이 섹션에서 프로세스를 계속 설명하겠습니다. 원한다면 스킵해도 됩니다.</p>
+<p>다음과 같이 <code class="language-text">createDepthResources</code> 함수 끝에서 <code class="language-text">transitionImageLayout</code>을 호출합니다</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token function">transitionImageLayout</span><span class="token punctuation">(</span>depthImage<span class="token punctuation">,</span> depthFormat<span class="token punctuation">,</span> VK_IMAGE_LAYOUT_UNDEFINED<span class="token punctuation">,</span> VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<p>정의되지 않은 레이아웃은 중요한 기존 깊이 이미지 컨텐츠가 없기 때문에 초기 레이아웃으로 사용할 수 있습니다. 올바른 하위 리소스 측면을 사용하려면 <code class="language-text">transitionImageLayout</code>의 일부 로직을 업데이트 해야 합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">if</span> <span class="token punctuation">(</span>newLayout <span class="token operator">==</span> VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    barrier<span class="token punctuation">.</span>subresourceRange<span class="token punctuation">.</span>aspectMask <span class="token operator">=</span> VK_IMAGE_ASPECT_DEPTH_BIT<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">hasStencilComponent</span><span class="token punctuation">(</span>format<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        barrier<span class="token punctuation">.</span>subresourceRange<span class="token punctuation">.</span>aspectMask <span class="token operator">|=</span> VK_IMAGE_ASPECT_STENCIL_BIT<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    barrier<span class="token punctuation">.</span>subresourceRange<span class="token punctuation">.</span>aspectMask <span class="token operator">=</span> VK_IMAGE_ASPECT_COLOR_BIT<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>스텐실 컴포넌트를 사용하지 않지만 깊이 이미지의 레이아웃 전환에 포함해야 합니다.</p>
+<p>마지막으로, 올바른 엑세스 마스크와 파이프라인 단계를 추가합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">if</span> <span class="token punctuation">(</span>oldLayout <span class="token operator">==</span> VK_IMAGE_LAYOUT_UNDEFINED <span class="token operator">&amp;&amp;</span> newLayout <span class="token operator">==</span> VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    barrier<span class="token punctuation">.</span>srcAccessMask <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    barrier<span class="token punctuation">.</span>dstAccessMask <span class="token operator">=</span> VK_ACCESS_TRANSFER_WRITE_BIT<span class="token punctuation">;</span>
+
+    sourceStage <span class="token operator">=</span> VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT<span class="token punctuation">;</span>
+    destinationStage <span class="token operator">=</span> VK_PIPELINE_STAGE_TRANSFER_BIT<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>oldLayout <span class="token operator">==</span> VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL <span class="token operator">&amp;&amp;</span> newLayout <span class="token operator">==</span> VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    barrier<span class="token punctuation">.</span>srcAccessMask <span class="token operator">=</span> VK_ACCESS_TRANSFER_WRITE_BIT<span class="token punctuation">;</span>
+    barrier<span class="token punctuation">.</span>dstAccessMask <span class="token operator">=</span> VK_ACCESS_SHADER_READ_BIT<span class="token punctuation">;</span>
+
+    sourceStage <span class="token operator">=</span> VK_PIPELINE_STAGE_TRANSFER_BIT<span class="token punctuation">;</span>
+    destinationStage <span class="token operator">=</span> VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>oldLayout <span class="token operator">==</span> VK_IMAGE_LAYOUT_UNDEFINED <span class="token operator">&amp;&amp;</span> newLayout <span class="token operator">==</span> VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    barrier<span class="token punctuation">.</span>srcAccessMask <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    barrier<span class="token punctuation">.</span>dstAccessMask <span class="token operator">=</span> VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT <span class="token operator">|</span> VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT<span class="token punctuation">;</span>
+
+    sourceStage <span class="token operator">=</span> VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT<span class="token punctuation">;</span>
+    destinationStage <span class="token operator">=</span> VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> std<span class="token double-colon punctuation">::</span><span class="token function">invalid_argument</span><span class="token punctuation">(</span><span class="token string">"unsupported layout transition!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>깊이 버퍼는 프래그먼트가 보이는지 확인하기 위해 깊이 테스트를 수행하도록 읽혀지고, 새 프래그먼트가 그려질 때 쓰여집니다. 읽기는 <code class="language-text">VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT</code> 단계에서 발생하고, 쓰기는 <code class="language-text">VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT</code>에서 발생합니다. 지정된 작업과 일치하는 가장 빠른 파이프라인 단계를 선택해야 필요할 때 깊이 연결로 사용할 수 있습니다.</p>
+<h1>렌더 패스</h1>
+<p>이제 깊이 attachment를 포함하도록 <code class="language-text">createRenderPass</code>를 수정하겠습니다. 먼저 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkAttachmentDescription.html" target="_blank" rel="nofollow"><code class="language-text">VkAttaachmentDescription</code></a>을 지정합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkAttachmentDescription depthAttachment<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+depthAttachment<span class="token punctuation">.</span>format <span class="token operator">=</span> <span class="token function">findDepthFormat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+depthAttachment<span class="token punctuation">.</span>samples <span class="token operator">=</span> VK_SAMPLE_COUNT_1_BIT<span class="token punctuation">;</span>
+depthAttachment<span class="token punctuation">.</span>loadOp <span class="token operator">=</span> VK_ATTACHMENT_LOAD_OP_CLEAR<span class="token punctuation">;</span>
+depthAttachment<span class="token punctuation">.</span>storeOp <span class="token operator">=</span> VK_ATTACHMENT_STORE_OP_DONT_CARE<span class="token punctuation">;</span>
+depthAttachment<span class="token punctuation">.</span>stencilLoadOp <span class="token operator">=</span> VK_ATTACHMENT_LOAD_OP_DONT_CARE<span class="token punctuation">;</span>
+depthAttachment<span class="token punctuation">.</span>stencilStoreOp <span class="token operator">=</span> VK_ATTACHMENT_STORE_OP_DONT_CARE<span class="token punctuation">;</span>
+depthAttachment<span class="token punctuation">.</span>initialLayout <span class="token operator">=</span> VK_IMAGE_LAYOUT_UNDEFINED<span class="token punctuation">;</span>
+depthAttachment<span class="token punctuation">.</span>finalLayout <span class="token operator">=</span> VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL<span class="token punctuation">;</span></code></pre></div>
+<p><code class="language-text">format</code>은 깊이 이미지와 같아야 합니다. 이번에는 깊이 데이터 (<code class="language-text">storeOp</code>)을 저장하는데 신경쓰지 않습니다. 그리기가 완료된 후에는 사용되지 않기 때문입니다. 이를 통해 하드웨어가 추가적인 최적화를 수행할 수 있습니다. 색상 버퍼와 마찬가지로 깊이 컨텐츠는 신경쓰지 않으므로, <code class="language-text">VK_IMAGE_LAYOUT_UNDEFINED</code>를 <code class="language-text">initialLayout</code>으로 사용할 수 있습니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkAttachmentReference depthAttachmentRef<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+depthAttachmentRef<span class="token punctuation">.</span>attachment <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+depthAttachmentRef<span class="token punctuation">.</span>layout <span class="token operator">=</span> VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL<span class="token punctuation">;</span></code></pre></div>
+<p>첫번째 (유일한) 서브패스에 대한 attachment의 참조를 추가합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkSubpassDescription subpass<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+subpass<span class="token punctuation">.</span>pipelineBindPoint <span class="token operator">=</span> VK_PIPELINE_BIND_POINT_GRAPHICS<span class="token punctuation">;</span>
+subpass<span class="token punctuation">.</span>colorAttachmentCount <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+subpass<span class="token punctuation">.</span>pColorAttachments <span class="token operator">=</span> <span class="token operator">&amp;</span>colorAttachmentRef<span class="token punctuation">;</span>
+subpass<span class="token punctuation">.</span>pDepthStencilAttachment <span class="token operator">=</span> <span class="token operator">&amp;</span>depthAttachmentRef<span class="token punctuation">;</span></code></pre></div>
+<p>색상 attachment와 다르게, 서브패스는 단일 깊이 (+스텐실) attachment만 사용할 수 있습니다. 여러 버퍼에서 깊이 테스트를 수행하는 것은 의미가 없습니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>array<span class="token operator">&lt;</span>VkAttachmentDescription<span class="token punctuation">,</span> <span class="token number">2</span><span class="token operator">></span> attachments <span class="token operator">=</span> <span class="token punctuation">{</span>colorAttachment<span class="token punctuation">,</span> depthAttachment<span class="token punctuation">}</span><span class="token punctuation">;</span>
+VkRenderPassCreateInfo renderPassInfo<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+renderPassInfo<span class="token punctuation">.</span>sType <span class="token operator">=</span> VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO<span class="token punctuation">;</span>
+renderPassInfo<span class="token punctuation">.</span>attachmentCount <span class="token operator">=</span> <span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">uint32_t</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>attachments<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+renderPassInfo<span class="token punctuation">.</span>pAttachments <span class="token operator">=</span> attachments<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+renderPassInfo<span class="token punctuation">.</span>subpassCount <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+renderPassInfo<span class="token punctuation">.</span>pSubpasses <span class="token operator">=</span> <span class="token operator">&amp;</span>subpass<span class="token punctuation">;</span>
+renderPassInfo<span class="token punctuation">.</span>dependencyCount <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+renderPassInfo<span class="token punctuation">.</span>pDependencies <span class="token operator">=</span> <span class="token operator">&amp;</span>dependency<span class="token punctuation">;</span></code></pre></div>
+<p>그 다음, 두 attachment를 모두 참조하도록 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkRenderPassCreateInfo.html" target="_blank" rel="nofollow"><code class="language-text">VkRenderPassCreateInfo</code></a> 구조체를 업데이트 합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">dependency<span class="token punctuation">.</span>srcStageMask <span class="token operator">=</span> VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT <span class="token operator">|</span> VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT<span class="token punctuation">;</span>
+dependency<span class="token punctuation">.</span>dstStageMask <span class="token operator">=</span> VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT <span class="token operator">|</span> VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT<span class="token punctuation">;</span>
+dependency<span class="token punctuation">.</span>dstAccessMask <span class="token operator">=</span> VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT <span class="token operator">|</span> VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT<span class="token punctuation">;</span></code></pre></div>
+<p>마지막으로, 깊이 이미지의 전환가 로드 작업의 일부로 지워지는 이미지들 간에 충돌이 없는지 확인해야 합니다. 이를 위해 서브패스 종속성을 확장하겠습니다. 깊이 이미지는 초기 프래그먼트 테스트 파이프라인 단계에서 먼저 엑세스되며, 지우는 로드 작업이 있으므로 쓰기에 대한 엑세스 마스크를 지정해야 합니다.</p>
+<h1>프레임 버퍼</h1>
+<p>다음 단계는 깊이 이미지를 깊이 attachment에 바인딩하도록 프레임 버퍼 생성을 수정하는 것입니다. <code class="language-text">createFramebuffers</code>로 이동하여 깊이 이미지 뷰를 두번째 attachment로 지정합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>array<span class="token operator">&lt;</span>VkImageView<span class="token punctuation">,</span> <span class="token number">2</span><span class="token operator">></span> attachments <span class="token operator">=</span> <span class="token punctuation">{</span>
+    swapChainImageViews<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>
+    depthImageView
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+VkFramebufferCreateInfo framebufferInfo<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+framebufferInfo<span class="token punctuation">.</span>sType <span class="token operator">=</span> VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO<span class="token punctuation">;</span>
+framebufferInfo<span class="token punctuation">.</span>renderPass <span class="token operator">=</span> renderPass<span class="token punctuation">;</span>
+framebufferInfo<span class="token punctuation">.</span>attachmentCount <span class="token operator">=</span> <span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">uint32_t</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>attachments<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+framebufferInfo<span class="token punctuation">.</span>pAttachments <span class="token operator">=</span> attachments<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+framebufferInfo<span class="token punctuation">.</span>width <span class="token operator">=</span> swapChainExtent<span class="token punctuation">.</span>width<span class="token punctuation">;</span>
+framebufferInfo<span class="token punctuation">.</span>height <span class="token operator">=</span> swapChainExtent<span class="token punctuation">.</span>height<span class="token punctuation">;</span>
+framebufferInfo<span class="token punctuation">.</span>layers <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span></code></pre></div>
+<p>색상 attachment는 스왑체인 이미지마다 다르지만 세마포어로 인해 단일 서브패스만 동시에 실행되기 때문에, 모든 스왑체인 이미지에서 동일한 깊이 이미지를 사용할 수 있습니다.</p>
+<p>또한 깊이 이미지 뷰가 실제로 생성된 후에 호출되도록 <code class="language-text">createFramebuffers</code>에 대한 호출을 이동시켜야 합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">initVulkan</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token function">createDepthResources</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">createFramebuffers</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span></code></pre></div>
+<h1>값 초기화</h1>
+<p>이제 <code class="language-text">VK_ATTACHMENT_LOAD_OP_CLEAR</code>가 포함된 여러 attachment가 있으므로, 여러 개의 명확한 값도 지정해야 합니다. <code class="language-text">recordCommandBuffer</code>로 이동하여 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkClearValue.html" target="_blank" rel="nofollow"><code class="language-text">VkClearValue</code></a> 구조체의 배열을 만듭니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>array<span class="token operator">&lt;</span>VkClearValue<span class="token punctuation">,</span> <span class="token number">2</span><span class="token operator">></span> clearValues<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+clearValues<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>color <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+clearValues<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>depthStencil <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+renderPassInfo<span class="token punctuation">.</span>clearValueCount <span class="token operator">=</span> <span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">uint32_t</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>clearValues<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+renderPassInfo<span class="token punctuation">.</span>pClearValues <span class="token operator">=</span> clearValues<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<p>깊이 버퍼의 범위는 Vulkan에서 <code class="language-text">0.0 ~ 1.0</code> 이며, <code class="language-text">1.0</code>은 원거리 뷰 평면에 있고, <code class="language-text">0.0</code>은 근거리 뷰 평면에 있습니다. 깊이 버퍼의 각 지점에서 초기 값은 가능한, 가장 먼 깊이인 <code class="language-text">1.0</code>이어야 합니다.</p>
+<p><code class="language-text">clearValues</code>의 순서는 attachment 순서와 동일해야 합니다.</p>
+<h1>깊이 및 스텐실 상태</h1>
+<p>이제 깊이 attachment를 사용할 준비가 되었지만, 그래픽 파이프라인에서 깊이 테스트를 활성화해야 합니다. <a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkPipelineDepthStencilStateCreateInfo.html" target="_blank" rel="nofollow"><code class="language-text">VkPipelineDepthStencilStateCreateInfo</code></a> 구조체를 통해 구성됩니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">VkPipelineDepthStencilStateCreateInfo depthStencil<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+depthStencil<span class="token punctuation">.</span>sType <span class="token operator">=</span> VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO<span class="token punctuation">;</span>
+depthStencil<span class="token punctuation">.</span>depthTestEnable <span class="token operator">=</span> VK_TRUE<span class="token punctuation">;</span>
+depthStencil<span class="token punctuation">.</span>depthWriteEnable <span class="token operator">=</span> VK_TRUE<span class="token punctuation">;</span></code></pre></div>
+<p><code class="language-text">depthTestEnable</code> 필드는 새 프래그먼트의 깊이를 깊이 버퍼와 비교하여 삭제해야 하는지 여부를 지정합니다. <code class="language-text">depthWriteEnable</code> 필드는 깊이 테스트를 통과한 프래그먼트의 새 깊이를 실제 깊이 버퍼에 기록해야 하는지 여부를 지정합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">depthStencil<span class="token punctuation">.</span>depthCompareOp <span class="token operator">=</span> VK_COMPARE_OP_LESS<span class="token punctuation">;</span></code></pre></div>
+<p><code class="language-text">depthCompareOp</code> 필드는 프래그먼트를 유지하거나 삭제하기 위해 수행되는 비교를 지정합니다. 우리는 더 낮은 깊이 = 더 가깝다는 규칙이기 때문에 새 조각의 깊이는 더 작아야 합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">depthStencil<span class="token punctuation">.</span>depthBoundsTestEnable <span class="token operator">=</span> VK_FALSE<span class="token punctuation">;</span>
+depthStencil<span class="token punctuation">.</span>minDepthBounds <span class="token operator">=</span> <span class="token number">0.0f</span><span class="token punctuation">;</span> <span class="token comment">// Optional</span>
+depthStencil<span class="token punctuation">.</span>maxDepthBounds <span class="token operator">=</span> <span class="token number">1.0f</span><span class="token punctuation">;</span> <span class="token comment">// Optional</span></code></pre></div>
+<p><code class="language-text">depthBoundsTestEnable</code>, <code class="language-text">minDepthBounds</code>, <code class="language-text">maxDepthBounds</code> 필드는 선택적 깊이 경계 테스트에 사용됩니다. 기본적으로 이렇게 하면 지정된 깊이 범위에 속하는 프래그먼트만 유지할 수 있습니다. 우리는 이 기능을 사용하지 않겠습니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">depthStencil<span class="token punctuation">.</span>stencilTestEnable <span class="token operator">=</span> VK_FALSE<span class="token punctuation">;</span>
+depthStencil<span class="token punctuation">.</span>front <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">// Optional</span>
+depthStencil<span class="token punctuation">.</span>back <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">// Optional</span></code></pre></div>
+<p>마지막 세 필드는 스텐실 버퍼 작업을 구성하며, 이 튜토리얼에서는 사용하지 않겠습니다. 이러한 작업을 사용하려면 깊이, 스텐실 이미지 형식에 스텐실 구성 요소가 포함되어있는지 확인해야 합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">pipelineInfo<span class="token punctuation">.</span>pDepthStencilState <span class="token operator">=</span> <span class="token operator">&amp;</span>depthStencil<span class="token punctuation">;</span></code></pre></div>
+<p>방금 채운 깊이 스텐실 상태를 참조하도록 <a href="https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkGraphicsPipelineCreateInfo.html" target="_blank" rel="nofollow"><code class="language-text">VkGraphicsPipelineCreateInfo</code></a> 구조체를 업데이트합니다. 렌더패스에 깊이 스텐실 attachment가 포함된 경우, 깊이 스텐실 상태를 항상 지정해야 합니다.</p>
+<p>지금 프로그램을 실행하면 지오메트리 조각이 이제 올바르게 정렬된 것을 볼 수 있습니다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/90275c1d385aed7d24ea97b61aef63ab/6535c/depth_correct.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 78.64583333333333%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAAA7DAAAOwwHHb6hkAAABJUlEQVR42t2SzUrDUBCF770JMT9qI61kE9xIQUUoFnTlL90EbRHpIlTiLaYgVtoIors+hj6GoKCUpq31zY63KCqIhcS7cnGYGRg+zhyGPD7co/v8hNfREKOXQSoNBzHiXhf9uAeiKgyEEHlSGP0PQCp26Dga+keggFDGoIiefYKpBIeqATK/AKKbX44TAzUBWSxA96oocx+F4AzE80Fm7MnQn8D3makaSCXEZjtC/+4atxHHXrkKk7eQc93foRNPXi/BrbexGpzi5oKjUedY2t5CZnY6ZYa7R7DDK5SiS3RaIXb8E7CDY1j6VEKgOIWOq52F4zew3zxHpxmgdljBysYaLNNI4fAjH2O5CObV4OTzsDRFzmPT772UP0wiZ85ANqMjJ0lvWlOLMfNfJ7kAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/90275c1d385aed7d24ea97b61aef63ab/a59e9/depth_correct.webp 192w,
+/static/90275c1d385aed7d24ea97b61aef63ab/0ca9f/depth_correct.webp 384w,
+/static/90275c1d385aed7d24ea97b61aef63ab/dc9b9/depth_correct.webp 768w,
+/static/90275c1d385aed7d24ea97b61aef63ab/66151/depth_correct.webp 802w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/90275c1d385aed7d24ea97b61aef63ab/3b721/depth_correct.png 192w,
+/static/90275c1d385aed7d24ea97b61aef63ab/66595/depth_correct.png 384w,
+/static/90275c1d385aed7d24ea97b61aef63ab/fe486/depth_correct.png 768w,
+/static/90275c1d385aed7d24ea97b61aef63ab/6535c/depth_correct.png 802w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/90275c1d385aed7d24ea97b61aef63ab/fe486/depth_correct.png"
+            alt="depth_correct.png"
+            title=""
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<h1>윈도우 리사이즈 핸들링</h1>
+<p>새 색상 attachment 해상도와 일치하도록 창 크기를 조정할 때 깊이 버퍼의 해상도가 변경되어야 합니다. 이 경우 <code class="language-text">recreateSwapChain</code> 함수를 확장하여 깊이 리소스를 다시 만듭니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">recreateSwapChain</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> width <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> height <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>width <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> height <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">glfwGetFramebufferSize</span><span class="token punctuation">(</span>window<span class="token punctuation">,</span> <span class="token operator">&amp;</span>width<span class="token punctuation">,</span> <span class="token operator">&amp;</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">glfwWaitEvents</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">vkDeviceWaitIdle</span><span class="token punctuation">(</span>device<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">cleanupSwapChain</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">createSwapChain</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">createImageViews</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">createDepthResources</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">createFramebuffers</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>정리 작업은 스왑체인 정리 함수에서 해야 합니다.</p>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">cleanupSwapChain</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">vkDestroyImageView</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> depthImageView<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">vkDestroyImage</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> depthImage<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">vkFreeMemory</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> depthImageMemory<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>축하합니다. 이제 어플리케이션이 드디어 임의의 3D 지오메트리를 렌더링하고 제대로 보이게 할 준비가 되었습니다. 텍스쳐 모델을 그려서 다음 챕터에서 시도하겠습니다.</p>
+<p><a href="https://vulkan-tutorial.com/code/27_depth_buffering.cpp" target="_blank" rel="nofollow">C++ code</a> / <a href="https://vulkan-tutorial.com/code/27_shader_depth.vert" target="_blank" rel="nofollow">Vertex shader</a> / <a href="https://vulkan-tutorial.com/code/27_shader_depth.frag" target="_blank" rel="nofollow">Fragment shader</a></p></div><style data-emotion="css hx9xpc">@media (max-width: 768px){.css-hx9xpc{padding:0 20px;}}</style><div class="css-hx9xpc e1gqsjds0"></div><style data-emotion="css lffphe">.css-lffphe{display:grid;place-items:center;margin-top:auto;padding:36px 0;font-size:15px;text-align:center;line-height:1.5;}@media (max-width: 768px){.css-lffphe{font-size:13px;}}</style><footer class="css-lffphe e1oae0v80">© 2025 yhc509, All rights reserved.</footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/vulkan/31_Depth_buffering/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx.js\"],\"component---src-pages-info-tsx\":[\"/component---src-pages-info-tsx.js\"],\"component---src-templates-post-template-tsx\":[\"/component---src-templates-post-template-tsx.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="41fb7f600fa9551db4d9";</script><script src="/webpack-runtime.js" async></script><script src="/framework.js" async></script><script src="/app.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
