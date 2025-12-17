@@ -3,7 +3,10 @@ import { notFound } from "next/navigation";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/posts";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { BackButton } from "@/components/BackButton";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import type { Metadata } from "next";
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
@@ -20,9 +23,28 @@ export async function generateMetadata({
   const { slug } = await params;
   try {
     const post = getPostBySlug(slug);
+    const url = `${BASE_URL}/posts/${slug}`;
+
     return {
       title: post.title,
       description: post.description,
+      keywords: post.tags,
+      openGraph: {
+        type: "article",
+        title: post.title,
+        description: post.description,
+        url,
+        publishedTime: post.date,
+        tags: post.tags,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: post.title,
+        description: post.description,
+      },
+      alternates: {
+        canonical: url,
+      },
     };
   } catch {
     return {
@@ -36,8 +58,25 @@ export default async function PostPage({ params }: PostPageProps) {
   try {
     const post = getPostBySlug(slug);
 
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.description,
+      datePublished: post.date,
+      author: {
+        "@type": "Person",
+        name: "Blog Author",
+      },
+      keywords: post.tags.join(", "),
+    };
+
     return (
       <div className="max-w-3xl mx-auto px-5 py-10">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Suspense>
           <BackButton />
         </Suspense>
@@ -60,6 +99,7 @@ export default async function PostPage({ params }: PostPageProps) {
             <MDXRemote source={post.content} />
           </div>
         </article>
+        <ScrollToTop />
       </div>
     );
   } catch {

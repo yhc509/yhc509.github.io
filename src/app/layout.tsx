@@ -2,11 +2,48 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { NavLinks } from "@/components/NavLinks";
 import "./globals.css";
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
+
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "My personal blog",
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: "Blog",
+    template: "%s | Blog",
+  },
+  description: "개발과 일상을 기록하는 블로그입니다.",
+  keywords: ["블로그", "개발", "프로그래밍", "기술"],
+  authors: [{ name: "Blog Author" }],
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    url: BASE_URL,
+    siteName: "Blog",
+    title: "Blog",
+    description: "개발과 일상을 기록하는 블로그입니다.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog",
+    description: "개발과 일상을 기록하는 블로그입니다.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    // google: "your-google-verification-code",
+    // naver: "your-naver-verification-code",
+  },
 };
 
 export default function RootLayout({
@@ -33,7 +70,10 @@ export default function RootLayout({
               >
                 Blog
               </Link>
-              <ThemeToggle />
+              <nav className="flex items-center gap-2">
+                <NavLinks />
+                <ThemeToggle />
+              </nav>
             </div>
           </header>
           <main>{children}</main>
