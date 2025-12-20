@@ -12,15 +12,20 @@ interface TagFilterProps {
 function TagItem({
   node,
   selectedTags,
-  onToggle,
+  onSelect,
+  onAdd,
+  onRemove,
   depth = 0,
 }: {
   node: TagNode;
   selectedTags: string[];
-  onToggle: (tag: string) => void;
+  onSelect: (tag: string) => void;
+  onAdd: (tag: string) => void;
+  onRemove: (tag: string) => void;
   depth?: number;
 }) {
   const [expanded, setExpanded] = useState(true);
+  const [hovered, setHovered] = useState(false);
   const isSelected = selectedTags.includes(node.fullPath);
   const hasChildren = node.children.length > 0;
 
@@ -29,6 +34,8 @@ function TagItem({
       <div
         className="flex items-center gap-1 py-1 cursor-pointer group"
         style={{ paddingLeft: `${depth * 12}px` }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
       >
         {hasChildren && (
           <button
@@ -41,10 +48,9 @@ function TagItem({
         )}
         {!hasChildren && <span className="w-4" />}
         <button
-          onClick={() => onToggle(node.fullPath)}
-          className={`flex items-center gap-2 text-sm transition-colors ${
-            isSelected ? "font-medium" : ""
-          }`}
+          onClick={() => onSelect(node.fullPath)}
+          className={`flex items-center gap-2 text-sm transition-colors ${isSelected ? "font-medium" : ""
+            }`}
           style={{
             color: isSelected ? "var(--accent)" : "var(--text-secondary)",
           }}
@@ -57,6 +63,38 @@ function TagItem({
             {node.count}
           </span>
         </button>
+        {hovered && !isSelected && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onAdd(node.fullPath);
+            }}
+            className="w-5 h-5 flex items-center justify-center text-xs rounded transition-all hover:scale-110"
+            style={{
+              color: "var(--accent)",
+              backgroundColor: "var(--card-border)",
+            }}
+            title="선택에 추가"
+          >
+            +
+          </button>
+        )}
+        {hovered && isSelected && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onRemove(node.fullPath);
+            }}
+            className="w-5 h-5 flex items-center justify-center text-xs rounded transition-all hover:scale-110"
+            style={{
+              color: "var(--text-muted)",
+              backgroundColor: "var(--card-border)",
+            }}
+            title="선택에서 제거"
+          >
+            −
+          </button>
+        )}
       </div>
       {hasChildren && expanded && (
         <div>
@@ -65,7 +103,9 @@ function TagItem({
               key={child.fullPath}
               node={child}
               selectedTags={selectedTags}
-              onToggle={onToggle}
+              onSelect={onSelect}
+              onAdd={onAdd}
+              onRemove={onRemove}
               depth={depth + 1}
             />
           ))}
@@ -80,12 +120,27 @@ export function TagFilter({
   selectedTags,
   onTagsChange,
 }: TagFilterProps) {
-  const handleToggle = (tag: string) => {
-    if (selectedTags.includes(tag)) {
-      onTagsChange(selectedTags.filter((t) => t !== tag));
+  // 단일 선택: 해당 태그만 선택
+  const handleSelect = (tag: string) => {
+    if (selectedTags.includes(tag) && selectedTags.length === 1) {
+      // 이미 선택된 유일한 태그를 다시 클릭하면 해제
+      onTagsChange([]);
     } else {
+      // 해당 태그만 선택
+      onTagsChange([tag]);
+    }
+  };
+
+  // 추가 선택: 기존 선택에 추가
+  const handleAdd = (tag: string) => {
+    if (!selectedTags.includes(tag)) {
       onTagsChange([...selectedTags, tag]);
     }
+  };
+
+  // 선택 해제: 기존 선택에서 제거
+  const handleRemove = (tag: string) => {
+    onTagsChange(selectedTags.filter((t) => t !== tag));
   };
 
   const handleClear = () => {
@@ -121,7 +176,9 @@ export function TagFilter({
             key={node.fullPath}
             node={node}
             selectedTags={selectedTags}
-            onToggle={handleToggle}
+            onSelect={handleSelect}
+            onAdd={handleAdd}
+            onRemove={handleRemove}
           />
         ))}
       </div>
