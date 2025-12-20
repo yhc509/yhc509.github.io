@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 
 export const metadata: Metadata = {
   title: "소개",
@@ -19,7 +20,14 @@ export default function AboutPage() {
   return (
     <div className="max-w-3xl mx-auto px-5 py-10">
       <div className="prose max-w-none">
-        <MDXRemote source={content} />
+        <MDXRemote
+          source={content}
+          options={{
+            mdxOptions: {
+              remarkPlugins: [remarkGfm],
+            },
+          }}
+        />
       </div>
     </div>
   );

@@ -3,7 +3,11 @@
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-export function BackButton() {
+interface BackButtonProps {
+  basePath?: string;
+}
+
+export function BackButton({ basePath = "/" }: BackButtonProps) {
   const searchParams = useSearchParams();
   const tags = searchParams.get("tags");
   const query = searchParams.get("q");
@@ -12,7 +16,7 @@ export function BackButton() {
   if (tags) params.set("tags", tags);
   if (query) params.set("q", query);
   const queryString = params.toString();
-  const backUrl = queryString ? `/?${queryString}` : "/";
+  const backUrl = queryString ? `${basePath}?${queryString}` : basePath;
 
   return (
     <Link

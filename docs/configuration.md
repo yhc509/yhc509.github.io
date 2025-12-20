@@ -157,7 +157,7 @@ const withMDX = createMDX({
 
 ### 콘텐츠 너비
 
-`src/components/BlogHome.tsx` 및 `src/app/posts/[slug]/page.tsx`:
+`src/components/BlogHome.tsx`, `src/components/ProjectsHome.tsx` 및 상세 페이지:
 
 ```tsx
 <div className="max-w-3xl mx-auto">  {/* 768px */}
@@ -170,11 +170,37 @@ const withMDX = createMDX({
 
 ### 사이드바 너비
 
-`src/components/BlogHome.tsx`:
+`src/components/BlogHome.tsx`, `src/components/ProjectsHome.tsx`:
 
 ```tsx
 <aside className="w-56">  {/* 224px */}
 ```
+
+### 프로젝트 그리드
+
+`src/components/ProjectsHome.tsx`:
+
+```tsx
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+```
+
+3열 그리드로 변경:
+```tsx
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+```
+
+## 네비게이션 설정
+
+`src/components/NavLinks.tsx`에서 네비게이션 메뉴 커스터마이징:
+
+```tsx
+// 현재 메뉴 구성
+- 포스트 (/)
+- 프로젝트 (/projects)
+- 소개 (/about)
+```
+
+메뉴 추가/삭제 시 해당 파일에서 `<Link>` 컴포넌트와 `isXxxActive` 변수 수정.
 
 ## 배포
 

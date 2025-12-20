@@ -38,7 +38,65 @@ tags:
 | `description` | ✅ | 짧은 설명 (SEO용) |
 | `tags` | ❌ | 태그 배열 |
 
+## 프로젝트 생성
+
+### 파일 위치
+
+```
+content/projects/your-project-slug.mdx
+```
+
+파일명이 URL slug가 됩니다:
+- `blog-platform.mdx` → `/projects/blog-platform`
+- `mobile-app.mdx` → `/projects/mobile-app`
+
+### 기본 구조
+
+```mdx
+---
+title: "프로젝트 제목"
+date: "2025-12-17"
+description: "프로젝트에 대한 짧은 설명"
+thumbnail: "/images/projects/my-project.png"
+tags:
+  - "web/frontend"
+  - "react"
+---
+
+## 프로젝트 소개
+
+프로젝트 설명을 작성합니다.
+
+### 주요 기능
+
+- 기능 1
+- 기능 2
+
+### 기술 스택
+
+- React
+- TypeScript
+```
+
+### Frontmatter 필드
+
+| 필드 | 필수 | 설명 |
+|------|------|------|
+| `title` | ✅ | 프로젝트 제목 |
+| `date` | ✅ | 작성일 (YYYY-MM-DD) |
+| `description` | ✅ | 짧은 설명 (SEO용) |
+| `thumbnail` | ❌ | 썸네일 이미지 경로 (기본: `/images/default-project.svg`) |
+| `tags` | ❌ | 태그 배열 (포스트 태그와 별개) |
+
+### 썸네일 이미지
+
+- 권장 크기: 800x450px (16:9 비율)
+- 위치: `public/images/projects/`
+- 형식: PNG, JPG, SVG, WebP
+
 ## 태그 시스템
+
+포스트와 프로젝트는 각각 **독립적인 태그 시스템**을 가지고 있습니다.
 
 ### 기본 태그
 
@@ -61,10 +119,16 @@ tags:
 
 ### 태그 필터링 동작
 
-- **단일 태그**: 해당 태그가 있는 모든 포스트
+- **단일 태그**: 해당 태그가 있는 모든 콘텐츠
 - **복수 태그**: OR 조건 (하나라도 있으면 표시)
-- **상위 태그 선택**: 하위 태그 포스트도 모두 포함
-  - `개발` 선택 시 → `개발/웹/React` 포스트도 표시
+- **상위 태그 선택**: 하위 태그 콘텐츠도 모두 포함
+  - `개발` 선택 시 → `개발/웹/React` 콘텐츠도 표시
+
+### 포스트 vs 프로젝트 태그
+
+- 포스트 태그: `/` 페이지에서 필터링
+- 프로젝트 태그: `/projects` 페이지에서 필터링
+- 두 태그 시스템은 서로 연동되지 않음
 
 ## 마크다운 문법
 

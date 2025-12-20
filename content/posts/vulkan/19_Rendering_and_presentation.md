@@ -1,0 +1,402 @@
+---
+date: 2022-08-22
+title: Vulkan Tutorial (19) - Draw a triangle - Drawing - Rendering and presentation
+categories: ['Vulkan']
+open: true
+---
+
+-[Khronos Vulkan Tutorial](https://docs.vulkan.org/tutorial/latest/00_Introduction.html)
+
+모든 것이 합쳐지는 챕터입니다. `drawFrame` 함수를 작성하고 메인 루프에서 호출되어 삼각형을 표시하게 될 것입니다. 먼저 `mainLoop`에 함수를 만들고 호출합시다:
+
+```cpp
+void mainLoop() {
+    while (!glfwWindowShouldClose(window)) {
+        glfwPollEvents();
+        drawFrame();
+    }
+}
+
+...
+
+void drawFrame() {
+
+}
+```
+
+# 프레임 개요
+
+높은 수준에서 Vulkan 프레임을 렌더링하는 것은 다음과 같은 공통 단계로 구성됩니다:
+
+- 이전 프레임이 완료될 때까지 기다립니다.
+- 스왑 체인에서 이미지를 얻습니다.
+- 해당 이미지에 장면을 그리는 명령 버퍼를 기록합니다.
+- 기록된 명령 버퍼를 제출합니다.
+- 스왑체인 이미지를 표시합니다.
+
+이후 챕터에서 그리기 기능을 확장할 것이지만, 지금은 이것이 렌더루프의 핵심입니다.
+
+# 동기화
+
+Vulkan의 핵심 설계 철학은 GPU에서의 실행 동기화가 명시적이라는 것입니다. 작업 순서는 드라이버에게 실행하려는 순서를 알려주는 여러 동기화 프리미티브의 사용을 정의하는 것으로, 우리에게 달려있습니다. 즉, GPU에서 작업 실행을 시작하는 많은 Vulkan API 호출이 비동기식이며, 함수들은 작업이 끝날때 반환됩니다.
+
+이 챕터에서는 순서를 명시적으로 하는 이벤트들이 많이 있습니다. 그것들은 GPU에서 발생하는데:
+
+- 스왑체인에서 이미지 획득
+- 획득한 이미지에 그리기 명령 실행
+- 프레젠테이션을 위해 해당 이미지를 화면에 표시하고, 스왑체인으로 반환
+
+이러한 각각의 이벤트들은 단일 함수 호출을 사용하여 모션으로 설정되지만, 모두 비동기로 실행됩니다. 함수 호출은 작업이 실제로 완료되기 전에 반환되며 실행 순서도 정의되지 않습니다. 각 작업은 이전 작업의 마무리에 의존되기 때문에 안타까운 일입니다. 그러므로 우리는 원하는 순서를 달성하기 위해 사용할 수 있는 기본 요소를 탐색해야 합니다.
+
+# 세마포어
+
+세마포어는 큐 작업 사이에 순서를 추가하는데 사용됩니다. 큐 작업은 명령 버퍼 또는 나중에 보게 될 함수 내에서 큐에 제출하는 작업입니다. 큐의 예시로는 그래픽 큐와 프레젠테이션 큐가 있습니다. 세마포어는 동일한 큐 내부와 다른 큐 사이에서 작업을 주문하는데 모두 사용됩니다.
+
+Vulkan에는 바이너리와 타임라인, 두종류의 세마포어가 있습니다. 이 튜토리얼에서는 바이너리 세마포어만 사용하기 때문에 타임라인 세마포어는 다루지 않겠습니다. 세마포어라는 용어는 바이너리 세마포어를 의미합니다.
+
+세파포어는 신호가 없거나 있습니다. 처음엔 신호가 없이 시작합니다. 큐 작업을 주문하기 위해 세마포어를 사용하는 방법은 한 큐 작업에서 ‘신호’ 세마포어와 다른 큐 작업에서 ‘대기' 세마포어로 동일한 세마포어를 제공하는 것입니다. 예를 들어, 세마포어S와 순서대로 실행하려는 큐 작업 A,B가 있다고 합시다. 우리가 Vulkan에게 작업 A가 끝나면 세마포어 S에게 ‘신호’를 보내고, 작업 B는 실행하기 전 세마포어 S에서 ‘대기' 할 것입니다. 작업 A가 끝나면 세마포어 S는 신호를 받고, 작업 B는 S가 신호를 받을 때까지 시작하지 않습니다. 작업 B가 실행을 시작한 후, 세마포어 S는 자동으로 다시 신호가 없는 상태로 재설정되어, 다시 사용할 수 있게 됩니다.
+
+의사 코드로 보면 이렇습니다:
+
+```cpp
+VkCommandBuffer A, B = ... // 명령 버퍼 기록
+VkSemaphore S = ... // 세마포어 생성
+
+// enqueue A, signal S when done - 즉시 시작됨.
+vkQueueSubmit(work: A, signal: S, wait: None)
+
+// enqueue B, wait on S to start
+vkQueueSubmit(work: B, signal: None, wait: S)
+```
+
+이 코드에서 두 번의 `vkQueueSubmit()`은 모두 즉시 반환됩니다. 대기는 GPU에서만 발생합니다. CPU는 막힘없이 진행됩니다. CPU를 기다리게 하려면 다른 동기화 프리미티브가 필요합니다. 이제 이에 대해 설명하겠습니다.
+
+# 펜스(Fences)
+
+펜스는 실행을 동기화하기 위해 사용한다는 점에서 비슷한 목적을 가지고 있습니다. 하지만 호스트라 불리는 CPU에서의 실행을 위한 것입니다. 간단히 말해서, 호스트가 GPU 작업을 완료한 시점을 알아야 하는 경우 펜스를 사용합니다.
+
+세마포어와 비슷하게, 펜스는 신호가 있거나 없는 상태에 있습니다. 실행할 작업을 제출할 때마다, 해당 작업을 펜스에 연결할 수 있습니다. 작업이 완료되면, 펜스는 신호 상태가 됩니다. 그런 다음 우리는 호스트를 펜스가 신호를 받을 때까지 기다리게 만들고, 호스트가 계속되기 전에 작업을 끝낼 수 있습니다.
+
+구체적인 예는 스크린샷을 찍는 것입니다. GPU에서 필요한 작업을 이미 완료했다고 가정해보겠습니다. 이제 GPU에서 호스트로 이미지를 전송한 다음, 메모리를 파일에 저장해야 합니다. 전송을 실행하는 명령 버퍼 A와 펜스 F가 있습니다. 펜스F와 함께 명령 버퍼 A를 제출한 다음, 즉시 F를 신호를 보낼때까지 기다리라고 지시합니다. 이렇게 하면 명령 버퍼 A가 실행을 마칠 때까지 호스트가 막힙니다. 따라서 메모리 전송이 완료되면 호스트가 파일을 디스크로 저장하도록 하는 것이 안전합니다.
+
+의사 코드는 다음과 같습니다:
+
+```cpp
+VkCommandBuffer A = ... // record command buffer with the transfer
+VkFence F = ... // create the fence
+
+// enqueue A, start work immediately, signal F when done
+vkQueueSubmit(work: A, fence: F)
+
+vkWaitForFence(F) // blocks execution until A has finished executing
+
+save_screenshot_to_disk() // can't run until the transfer has finished
+```
+
+세마포어 예제와 다르게, 이 예제는 호스트 실행을 차단합니다. 이것은 호스트가 실행이 완료될 때까지 기다리는 것 외에는 아무것도 하지 않는 다는 것을 의미합니다. 이 경우, 스크린샷을 디스크에 저장하기 전에 전송이 완료되었는지 확인해야 합니다.
+
+일반적으로 필요한 경우가 아니면 호스트를 차단하지 않는 것이 좋습니다. 우리는 GPU와 호스트에 유용한 작업을 제공하려고 합니다. 펜스에서 신호를 기다리는 것은 유용하지 않습니다. 그러므로 세마포어 또는 아직 다루지 않은 동기화 프리미티브를 선호합니다.
+
+펜스는 신호가 없는 상태로 되돌리려면 수동으로 재설정해야 합니다. 이는 펜스가 호스트의 실행을 제어하는데 사용되므로 호스트가 펜스를 재설정할 시기를 결정하기 때문입니다. 이를 호스트가 관여하지 않고 GPU에서 작업을 주문하는데 사용되는 세마포어와 대조해보세요.
+
+요약하자면, 세마포어는 GPU에서 작업 실행 순서를 지정하는데 사용되는 반면, 펜스는 CPU와 GPU가 서로 동기화된 상태를 유지하는데 사용됩니다.
+
+# 무엇을 선택할까?
+
+사용할 동기화 프리미티브가 두 개 있고, 동기화를 적용할 곳이 두 곳 있습니다. 스왑체인 작업과 이전 프레임이 완되기를 기다리는 것입니다. 스왑체인은 GPU에서 발생하기 때문에 세마포어를 사용하고 싶습니다. 그러므로 우리가 도울 수 있다면 호스트를 기다리게 만들고 싶지 않습니다. 이전 프레임이 끝날 때까지 기다리는 것에는 반대의 이유로 펜스를 사용하려고 합니다. 호스트가 기다려야 하기 때문입니다. 이것은 한 번에 하나 이상의 프레임을 그리지 않기 위한 것입니다. 매 프레임마다 명령 버퍼를 다시 기록하기 때문에 현재 프레임이 실행을 마칠 때까지 명령 버퍼에 다음 프레임의 작업을 기록할 수 없습니다.
+
+# 동기화 객체 생성
+
+우리는 스왑체인으로부터 이미지를 얻고 렌더링할 준비가 되었음을 알리는 세마포어 하나가 필요합니다. 또 렌더링이 끝나고 프레젠테이션이 발생했음을 알리는 것도 하나 필요합니다. 그리고 한번에 하나의 프레임만 렌더링되도록 하는 펜스가 하나 필요합니다.
+
+이러한 세마포어 객체와 펜스 객체를 저장할 세 개의 클래스 멤버를 만듭니다:
+
+```cpp
+VkSemaphore imageAvailableSemaphore;
+VkSemaphore renderFinishedSemaphore;
+VkFence inFlightFence;
+```
+
+세마포어를 생성하기 위한 이 튜토리얼에서의 마지막 `create` 함수를 만들겠습니다: `createSyncObjects`
+
+```cpp
+void initVulkan() {
+    createInstance();
+    setupDebugMessenger();
+    createSurface();
+    pickPhysicalDevice();
+    createLogicalDevice();
+    createSwapChain();
+    createImageViews();
+    createRenderPass();
+    createGraphicsPipeline();
+    createFramebuffers();
+    createCommandPool();
+    createCommandBuffer();
+    createSyncObjects();
+}
+
+...
+
+void createSyncObjects() {
+
+}
+```
+
+[`VkSemaphoreCreateInfo`](https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkSemaphoreCreateInfo.html)를 채워서 세마포어를 생성합니다. 하지만 현재 API 버전에서는 `sType` 외에는 필수가 아닙니다:
+
+```cpp
+void createSyncObjects() {
+    VkSemaphoreCreateInfo semaphoreInfo{};
+    semaphoreInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+}
+```
+
+Vulkan API의 향후 버전은 다른 구조체와 마찬가지로 `flags`와 `pNext` 매개변수에 대한 기능을 추가할 수도 있습니다.
+
+[`VkFenceCreateInfo`](https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkFenceCreateInfo.html)를 채워서 펜스를 생성합니다:
+
+```cpp
+VkFenceCreateInfo fenceInfo{};
+fenceInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+```
+
+[`vkCreateSemaphore`](https://www.khronos.org/registry/vulkan/specs/1.0/man/html/vkCreateSemaphore.html)와 [`vkCreateFence`](https://www.khronos.org/registry/vulkan/specs/1.0/man/html/vkCreateFence.html)으로 세마포어와 펜스를 만드는 것은 비슷한 패턴을 따릅니다.
+
+```cpp
+if (vkCreateSemaphore(device, &semaphoreInfo, nullptr, &imageAvailableSemaphore) != VK_SUCCESS ||
+    vkCreateSemaphore(device, &semaphoreInfo, nullptr, &renderFinishedSemaphore) != VK_SUCCESS ||
+    vkCreateFence(device, &fenceInfo, nullptr, &inFlightFence) != VK_SUCCESS) {
+    throw std::runtime_error("failed to create semaphores!");
+}
+```
+
+세마포어와 펜스는 모든 명령이 종료되고 더 이상 동기화가 필요하지 않을 때 프로그램 끝에서 정리해야 합니다:
+
+```cpp
+void cleanup() {
+    vkDestroySemaphore(device, imageAvailableSemaphore, nullptr);
+    vkDestroySemaphore(device, renderFinishedSemaphore, nullptr);
+    vkDestroyFence(device, inFlightFence, nullptr);
+```
+
+메인 그리기 기능으로 갑시다!
+
+# 이전 프레임 기다리기
+
+프레임이 시작될 때, 이전 프레임이 완료될 때까지 기다리길 원합니다. 그래야 명령 버퍼와 세마포어를 사용할 수 있습니다. 이를 위해 [`vkWaitForFences`](https://www.khronos.org/registry/vulkan/specs/1.0/man/html/vkWaitForFences.html)를 호출합니다:
+
+```cpp
+void drawFrame() {
+    vkWaitForFences(device, 1, &inFlightFence, VK_TRUE, UINT64_MAX);
+}
+```
+
+[`vkWaitForFences`](https://www.khronos.org/registry/vulkan/specs/1.0/man/html/vkWaitForFences.html) 함수는 펜스 배열을 이용하여, 반환하기 전에 일부 또는 모든 펜스가 신호를 받을 때까지 호스트에서 기다립니다. `VK_TRUE`는 모든 펜스를 기다릴지 여부입니다. 이 케이스에서는 하나만 사용하므로 중요하지 않습니다. 이 함수는 64비트 부호없는 정수로 타임아웃 매개변수를 지정하며, `UINT64_MAX`는 타임아웃을 비활성화하게 됩니다.
+
+대기한 후, [`vkResetFences`](https://www.khronos.org/registry/vulkan/specs/1.0/man/html/vkResetFences.html)를 호출하여 수동으로 펜스를 신호가 없는 상태로 만들어야 합니다.
+
+```cpp
+vkResetFences(device, 1, &inFlightFence);
+```
+
+진행하기 전에 설계에 약간 문제가 있습니다. 첫번째 프레임에서 `drawFrame()`을 호출하면, `inFlightFence`는 신호를 받기 위해 즉시 기다리게 됩니다. `isFlightFence`는 렌더링이 끝난 프레임 이후에 신호 상태가 되지만, 첫 프레임에서는 펜스에 신호를 보낼 이전 프레임이 없습니다! 그러므로 vkWaitForFences()를 무기한 차단하고 일어나지 않을 일을 기다리게 됩니다.
+
+이 딜레마에 대한 많은 솔루션 중 API에 내장된 영리한 해결방법이 있습니다. 신호 상태에서 펜스를 만들면, 첫 `vkWaitForFences()`는 펜스가 신호를 받았기 때문에 즉시 반환될 것입니다.
+
+이를 위해 [`VkFenceCreateInfo`](https://www.notion.so/Drawing-a-triangle-Drawing-Rendering-and-presentation-024f3da3c27142e686e250728781fd2e?pvs=21)에 `VK_FENCE_CREATE_SIGNALED_BIT` 플래그를 추가해줍니다:
+
+```cpp
+void createSyncObjects() {
+    ...
+
+    VkFenceCreateInfo fenceInfo{};
+    fenceInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+    fenceInfo.flags = VK_FENCE_CREATE_SIGNALED_BIT;
+
+    ...
+}
+```
+
+# 스왑체인에서 이미지 가져오기
+
+`drawFrame` 함수 다음에 해야할 것은 스왑체인에서 이미지를 획득하는 것입니다. 스왑체인은 확장 기능이므로, `vk*KHR` 명명 규칙이 있는 함수를 사용해야 합니다.
+
+```cpp
+void drawFrame() {
+    uint32_t imageIndex;
+    vkAcquireNextImageKHR(device, swapChain, UINT64_MAX, imageAvailableSemaphore, VK_NULL_HANDLE, &imageIndex);
+}
+```
+
+`vkAcquireNextImageKHR`의 첫 두 매개변수는 이미지를 획득하려는 논리적 장치와 스왑체인입니다. 세번째 매개변수는 이미지를 사용할 수 있게 되는 시간 제한을 나노초 단위로 지정합니다. 64비트 부호없는 정수의 최대값을 사용하면 시간 제한을 비활성화 할 수 있습니다.
+
+그 다음 두 매개변수는 프레젠테이션 엔진이 이미지를 사용을 완료할 때 신호를 보낼 동기화 객체를 지정합니다. 그것이 우리가 그리기 시작할 수 있는 시점입니다. 세마포어나 펜스, 또는 둘 다를 지정할 수 있습니다. 우리는 여기서 `imageAvailableSemaphore`를 그 목적으로 사용할 것입니다.
+
+마지막 매개변수는 스왑체인 이미지의 인덱스를 출력할 변수를 지정합니다. 인덱스는 `swamChainImages` 배열의 [`VkImage`](https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkImage.html)를 참조합니다. 우리는 이것을 사용하여 [`VkFrameBuffer`](https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkFrameBuffer.html)를 선택할 것입니다.
+
+# 명령 버퍼 기록하기
+
+사용할 스왑체인 이미지를 지정하는 imageIndex를 사용하여, 이제 명령 버퍼에 기록할 수 있습니다. 먼저, [`vkResetCommandBuffer`](https://www.notion.so/Drawing-a-triangle-Drawing-Rendering-and-presentation-024f3da3c27142e686e250728781fd2e?pvs=21)를 호출하여 명령 버퍼에 확실히 기록할 수 있도록 합니다.
+
+```cpp
+vkResetCommandBuffer(commandBuffer, 0);
+```
+
+[`vkResetCommandBuffer`](https://www.khronos.org/registry/vulkan/specs/1.0/man/html/vkResetCommandBuffer.html)의 두번째 매개변수는 [`VkCommandBufferResetFlagBits`](https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkCommandBufferResetFlagBits.html) 플래그입니다. 특별한 것을 하고 싶지 않기 때문에 0으로 둡니다.
+
+이제 `recordCommandBuffer` 함수를 호출하여 원하는 명령을 기록합니다.
+
+```cpp
+recordCommandBuffer(commandBuffer, imageIndex);
+```
+
+완전히 기록된 명령 버퍼를 사용하여 이제 제출할 수 있습니다.
+
+# 명령 버퍼 제출하기
+
+큐 제출과 동기화는 [`VkSubmitInfo`](https://www.notion.so/Drawing-a-triangle-Drawing-Rendering-and-presentation-024f3da3c27142e686e250728781fd2e?pvs=21) 구조체를 통해 구성됩니다.
+
+```cpp
+VkSubmitInfo submitInfo{};
+submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+
+VkSemaphore waitSemaphores[] = {imageAvailableSemaphore};
+VkPipelineStageFlags waitStages[] = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
+submitInfo.waitSemaphoreCount = 1;
+submitInfo.pWaitSemaphores = waitSemaphores;
+submitInfo.pWaitDstStageMask = waitStages;
+```
+
+처음 세 개의 매개변수는 대기할 세마포어와, 파이프라인의 어떤 단계에서 대기를 시작할 것인지 지정합니다. 사용할 수 있을 때까지 이미지에 색상이 기록되기를 원하므로 색상 attachment에 쓰는 그래픽 파이프라인 단계를 지정하고 있습니다. 이는 이론적으로 이미지가 아직 사용할 수 없는 동안에도 정점 셰이더가 이미 시작할 수 있음을 의미합니다. `waitStages` 배열의 각 항목은 `pWaitSemaphores`의 동일한 인덱스를 가진 세마포어에 해당합니다.
+
+```cpp
+submitInfo.commandBufferCount = 1;
+submitInfo.pCommandBuffers = &commandBuffer;
+```
+
+다음 두 매개변수는 실제 실행을 위해 제출할 명령 버퍼를 지정합니다. 간단히 우리가 가지고 있는 단일 명령 버퍼를 제출하면 됩니다.
+
+```cpp
+VkSemaphore signalSemaphores[] = {renderFinishedSemaphore};
+submitInfo.signalSemaphoreCount = 1;
+submitInfo.pSignalSemaphores = signalSemaphores;
+```
+
+`signalSemaphoreCount`와 `pSignalSemaphores` 매개변수는 명령 버퍼가 실행을 완료한 후 신호를 보낼 세마포어를 지정합니다. 우리의 경우 `renderFinishedSemaphore`를 그 목적으로 사용하고 있습니다.
+
+```cpp
+if (vkQueueSubmit(graphicsQueue, 1, &submitInfo, inFlightFence) != VK_SUCCESS) {
+    throw std::runtime_error("failed to submit draw command buffer!");
+}
+```
+
+이제 [`vkQueueSumbit`](https://www.notion.so/Drawing-a-triangle-Drawing-Rendering-and-presentation-024f3da3c27142e686e250728781fd2e?pvs=21)을 사용하여 그래픽 큐에 명령 버퍼를 제출할 수 있습니다. 함수는 워크로드가 더 클 때 효율적일 수 있도록 [`VkSubmitInfo`](https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkSubmitInfo.html) 구조체 배열을 인수로 사용합니다. 마지막 매개변수는 명령 버퍼가 실행을 완료할 때 신호를 보낼 선택적 펜스를 참조합니다. 우리가 언제 명령 버퍼를 재사용하는 것이 안전한지 알 수 있도록, `isFlightFence`에 주기를 원합니다. 이제 다음 프레임에 CPU는 새 명령을 기록하기 전에 이 명령 버퍼의 실행이 완료될 때까지 기다릴 것입니다.
+
+# 서브패스 종속성
+
+렌더패스의 서브패스는 자동으로 이미지 레이아웃 전환을 처리한다는 것을 기억하세요. 이러한 전환은 서브패스 간의 메모리나 실행 종속성을 지정하는 *서브패스 종속성*에 의해 제어됩니다. 우리는 지금 하나의 서브패스만 있지만, 이 서브패스 바로 전후의 작업도 암시적으로 “서브패스"로 계산됩니다.
+
+렌더패스의 시작과 끝에서 전환을 처리하는 두가지 빌트인 종속성이 있지만 적당한 타이밍에 발생하지 않습니다. 파이프라인 시작시 전환이 발생한다고 가정하지만, 그 시점에는 아직 이미지를 얻지 못했습니다! 이 문제를 처리하는 두가지 방법이 있습니다. `imageAvailableSemaphore`를 `VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT` 로 변경하여 이미지를 사용할 수 있을때까지 렌더패스를 시작하지 않도록 하거나, `VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT` 로 하여 렌더패스가 단계를 기다리도록 만들 수 있습니다. 여기서는 두번째 옵션을 사용하겠습니다. 서브패스 종속성과 작동 방식을 살펴보는 것이 좋은 방법이기 때문입니다.
+
+서브패스 종속성은 [`VkSubpassDependency`](https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkSubpassDependency.html) 구조체로 지정합니다. `createRenderPass` 함수로 가서 추가합니다:
+
+```cpp
+VkSubpassDependency dependency{};
+dependency.srcSubpass = VK_SUBPASS_EXTERNAL;
+dependency.dstSubpass = 0;
+```
+
+처음 두 필드는 종속성과 종속 서브패스의 인덱스를 지정합니다. 특수 값 VK_SUBPASS_EXTERNAL은 렌더패스의 전후에 따라 `srcSubpass`나 `dstSubpass`로 지정되는 암시적 서브패스를 나타냅니다. 인덱스 0은 첫번째이자 유일한 서브패스를 나타냅니다. 종속성 그래프의 순환을 방지하기 위해서는 `dstSubpass`는 반드시 `srcSubpass`보다 높아야 합니다. (서브패스 중 하나가 `VK_SUBPASS_EXTERNAL`인 경우는 예외)
+
+```cpp
+dependency.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+dependency.srcAccessMask = 0;
+```
+
+다음 두 필드는 대기할 작업과 이러한 작업이 발생하는 단계를 지정합니다. 이미지에 접근하기 전에 스왑체인이 이미지 읽기를 끝낼 때까지 기다려야 합니다. 이는 색상 attachment 출력 단계 자체에서 대기하여 수행할 수 있습니다.
+
+```cpp
+dependency.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+dependency.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+```
+
+이 작업은 색상 attachment 단계에서 기다려야 하며, 색상 attachment 쓰기가 포함됩니다. 이러한 설정은 실제로 필요하고 허용될 때까지 발생하지 않도록 방지합니다: 색상 쓰기를 시작하려는 경우
+
+```cpp
+renderPassInfo.dependencyCount = 1;
+renderPassInfo.pDependencies = &dependency;
+```
+
+[`VkRenderPassCreateInfo`](https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkRenderPassCreateInfo.html) 구조체는 종속성 배열을 지정하는 두 필드를 가지고 있습니다.
+
+# 프레젠테이션
+
+프레임을 그리는 마지막 단계는 결과를 스왑체인에 다시 제출하여 화면에 표시되도록 하는 것입니다. 프레젠테이션은 `drawFrame` 함수 끝에서 `VkPresentInfoKHR` 구조체를 통해 구성됩니다.
+
+```cpp
+VkPresentInfoKHR presentInfo{};
+presentInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
+
+presentInfo.waitSemaphoreCount = 1;
+presentInfo.pWaitSemaphores = signalSemaphores;
+```
+
+처음 두 매개변수는 [`VkSubmitInfo`](https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkSubmitInfo.html) 같이 프레젠테이션이 발생하기 전에 기다릴 세마포어를 지정합니다. 우리는 명령 버퍼에서 실행이 끝나기를 기다리고, 삼각형이 그려지기를 원하기 때문에 신호를 받을 세마포어를 가져와서 기다립니다. 그러므로 `signalSemaphores`를 사용합니다.
+
+```cpp
+VkSwapchainKHR swapChains[] = {swapChain};
+presentInfo.swapchainCount = 1;
+presentInfo.pSwapchains = swapChains;
+presentInfo.pImageIndices = &imageIndex;
+```
+
+다음 두 매개변수는 이미지를 표시할 스왑체인과 각 스왑체인에 대한 이미지 인덱스를 지정합니다. 이것은 거의 하나입니다.
+
+```cpp
+presentInfo.pResults = nullptr; // Optional
+```
+
+마지막에 `pResult`라는 선택적 매개변수가 있습니다. [`VkResult`](https://www.khronos.org/registry/vulkan/specs/1.0/man/html/VkResult.html) 배열을 지정하여 프레젠테이션이 성공인 경우 각 스왑체인에 대한 값을 확인할 수 있습니다. 단일 스왑체인만 사용할 때는 필수는 아닙니다. 현재 함수의 반환값을 사용할 수 있기 때문입니다.
+
+```cpp
+vkQueuePresentKHR(presentQueue, &presentInfo);
+```
+
+`vkQueuePresentKHR` 함수는 이미지를 스왑체인에 표시하라는 요청을 제출합니다. 우리는 다음 챕터에서`vkAcquireNextImageKHR`과 `vkQeuePresentKHR` 둘 다 에러 핸들링을 추가할 것입니다. 지금까지 본 함수들과 다르게 실패하는 것이 프로그램이 반드시 종료되어야 하는 것은 아니기 때문입니다.
+
+지금까지 모든 작업을 올바르게 수행했다면, 이제 프로그램을 실행하면 다음과 같은 내용이 표시되어야 합니다:
+
+![triangle.png](./img/triangle.png)
+
+> 삼각형 색이 그래픽 튜토리얼에서 보는 것과 다르게 보일 수 있습니다. 이 튜토리얼에서는 셰이더가 선형 색상 공간에서 보간하고, 나중에 sRGB 색상 공간으로 변환할 수 있기 때문입니다. 차이점에 대한 논의는 [이 블로그 게시물](https://medium.com/@heypete/hello-triangle-meet-swift-and-wide-color-6f9e246616d9)을 참조하십시오.
+> 
+
+아! 불행히도 유효성 검사 레이어가 활성화되면 프로그램을 닫는 즉시 크래시가 나는 것을 볼 수 있습니다. `debugCallback`에서 터미널에 찍힌 메세지가 이유를 알려줍니다:
+
+![semaphore_in_use.png](./img/semaphore_in_use.png)
+
+`drawFrame`의 모든 작업은 비동기식임을 기억하세요. 즉 `mainLoop`에서 루프를 종료할 때, 그리기와 프레젠테이션 작업이 계속 진행될 수 있다는 뜻입니다. 그런 일이 일어나는 동안 리소스를 정리하는 것은 좋지 않은 생각입니다.
+
+이 문제를 해결하기 이해, `mainLoop`를 종료하고 창을 파괴하기 전까지 논리 장치를 기다려야 합니다.
+
+```cpp
+void mainLoop() {
+    while (!glfwWindowShouldClose(window)) {
+        glfwPollEvents();
+        drawFrame();
+    }
+
+    vkDeviceWaitIdle(device);
+}
+```
+
+[`vkQueueWaitIdle`](https://www.notion.so/Drawing-a-triangle-Drawing-Rendering-and-presentation-024f3da3c27142e686e250728781fd2e?pvs=21)을 사용하여 특정 명령 큐가 끝날 때까지 기다릴 수도 있습니다. 이러한 기능은 동기화를 수행하는 매우 기본적인 방법으로 사용할 수 있습니다. 이제 창을 닫을 때 문제없이 프로그램이 종료되는 것을 볼 수 있습니다.
+
+# 결론
+
+900줄이 조금 넘는 코드로, 우리는 화면에 무언가 팝업되는 단계까지 도달했습니다! Vulkan프로그램을 부트스트랩하는 것은 분명 많은 작업량이지만, 중요한 메세지는 Vulkan이 명시성을 통해 엄청난 양의 제어를 제공한다는 것입니다. 이제 시간을 내어 코드를 다시 읽고, 프로그램에 있는 모든 Vulkan 객체의 목적과 이들이 서로 어떻게 관련되는지에 대한 멘탈 모델을 구축하는 것이 좋습니다. 우리는 이제부터 프로그램의 기능 확장을 할 때, 그 지식을 바탕으로 구축할 것입니다.
+
+다음 챕터에서는 렌더 루프를 확장하여 비행 중인 여러 프레임을 처리합니다.
+
+[C++ code](https://vulkan-tutorial.com/code/15_hello_triangle.cpp) / [Vertex shader](https://vulkan-tutorial.com/code/09_shader_base.vert) / [Fragment shader](https://vulkan-tutorial.com/code/09_shader_base.frag)

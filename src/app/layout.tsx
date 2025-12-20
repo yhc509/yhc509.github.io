@@ -72,6 +72,7 @@ export default function RootLayout({
               </Link>
               <nav className="flex items-center gap-2">
                 <NavLinks />
+                <div className="w-px h-5 mx-1" style={{ backgroundColor: "var(--card-border)" }} />
                 <ThemeToggle />
               </nav>
             </div>
