@@ -1,7 +1,7 @@
 ---
 date: 2022-09-05
 title: Vulkan Tutorial (22) - Vertext buffers - Vertex input description
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

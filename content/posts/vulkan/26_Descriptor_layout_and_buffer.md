@@ -1,7 +1,7 @@
 ---
 date: 2022-09-26
 title: Vulkan Tutorial (26) - Uniform buffers - Descriptor layout and buffer
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

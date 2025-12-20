@@ -1,7 +1,7 @@
 ---
 date: 2022-08-29
 title: Vulkan Tutorial (21) - Draw a triangle - Swap chain recreation
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

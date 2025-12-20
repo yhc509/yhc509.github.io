@@ -1,7 +1,7 @@
 ---
 date: 2022-10-10
 title: Vulkan Tutorial (30) - Texture mapping - Combined image sampler
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

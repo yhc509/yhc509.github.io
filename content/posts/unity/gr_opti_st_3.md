@@ -1,7 +1,7 @@
 ---
 date: 2022-08-12
 title: 유니티 그래픽스 최적화 스타트업 (3) - Lighting, Shadow, GI
-categories: ['Unity']
+categories: ['Game Engine/Unity']
 open: true
 ---
 

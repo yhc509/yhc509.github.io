@@ -1,7 +1,7 @@
 ---
 date: 2022-08-04
 title: Physical device & Logical device
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

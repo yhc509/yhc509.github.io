@@ -1,7 +1,7 @@
 ---
 date: 2022-08-01
 title: Vulkan Tutorial (5) - Draw a triangle - Setup - Instance
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 date: 2022-09-19
 title: Vulkan Tutorial (24) - Vertext buffers - Staging buffer
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 date: 2022-08-08
 title: Vulkan Tutorial (12) - Draw a triangle - Graphics Pipeline Basic - Validation Layers
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 date: 2022-08-22
 title: Vulkan Tutorial (18) - Draw a triangle - Drawing - CommandBuffers
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

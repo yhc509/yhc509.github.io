@@ -1,7 +1,7 @@
 ---
 date: 2022-10-23
 title: Vulkan Tutorial (32) - Loading models
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

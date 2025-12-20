@@ -1,7 +1,7 @@
 ---
 date: 2022-08-04
 title: OpenGL vs Vulkan
-categories: ['Vulkan', 'OpenGL']
+categories: ['Graphics/Vulkan', 'Graphics/OpenGL']
 open: true
 ---
 

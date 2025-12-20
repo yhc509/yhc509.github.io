@@ -1,7 +1,7 @@
 ---
 date: 2022-08-01
 title: Vulkan Tutorial (4) - Draw a triangle - Setup - Base Code
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

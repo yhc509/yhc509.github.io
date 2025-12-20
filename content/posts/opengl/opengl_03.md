@@ -1,7 +1,7 @@
 ---
 date: 2025-02-20
 title: OpenGL Super Bible- 기초
-categories: ['OpenGL']
+categories: ['Graphics/OpenGL']
 open: false
 ---
 

@@ -1,7 +1,7 @@
 ---
 date: 2022-08-18
 title: 유니티 그래픽스 최적화 스타트업 (4) - Texture
-categories: ['Unity']
+categories: ['Game Engine/Unity']
 open: true
 ---
 

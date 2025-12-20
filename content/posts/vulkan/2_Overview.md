@@ -1,7 +1,7 @@
 ---
 date: 2022-07-25
 title: Vulkan Tutorial (2) - Overview
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

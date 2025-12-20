@@ -1,7 +1,7 @@
 ---
 date: 2022-09-05
 title: Vulkan Tutorial (23) - Vertext buffers - Vertex buffer creation
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

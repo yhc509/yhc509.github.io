@@ -1,7 +1,7 @@
 ---
 date: 2022-08-15
 title: Vulkan Tutorial (15) - Draw a triangle - Graphics Pipeline Basic - Render passes
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 date: 2022-08-22
 title: Vulkan Tutorial (19) - Draw a triangle - Drawing - Rendering and presentation
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

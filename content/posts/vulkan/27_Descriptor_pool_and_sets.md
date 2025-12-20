@@ -1,7 +1,7 @@
 ---
 date: 2022-09-26
 title: Vulkan Tutorial (27) - Uniform buffers - Descriptor pool and sets
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

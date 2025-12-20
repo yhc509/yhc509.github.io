@@ -1,7 +1,7 @@
 ---
 date: 2022-08-29
 title: Vulkan Tutorial (20) - Draw a triangle - Drawing - Frames in flight
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

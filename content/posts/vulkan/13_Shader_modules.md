@@ -1,7 +1,7 @@
 ---
 date: 2022-08-15
 title: Vulkan Tutorial (13) - Draw a triangle - Graphics Pipeline Basic - Shader modules
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 

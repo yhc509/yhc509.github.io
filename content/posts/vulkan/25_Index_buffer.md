@@ -1,7 +1,7 @@
 ---
 date: 2022-09-19
 title: Vulkan Tutorial (25) - Vertext buffers - Index buffer
-categories: ['Vulkan']
+categories: ['Graphics/Vulkan']
 open: true
 ---
 
