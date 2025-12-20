@@ -18,25 +18,59 @@ export interface Post extends PostMeta {
   content: string;
 }
 
+// Helper to recursively find files
+function getFilesRecursively(dir: string): string[] {
+  let results: string[] = [];
+  const list = fs.readdirSync(dir);
+  list.forEach((file) => {
+    file = path.join(dir, file);
+    const stat = fs.statSync(file);
+    if (stat && stat.isDirectory()) {
+      results = results.concat(getFilesRecursively(file));
+    } else {
+      results.push(file);
+    }
+  });
+  return results;
+}
+
 export function getAllPostSlugs(): string[] {
-  const fileNames = fs.readdirSync(postsDirectory);
-  return fileNames
-    .filter((name) => name.endsWith(".mdx"))
-    .map((name) => name.replace(/\.mdx$/, ""));
+  const filePaths = getFilesRecursively(postsDirectory);
+  return filePaths
+    .filter((filePath) => /\.(md|mdx)$/.test(filePath))
+    .map((filePath) => {
+      const relativePath = path.relative(postsDirectory, filePath);
+      return relativePath.replace(/\.(md|mdx)$/, "");
+    });
 }
 
 export function getPostBySlug(slug: string): Post {
-  const fullPath = path.join(postsDirectory, `${slug}.mdx`);
+  // Check for .md or .mdx
+  const extensions = [".mdx", ".md"];
+  let fullPath = "";
+
+  for (const ext of extensions) {
+    const p = path.join(postsDirectory, `${slug}${ext}`);
+    if (fs.existsSync(p)) {
+      fullPath = p;
+      break;
+    }
+  }
+
+  if (!fullPath) {
+    throw new Error(`Post not found: ${slug}`);
+  }
+
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  const tags: string[] = data.tags || [];
+  const tags: string[] = data.tags || (data.categories && Array.isArray(data.categories) ? data.categories : []);
 
   return {
     slug,
-    title: data.title,
-    date: data.date,
-    description: data.description,
+    title: data.title || slug,
+    date: data.date ? new Date(data.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+    description: data.description || "",
     content,
     readingTime: readingTime(content).text,
     tags,
