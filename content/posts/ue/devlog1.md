@@ -1,7 +1,7 @@
 ---
 date: 2025-08-31
 title: UE5 - DevLog (1)
-categories: ['UnrealEngine', 'DevLog']
+categories: ['Game Engine/Unreal']
 open: true
 ---
 
