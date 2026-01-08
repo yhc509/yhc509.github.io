@@ -1,0 +1,70 @@
+1:"$Sreact.fragment"
+2:"$Sreact.suspense"
+3:I[98477,["/_next/static/chunks/c88fd6028e657d3e.js","/_next/static/chunks/7048f1273beebf5b.js"],"BackButton"]
+5:I[63687,["/_next/static/chunks/c88fd6028e657d3e.js","/_next/static/chunks/7048f1273beebf5b.js"],"ScrollToTop"]
+6:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/247eb132b7f7b574.js"],"OutletBoundary"]
+4:T6bd,#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
+#include <iostream>
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void processInput(GLFWwindow *window);
+
+// 스크린 크기
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
+
+int main()
+{
+    glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "songsmir GL", NULL, NULL);
+    if (window == NULL)
+    {
+        std::cout << "Failed to create GLFW window" << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+    glfwMakeContextCurrent(window);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+    auto glVersion = glGetString(GL_VERSION);
+    std::cout << "OpenGL context version: " << glVersion << std::endl;
+
+    while (!glfwWindowShouldClose(window))
+    {
+        processInput(window);
+
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+       
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
+
+    glfwTerminate();
+    return 0;
+}
+
+void processInput(GLFWwindow *window)
+{
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
+0:{"buildId":"LaOo7Ht87LlIiwJVbUdsD","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"max-w-3xl mx-auto px-5 py-10","children":[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"BlogPosting\",\"headline\":\"OpenGL Super Bible- 기초\",\"description\":\"\",\"datePublished\":\"2025-02-20\",\"author\":{\"@type\":\"Person\",\"name\":\"Blog Author\"},\"keywords\":\"Graphics/OpenGL\"}"}}],["$","$2",null,{"children":["$","$L3",null,{}]}],["$","article",null,{"children":[["$","header",null,{"className":"mb-8 pb-8 border-b","style":{"borderColor":"var(--card-border)"},"children":[["$","h1",null,{"className":"text-3xl font-bold mb-4","children":"OpenGL Super Bible- 기초"}],["$","div",null,{"className":"flex items-center gap-3 text-sm","style":{"color":"var(--text-muted)"},"children":[["$","time",null,{"dateTime":"2025-02-20","children":"2025-02-20"}],["$","span",null,{"children":"·"}],["$","span",null,{"children":"1 min read"}]]}]]}],["$","div",null,{"className":"prose max-w-none","children":["$","pre",null,{"children":["$","code",null,{"className":"language-cpp","children":"$4"}]}]}]]}],["$","$L5",null,{}]]}],[["$","script","script-0",{"src":"/_next/static/chunks/7048f1273beebf5b.js","async":true}]],["$","$L6",null,{"children":["$","$2",null,{"name":"Next.MetadataOutlet","children":"$@7"}]}]]}],"loading":null,"isPartial":false}
+7:null

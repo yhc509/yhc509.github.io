@@ -1,0 +1,137 @@
+1:"$Sreact.fragment"
+2:I[59919,["/_next/static/chunks/c88fd6028e657d3e.js"],"ThemeProvider"]
+3:I[22016,["/_next/static/chunks/c88fd6028e657d3e.js"],""]
+4:I[36934,["/_next/static/chunks/c88fd6028e657d3e.js"],"NavLinks"]
+5:I[22530,["/_next/static/chunks/c88fd6028e657d3e.js"],"ThemeToggle"]
+6:I[39756,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/247eb132b7f7b574.js"],"default"]
+7:I[37457,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/247eb132b7f7b574.js"],"default"]
+9:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/247eb132b7f7b574.js"],"OutletBoundary"]
+a:"$Sreact.suspense"
+c:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/247eb132b7f7b574.js"],"ViewportBoundary"]
+e:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/247eb132b7f7b574.js"],"MetadataBoundary"]
+10:I[68027,[],"default"]
+:HL["/_next/static/chunks/a0fbd852352e5fd8.css","style"]
+0:{"P":null,"b":"LaOo7Ht87LlIiwJVbUdsD","c":["","posts","opengl","opengl_02"],"q":"","i":false,"f":[[["",{"children":["posts",{"children":[["slug","opengl/opengl_02","c"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/a0fbd852352e5fd8.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/c88fd6028e657d3e.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"ko","suppressHydrationWarning":true,"children":["$","body",null,{"className":"antialiased min-h-screen","children":["$","$L2",null,{"children":[["$","header",null,{"className":"w-full py-8 border-b","style":{"backgroundColor":"var(--header-bg)","borderColor":"var(--card-border)"},"children":["$","div",null,{"className":"max-w-3xl mx-auto px-5 flex items-center justify-between","children":[["$","$L3",null,{"href":"/","className":"text-2xl font-bold transition-opacity hover:opacity-70","style":{"color":"var(--foreground)"},"children":"yhc509's Dev Journey"}],["$","nav",null,{"className":"flex items-center gap-2","children":[["$","$L4",null,{}],["$","div",null,{"className":"w-px h-5 mx-1","style":{"backgroundColor":"var(--card-border)"}}],["$","$L5",null,{}]]}]]}]}],["$","main",null,{"children":["$","$L6",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L7",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]]}]}]}]]}],{"children":[["$","$1","c",{"children":[null,["$","$L6",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L7",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["$","$1","c",{"children":[null,["$","$L6",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L7",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["$","$1","c",{"children":["$L8",[["$","script","script-0",{"src":"/_next/static/chunks/7048f1273beebf5b.js","async":true,"nonce":"$undefined"}]],["$","$L9",null,{"children":["$","$a",null,{"name":"Next.MetadataOutlet","children":"$@b"}]}]]}],{},null,false,false]},null,false,false]},null,false,false]},null,false,false],["$","$1","h",{"children":[null,["$","$Lc",null,{"children":"$@d"}],["$","div",null,{"hidden":true,"children":["$","$Le",null,{"children":["$","$a",null,{"name":"Next.Metadata","children":"$@f"}]}]}],null]}],false]],"m":"$undefined","G":["$10",[]],"S":true}
+11:I[98477,["/_next/static/chunks/c88fd6028e657d3e.js","/_next/static/chunks/7048f1273beebf5b.js"],"BackButton"]
+13:I[63687,["/_next/static/chunks/c88fd6028e657d3e.js","/_next/static/chunks/7048f1273beebf5b.js"],"ScrollToTop"]
+8:["$","div",null,{"className":"max-w-3xl mx-auto px-5 py-10","children":[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"BlogPosting\",\"headline\":\"OpenGL Super Bible- 기초\",\"description\":\"\",\"datePublished\":\"2025-02-20\",\"author\":{\"@type\":\"Person\",\"name\":\"Blog Author\"},\"keywords\":\"Graphics/OpenGL\"}"}}],["$","$a",null,{"children":["$","$L11",null,{}]}],["$","article",null,{"children":[["$","header",null,{"className":"mb-8 pb-8 border-b","style":{"borderColor":"var(--card-border)"},"children":[["$","h1",null,{"className":"text-3xl font-bold mb-4","children":"OpenGL Super Bible- 기초"}],["$","div",null,{"className":"flex items-center gap-3 text-sm","style":{"color":"var(--text-muted)"},"children":[["$","time",null,{"dateTime":"2025-02-20","children":"2025-02-20"}],["$","span",null,{"children":"·"}],["$","span",null,{"children":"4 min read"}]]}]]}],["$","div",null,{"className":"prose max-w-none","children":"$L12"}]]}],["$","$L13",null,{}]]}]
+:HL["/posts-images/opengl/img/msys2.png","image"]
+14:T40c,pacman -S mingw-w64-ucrt-x86_64-gcc
+
+Packages (16) mingw-w64-ucrt-x86_64-binutils-2.43.1-1
+              mingw-w64-ucrt-x86_64-crt-git-12.0.0.r423.g8bcd5fc1a-1
+              mingw-w64-ucrt-x86_64-gcc-libs-14.2.0-2
+              mingw-w64-ucrt-x86_64-gettext-runtime-0.22.5-2  mingw-w64-ucrt-x86_64-gmp-6.3.0-2
+              mingw-w64-ucrt-x86_64-headers-git-12.0.0.r423.g8bcd5fc1a-1
+              mingw-w64-ucrt-x86_64-isl-0.27-1  mingw-w64-ucrt-x86_64-libiconv-1.17-4
+              mingw-w64-ucrt-x86_64-libwinpthread-git-12.0.0.r423.g8bcd5fc1a-1
+              mingw-w64-ucrt-x86_64-mpc-1.3.1-2  mingw-w64-ucrt-x86_64-mpfr-4.2.1-2
+              mingw-w64-ucrt-x86_64-windows-default-manifest-6.4-4
+              mingw-w64-ucrt-x86_64-winpthreads-git-12.0.0.r423.g8bcd5fc1a-1
+              mingw-w64-ucrt-x86_64-zlib-1.3.1-1  mingw-w64-ucrt-x86_64-zstd-1.5.6-2
+              mingw-w64-ucrt-x86_64-gcc-14.2.0-2
+
+Total Download Size:    65.75 MiB
+Total Installed Size:  517.33 MiB
+
+:: Proceed with installation? [Y/n]
+
+12:[["$","p",null,{"children":"개발 환경은 Windows & VSCode에서 진행하였다."}],"\n",["$","h2",null,{"children":"VSCode에서 C++ 환경을 구성하기 위한 플러그인 및 프로그램"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":["VSCode Plugins 설치","\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":"C/C++"}],"\n",["$","li",null,{"children":"C/C++ Extension Pack"}],"\n",["$","li",null,{"children":"C/C++ Themes"}],"\n"]}],"\n"]}],"\n",["$","li",null,{"children":[["$","a",null,{"href":"https://www.msys2.org/","children":"MSYS2"}]," 설치","\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":"MSY2 Terminal에서 아래 명령어를 입력하여 추가 설치 진행"}],"\n"]}],"\n"]}],"\n"]}],"\n",["$","pre",null,{"children":["$","code",null,{"className":"language-shell","children":"$14"}]}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":["\n",["$","p",null,{"children":["MSYS2 환경 변수 세팅\r\n",["$","img",null,{"src":"/posts-images/opengl/img/msys2.png","alt":"msys2"}]]}],"\n"]}],"\n",["$","li",null,{"children":["\n",["$","p",null,{"children":"VSCode 단축키 설정"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":"Ctrl + K + S를 눌러 keymap 설정 창을 연다."}],"\n",["$","li",null,{"children":[["$","code",null,{"children":"Tasks: Run Task"}]," => Ctrl + Shift + B"]}],"\n",["$","li",null,{"children":["컴파일 (",["$","code",null,{"children":"Tasks: Run Build Task"}],") => Ctrl + Alt + C"]}],"\n",["$","li",null,{"children":["실행 (",["$","code",null,{"children":"Tasks: Run Test Task"}],") => Ctrl + Alt + B"]}],"\n"]}],"\n"]}],"\n"]}],"\n",["$","h2",null,{"children":"폴더 구성"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":[["$","code",null,{"children":"builds"}]," / ",["$","code",null,{"children":"dependencies"}]," / ",["$","code",null,{"children":"resources"}]," / ",["$","code",null,{"children":"src"}]," 폴더 추가"]}],"\n"]}],"\n",["$","hr",null,{}],"\n",["$","h2",null,{"children":"GLFW"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":"Window, Context, Input 등 플랫폼 관련 처리를 돕는 라이브러리"}],"\n",["$","li",null,{"children":[["$","a",null,{"href":"https://www.glfw.org/","children":"[GLFW]"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":"3.4 버전"}],"\n"]}],"\n"]}],"\n",["$","li",null,{"children":[["$","code",null,{"children":"include"}],", ",["$","code",null,{"children":"lib-mingw-w64"}],"를 ",["$","code",null,{"children":"dependencies"}]," 폴더로 복사"]}],"\n",["$","li",null,{"children":[["$","code",null,{"children":"lib-static-ucrt/glfw3.dll"}],"을 ",["$","code",null,{"children":"builds"}]," 폴더로 복사"]}],"\n"]}],"\n",["$","h2",null,{"children":"GLAD"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":"함수 포인터 처리를 도와주는 라이브러리"}],"\n",["$","li",null,{"children":[["$","a",null,{"href":"https://glad.dav1d.de/","children":"[GLAD]"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":"API GL : 4.6 / Profile : Core / Generate a loader 체크 -> Generate"}],"\n"]}],"\n"]}],"\n",["$","li",null,{"children":[["$","code",null,{"children":"include"}],", ",["$","code",null,{"children":"src"}],"을 ",["$","code",null,{"children":"dependencies"}]," 폴더로 복사"]}],"\n"]}],"\n",["$","h2",null,{"children":"GLM"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":"벡터, 행렬 등 수학 라이브러리"}],"\n",["$","li",null,{"children":[["$","a",null,{"href":"https://glm.g-truc.net/0.9.9/index.html","children":"[GLM]"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":"Downloads -> 1.0.1"}],"\n"]}],"\n"]}],"\n",["$","li",null,{"children":[["$","code",null,{"children":"glm"}],"를 ",["$","code",null,{"children":"dependencies"}],"폴더로 복사"]}],"\n"]}],"\n","$L15","\n","$L16","\n","$L17","\n","$L18","\n","$L19","\n","$L1a","\n","$L1b","\n","$L1c","\n","$L1d","\n","$L1e","\n","$L1f","\n","$L20","\n","$L21","\n","$L22","\n","$L23","\n","$L24","\n","$L25","\n","$L26"]
+15:["$","hr",null,{}]
+16:["$","h2",null,{"children":"vscode 설정"}]
+17:["$","ul",null,{"children":["\n",["$","li",null,{"children":"c_cpp_properties.json"}],"\n"]}]
+18:["$","pre",null,{"children":["$","code",null,{"className":"language-json","children":"{\r\n    \"configurations\": [\r\n        {\r\n            \"name\": \"Win32\",\r\n            \"includePath\": [\r\n                \"${workspaceFolder}\",\r\n                \"${workspaceFolder}/dependencies/GLFW/include\",\r\n                \"${workspaceFolder}/dependencies/GLAD/include\",\r\n                \"${workspaceFolder}/dependencies/GLM\"\r\n            ],\r\n            \"defines\": [\r\n                \"_DEBUG\",\r\n                \"UNICODE\",\r\n                \"_UNICODE\"\r\n            ],\r\n            \"compilerPath\": \"C:\\\\msys64\\\\mingw64\\\\bin\\\\g++.exe\",\r\n            \"cStandard\": \"gnu11\",\r\n            \"cppStandard\": \"gnu++14\",\r\n            \"intelliSenseMode\": \"gcc-x64\"\r\n        }\r\n    ],\r\n    \"version\": 4\r\n}\n"}]}]
+19:["$","ul",null,{"children":["\n",["$","li",null,{"children":"launch.json"}],"\n"]}]
+1a:["$","pre",null,{"children":["$","code",null,{"className":"language-json","children":"{\r\n    \"version\": \"0.2.0\",\r\n    \"configurations\": [\r\n        {\r\n            \"name\": \"g++.exe - 활성 파일 빌드 및 디버그\",\r\n            \"type\": \"cppdbg\",\r\n            \"request\": \"launch\",\r\n            \"program\": \"${workspaceRoot}/builds/main\",\r\n            \"args\": [],\r\n            \"stopAtEntry\": false,\r\n            \"cwd\": \"${workspaceFolder}\",\r\n            \"environment\": [],\r\n            \"externalConsole\": false,\r\n            \"MIMode\": \"gdb\",\r\n            \"miDebuggerPath\": \"C:\\\\msys64\\\\mingw64\\\\bin\\\\gdb.exe\",\r\n            \"setupCommands\": [\r\n                {\r\n                    \"description\": \"gdb에 자동 서식 지정 사용\",\r\n                    \"text\": \"-enable-pretty-printing\",\r\n                    \"ignoreFailures\": true\r\n                }\r\n            ],\r\n            \"preLaunchTask\": \"C/C++: g++.exe build active file\"\r\n        },\r\n    ]\r\n}\n"}]}]
+1b:["$","ul",null,{"children":["\n",["$","li",null,{"children":"task.json"}],"\n"]}]
+27:T93e,{
+    "version": "2.0.0",
+    "runner": "terminal",
+    "type": "shell",
+    "echoCommand": true,
+    "presentation": {
+        "reveal": "always"
+    },
+    "tasks": [
+        {
+            "label": "save and compile for C++",
+            "command": "g++",
+            "args": [
+                "${workspaceRoot}/src/main.cpp",
+                "${workspaceRoot}/dependencies/GLAD/src/glad.c",
+                "-g",
+                "-I${workspaceRoot}/dependencies/GLFW/include",
+                "-I${workspaceFolder}/dependencies/GLAD/include",
+                "-I${workspaceFolder}/dependencies/GLM",
+                "-lopengl32",
+                "-L${workspaceRoot}/dependencies/GLFW/lib-mingw-w64",
+                "-static",
+                "-lglfw3dll",
+                "-o",
+                "${workspaceRoot}/builds/main"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        },
+        {
+            "label": "execute",
+            "command": "cmd",
+            "group": "test",
+            "args": [
+                "/C",
+                "${workspaceRoot}/builds\\${fileBasenameNoExtension}"
+            ]
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe build active file",
+            "command": "C:\\msys64\\mingw64\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Task generated by Debugger."
+        }
+    ]
+}
+1c:["$","pre",null,{"children":["$","code",null,{"className":"language-json","children":"$27"}]}]
+1d:["$","hr",null,{}]
+1e:["$","h2",null,{"children":"main.cpp"}]
+1f:["$","ul",null,{"children":["\n",["$","li",null,{"children":[["$","code",null,{"children":"src"}],"폴더 안에 ",["$","code",null,{"children":"main.cpp"}]," 코드 작성"]}],"\n"]}]
+20:["$","pre",null,{"children":["$","code",null,{"className":"language-cpp","children":"#include <glad/glad.h>\r\n#include <GLFW/glfw3.h>\r\n\r\n#include <iostream>\r\n\r\nint main()\r\n{\r\n    std::cout << \"Hello world!\" << std::endl;\r\n    return 0;\r\n}\n"}]}]
+21:["$","hr",null,{}]
+22:["$","h2",null,{"children":"Build & Run"}]
+23:["$","ul",null,{"children":["\n",["$","li",null,{"children":["Build : ",["$","code",null,{"children":"Terminal - Run Task - save and compile for C++"}]]}],"\n",["$","li",null,{"children":["Run : ",["$","code",null,{"children":"Terminal - Run Task - execute"}]]}],"\n",["$","li",null,{"children":"Compile Error가 발생하지 않고 빌드가 잘 되어서 Hello World! 라는 텍스트가 정상적으로 출력되는 것을 확인."}],"\n"]}]
+24:["$","hr",null,{}]
+25:["$","h2",null,{"children":"참고 자료"}]
+26:["$","ul",null,{"children":["\n",["$","li",null,{"children":["$","a",null,{"href":"https://pasongsong.tistory.com/543","children":"VScode C++ 환경 구성하기"}]}],"\n",["$","li",null,{"children":["$","a",null,{"href":"https://songsmir.tistory.com/5","children":"Code OpenGL 개발 환경 설정"}]}],"\n",["$","li",null,{"children":["$","a",null,{"href":"https://rinthel.github.io/opengl_course/","children":"OpenGL Course"}]}],"\n"]}]
+d:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+28:I[27201,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/247eb132b7f7b574.js"],"IconMark"]
+f:[["$","title","0",{"children":"OpenGL Super Bible- 기초 | Blog"}],["$","meta","1",{"name":"author","content":"Blog Author"}],["$","meta","2",{"name":"keywords","content":"Graphics/OpenGL"}],["$","meta","3",{"name":"robots","content":"index, follow"}],["$","meta","4",{"name":"googlebot","content":"index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"}],["$","link","5",{"rel":"canonical","href":"https://example.com/posts/opengl/opengl_02"}],["$","meta","6",{"property":"og:title","content":"OpenGL Super Bible- 기초"}],["$","meta","7",{"property":"og:url","content":"https://example.com/posts/opengl/opengl_02"}],["$","meta","8",{"property":"og:type","content":"article"}],["$","meta","9",{"property":"article:published_time","content":"2025-02-20"}],["$","meta","10",{"property":"article:tag","content":"Graphics/OpenGL"}],["$","meta","11",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","12",{"name":"twitter:title","content":"OpenGL Super Bible- 기초"}],["$","link","13",{"rel":"icon","href":"/favicon.ico?favicon.0b3bf435.ico","sizes":"256x256","type":"image/x-icon"}],["$","$L28","14",{}]]
+b:null

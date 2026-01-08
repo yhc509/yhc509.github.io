@@ -1,4 +1,4 @@
-User-agent: *
+User-Agent: *
 Allow: /
-Sitemap: https://yhc509.github.io/sitemap-index.xml
-Host: https://yhc509.github.io
+
+Sitemap: https://example.com/sitemap.xml
