@@ -12,6 +12,7 @@ export interface PostMeta {
   description: string;
   readingTime: string;
   tags: string[];
+  open: boolean;
 }
 
 export interface Post extends PostMeta {
@@ -74,6 +75,7 @@ export function getPostBySlug(slug: string): Post {
     content,
     readingTime: readingTime(content).text,
     tags,
+    open: data.open !== false, // 기본값은 true (공개)
   };
 }
 
@@ -84,6 +86,7 @@ export function getAllPosts(): PostMeta[] {
       const { content, ...meta } = getPostBySlug(slug);
       return meta;
     })
+    .filter((post) => post.open) // open: false인 포스트는 목록에서 제외
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? -1 : 1));
 
   return posts;

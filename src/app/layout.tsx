@@ -68,7 +68,7 @@ export default function RootLayout({
                 className="text-2xl font-bold transition-opacity hover:opacity-70"
                 style={{ color: "var(--foreground)" }}
               >
-                Blog
+                yhc509&apos;s Dev Journey
               </Link>
               <nav className="flex items-center gap-2">
                 <NavLinks />

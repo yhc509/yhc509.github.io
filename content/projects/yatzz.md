@@ -8,6 +8,7 @@ tags:
   - "react"
   - "game"
   - "ai-assisted"
+open: false
 ---
 
 ## 프로젝트 소개

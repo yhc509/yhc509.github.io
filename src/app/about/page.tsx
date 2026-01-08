@@ -10,9 +10,33 @@ export const metadata: Metadata = {
 };
 
 function getAboutContent(): string {
-  const filePath = path.join(process.cwd(), "content/about.mdx");
-  return fs.readFileSync(filePath, "utf8");
+  const extensions = [".mdx", ".md"];
+  for (const ext of extensions) {
+    const filePath = path.join(process.cwd(), `content/about${ext}`);
+    if (fs.existsSync(filePath)) {
+      return fs.readFileSync(filePath, "utf8");
+    }
+  }
+  throw new Error("About content not found");
 }
+
+const components = {
+  img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      {...props}
+      alt={props.alt || ""}
+      style={{
+        borderRadius: "50%",
+        width: "150px",
+        height: "150px",
+        objectFit: "cover",
+        display: "block",
+        margin: "0 auto",
+      }}
+    />
+  ),
+};
 
 export default function AboutPage() {
   const content = getAboutContent();
@@ -22,6 +46,7 @@ export default function AboutPage() {
       <div className="prose max-w-none">
         <MDXRemote
           source={content}
+          components={components}
           options={{
             mdxOptions: {
               remarkPlugins: [remarkGfm],

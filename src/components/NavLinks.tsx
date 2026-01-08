@@ -36,7 +36,7 @@ export function NavLinks() {
           <line x1="16" y1="17" x2="8" y2="17" />
           <polyline points="10 9 9 9 8 9" />
         </svg>
-        포스트
+        Posts
       </Link>
       <Link
         href="/projects"
@@ -60,7 +60,7 @@ export function NavLinks() {
           <line x1="8" y1="21" x2="16" y2="21" />
           <line x1="12" y1="17" x2="12" y2="21" />
         </svg>
-        프로젝트
+        Projects
       </Link>
       <Link
         href="/about"
@@ -83,7 +83,7 @@ export function NavLinks() {
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
           <circle cx="12" cy="7" r="4" />
         </svg>
-        소개
+        About
       </Link>
     </>
   );

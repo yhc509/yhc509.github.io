@@ -11,6 +11,7 @@ export interface ProjectMeta {
   description: string;
   thumbnail: string;
   tags: string[];
+  open: boolean;
 }
 
 export interface Project extends ProjectMeta {
@@ -42,6 +43,7 @@ export function getProjectBySlug(slug: string): Project {
     thumbnail: data.thumbnail || "/images/default-project.svg",
     content,
     tags,
+    open: data.open !== false, // 기본값은 true (공개)
   };
 }
 
@@ -52,6 +54,7 @@ export function getAllProjects(): ProjectMeta[] {
       const { content, ...meta } = getProjectBySlug(slug);
       return meta;
     })
+    .filter((project) => project.open) // open: false인 프로젝트는 목록에서 제외
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? -1 : 1));
 
   return projects;
