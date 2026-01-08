@@ -2,6 +2,8 @@ import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/posts";
 import { getAllProjects } from "@/lib/projects";
 
+export const dynamic = "force-static";
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {

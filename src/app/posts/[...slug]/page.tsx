@@ -89,7 +89,7 @@ export default async function PostPage({ params }: PostPageProps) {
         // e.g. src="./img/cloud.png", postDir="aws" -> "aws/img/cloud.png"
         const cleanSrc = src.replace(/^\.\//, "");
         const relativePath = postDir ? `${postDir}/${cleanSrc}` : cleanSrc;
-        src = `/api/images/${relativePath}`;
+        src = `/posts-images/${relativePath}`;
       }
       // eslint-disable-next-line @next/next/no-img-element
       return <img {...props} src={src as string} alt={props.alt || ""} />;

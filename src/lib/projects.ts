@@ -24,12 +24,15 @@ export function getAllProjectSlugs(): string[] {
   }
   const fileNames = fs.readdirSync(projectsDirectory);
   return fileNames
-    .filter((name) => name.endsWith(".mdx"))
-    .map((name) => name.replace(/\.mdx$/, ""));
+    .filter((name) => name.endsWith(".md") || name.endsWith(".mdx"))
+    .map((name) => name.replace(/\.mdx?$/, ""));
 }
 
 export function getProjectBySlug(slug: string): Project {
-  const fullPath = path.join(projectsDirectory, `${slug}.mdx`);
+  let fullPath = path.join(projectsDirectory, `${slug}.md`);
+  if (!fs.existsSync(fullPath)) {
+    fullPath = path.join(projectsDirectory, `${slug}.mdx`);
+  }
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 

@@ -79,8 +79,9 @@ open: false
 ## Memcached
 
 ---
-<!-- 
+
 ## DynamoDB
+
 - 완전 관리형 고가용성 데이터베이스
 - 세 개의 가용영역에 걸쳐 복제본을 두고 운영됨.
 - NoSQL
@@ -101,4 +102,4 @@ open: false
 ### DynamoDB Global Tables
 
 - 짧은 지연시간으로 DynamoDB 테이블에 액세스 할 수 있도록 하는 기능. 여러 리전에서 가능하다.
-- Active-Active 복제 (여러 리전에서 read/write가 가능함) -->
+- Active-Active 복제 (여러 리전에서 read/write가 가능함)

@@ -16,6 +16,7 @@
 # next.js
 /.next/
 /out/
+/public/posts-images/
 
 # production
 /build
