@@ -5,6 +5,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { BackButton } from "@/components/BackButton";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { Comments } from "@/components/Comments";
 import type { Metadata } from "next";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
@@ -132,6 +133,7 @@ export default async function PostPage({ params }: PostPageProps) {
           />
         </div>
       </article>
+      <Comments />
       <ScrollToTop />
     </div>
   );
