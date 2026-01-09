@@ -1,7 +1,7 @@
 ---
 date: 2024-07-12
 title: DeepLearning - CNN Neural Style Transfer
-categories: ['DeepLearning']
+categories: ['AI/DeepLearning']
 open: true
 ---
 

@@ -14,7 +14,7 @@ export function NavLinks() {
     <>
       <Link
         href="/"
-        className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm transition-colors"
+        className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-sm transition-colors"
         style={{
           backgroundColor: isPostsActive ? "var(--accent)" : "var(--card-bg)",
           color: isPostsActive ? "white" : "var(--foreground)",
@@ -29,6 +29,7 @@ export function NavLinks() {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          className="flex-shrink-0"
         >
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
           <polyline points="14 2 14 8 20 8" />
@@ -36,11 +37,11 @@ export function NavLinks() {
           <line x1="16" y1="17" x2="8" y2="17" />
           <polyline points="10 9 9 9 8 9" />
         </svg>
-        Posts
+        <span className="hidden sm:inline">Posts</span>
       </Link>
       <Link
         href="/projects"
-        className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm transition-colors"
+        className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-sm transition-colors"
         style={{
           backgroundColor: isProjectsActive ? "var(--accent)" : "var(--card-bg)",
           color: isProjectsActive ? "white" : "var(--foreground)",
@@ -55,16 +56,17 @@ export function NavLinks() {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          className="flex-shrink-0"
         >
           <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
           <line x1="8" y1="21" x2="16" y2="21" />
           <line x1="12" y1="17" x2="12" y2="21" />
         </svg>
-        Projects
+        <span className="hidden sm:inline">Projects</span>
       </Link>
       <Link
         href="/about"
-        className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm transition-colors"
+        className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-sm transition-colors"
         style={{
           backgroundColor: isAboutActive ? "var(--accent)" : "var(--card-bg)",
           color: isAboutActive ? "white" : "var(--foreground)",
@@ -79,11 +81,12 @@ export function NavLinks() {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          className="flex-shrink-0"
         >
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
           <circle cx="12" cy="7" r="4" />
         </svg>
-        About
+        <span className="hidden sm:inline">About</span>
       </Link>
     </>
   );

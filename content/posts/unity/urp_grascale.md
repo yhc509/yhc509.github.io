@@ -1,7 +1,7 @@
 ---
 date: 2024-03-23
 title: URP - Saturation 쓰지 않고 Grayscale 구현
-categories: ['Game Engine/Unity', 'Shader']
+categories: ['Game Engine/Unity', 'Graphics/Shader']
 open: true
 ---
 

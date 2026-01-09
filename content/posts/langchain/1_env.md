@@ -1,7 +1,7 @@
 ---
 date: 2024-04-02
 title: LangChain (1) - 환경 세팅
-categories: ['LangChain']
+categories: ['AI/LangChain']
 open: true
 ---
 

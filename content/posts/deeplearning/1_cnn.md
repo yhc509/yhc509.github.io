@@ -1,7 +1,7 @@
 ---
 date: 2024-06-23
 title: DeepLearning - CNN
-categories: ['DeepLearning']
+categories: ['AI/DeepLearning']
 open: true
 ---
 

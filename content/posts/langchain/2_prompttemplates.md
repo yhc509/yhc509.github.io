@@ -1,7 +1,7 @@
 ---
 date: 2024-04-10
 title: LangChain (2) - ChatPromptTemplate, StrOutputParser, MultiChain
-categories: ['LangChain']
+categories: ['AI/LangChain']
 open: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 date: 2024-03-23
 title: URP - 감마 보정 (Gamma Correction)
-categories: ['Game Engine/Unity', 'Shader']
+categories: ['Game Engine/Unity', 'Graphics/Shader']
 open: true
 ---
 

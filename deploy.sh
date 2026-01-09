@@ -14,6 +14,9 @@ cd "$BLOG_DIR"
 # 이전 빌드 결과물 삭제
 rm -rf .next out
 
+# 환경 변수 설정
+export NEXT_PUBLIC_BASE_URL="https://yhc509.github.io"
+
 # 빌드 실행
 npm run build
 

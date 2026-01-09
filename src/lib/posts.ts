@@ -42,6 +42,15 @@ export function getAllPostSlugs(): string[] {
     .map((filePath) => {
       const relativePath = path.relative(postsDirectory, filePath);
       return relativePath.replace(/\.(md|mdx)$/, "");
+    })
+    .filter((slug) => {
+      // open: false인 포스트는 정적 파일로 생성하지 않음
+      try {
+        const post = getPostBySlug(slug);
+        return post.open;
+      } catch {
+        return false;
+      }
     });
 }
 

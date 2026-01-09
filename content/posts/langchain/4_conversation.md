@@ -1,7 +1,7 @@
 ---
 date: 2024-04-18
 title: LangChain (4) - Conversation
-categories: ['LangChain']
+categories: ['AI/LangChain']
 open: true
 ---
 

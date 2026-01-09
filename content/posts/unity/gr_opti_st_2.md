@@ -1,5 +1,5 @@
 ---
-date: 2022-06-05
+date: 2022-06-06
 title: 유니티 그래픽스 최적화 스타트업 (2) - DrawCall, Batching, Culling
 categories: ['Game Engine/Unity']
 open: true

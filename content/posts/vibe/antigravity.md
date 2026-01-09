@@ -2,7 +2,7 @@
 title: "Antigravity"
 date: "2025-12-17"
 description: "Antigravity로 블로그 개편"
-categories: ['VibeCoding']
+categories: ['AI/VibeCoding']
 open: true
 ---
 

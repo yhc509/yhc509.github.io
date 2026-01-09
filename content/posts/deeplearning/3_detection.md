@@ -1,7 +1,7 @@
 ---
 date: 2024-07-06
 title: DeepLearning - CNN Detection Algorithms
-categories: ['DeepLearning']
+categories: ['AI/DeepLearning']
 open: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 date: 2024-07-09
 title: DeepLearning - CNN Face Recognition
-categories: ['DeepLearning']
+categories: ['AI/DeepLearning']
 open: true
 ---
 

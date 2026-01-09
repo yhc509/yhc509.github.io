@@ -1,7 +1,7 @@
 ---
 date: 2024-06-27
 title: DeepLearning - CNN Case Studies
-categories: ['DeepLearning']
+categories: ['AI/DeepLearning']
 open: true
 ---
 
