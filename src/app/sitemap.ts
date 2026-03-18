@@ -1,24 +1,23 @@
 import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/posts";
 import { getAllProjects } from "@/lib/projects";
+import { SITE_URL } from "@/lib/site";
 
 export const dynamic = "force-static";
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();
   const projects = getAllProjects();
 
   const postUrls = posts.map((post) => ({
-    url: `${BASE_URL}/posts/${post.slug}`,
+    url: `${SITE_URL}/posts/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
 
   const projectUrls = projects.map((project) => ({
-    url: `${BASE_URL}/projects/${project.slug}`,
+    url: `${SITE_URL}/projects/${project.slug}`,
     lastModified: new Date(project.date),
     changeFrequency: "monthly" as const,
     priority: 0.8,
@@ -26,19 +25,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
-      url: BASE_URL,
+      url: SITE_URL,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: `${BASE_URL}/projects`,
+      url: `${SITE_URL}/projects`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/about`,
+      url: `${SITE_URL}/about`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,

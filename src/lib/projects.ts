@@ -25,7 +25,15 @@ export function getAllProjectSlugs(): string[] {
   const fileNames = fs.readdirSync(projectsDirectory);
   return fileNames
     .filter((name) => name.endsWith(".md") || name.endsWith(".mdx"))
-    .map((name) => name.replace(/\.mdx?$/, ""));
+    .map((name) => name.replace(/\.mdx?$/, ""))
+    .filter((slug) => {
+      try {
+        const project = getProjectBySlug(slug);
+        return project.open;
+      } catch {
+        return false;
+      }
+    });
 }
 
 export function getProjectBySlug(slug: string): Project {

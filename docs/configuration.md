@@ -204,12 +204,9 @@ const withMDX = createMDX({
 
 ## 배포
 
-### Vercel
+### GitHub Pages
 
-```bash
-npm i -g vercel
-vercel
-```
+이 프로젝트는 정적 export 결과물을 GitHub Actions를 통해 GitHub Pages에 배포합니다. 로컬에서는 `npm run build`로 동일한 산출물을 확인할 수 있습니다.
 
 ### 정적 내보내기
 

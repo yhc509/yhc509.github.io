@@ -7,8 +7,7 @@ import { BackButton } from "@/components/BackButton";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { Comments } from "@/components/Comments";
 import type { Metadata } from "next";
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
+import { SITE_URL } from "@/lib/site";
 
 interface PostPageProps {
   params: Promise<{ slug: string[] }>;
@@ -25,7 +24,7 @@ export async function generateMetadata({
   const { slug } = await params;
   try {
     const post = getPostBySlug(slug.join("/"));
-    const url = `${BASE_URL}/posts/${slug.join("/")}`;
+    const url = `${SITE_URL}/posts/${slug.join("/")}`;
 
     return {
       title: post.title,

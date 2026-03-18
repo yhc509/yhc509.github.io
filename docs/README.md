@@ -19,9 +19,6 @@ npm run dev
 
 # 프로덕션 빌드
 npm run build
-
-# 프로덕션 서버 실행
-npm run start
 ```
 
 ## 주요 기능
@@ -52,3 +49,4 @@ content/
 - Tailwind CSS v4
 - MDX (next-mdx-remote)
 - gray-matter (frontmatter 파싱)
+- GitHub Pages + GitHub Actions

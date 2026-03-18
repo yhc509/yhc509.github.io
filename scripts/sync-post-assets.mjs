@@ -4,6 +4,16 @@ import path from "node:path";
 const sourceDir = path.join(process.cwd(), "content", "posts");
 const targetDir = path.join(process.cwd(), "public", "posts-images");
 const markdownExtensions = new Set([".md", ".mdx"]);
+const assetExtensions = new Set([
+  ".png",
+  ".jpg",
+  ".jpeg",
+  ".gif",
+  ".webp",
+  ".svg",
+  ".ico",
+  ".avif",
+]);
 
 function resetDirectory(dirPath) {
   fs.rmSync(dirPath, { recursive: true, force: true });
@@ -29,6 +39,10 @@ function copyAssets(sourcePath, destinationPath) {
 
     const extension = path.extname(entry.name).toLowerCase();
     if (markdownExtensions.has(extension)) {
+      continue;
+    }
+
+    if (!assetExtensions.has(extension)) {
       continue;
     }
 

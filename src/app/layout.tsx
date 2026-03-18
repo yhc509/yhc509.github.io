@@ -3,12 +3,11 @@ import Link from "next/link";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { NavLinks } from "@/components/NavLinks";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "yhc509's Dev Journey",
     template: "%s | yhc509's Dev Journey",
@@ -19,13 +18,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: BASE_URL,
+    url: SITE_URL,
     siteName: "yhc509's Dev Journey",
     title: "yhc509's Dev Journey",
     description: "개발과 일상을 기록하는 블로그입니다.",
     images: [
       {
-        url: `${BASE_URL}/profile.png`,
+        url: `${SITE_URL}/profile.png`,
         width: 400,
         height: 400,
         alt: "yhc509's Dev Journey",
@@ -36,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "yhc509's Dev Journey",
     description: "개발과 일상을 기록하는 블로그입니다.",
-    images: [`${BASE_URL}/profile.png`],
+    images: [`${SITE_URL}/profile.png`],
   },
   robots: {
     index: true,
