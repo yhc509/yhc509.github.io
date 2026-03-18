@@ -204,25 +204,19 @@ const withMDX = createMDX({
 
 ## 배포
 
-### Vercel
+수동 배포 스크립트는 사용하지 않는다. `deploy.sh`는 제거했다.
+
+이 저장소는 블로그 소스만 관리한다. 실제 배포는 `yhc509.github.io` 저장소의 GitHub Actions가 맡는다.
+
+배포 전에 로컬에서 확인:
 
 ```bash
-npm i -g vercel
-vercel
-```
-
-### 정적 내보내기
-
-`next.config.ts`:
-
-```typescript
-const nextConfig: NextConfig = {
-  output: "export",  // 정적 HTML 내보내기
-  // ...
-};
-```
-
-```bash
+npm run lint
 npm run build
-# out/ 폴더에 정적 파일 생성
 ```
+
+배포 흐름:
+
+1. 이 저장소에서 변경 사항을 커밋한다.
+2. GitHub Pages 배포 저장소에 변경을 반영한다.
+3. `main` 브랜치에 푸시하면 GitHub Actions가 `out/` 결과물을 배포한다.
