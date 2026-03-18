@@ -1,11 +1,6 @@
-# About
+2017- Unity 클라이언트 프로그래머.
 
-![Profile](/profile.png)
-
-## Profile
-
-- Game Programmer
-- Interested in Game Engines, Computer Graphics, and AI.
+최근 관심사: Agentic Coding, Harness Engineering.
 
 ## Contact
 

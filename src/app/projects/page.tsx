@@ -4,8 +4,8 @@ import { ProjectsHome } from "@/components/ProjectsHome";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Projects",
-  description: "프로젝트 모음입니다.",
+  title: "프로젝트",
+  description: "Project",
 };
 
 export default function ProjectsPage() {

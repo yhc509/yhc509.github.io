@@ -125,7 +125,7 @@ export function BlogHome({ posts, tagTree }: BlogHomeProps) {
   }
 
   return (
-    <div className="py-10">
+    <div id="posts-feed" className="pb-10">
       {/* Main content - 중앙 고정 */}
       <div className="relative max-w-3xl mx-auto px-5">
         {/* Sidebar - 포스트 영역 바로 왼쪽 */}
@@ -149,7 +149,10 @@ export function BlogHome({ posts, tagTree }: BlogHomeProps) {
         </div>
 
         {/* Search and Limit input */}
-        <div className="mb-6 flex gap-3">
+        <div
+          className="mb-6 flex gap-3 border-b pb-4"
+          style={{ borderColor: "var(--card-border)" }}
+        >
           <div className="relative flex-1">
             <svg
               className="absolute left-3 top-1/2 -translate-y-1/2"
@@ -171,9 +174,9 @@ export function BlogHome({ posts, tagTree }: BlogHomeProps) {
               placeholder="검색..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 rounded-lg border outline-none transition-colors"
+              className="w-full rounded-lg border py-2 pl-10 pr-4 outline-none transition-colors"
               style={{
-                backgroundColor: "var(--card-bg)",
+                backgroundColor: "transparent",
                 borderColor: "var(--card-border)",
                 color: "var(--foreground)",
               }}
@@ -205,9 +208,9 @@ export function BlogHome({ posts, tagTree }: BlogHomeProps) {
             <select
               value={postsPerPage}
               onChange={(e) => setLimit(Number(e.target.value))}
-              className="appearance-none pl-4 pr-8 py-2 rounded-lg border outline-none transition-colors cursor-pointer h-full"
+              className="h-full appearance-none rounded-lg border py-2 pl-4 pr-8 outline-none transition-colors cursor-pointer"
               style={{
-                backgroundColor: "var(--card-bg)",
+                backgroundColor: "transparent",
                 borderColor: "var(--card-border)",
                 color: "var(--foreground)",
               }}
@@ -236,7 +239,7 @@ export function BlogHome({ posts, tagTree }: BlogHomeProps) {
 
         {/* Selected tags display */}
         {selectedTags.length > 0 && (
-          <div className="mb-4 flex flex-wrap gap-2">
+          <div className="mb-5 flex flex-wrap gap-2">
             {selectedTags.map((tag) => (
               <button
                 key={tag}
@@ -267,56 +270,57 @@ export function BlogHome({ posts, tagTree }: BlogHomeProps) {
         )}
 
         {/* Posts list */}
-        <div className="grid gap-5">
+        <div>
           {filteredPosts.length === 0 ? (
-            <p style={{ color: "var(--text-muted)" }}>
+            <div
+              className="border-b py-8"
+              style={{
+                color: "var(--text-muted)",
+                borderColor: "var(--card-border)",
+              }}
+            >
               {searchQuery
                 ? "검색 결과가 없습니다."
                 : "선택한 태그에 해당하는 포스트가 없습니다."}
-            </p>
+            </div>
           ) : (
             currentPosts.map((post) => (
               <Link
                 key={post.slug}
                 href={getPostUrl(post.slug)}
-                className="block p-6 rounded-xl border transition-all duration-200 hover:-translate-y-1"
-                style={{
-                  backgroundColor: "var(--card-bg)",
-                  borderColor: "var(--card-border)",
-                }}
+                className="block border-b py-5 transition-colors hover:opacity-85"
+                style={{ borderColor: "var(--card-border)" }}
               >
                 <article>
-                  <h2 className="text-lg font-bold mb-2">{post.title}</h2>
-                  <p
-                    className="text-sm mb-3"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    {post.description}
-                  </p>
-                  {post.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {post.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs px-2 py-0.5 rounded"
-                          style={{
-                            backgroundColor: "var(--card-border)",
-                            color: "var(--text-secondary)",
-                          }}
-                        >
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
                   <div
-                    className="flex items-center gap-3 text-xs"
+                    className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs"
                     style={{ color: "var(--text-muted)" }}
                   >
                     <time dateTime={post.date}>{post.date}</time>
                     <span>·</span>
                     <span>{post.readingTime}</span>
                   </div>
+                  <h2 className="text-lg font-bold leading-snug">{post.title}</h2>
+                  {post.description && (
+                    <p
+                      className="mt-2 text-sm leading-6"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      {post.description}
+                    </p>
+                  )}
+                  {post.tags.length > 0 && (
+                    <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                      {post.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          style={{ color: "var(--text-muted)" }}
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </article>
               </Link>
             ))

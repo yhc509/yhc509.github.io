@@ -7,8 +7,8 @@ import remarkGfm from "remark-gfm";
 import { BackButton } from "@/components/BackButton";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import type { Metadata } from "next";
-import { SITE_URL } from "@/lib/site";
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
 const EMPTY_PROJECT_SLUG = "__empty__";
 
 interface ProjectPageProps {
@@ -30,7 +30,12 @@ export async function generateMetadata({
   const { slug } = await params;
   try {
     const project = getProjectBySlug(slug);
-    const url = `${SITE_URL}/projects/${slug}`;
+    if (!project.open) {
+      return {
+        title: "Project Not Found",
+      };
+    }
+    const url = `${BASE_URL}/projects/${slug}`;
 
     return {
       title: project.title,
@@ -69,7 +74,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  let project;
+  let project: ReturnType<typeof getProjectBySlug>;
 
   try {
     project = getProjectBySlug(slug);

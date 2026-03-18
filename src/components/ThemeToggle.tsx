@@ -3,13 +3,13 @@
 import { useSyncExternalStore } from "react";
 import { useTheme } from "./ThemeProvider";
 
-function subscribe() {
-  return () => {};
-}
-
 export function ThemeToggle() {
-  const mounted = useSyncExternalStore(subscribe, () => true, () => false);
   const { theme, toggleTheme } = useTheme();
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
 
   if (!mounted) {
     return (
