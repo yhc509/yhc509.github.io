@@ -92,8 +92,16 @@ export function getAllPosts(): PostMeta[] {
   const slugs = getAllPostSlugs();
   const posts = slugs
     .map((slug) => {
-      const { content, ...meta } = getPostBySlug(slug);
-      return meta;
+      const post = getPostBySlug(slug);
+      return {
+        slug: post.slug,
+        title: post.title,
+        date: post.date,
+        description: post.description,
+        readingTime: post.readingTime,
+        tags: post.tags,
+        open: post.open,
+      };
     })
     .filter((post) => post.open) // open: false인 포스트는 목록에서 제외
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? -1 : 1));

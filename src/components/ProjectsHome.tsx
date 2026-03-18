@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,26 +14,8 @@ interface ProjectsHomeProps {
 export function ProjectsHome({ projects, tagTree }: ProjectsHomeProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
-
-  useEffect(() => {
-    const tagsParam = searchParams.get("tags");
-    const searchParam = searchParams.get("q");
-
-    if (tagsParam) {
-      setSelectedTags(tagsParam.split(",").filter(Boolean));
-    } else {
-      setSelectedTags([]);
-    }
-
-    if (searchParam) {
-      setSearchQuery(searchParam);
-    } else {
-      setSearchQuery("");
-    }
-  }, [searchParams]);
+  const selectedTags = searchParams.get("tags")?.split(",").filter(Boolean) ?? [];
+  const searchQuery = searchParams.get("q") ?? "";
 
   const updateURL = (tags: string[], query: string) => {
     const params = new URLSearchParams();
@@ -51,13 +32,11 @@ export function ProjectsHome({ projects, tagTree }: ProjectsHomeProps) {
   };
 
   const handleTagsChange = (tags: string[]) => {
-    setSelectedTags(tags);
     updateURL(tags, searchQuery);
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
-    setSearchQuery(query);
     updateURL(selectedTags, query);
   };
 

@@ -1,4 +1,0 @@
-User-Agent: *
-Allow: /
-
-Sitemap: https://yhc509.github.io/sitemap.xml
