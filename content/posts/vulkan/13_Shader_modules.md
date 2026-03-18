@@ -1,0 +1,338 @@
+---
+date: 2022-08-15
+title: Vulkan Tutorial (13) - Draw a triangle - Graphics Pipeline Basic - Shader modules
+categories: ['Graphics/Vulkan']
+open: true
+---
+
+-[Khronos Vulkan Tutorial](https://docs.vulkan.org/tutorial/latest/00_Introduction.html)
+
+이전 API들과는 다르게 Vulkan의 셰이더 코드는 GLSL이나 HLSL같이 사람이 읽을 수 있는 구문이 아닌 바이트 코드 형식으로 지정해야 합니다. 이 바이트 코드 형식은 SPIR-V라고 부르며 Vulkan과 OpenCL(둘 다 Khronos의 API들)과 함께 사용하도록 설계되었습니다. 그래픽과 컴퓨트 셰이더를 작성할 수 있는 형식이지만, 이 튜토리얼에서는 Vulkan의 그래픽스 파이프라인에서 사용하는 셰이더에 중점을 두겠습니다.
+
+바이트 코드 형식을 사용할 때 장점은 GPU 공급 업체가 셰이더 코드를 네이티브 코드로 바꾸기 위해 작성된 컴파일러가 덜 복잡하다는 것입니다. 과거 GLSL 문법과 같이 사람이 읽을 수 있는 구문을 사용하여, 몇 GPU 공급 업체들은 표준을 꽤 유연하게 해석했습니다. 공급 업체들 중 하나의 GPU를 사용하여 중요하지 않은 셰이더를 작성하는 경우, 구문 오류로 인해 다른 공급 업체의 드라이버가 코드를 거부하거나 컴파일러 버그로 인해 셰이더가 다르게 실행될 수 있습니다. SPIR-V 같은 간단한 바이트 코드 형식을 사용하면 이러한 문제를 피할 수 있습니다.
+
+그러나 우리가 바이트 코드를 일일히 작성할 필요는 없습니다. Khronos는 GLSL을 SPIR-V로 컴파일하는 공급업체에 독릭된 자체적인 컴파일러를 출시하였습니다. 이 컴파일러는 셰이더 코드가 완전히 표준을 지키고, 프로그램과 함께 제공될 수 있는 하나의 SPIR-V 바이너리를 생산하도록 설계되었습니다. 이 컴파일러를 라이브러리로 포함하여 런타임 상에서 SPIR-V를 생성하도록 할 수 있지만, 이 튜토리얼에서는 그렇게 하지 않을 것입니다. Google의 `glslangValidator.exe`이나 `glslc.exe` 같은 컴파일러를 직접 사용할 수 있습니다. `glslc`의 장점은 GCC나 Clang과 같이 유명한 컴파일러들과 같은 매개변수 형식을 사용하고, include같은 몇가지 추가 기능을 포함한다는 것입니다. 둘 다 Vulkan SDK에 이미 포함되어 있어서 추가로 다운로드 받을 필요는 없습니다.
+
+GLSL은 C-스타일 구문을 사용하는 셰이더 언어입니다. 여기에 작성된 프로그램은 모든 오브젝트들에 대해 호출되는 `main`이라는 함수를 가지고 있습니다. 입력에 매개변수를 사용하고 출력으로 반환 값을 사용하는 대신, GLSL은 전역 변수를 사용하여 입력과 출력을 처리합니다. 이 언어에는 내장된 vector나 matrix 요소와 같이 그래픽 프로그래밍을 지원하는 많은 기능들이 포함되어 있습니다. 외적, 행렬-벡터 곱, 반사 벡터와 같은 기능들이 포함되어 있습니다. 벡터 타입은 요소의 양을 나타내는 `vec`라는 것으로 불립니다. 예를 들어, 3D 위치는 `vec3`에 저장됩니다. `.x`와 같이 단일 개체에 접근할 수 있지만, 여러 구성 요소를 통해 새로운 벡터를 만드는 것도 가능합니다. `vec3(1.0, 2.0, 3.0).xy`의 결과는 `vec2`입니다. 벡터의 생성자는 백터 객체와 스칼라 값의 조합을 사용할 수 있습니다. `vec3(vec2(1.0, 2.0), 3.0)`으로 `vec3`를 생성할 수 있습니다.
+
+이전 챕터에서 언급했듯이, 삼각형을 표시하려면 정점 셰이더와 조각 셰이더를 작성해야 합니다. 다음 두 섹션에서 각각의 GLSL 코드를 다루고, 두 개의 SPIR-V 바이너리를 생성하여 프로그램에 로드하는 방법을 보겠습니다.
+
+# 정점 셰이더(Vertex shader)
+
+정점 셰이더는 들어온 각 정점들을 처리합니다. 월드 위치, 색상, 법선과 텍스쳐 좌표 같은 속성들을 입력받습니다. 클립 좌표의 최종 위치와 색상이나 텍스쳐 좌표 같은 조각 셰이더에 전달할 속성들을 출력합니다. 이 값은 부드러운 그라디언트를 생성하기 위해 래스터라이저에 의해 보간된 후 조각 셰이더로 전달됩니다.
+
+*클립 좌표*는 정점 셰이더의 4차원 벡터로, 전체 벡터를 마지막 컴포넌트로 나누어 *정규화된 장치 좌표*로 변환합니다. 이러한 정규화된 장치 좌표는 프레임버퍼를 다음과 같이 [-1, -1]에서 [1, 1] 좌표계로 매핑하는 [동종 좌표계](https://en.wikipedia.org/wiki/Homogeneous_coordinates)입니다.
+
+![normalized_device_coordinates.svg](./img/ndc.svg)
+
+이전에 컴퓨터 그래픽스를 건드려본 적이 있다면 친숙해야 합니다. OpenGL을 써봤다면 Y 좌표의 부호가 뒤집힌 것을 알아차릴 것입니다. 이제 Z 좌표는 0에서 1까지, Direct3D와 동일한 범위를 사용합니다.
+
+첫번째 삼각형은 아무 변환도 적용하지 않고, 세 정점의 위치를 정규화된 장치 좌표로 직접 지정하여 다음과 같은 모습으로 만들 것입니다:
+
+![triangle_coordinates.svg](./img/triangle_coordinates.svg)
+
+우리는 정점 셰이더에서 나온 클립 좌표의 마지막 요소를 `1`로 세팅하여 정규화된 장치 좌표를 직접 출력할 수 있습니다. 이렇게 하면 클립 좌표를 정규화된 장치 좌표로 변환하는 나눗셈은 아무 것도 바꾸지 않을 것입니다.
+
+일반적으로 이러한 좌표들은 정점 버퍼에 저장되지만, Vulkan에서 정점 버퍼를 만들고 데이터를 채우는 것은 간단하지 않습니다. 그러므로 삼각형이 화면에 나타나는 것을 보고 만족할 때까지 그 작업을 미룰 것입니다. 그 동안에는 비정석적인 작업을 수행할 것입니다: 정점 셰이더에 좌표를 직접 포함하는 것입니다. 코드는 다음과 같습니다.
+
+```glsl
+#version 450
+
+vec2 positions[3] = vec2[](
+    vec2(0.0, -0.5),
+    vec2(0.5, 0.5),
+    vec2(-0.5, 0.5)
+);
+
+void main() {
+    gl_Position = vec4(positions[gl_VertexIndex], 0.0, 1.0);
+}
+```
+
+`main` 함수는 모든 버텍스에 의해 호출됩니다. `gl_VertexIndex` 변수는 현재 정점의 인덱스를 포함합니다. 원래라면 정점 버퍼에 대한 인덱스이지만, 우리의 경우는 하드코딩된 배경에 대한 인덱스가 되겠죠. 각 정점의 위치는 상수 배열에서 접근 가능하고, 더미로 된 z와 w 요소를 결합하여 클립 좌표의 위치를 만듭니다. 내장된 변수인 `gl_Position`는 출력값으로 사용됩니다.
+
+# 조각 셰이더(Fragment shader)
+
+정점 셰이더에 의해 형성되는 삼각형은 화면 영역을 조각으로 채웁니다. 조각 셰이더는 이러한 조각들에게서 호출되어 프레임버퍼의 색상과 깊이를 생성합니다. 삼각형 전체를 빨간색으로 출력하는 간단한 조각 셰이더는 다음과 같습니다:
+
+```glsl
+#version 450
+
+layout(location = 0) out vec4 outColor;
+
+void main() {
+    outColor = vec4(1.0, 0.0, 0.0, 1.0);
+}
+```
+
+`main` 함수는 정점 셰이더에서와 마찬가지로, 모든 조각들에 의해 불려집니다. GLSL의 색상은 [0, 1] 범위의 R, G, B와 알파채널을 가지고 있는 4차원 벡터입니다. 정점 셰이더의 `gl_Position`과 다르게 현재 조각의 색상을 출력하는 내장 변수가 없습니다. 각 프레임 버퍼로 출력하고자 하는 특정 변수에 `layout(location = 0)` 프레임 버퍼의 인덱스를 지정하는 수정자를 기입해야 합니다. 빨간색은 프레임 버퍼에서 인덱스가 `0`인 outColor 변수에 기록됩니다.
+
+# 정점별 색상
+
+삼각형 전체를 빨갛게 만드는 것은 그다지 흥미롭지 않고 다음과 같이 보이는 것이 더 멋있어 보이지 않나요?
+
+![triangle_coordinates_colors.png](./img/colortri.png)
+
+이렇게 만드려면 두 셰이더 모두 몇 가지 변경이 필요합니다. 먼저 세 정점 각각에 고유한 색상을 지정해야 합니다. 정점 셰이더는 위치와 마찬가지로 색상에 대한 배열을 가지고 있어야 합니다:
+
+```glsl
+vec3 colors[3] = vec3[](
+    vec3(1.0, 0.0, 0.0),
+    vec3(0.0, 1.0, 0.0),
+    vec3(0.0, 0.0, 1.0)
+);
+```
+
+이제 이러한 정점별 색상을 조각 셰이더로 전달하여 보간된 값을 프레임 버퍼에 출력할 수 있습니다. 버텍스 셰이더에 색상 출력을 추가해주고 `main` 함수에 이렇게 작성해줍시다:
+
+```glsl
+layout(location = 0) out vec3 fragColor;
+
+void main() {
+    gl_Position = vec4(positions[gl_VertexIndex], 0.0, 1.0);
+    fragColor = colors[gl_VertexIndex];
+}
+```
+
+다음은 조각 셰이더에 일치하는 입력을 추가해주어야 합니다.
+
+```glsl
+layout(location = 0) in vec3 fragColor;
+
+void main() {
+    outColor = vec4(fragColor, 1.0);
+}
+```
+
+입력 변수는 반드시 같은 이름을 사용할 필요는 없습니다. `location`에 지정된 인덱스를 사용하여 연결됩니다. `main` 함수는 알파 값과 함께 색상이 출력되도록 수정되었습니다. 위의 이미지에서 보이듯이, `fragColor`의 값은 세 정점 사이의 조각들에 따라 자동으로 보간되어 부드럽게 보여집니다.
+
+# 셰이더 컴파일
+
+프로젝트 루트 디렉토리에 `shaders` 디렉토리를 만들고 `shader.vert` 정점 셰이더 파일과 `shader.frag` 조각 셰이더 파일을 저장합니다. GLSL 셰이더는 공식 확장자를 가지고 있지는 않지만, 보통 두 셰이더를 구분할 때 사용합니다.
+
+`shader.vert`의 내용은 이렇습니다:
+
+```glsl
+#version 450
+
+layout(location = 0) out vec3 fragColor;
+
+vec2 positions[3] = vec2[](
+    vec2(0.0, -0.5),
+    vec2(0.5, 0.5),
+    vec2(-0.5, 0.5)
+);
+
+vec3 colors[3] = vec3[](
+    vec3(1.0, 0.0, 0.0),
+    vec3(0.0, 1.0, 0.0),
+    vec3(0.0, 0.0, 1.0)
+);
+
+void main() {
+    gl_Position = vec4(positions[gl_VertexIndex], 0.0, 1.0);
+    fragColor = colors[gl_VertexIndex];
+}
+```
+
+`shader.frag`의 내용은 이렇습니다:
+
+```glsl
+#version 450
+
+layout(location = 0) in vec3 fragColor;
+
+layout(location = 0) out vec4 outColor;
+
+void main() {
+    outColor = vec4(fragColor, 1.0);
+}
+```
+
+이제 `glslc` 프로그램을 이용하여 SPIR-V 바이트 코드로 컴파일할 것입니다.
+
+**Windows**
+
+`compile.bat`을 만들고 아래와 같이 작성하세요:
+
+```bash
+C:/VulkanSDK/x.x.x.x/Bin32/glslc.exe shader.vert -o vert.spv
+C:/VulkanSDK/x.x.x.x/Bin32/glslc.exe shader.frag -o frag.spv
+pause
+```
+
+`glslc.exe`의 경로를 당신이 Vulkan SDK를 설치한 경로로 바꾸십시오. 파일을 두번 클릭하여 실행합니다.
+
+**Linux**
+
+`compile.sh`를 만들고 아래와 같이 작성하세요:
+
+```bash
+/home/user/VulkanSDK/x.x.x.x/x86_64/bin/glslc shader.vert -o vert.spv
+/home/user/VulkanSDK/x.x.x.x/x86_64/bin/glslc shader.frag -o frag.spv
+```
+
+`glslc.exe`의 경로를 당신이 Vulkan SDK를 설치한 경로로 바꾸십시오. 스크립트를 실행할 수 있도록 `chmod +x compile.sh` 권한을 줍니다. 그리고 실행하세요.
+
+**플랫폼별 지침 끝**
+
+이 두 명령어는 컴파일러에게 GLSL 소스 파일을 읽고 `-o` (출력) 플래그를 이용하여 SPIR-V 바이트 코드를 출력하도록 지시합니다.
+
+셰이더에 구문 오류가 있는 경우, 컴파일러는 예상대로 줄 번호와 문제를 알려줄 것입니다. 세미콜론을 빠뜨리고 컴파일 스크립트를 다시 실행해보세요. 또한 컴파일러가 지원하는 플래그의 종류를 확인하려면 인수 없이 컴파일러를 실행해보십시오. 예를 들어, 바이트 코드를 사람이 읽을 수 있는 형식으로 출력할 수 있으므로 셰이더가 정확히 수행하는 작업과 이 단계에서 적용된 최적화에 대해 알 수 있습니다.
+
+명령줄에서 셰이더를 컴파일하는 것은 가장 간단한 옵션 중 하나이며 이 튜토리얼에서 사용한 방법입니다. 당신의 코드에서 직접 셰이더를 컴파일하는 것도 가능합니다. Vulkan SDK에는 프로그램 내에서 GLSL 코드를 SPIR-V로 컴파일하는 라이브러리인 `libshaderc`가 포함되어 있습니다.
+
+# 셰이더 불러오기
+
+이제 SPIR-V 셰이더를 생성하는 방법을 배웠으므로, 프로그램에 로드한 후 어떠한 시점에 그래픽 파이프라인에 연결해야 할 것입니다. 먼저 바이너리 데이터를 파일에서 읽어오는 간단한 헬퍼 함수를 작성합니다.
+
+```cpp
+#include <fstream>
+
+...
+
+static std::vector<char> readFile(const std::string& filename) {
+    std::ifstream file(filename, std::ios::ate | std::ios::binary);
+
+    if (!file.is_open()) {
+        throw std::runtime_error("failed to open file!");
+    }
+}
+```
+
+`readFile` 함수는 지정된 파일에서 모든 바이트를 읽고 `std::vector` 바이트 배열로 반환합니다. 우리는 파일을 열 때, 두개의 플래그로 시작합니다.
+
+- `ate`: 파일 끝에서 읽기 시작
+- `binary`: 파일을 바이너리 파일로 읽기 (텍스트 변형을 방지함)
+
+“파일 끝에서 읽기 시작”의 장점은 읽기 위치를 사용하여 파일의 크기를 결정하고 버퍼에 할당할 수 있다는 것입니다:
+
+```cpp
+size_t fileSize = (size_t) file.tellg();
+std::vector<char> buffer(fileSize);
+```
+
+그 후, 우리는 파일의 시작 부분으로 돌아가서 모든 바이트를 한 번에 읽을 수 있습니다:
+
+```cpp
+file.seekg(0);
+file.read(buffer.data(), fileSize);
+```
+
+마지막으로 파일을 닫고 바이트를 반환합니다:
+
+```cpp
+file.close();
+
+return buffer;
+```
+
+이제 createGraphicsPipeline에서 이 함수를 호출하여 두 개의 셰이더를 불러올 것입니다:
+
+```cpp
+void createGraphicsPipeline() {
+    auto vertShaderCode = readFile("shaders/vert.spv");
+    auto fragShaderCode = readFile("shaders/frag.spv");
+}
+```
+
+버퍼 크기를 print하고 실제 파일 크기와 일치하는지 비교하여 셰이더가 올바르게 로드되었는지 확인합니다. 참고로 바이너리 코드이기 때문에 null로 종료될 필요는 없습니다. 나중에 정확한 크기에 대해 명시할 것입니다.
+
+# 셰이더 모듈 만들기
+
+코드를 파이프라인에 전달하기 전에, `VkShaderModule`로 래핑해야 합니다. `createShaderModule` 헬퍼 함수를 만듭시다.
+
+```cpp
+VkShaderModule createShaderModule(const std::vector<char>& code) {
+
+}
+```
+
+이 함수는 바이트 코드를 매개변수로 받아서 `VkShaderModule`을 생성합니다.
+
+셰이더 모듈을 만드는 것은 간단합니다. 바이트 코드와 그 길이가 있는 버퍼를 가리키는 포인터만 있으면 됩니다. 이 정보는 `VkShaderModuleCreateInfo` 구조체에 지정됩니다.  한가지 문제는 바이트 코드의 크기가 지정되지만, 포인터가 `char`가 아닌 `uint32_t`라는 것입니다. 따라서 아래와 같이 reinterpret_cst를 통해 포인터를 캐스팅해주어야 합니다. 이러한 캐스팅을 할 때, 데이터가 uint32_t의 정렬 요구사항을 만족하는지 확인해야 합니다. 운이 좋게도 데이터는 std::vector의 기본 할당자가 최악의 경우에 정렬 요구사항을 만족하는지를 확인하는 위치에 저장됩니다.
+
+```cpp
+VkShaderModuleCreateInfo createInfo{};
+createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+createInfo.codeSize = code.size();
+createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
+```
+
+`VkShaderModule`은 `vkCreateShaderModule`을 호출하여 생성할 수 있습니다:
+
+```cpp
+VkShaderModule shaderModule;
+if (vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
+    throw std::runtime_error("failed to create shader module!");
+}
+```
+
+매개변수는 이전 오브젝트 생성 함수들(logical device, 정보 구조체 생성을 위한 포인터, 사용자 지정 할당자, 핸들 출력 변수)들과 같습니다. 코드가 있는 버퍼는 셰이더 모듈이 생성된 후 즉시 해제할 수 있습니다. 생성된 셰이더 모듈을 반환하는 것을 잊지 마세요:
+
+```cpp
+return shaderModule;
+```
+
+셰이더 모듈은 이전에 정의한 함수로 파일에서 로드한 셰이더 바이트 코드를 감싸는 짧은 래퍼입니다. GPU에서 실행하기 위해 SPIR-V 바이트 코드를 기계어로 컴파일하고 링킹하는 것은 그래픽 파이프라인이 생성될 때 까지 발생하지 않습니다. 즉, 파이프라인 생성이 완료되는 즉시 셰이더 모듈을 다시 파괴할 수 있기 때문에, 클래스 멤버 변수 대신 로컬 변수에서 `createGraphicsPipeline`  호출할 것입니다:
+
+```cpp
+void createGraphicsPipeline() {
+    auto vertShaderCode = readFile("shaders/vert.spv");
+    auto fragShaderCode = readFile("shaders/frag.spv");
+
+    VkShaderModule vertShaderModule = createShaderModule(vertShaderCode);
+    VkShaderModule fragShaderModule = createShaderModule(fragShaderCode);
+```
+
+cleanup은 함수 끝에 두 번의 `vkDestroyShaderModule` 호출을 추가합니다. 이 챕터의 나머지 코드들은 모두 이 줄 앞에 삽입됩니다.
+
+```cpp
+...
+    vkDestroyShaderModule(device, fragShaderModule, nullptr);
+    vkDestroyShaderModule(device, vertShaderModule, nullptr);
+}
+```
+
+# 셰이더 단계 생성
+
+셰이더를 실제로 사용하려면 실제 파이프라인 생성 프로세스의 일부로 `VkPipelineShaderStageCreateInfo` 구조체를 통해 특정 파이프라인 단계에 할당해야 합니다.
+
+createGraphicsPipeline 함수에서 다시 정점 셰이더의 구조를 채우는 것으로 시작하겠습니다.
+
+```cpp
+VkPipelineShaderStageCreateInfo vertShaderStageInfo{};
+vertShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+vertShaderStageInfo.stage = VK_SHADER_STAGE_VERTEX_BIT;
+```
+
+먼저 `sType`는 Vulkan에 셰이더가 사용될 파이프라인 단계를 알려줍니다. 이전 챕터에서 설명한 프로그래밍 가능한 단계에 해당하는 열거형 값이 있습니다.
+
+```cpp
+vertShaderStageInfo.module = vertShaderModule;
+vertShaderStageInfo.pName = "main";
+```
+
+다음 두 멤버는 코드가 포함된 셰이더 모듈과 진입점(entrypoint) 함수를 지정합니다. 즉, 여러 조각 셰이더를 조합하여 하나의 셰이더를 만들고, 서로 다른 진입점을 사용하여 동작을 구별할 수 있다는 뜻입니다. 그러나 우리는 표준을 준수하여 `main`을 사용합니다.
+
+선택 가능한 옵션으로 `pSpecializationInfo`는 여기서 사용하지는 않지만 의논할 가치가 있습니다. 셰이더 상수에 값을 지정할 수 있습니다. 단일 셰이더 모듈로 파이프라인 생성 시 사용되는 상수에 대해 다른 값을 지정하여 사용할 수 있습니다. 컴파일러가 `if` 같이 값에 의존적인 구문을 제거하는 등의 최적화를 할 수 있기 때문에 렌더 시간에 보다 효율적입니다. 이러한 상수가 없으면 nullptr로 설정하여 자동으로 구조체 초기화가 되도록 할 수 있습니다.
+
+조각 셰이더를 구조에 맞게 수정하는 것은 쉽습니다:
+
+```cpp
+VkPipelineShaderStageCreateInfo fragShaderStageInfo{};
+fragShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+fragShaderStageInfo.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
+fragShaderStageInfo.module = fragShaderModule;
+fragShaderStageInfo.pName = "main";
+```
+
+실제 파이프라인 생성 단계에서 참조하는데 사용할 두 구조체가 들어있는 배열을 정의하면서 완료합니다
+
+```cpp
+VkPipelineShaderStageCreateInfo shaderStages[] = {vertShaderStageInfo, fragShaderStageInfo};
+```
+
+이것이 파이프라인의 프로그래밍 가능한 단계의 전부입니다. 다음 챕터에서는 고정 기능 단계를 살펴보겠습니다.
+
+[C++ code](https://vulkan-tutorial.com/code/09_shader_modules.cpp) / [Vertex shader](https://vulkan-tutorial.com/code/09_shader_base.vert) / [Fragment shader](https://vulkan-tutorial.com/code/09_shader_base.frag)
