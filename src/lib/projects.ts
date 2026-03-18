@@ -54,8 +54,16 @@ export function getAllProjects(): ProjectMeta[] {
   const slugs = getAllProjectSlugs();
   const projects = slugs
     .map((slug) => {
-      const { content, ...meta } = getProjectBySlug(slug);
-      return meta;
+      const project = getProjectBySlug(slug);
+      return {
+        slug: project.slug,
+        title: project.title,
+        date: project.date,
+        description: project.description,
+        thumbnail: project.thumbnail,
+        tags: project.tags,
+        open: project.open,
+      };
     })
     .filter((project) => project.open) // open: false인 프로젝트는 목록에서 제외
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? -1 : 1));

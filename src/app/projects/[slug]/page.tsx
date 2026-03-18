@@ -25,6 +25,11 @@ export async function generateMetadata({
   const { slug } = await params;
   try {
     const project = getProjectBySlug(slug);
+    if (!project.open) {
+      return {
+        title: "Project Not Found",
+      };
+    }
     const url = `${BASE_URL}/projects/${slug}`;
 
     return {
@@ -59,85 +64,91 @@ export async function generateMetadata({
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
+  let project: ReturnType<typeof getProjectBySlug>;
+
   try {
-    const project = getProjectBySlug(slug);
-
-    const jsonLd = {
-      "@context": "https://schema.org",
-      "@type": "CreativeWork",
-      name: project.title,
-      description: project.description,
-      datePublished: project.date,
-      author: {
-        "@type": "Person",
-        name: "Blog Author",
-      },
-      keywords: project.tags.join(", "),
-      image: project.thumbnail,
-    };
-
-    return (
-      <div className="max-w-3xl mx-auto px-5 py-10">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <Suspense>
-          <BackButton basePath="/projects" />
-        </Suspense>
-        <article>
-          <header
-            className="mb-8 pb-8 border-b"
-            style={{ borderColor: "var(--card-border)" }}
-          >
-            <div className="relative aspect-video rounded-xl overflow-hidden mb-6">
-              <Image
-                src={project.thumbnail}
-                alt={project.title}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-            <h1 className="text-3xl font-bold mb-4">{project.title}</h1>
-            <p
-              className="text-lg mb-4"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              {project.description}
-            </p>
-            <div
-              className="flex items-center gap-3 text-sm"
-              style={{ color: "var(--text-muted)" }}
-            >
-              <time dateTime={project.date}>{project.date}</time>
-              {project.tags.length > 0 && (
-                <>
-                  <span>·</span>
-                  <div className="flex gap-2 flex-wrap">
-                    {project.tags.map((tag) => (
-                      <span key={tag}>#{tag}</span>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-          </header>
-          <div className="prose max-w-none">
-            <MDXRemote
-              source={project.content}
-              options={{
-                mdxOptions: {
-                  remarkPlugins: [remarkGfm],
-                },
-              }}
-            />
-          </div>
-        </article>
-        <ScrollToTop />
-      </div>
-    );
+    project = getProjectBySlug(slug);
   } catch {
     notFound();
   }
+
+  if (!project.open) {
+    notFound();
+  }
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: project.title,
+    description: project.description,
+    datePublished: project.date,
+    author: {
+      "@type": "Person",
+      name: "Blog Author",
+    },
+    keywords: project.tags.join(", "),
+    image: project.thumbnail,
+  };
+
+  return (
+    <div className="max-w-3xl mx-auto px-5 py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Suspense>
+        <BackButton basePath="/projects" />
+      </Suspense>
+      <article>
+        <header
+          className="mb-8 pb-8 border-b"
+          style={{ borderColor: "var(--card-border)" }}
+        >
+          <div className="relative aspect-video rounded-xl overflow-hidden mb-6">
+            <Image
+              src={project.thumbnail}
+              alt={project.title}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+          <h1 className="text-3xl font-bold mb-4">{project.title}</h1>
+          <p
+            className="text-lg mb-4"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            {project.description}
+          </p>
+          <div
+            className="flex items-center gap-3 text-sm"
+            style={{ color: "var(--text-muted)" }}
+          >
+            <time dateTime={project.date}>{project.date}</time>
+            {project.tags.length > 0 && (
+              <>
+                <span>·</span>
+                <div className="flex gap-2 flex-wrap">
+                  {project.tags.map((tag) => (
+                    <span key={tag}>#{tag}</span>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </header>
+        <div className="prose max-w-none">
+          <MDXRemote
+            source={project.content}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [remarkGfm],
+              },
+            }}
+          />
+        </div>
+      </article>
+      <ScrollToTop />
+    </div>
+  );
 }
