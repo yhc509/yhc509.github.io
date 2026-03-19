@@ -23,6 +23,9 @@ export const siteContent = {
     headline: "yhc509",
   },
   projects: {
+    headline: "프로젝트",
+    intro: "공개 가능한 프로젝트만 적어둡니다.",
+    searchPlaceholder: "제목, 요약, 태그로 검색...",
     emptyStateTitle: "공개 가능한 프로젝트를 정리 중입니다.",
     emptyStateDescription:
       "보안과 공개 범위를 정리한 뒤, 실험 프로젝트와 재현용 데모부터 순서대로 올릴 예정입니다.",

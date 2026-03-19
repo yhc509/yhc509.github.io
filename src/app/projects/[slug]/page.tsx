@@ -5,6 +5,7 @@ import { getAllProjectSlugs, getProjectBySlug } from "@/lib/projects";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { BackButton } from "@/components/BackButton";
+import { ProjectExternalLinks } from "@/components/ProjectExternalLinks";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import type { Metadata } from "next";
 
@@ -35,7 +36,7 @@ export async function generateMetadata({
     return {
       title: project.title,
       description: project.description,
-      keywords: project.tags,
+      keywords: [...project.tags, project.role],
       openGraph: {
         type: "article",
         title: project.title,
@@ -78,13 +79,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "CreativeWork",
+    "@type": "SoftwareSourceCode",
     name: project.title,
     description: project.description,
     datePublished: project.date,
+    codeRepository: project.links.github,
     author: {
       "@type": "Person",
-      name: "Blog Author",
+      name: "yhc509",
     },
     keywords: project.tags.join(", "),
     image: project.thumbnail,
@@ -113,6 +115,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               priority
             />
           </div>
+          <div
+            className="mb-4 flex flex-wrap items-center gap-2 text-xs"
+            style={{ color: "var(--text-muted)" }}
+          >
+            <time dateTime={project.date}>{project.date}</time>
+          </div>
           <h1 className="text-3xl font-bold mb-4">{project.title}</h1>
           <p
             className="text-lg mb-4"
@@ -121,20 +129,39 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             {project.description}
           </p>
           <div
-            className="flex items-center gap-3 text-sm"
-            style={{ color: "var(--text-muted)" }}
+            className="mt-6 border-t pt-5"
+            style={{ borderColor: "var(--card-border)" }}
           >
-            <time dateTime={project.date}>{project.date}</time>
-            {project.tags.length > 0 && (
-              <>
-                <span>·</span>
-                <div className="flex gap-2 flex-wrap">
-                  {project.tags.map((tag) => (
-                    <span key={tag}>#{tag}</span>
-                  ))}
-                </div>
-              </>
-            )}
+            <div className="grid gap-y-4 sm:grid-cols-[72px_minmax(0,1fr)] sm:gap-x-6">
+              <p className="section-kicker sm:pt-1">역할</p>
+              <p className="text-sm leading-6">{project.role}</p>
+
+              <p className="section-kicker sm:pt-1">태그</p>
+              <div
+                className="flex flex-wrap gap-x-3 gap-y-1 text-sm"
+                style={{ color: "var(--text-muted)" }}
+              >
+                {project.tags.map((tag) => (
+                  <span key={tag}>#{tag}</span>
+                ))}
+              </div>
+
+              <p className="section-kicker sm:pt-1">링크</p>
+              <ProjectExternalLinks links={project.links} variant="plain" />
+
+              <p className="section-kicker sm:pt-1">구성</p>
+              <ul className="space-y-2 text-sm leading-6">
+                {project.highlights.map((highlight) => (
+                  <li key={highlight} className="flex items-start gap-3">
+                    <span
+                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full"
+                      style={{ backgroundColor: "var(--accent)" }}
+                    />
+                    <span>{highlight}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </header>
         <div className="prose max-w-none">

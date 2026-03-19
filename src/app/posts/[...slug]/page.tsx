@@ -7,6 +7,10 @@ import { BackButton } from "@/components/BackButton";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { Comments } from "@/components/Comments";
 import type { Metadata } from "next";
+import {
+  createPostAssetRemarkPlugin,
+  resolvePostAssetSrc,
+} from "@/lib/postAssets";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
 
@@ -84,16 +88,30 @@ export default async function PostPage({ params }: PostPageProps) {
 
   const components = {
     img: (props: React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>) => {
-      let src = props.src;
-      if (typeof src === "string" && src && !src.startsWith("http") && !src.startsWith("/")) {
-        // Resolve relative path
-        // e.g. src="./img/cloud.png", postDir="aws" -> "aws/img/cloud.png"
-        const cleanSrc = src.replace(/^\.\//, "");
-        const relativePath = postDir ? `${postDir}/${cleanSrc}` : cleanSrc;
-        src = `/posts-images/${relativePath}`;
-      }
+      const src = resolvePostAssetSrc(
+        typeof props.src === "string" ? props.src : undefined,
+        postDir
+      );
       // eslint-disable-next-line @next/next/no-img-element
       return <img {...props} src={src as string} alt={props.alt || ""} />;
+    },
+    video: (props: React.DetailedHTMLProps<React.VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement>) => {
+      const src = resolvePostAssetSrc(
+        typeof props.src === "string" ? props.src : undefined,
+        postDir
+      );
+      const poster = resolvePostAssetSrc(
+        typeof props.poster === "string" ? props.poster : undefined,
+        postDir
+      );
+      return <video {...props} src={src} poster={poster} />;
+    },
+    source: (props: React.DetailedHTMLProps<React.SourceHTMLAttributes<HTMLSourceElement>, HTMLSourceElement>) => {
+      const src = resolvePostAssetSrc(
+        typeof props.src === "string" ? props.src : undefined,
+        postDir
+      );
+      return <source {...props} src={src} />;
     },
   };
 
@@ -127,7 +145,7 @@ export default async function PostPage({ params }: PostPageProps) {
             components={components}
             options={{
               mdxOptions: {
-                remarkPlugins: [remarkGfm],
+                remarkPlugins: [remarkGfm, createPostAssetRemarkPlugin(postDir)],
               },
             }}
           />
