@@ -15,7 +15,7 @@
 | `project-t/devlog-6` | `devlog` | `project-t/devlog-6` | `Epoch: Unseen Devlog 6` | `rewritten` | 시나리오 방향과 프로젝트 제목만 남겨 재작성 |
 | `project-t/devlog-6` | `article` | `agentic/character-forge` | `Character Forge: ComfyUI 기반 캐릭터 일러스트 생성기` | `extracted` | 캐릭터 생성 툴 분리 |
 | `project-t/devlog-6` | `article` | `agentic/openclaw-telegram-dev` | `텔레그램만으로 개발하기: OpenClaw 원격 개발 실험` | `extracted` | OpenClaw와 텔레그램 원격 개발 실험 분리 |
-| `project-t/devlog-6` | `article` | `vibe/ai-vampire-survivors` | `AI로 2D 뱀서라이크를 하루 만에 만들어 본 기록` | `extracted` | 별도 게임 실험 분리 |
+| `project-t/devlog-6` | `article` | `vibe/ai-vampire-survivors` | `AI로 2D 뱀서라이크를 하루 만에 만들어 본 기록` | `deleted` | FlyingCat 사례 글과 결이 겹쳐 삭제 |
 | `project-t/devlog-7` | `devlog` | `project-t/devlog-7` | `Epoch: Unseen Devlog 7` | `trimmed` | AI 메타 섹션 분리 |
 | `project-t/devlog-7` | `article` | `agentic/ai-driven-dev-gpt54` | `AI 주도 개발 반년차와 GPT 5.4 첫 인상` | `deleted` | `AI 코딩 툴을 갈아타며 정리한 선택 기준`에 흡수되어 삭제 |
 | `ue/devlog1` | `article` | `ue/devlog1` | `UE5 애니메이션 기능 정리` | `reclassified` | 학습 메모로 유지 |
