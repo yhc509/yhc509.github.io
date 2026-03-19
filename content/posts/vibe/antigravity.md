@@ -1,9 +1,10 @@
 ---
 title: "Antigravity"
 date: "2025-12-17"
-description: "Antigravity로 블로그 개편"
+description: "Antigravity와 Gemini 3.0 Pro로 블로그를 개편해 보며 바이브 코딩 입문 감각을 확인한 당시 기록."
 categories: ['AI/VibeCoding']
-open: true
+open: false
+type: archive_candidate
 ---
 
 ![Antigravity](./anti.webp)

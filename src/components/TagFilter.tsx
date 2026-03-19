@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useState } from "react";
 import type { TagNode } from "@/lib/posts";
 
@@ -9,12 +10,72 @@ interface TagFilterProps {
   onTagsChange: (tags: string[]) => void;
 }
 
+type TagGroupKey = "game-dev" | "graphics" | "ai" | "archive";
+
+interface TagGroup {
+  key: TagGroupKey;
+  label: string;
+  count: number;
+  defaultExpanded: boolean;
+  nodes: TagNode[];
+}
+
+const TAG_GROUP_CONFIG: Record<
+  TagGroupKey,
+  { label: string; defaultExpanded: boolean }
+> = {
+  "game-dev": { label: "Game Dev", defaultExpanded: true },
+  graphics: { label: "Graphics", defaultExpanded: true },
+  ai: { label: "AI", defaultExpanded: true },
+  archive: { label: "Archive", defaultExpanded: false },
+};
+
+function getTagGroupKey(fullPath: string): TagGroupKey {
+  if (fullPath === "Game Engine") {
+    return "game-dev";
+  }
+  if (fullPath === "Graphics") {
+    return "graphics";
+  }
+  if (fullPath === "AI") {
+    return "ai";
+  }
+  return "archive";
+}
+
+function buildTagGroups(tagTree: TagNode[]): TagGroup[] {
+  const groups = new Map<TagGroupKey, TagNode[]>();
+
+  tagTree.forEach((node) => {
+    const groupKey = getTagGroupKey(node.fullPath);
+    const nodes = groups.get(groupKey) ?? [];
+    nodes.push(node);
+    groups.set(groupKey, nodes);
+  });
+
+  return (Object.entries(TAG_GROUP_CONFIG) as Array<
+    [TagGroupKey, { label: string; defaultExpanded: boolean }]
+  >)
+    .map(([key, config]) => {
+      const nodes = groups.get(key) ?? [];
+      return {
+        key,
+        label: config.label,
+        count: nodes.reduce((sum, node) => sum + node.count, 0),
+        defaultExpanded: config.defaultExpanded,
+        nodes,
+      };
+    })
+    .filter((group) => group.nodes.length > 0);
+}
+
 function TagItem({
   node,
   selectedTags,
   onSelect,
   onAdd,
   onRemove,
+  label,
   depth = 0,
 }: {
   node: TagNode;
@@ -22,6 +83,7 @@ function TagItem({
   onSelect: (tag: string) => void;
   onAdd: (tag: string) => void;
   onRemove: (tag: string) => void;
+  label?: string;
   depth?: number;
 }) {
   const [expanded, setExpanded] = useState(true);
@@ -55,7 +117,7 @@ function TagItem({
             color: isSelected ? "var(--accent)" : "var(--text-secondary)",
           }}
         >
-          <span className="group-hover:underline">#{node.name}</span>
+          <span className="group-hover:underline">#{label ?? node.name}</span>
           <span
             className="text-xs"
             style={{ color: "var(--text-muted)" }}
@@ -115,6 +177,41 @@ function TagItem({
   );
 }
 
+function TagGroupSection({
+  group,
+  children,
+}: {
+  group: TagGroup;
+  children: ReactNode;
+}) {
+  const [expanded, setExpanded] = useState(group.defaultExpanded);
+
+  return (
+    <section className="border-t pt-3 first:border-t-0 first:pt-0">
+      <button
+        type="button"
+        onClick={() => setExpanded((prev) => !prev)}
+        className="mb-2 flex w-full items-center justify-between text-left"
+      >
+        <span
+          className="text-xs font-semibold uppercase tracking-[0.08em]"
+          style={{ color: "var(--text-muted)" }}
+        >
+          {group.label}
+        </span>
+        <span
+          className="flex items-center gap-2 text-xs"
+          style={{ color: "var(--text-muted)" }}
+        >
+          <span>{group.count}</span>
+          <span>{expanded ? "−" : "+"}</span>
+        </span>
+      </button>
+      {expanded && <div>{children}</div>}
+    </section>
+  );
+}
+
 export function TagFilter({
   tagTree,
   selectedTags,
@@ -147,6 +244,8 @@ export function TagFilter({
     onTagsChange([]);
   };
 
+  const tagGroups = buildTagGroups(tagTree);
+
   return (
     <div
       className="p-4 rounded-xl border"
@@ -170,16 +269,25 @@ export function TagFilter({
           </button>
         )}
       </div>
-      <div>
-        {tagTree.map((node) => (
-          <TagItem
-            key={node.fullPath}
-            node={node}
-            selectedTags={selectedTags}
-            onSelect={handleSelect}
-            onAdd={handleAdd}
-            onRemove={handleRemove}
-          />
+      <div className="space-y-4">
+        {tagGroups.map((group) => (
+          <TagGroupSection key={group.key} group={group}>
+            {group.nodes.map((node) => (
+              <TagItem
+                key={node.fullPath}
+                node={node}
+                selectedTags={selectedTags}
+                onSelect={handleSelect}
+                onAdd={handleAdd}
+                onRemove={handleRemove}
+                label={
+                  group.key === "archive" || node.children.length === 0
+                    ? undefined
+                    : "전체"
+                }
+              />
+            ))}
+          </TagGroupSection>
         ))}
       </div>
     </div>

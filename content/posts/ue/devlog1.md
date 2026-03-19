@@ -1,8 +1,10 @@
 ---
 date: 2025-08-31
-title: UE5 - DevLog (1)
+title: UE5 애니메이션 기능 정리
+description: "언리얼 엔진 학습 중 애니메이션 몽타주, 블렌드 스페이스, 노티파이, IK 릭을 정리했다."
 categories: ['Game Engine/Unreal']
 open: true
+type: article
 ---
 
 ![devlog_1](./dvl_1.gif)

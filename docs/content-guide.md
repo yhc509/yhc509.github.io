@@ -19,9 +19,11 @@ content/posts/your-post-slug.mdx
 title: "포스트 제목"
 date: "2025-12-17"
 description: "포스트에 대한 짧은 설명 (SEO 메타 설명으로 사용)"
-tags:
+categories:
   - "태그1"
   - "태그2"
+open: true
+type: "article"
 ---
 
 # 본문 시작
@@ -36,7 +38,19 @@ tags:
 | `title` | ✅ | 포스트 제목 |
 | `date` | ✅ | 작성일 (YYYY-MM-DD) |
 | `description` | ✅ | 짧은 설명 (SEO용) |
-| `tags` | ❌ | 태그 배열 |
+| `categories` or `tags` | ❌ | 주제 탐색용 태그 배열 |
+| `open` | ❌ | `false`면 공개 목록과 정적 생성에서 제외 |
+| `type` | ❌ | `article`, `devlog`, `archive_candidate` |
+| `project` | `devlog`에서 권장 | 연결할 프로젝트 slug |
+| `series` | ❌ | 연재 식별자 |
+
+### 포스트 타입 규칙
+
+- `article`: 학습 기록, 도구 후기, 개념 정리
+- `devlog`: 실제 프로젝트에 연결되는 진행 기록
+- `archive_candidate`: 보관 또는 재작성 후보
+
+`type: devlog`인 글은 `project`를 함께 적고, 제목은 `Project Name Devlog N` 형식으로 맞춥니다.
 
 ## 프로젝트 생성
 
