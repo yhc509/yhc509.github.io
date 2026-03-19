@@ -2,7 +2,7 @@
 title: "FlyingCat으로 확인한 바이브 코딩의 현재"
 date: "2026-01-01"
 description: "Antigravity와 Gemini 3.0 Pro로 FlyingCat을 만들며, 작은 게임과 UI, WebGL 배포, 랭킹 연동 정도는 AI에게 꽤 맡길 수 있다는 가능성을 확인했다."
-categories: ['GameDev/FlyingCat', 'AI/AgenticCoding']
+categories: ['AI/AgenticCoding']
 open: true
 type: article
 project: "flyingcat"

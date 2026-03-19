@@ -2,7 +2,7 @@
 title: "Character Forge: ComfyUI 기반 캐릭터 일러스트 생성기"
 date: "2026-02-28"
 description: "Epoch: Unseen 초상화 작업에서 프롬프트를 직접 관리하는 대신, 태그 기반 입력 체계와 로컬 ComfyUI 파이프라인으로 반복 생성 흐름을 시스템화했다."
-categories: ['GameDev/Epoch: Unseen', 'AI/AgenticCoding']
+categories: ['AI/AgenticCoding']
 open: true
 type: article
 project: "project-t"

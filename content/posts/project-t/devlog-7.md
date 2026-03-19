@@ -2,7 +2,7 @@
 title: "Epoch: Unseen Devlog 7"
 date: "2026-03-07"
 description: "데이터 구조 변경, 클래스 트리와 UI 작업을 정리한 개발 일지."
-categories: ['GameDev/Epoch: Unseen']
+categories: []
 open: true
 type: "devlog"
 project: "project-t"

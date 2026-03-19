@@ -154,6 +154,12 @@ export interface TagNode {
   count: number;
 }
 
+export interface PostProjectOption {
+  slug: string;
+  title: string;
+  count: number;
+}
+
 export function buildTagTree(posts: PostMeta[]): TagNode[] {
   const tagMap = new Map<string, number>();
 
@@ -202,6 +208,35 @@ export function buildTagTree(posts: PostMeta[]): TagNode[] {
   });
 
   return root;
+}
+
+export function buildPostProjectOptions(
+  posts: PostMeta[],
+  projectTitleMap: Record<string, string> = {}
+): PostProjectOption[] {
+  const counts = new Map<string, number>();
+
+  posts.forEach((post) => {
+    if (!post.project) {
+      return;
+    }
+
+    counts.set(post.project, (counts.get(post.project) || 0) + 1);
+  });
+
+  return Array.from(counts.entries())
+    .map(([slug, count]) => ({
+      slug,
+      title: projectTitleMap[slug] || slug,
+      count,
+    }))
+    .sort((a, b) => {
+      if (b.count !== a.count) {
+        return b.count - a.count;
+      }
+
+      return a.title.localeCompare(b.title, "ko");
+    });
 }
 
 export function filterPostsByTags(

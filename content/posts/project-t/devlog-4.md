@@ -2,7 +2,7 @@
 title: "Epoch: Unseen Devlog 4"
 date: "2026-02-01"
 description: "전투 AI, 스킬 리팩토링, 전투 시나리오와 UI 작업을 정리한 개발 일지."
-categories: ['GameDev/Epoch: Unseen']
+categories: []
 open: true
 type: "devlog"
 project: "project-t"

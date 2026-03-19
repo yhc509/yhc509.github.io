@@ -10,7 +10,7 @@ interface TagFilterProps {
   onTagsChange: (tags: string[]) => void;
 }
 
-type TagGroupKey = "game-dev" | "graphics" | "ai" | "archive";
+type TagGroupKey = "game-engine" | "graphics" | "ai";
 
 interface TagGroup {
   key: TagGroupKey;
@@ -24,15 +24,14 @@ const TAG_GROUP_CONFIG: Record<
   TagGroupKey,
   { label: string; defaultExpanded: boolean }
 > = {
-  "game-dev": { label: "Game Dev", defaultExpanded: true },
+  "game-engine": { label: "Game Engine", defaultExpanded: true },
   graphics: { label: "Graphics", defaultExpanded: true },
   ai: { label: "AI", defaultExpanded: true },
-  archive: { label: "Archive", defaultExpanded: false },
 };
 
-function getTagGroupKey(fullPath: string): TagGroupKey {
+function getTagGroupKey(fullPath: string): TagGroupKey | undefined {
   if (fullPath === "Game Engine") {
-    return "game-dev";
+    return "game-engine";
   }
   if (fullPath === "Graphics") {
     return "graphics";
@@ -40,7 +39,7 @@ function getTagGroupKey(fullPath: string): TagGroupKey {
   if (fullPath === "AI") {
     return "ai";
   }
-  return "archive";
+  return undefined;
 }
 
 function buildTagGroups(tagTree: TagNode[]): TagGroup[] {
@@ -48,6 +47,9 @@ function buildTagGroups(tagTree: TagNode[]): TagGroup[] {
 
   tagTree.forEach((node) => {
     const groupKey = getTagGroupKey(node.fullPath);
+    if (!groupKey) {
+      return;
+    }
     const nodes = groups.get(groupKey) ?? [];
     nodes.push(node);
     groups.set(groupKey, nodes);
@@ -255,7 +257,7 @@ export function TagFilter({
       }}
     >
       <div className="flex items-center justify-between mb-3">
-        <h2 className="font-bold text-sm">Tags</h2>
+        <h2 className="font-bold text-sm">Topics</h2>
         {selectedTags.length > 0 && (
           <button
             onClick={handleClear}
@@ -280,11 +282,7 @@ export function TagFilter({
                 onSelect={handleSelect}
                 onAdd={handleAdd}
                 onRemove={handleRemove}
-                label={
-                  group.key === "archive" || node.children.length === 0
-                    ? undefined
-                    : "전체"
-                }
+                label={node.children.length === 0 ? undefined : "전체"}
               />
             ))}
           </TagGroupSection>

@@ -2,7 +2,7 @@
 title: "Epoch: Unseen Devlog 1"
 date: "2026-01-01"
 description: "멈춰 있던 Epoch: Unseen을 다시 꺼내 레거시 코드를 정리하고 재시동한 첫 개발 기록."
-categories: ['GameDev/Epoch: Unseen']
+categories: []
 open: true
 type: "devlog"
 project: "project-t"

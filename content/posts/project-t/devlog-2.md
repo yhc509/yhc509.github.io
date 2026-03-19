@@ -2,7 +2,7 @@
 title: "Epoch: Unseen Devlog 2"
 date: "2026-01-03"
 description: "유니티 타일맵 전환과 범위 툴 통합, Behavior Designer 도입을 정리한 개발 일지."
-categories: ['GameDev/Epoch: Unseen']
+categories: []
 open: true
 type: "devlog"
 project: "project-t"

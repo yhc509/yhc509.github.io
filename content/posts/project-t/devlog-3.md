@@ -2,7 +2,7 @@
 title: "Epoch: Unseen Devlog 3"
 date: "2026-01-17"
 description: "유닛 스프라이트와 전투 애니메이션, 스탯과 전투 공식을 정리한 개발 일지."
-categories: ['GameDev/Epoch: Unseen']
+categories: []
 open: true
 type: "devlog"
 project: "project-t"

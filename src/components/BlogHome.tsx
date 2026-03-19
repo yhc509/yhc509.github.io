@@ -2,12 +2,14 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { PostProjectFilter } from "./PostProjectFilter";
 import { TagFilter } from "./TagFilter";
-import type { PostMeta, TagNode } from "@/lib/posts";
+import type { PostMeta, PostProjectOption, TagNode } from "@/lib/posts";
 
 interface BlogHomeProps {
   posts: PostMeta[];
   tagTree: TagNode[];
+  projectOptions: PostProjectOption[];
 }
 
 function filterPostsByTags(posts: PostMeta[], selectedTags: string[]): PostMeta[] {
@@ -35,11 +37,28 @@ function filterPostsBySearch(posts: PostMeta[], query: string): PostMeta[] {
   );
 }
 
-export function BlogHome({ posts, tagTree }: BlogHomeProps) {
+function filterPostsByProjects(
+  posts: PostMeta[],
+  selectedProjects: string[]
+): PostMeta[] {
+  if (selectedProjects.length === 0) return posts;
+
+  return posts.filter(
+    (post) => post.project && selectedProjects.includes(post.project)
+  );
+}
+
+export function BlogHome({
+  posts,
+  tagTree,
+  projectOptions,
+}: BlogHomeProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const selectedTags = searchParams.get("tags")?.split(",").filter(Boolean) || [];
+  const selectedProjects =
+    searchParams.get("projects")?.split(",").filter(Boolean) || [];
   const searchQuery = searchParams.get("q") || "";
   const pageParam = searchParams.get("page");
   const limitParam = searchParams.get("limit");
@@ -47,7 +66,12 @@ export function BlogHome({ posts, tagTree }: BlogHomeProps) {
   const currentPage = pageParam ? parseInt(pageParam, 10) : 1;
   const postsPerPage = limitParam ? parseInt(limitParam, 10) : 10;
 
-  const filteredByTags = filterPostsByTags(posts, selectedTags);
+  const projectTitleMap = new Map(
+    projectOptions.map((project) => [project.slug, project.title])
+  );
+
+  const filteredByProjects = filterPostsByProjects(posts, selectedProjects);
+  const filteredByTags = filterPostsByTags(filteredByProjects, selectedTags);
   const filteredPosts = filterPostsBySearch(filteredByTags, searchQuery);
 
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
@@ -55,10 +79,19 @@ export function BlogHome({ posts, tagTree }: BlogHomeProps) {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
 
-  const updateUrl = (tags: string[], query: string, page: number, limit: number) => {
+  const updateUrl = (
+    tags: string[],
+    projects: string[],
+    query: string,
+    page: number,
+    limit: number
+  ) => {
     const params = new URLSearchParams();
     if (tags.length > 0) {
       params.set("tags", tags.join(","));
+    }
+    if (projects.length > 0) {
+      params.set("projects", projects.join(","));
     }
     if (query.trim()) {
       params.set("q", query);
@@ -74,25 +107,32 @@ export function BlogHome({ posts, tagTree }: BlogHomeProps) {
   };
 
   const setSelectedTags = (tags: string[]) => {
-    updateUrl(tags, searchQuery, 1, postsPerPage);
+    updateUrl(tags, selectedProjects, searchQuery, 1, postsPerPage);
+  };
+
+  const setSelectedProjects = (projects: string[]) => {
+    updateUrl(selectedTags, projects, searchQuery, 1, postsPerPage);
   };
 
   const setSearchQuery = (query: string) => {
-    updateUrl(selectedTags, query, 1, postsPerPage);
+    updateUrl(selectedTags, selectedProjects, query, 1, postsPerPage);
   };
 
   const setPage = (page: number) => {
-    updateUrl(selectedTags, searchQuery, page, postsPerPage);
+    updateUrl(selectedTags, selectedProjects, searchQuery, page, postsPerPage);
   };
 
   const setLimit = (limit: number) => {
-    updateUrl(selectedTags, searchQuery, 1, limit);
+    updateUrl(selectedTags, selectedProjects, searchQuery, 1, limit);
   };
 
   const getPostUrl = (slug: string) => {
     const params = new URLSearchParams();
     if (selectedTags.length > 0) {
       params.set("tags", selectedTags.join(","));
+    }
+    if (selectedProjects.length > 0) {
+      params.set("projects", selectedProjects.join(","));
     }
     if (searchQuery.trim()) {
       params.set("q", searchQuery);
@@ -130,7 +170,12 @@ export function BlogHome({ posts, tagTree }: BlogHomeProps) {
       <div className="relative max-w-3xl mx-auto px-5">
         {/* Sidebar - 포스트 영역 바로 왼쪽 */}
         <aside className="hidden lg:block absolute right-full mr-8 w-56 top-0">
-          <div className="sticky top-8">
+          <div className="sticky top-8 space-y-4">
+            <PostProjectFilter
+              projects={projectOptions}
+              selectedProjects={selectedProjects}
+              onProjectsChange={setSelectedProjects}
+            />
             <TagFilter
               tagTree={tagTree}
               selectedTags={selectedTags}
@@ -140,7 +185,12 @@ export function BlogHome({ posts, tagTree }: BlogHomeProps) {
         </aside>
 
         {/* Mobile tag filter */}
-        <div className="lg:hidden mb-6">
+        <div className="lg:hidden mb-6 space-y-4">
+          <PostProjectFilter
+            projects={projectOptions}
+            selectedProjects={selectedProjects}
+            onProjectsChange={setSelectedProjects}
+          />
           <TagFilter
             tagTree={tagTree}
             selectedTags={selectedTags}
@@ -237,9 +287,39 @@ export function BlogHome({ posts, tagTree }: BlogHomeProps) {
           </div>
         </div>
 
-        {/* Selected tags display */}
-        {selectedTags.length > 0 && (
+        {/* Selected filters display */}
+        {(selectedProjects.length > 0 || selectedTags.length > 0) && (
           <div className="mb-5 flex flex-wrap gap-2">
+            {selectedProjects.map((projectSlug) => (
+              <button
+                key={projectSlug}
+                onClick={() =>
+                  setSelectedProjects(
+                    selectedProjects.filter((slug) => slug !== projectSlug)
+                  )
+                }
+                className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-full transition-opacity hover:opacity-80"
+                style={{
+                  backgroundColor: "var(--card-border)",
+                  color: "var(--foreground)",
+                }}
+              >
+                프로젝트: {projectTitleMap.get(projectSlug) || projectSlug}
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            ))}
             {selectedTags.map((tag) => (
               <button
                 key={tag}
@@ -281,7 +361,7 @@ export function BlogHome({ posts, tagTree }: BlogHomeProps) {
             >
               {searchQuery
                 ? "검색 결과가 없습니다."
-                : "선택한 태그에 해당하는 포스트가 없습니다."}
+                : "선택한 주제나 프로젝트에 해당하는 포스트가 없습니다."}
             </div>
           ) : (
             currentPosts.map((post) => (
@@ -299,6 +379,14 @@ export function BlogHome({ posts, tagTree }: BlogHomeProps) {
                     <time dateTime={post.date}>{post.date}</time>
                     <span>·</span>
                     <span>{post.readingTime}</span>
+                    {post.project && projectTitleMap.has(post.project) && (
+                      <>
+                        <span>·</span>
+                        <span>
+                          Project: {projectTitleMap.get(post.project)}
+                        </span>
+                      </>
+                    )}
                   </div>
                   <h2 className="text-lg font-bold leading-snug">{post.title}</h2>
                   {post.description && (

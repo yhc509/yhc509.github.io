@@ -2,7 +2,7 @@
 title: "Epoch: Unseen Devlog 5"
 date: "2026-02-15"
 description: "응전 시스템, AP 시스템, 전투 정리 작업을 기록한 개발 일지."
-categories: ['GameDev/Epoch: Unseen']
+categories: []
 open: true
 type: "devlog"
 project: "project-t"

@@ -2,7 +2,7 @@
 title: "Epoch: Unseen Devlog 6"
 date: "2026-02-28"
 description: "세계관 방향과 프로젝트 제목을 정리한 짧은 개발 기록."
-categories: ['GameDev/Epoch: Unseen']
+categories: []
 open: true
 type: "devlog"
 project: "project-t"

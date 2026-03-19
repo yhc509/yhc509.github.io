@@ -2,7 +2,7 @@
 title: "Epoch: Unseen 주인공 설정을 다시 세운 과정"
 date: "2026-01-17"
 description: "오래전에 만들다 멈춘 설정을 다시 꺼내 Epoch: Unseen의 주인공과 세계관 방향을 새로 잡았다."
-categories: ['GameDev/Epoch: Unseen']
+categories: []
 open: true
 type: article
 project: "project-t"
