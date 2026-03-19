@@ -160,6 +160,41 @@ export interface PostProjectOption {
   count: number;
 }
 
+export interface ProjectPostGroups {
+  devlogs: PostMeta[];
+  articles: PostMeta[];
+}
+
+function comparePostsByDateAscending(a: PostMeta, b: PostMeta): number {
+  const dateDiff = new Date(a.date).getTime() - new Date(b.date).getTime();
+  if (dateDiff !== 0) {
+    return dateDiff;
+  }
+
+  return a.title.localeCompare(b.title, "ko");
+}
+
+function readDevlogNumber(title: string): number | undefined {
+  const match = title.match(/devlog\s+(\d+)\s*$/i);
+  if (!match) {
+    return undefined;
+  }
+
+  const value = Number(match[1]);
+  return Number.isFinite(value) ? value : undefined;
+}
+
+function compareDevlogs(a: PostMeta, b: PostMeta): number {
+  const aNumber = readDevlogNumber(a.title);
+  const bNumber = readDevlogNumber(b.title);
+
+  if (aNumber !== undefined && bNumber !== undefined && aNumber !== bNumber) {
+    return aNumber - bNumber;
+  }
+
+  return comparePostsByDateAscending(a, b);
+}
+
 export function buildTagTree(posts: PostMeta[]): TagNode[] {
   const tagMap = new Map<string, number>();
 
@@ -237,6 +272,25 @@ export function buildPostProjectOptions(
 
       return a.title.localeCompare(b.title, "ko");
     });
+}
+
+export function getPostsByProject(projectSlug: string): PostMeta[] {
+  return getAllPosts()
+    .filter((post) => post.project === projectSlug)
+    .sort(comparePostsByDateAscending);
+}
+
+export function getProjectPostGroups(projectSlug: string): ProjectPostGroups {
+  const relatedPosts = getPostsByProject(projectSlug);
+
+  return {
+    devlogs: relatedPosts
+      .filter((post) => post.type === "devlog")
+      .sort(compareDevlogs),
+    articles: relatedPosts
+      .filter((post) => post.type === "article")
+      .sort(comparePostsByDateAscending),
+  };
 }
 
 export function filterPostsByTags(

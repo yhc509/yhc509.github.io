@@ -1,41 +1,34 @@
 ---
 title: "Epoch: Unseen"
 date: "2026-03-07"
-description: "개발 중인 SRPG 프로젝트입니다. 전투, 시나리오, 정비 페이즈를 계속 만들고 있습니다."
-thumbnail: "/posts-images/project-t/img/devlog-7-06.png"
+description: "스토리 중심의 중세 판타지 SRPG다. 에리히의 지휘 스킬과 적군 조종을 전투의 축으로 잡고 있다."
+thumbnail: "/posts-images/project-t/img/devlog-7-03.png"
 tags:
   - "GameDev"
 open: true
-role: "전투 시스템, 데이터 구조, 시나리오 스크립트, UI 작업"
+role: "기획, 전투 구조 설계, 시나리오 구성, UI/툴 작업"
 highlights:
-  - "전투와 응전 시스템 작업"
-  - "Lua 기반 시나리오 스크립트 정리"
-  - "정비 페이즈와 전투 UI 개발 중"
+  - "스토리 중심의 중세 판타지 SRPG"
+  - "지휘 스킬과 적군 조종이 전투의 축"
+  - "중세 판타지와 JRPG풍 분위기"
 links:
   devlog: "/posts/project-t/devlog-7"
 ---
 
 ## 개요
 
-개발 중인 SRPG 프로젝트입니다. 전투, 시나리오, 정비 페이즈를 중심으로 계속 작업하고 있습니다.
+스토리 중심의 SRPG다. 파이어엠블렘 계열 SRPG를 떠올리면 감각을 이해하기 쉽다. 분위기는 중세 판타지와 JRPG 쪽에 가깝다.
 
 ## 문제/배경
 
-2021년부터 만들던 프로젝트를 다시 꺼내 정리하고 있습니다. 예전 구조를 그대로 끌고 가지 않고, 지금 작업 방식에 맞게 전투 시스템과 데이터 구조를 다시 잡는 쪽으로 진행 중입니다.
+예전에 만들다 멈춘 프로젝트를 다시 꺼내, 설정과 구조를 지금 기준에 맞게 다듬고 있다. 예전 설정을 그대로 복원하기보다, 지금 만들고 싶은 분위기와 전투 감각에 맞춰 다시 세우고 있다.
 
 ## 핵심 구현
 
-1. 전투, 응전, AP 같은 전투 시스템을 계속 정리하고 있습니다.
-2. AI 친화적인 구조로 바꾸기 위해 전투 공식과 시나리오 데이터를 다시 정리했습니다.
-3. 전투 UI, 타이틀, 정비 페이즈를 순서대로 붙이고 있습니다.
-4. 개발 내용은 Epoch: Unseen Devlog로 계속 공개하고 있습니다.
+1. 에리히는 아군 진형을 기준으로 일발 역전의 지휘 스킬을 발동할 수 있고, 적군을 조종해 하수인처럼 부릴 수도 있다. 이 두 가지를 스테이지 공략의 중심에 두고 있다.
+2. 클래스 성장, 전장 연출, 캐릭터 초상화를 묶어 게임의 분위기를 잡고 있다.
+3. 오래전에 잡아 둔 설정을 지금 톤에 맞게 다시 정리하면서 세계와 인물의 색을 다시 세우고 있다.
 
 ## 링크
 
-- Epoch: Unseen Devlog 1: [/posts/project-t/devlog-1](/posts/project-t/devlog-1)
-- Epoch: Unseen Devlog 2: [/posts/project-t/devlog-2](/posts/project-t/devlog-2)
-- Epoch: Unseen Devlog 3: [/posts/project-t/devlog-3](/posts/project-t/devlog-3)
-- Epoch: Unseen Devlog 4: [/posts/project-t/devlog-4](/posts/project-t/devlog-4)
-- Epoch: Unseen Devlog 5: [/posts/project-t/devlog-5](/posts/project-t/devlog-5)
-- Epoch: Unseen Devlog 6: [/posts/project-t/devlog-6](/posts/project-t/devlog-6)
-- Epoch: Unseen Devlog 7: [/posts/project-t/devlog-7](/posts/project-t/devlog-7)
+개발 기록과 관련 글은 아래 허브에서 확인할 수 있다.

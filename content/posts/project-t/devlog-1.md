@@ -1,7 +1,7 @@
 ---
-title: "Epoch: Unseen Devlog 1"
+title: "Epoch: Unseen Devlog 1 - 재시동"
 date: "2026-01-01"
-description: "멈춰 있던 Epoch: Unseen을 다시 꺼내 레거시 코드를 정리하고 재시동한 첫 개발 기록."
+description: "멈춰 있던 Epoch: Unseen을 다시 꺼내 레거시 구조를 걷고, 다시 개발을 붙일 바닥을 만든 첫 회차."
 categories: []
 open: true
 type: "devlog"
@@ -9,7 +9,7 @@ project: "project-t"
 series: "epoch-unseen-devlog"
 ---
 
-Epoch: Unseen을 다시 꺼냈다. 이번 회차는 새 기능을 크게 늘리기보다, 멈춰 있던 프로젝트를 다시 굴릴 수 있는 상태로 만드는 데 집중했다.
+이번엔 새 기능보다 재시동 준비가 먼저였다. 멈춰 있던 Epoch: Unseen을 다시 굴릴 수 있게 레거시 구조를 걷고, 이후 전투 시스템을 다시 붙일 바닥부터 정리했다.
 
 ## 재시동
 

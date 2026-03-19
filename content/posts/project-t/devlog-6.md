@@ -1,7 +1,7 @@
 ---
-title: "Epoch: Unseen Devlog 6"
+title: "Epoch: Unseen Devlog 6 - 세계관과 프로젝트 이름 확정"
 date: "2026-02-28"
-description: "세계관 방향과 프로젝트 제목을 정리한 짧은 개발 기록."
+description: "중세 판타지 방향과 Epoch: Unseen이라는 이름을 정해 둔 짧은 체크포인트."
 categories: []
 open: true
 type: "devlog"
@@ -9,7 +9,7 @@ project: "project-t"
 series: "epoch-unseen-devlog"
 ---
 
-이번 회차는 시스템 구현보다 시나리오와 프로젝트 방향을 정리하는 쪽이 중심이었다.
+이번엔 시스템보다 방향을 정하는 쪽이 중요했다. 세계관을 중세 판타지로 굳히고, 이후 devlog와 문서에서 계속 쓰게 될 이름을 `Epoch: Unseen`으로 정해 둔 짧은 체크포인트다.
 
 ## 시나리오 방향
 

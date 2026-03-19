@@ -1,7 +1,7 @@
 ---
-title: "Epoch: Unseen Devlog 4"
+title: "Epoch: Unseen Devlog 4 - 전투 AI와 UI 초안"
 date: "2026-02-01"
-description: "전투 AI, 스킬 리팩토링, 전투 시나리오와 UI 작업을 정리한 개발 일지."
+description: "Directive/Force/Policy 구조의 전투 AI와 시나리오 그래프, 전투 UI 초안을 잡은 회차."
 categories: []
 open: true
 type: "devlog"
@@ -9,7 +9,7 @@ project: "project-t"
 series: "epoch-unseen-devlog"
 ---
 
-이번 회차는 전투 AI, 시나리오, UI 쪽 베이스를 잡는 작업이 중심이었다.
+이번엔 전투 AI, 시나리오 그래프, 전투 UI 초안을 한 번에 잡았다. 아직 콘텐츠가 많이 올라간 단계는 아니지만, 전투 프로토타입의 뼈대는 이때 거의 나온 셈이다.
 
 ## AI 시스템 고도화
 

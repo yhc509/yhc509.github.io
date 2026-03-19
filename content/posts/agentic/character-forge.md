@@ -1,7 +1,7 @@
 ---
 title: "Character Forge: ComfyUI 기반 캐릭터 일러스트 생성기"
 date: "2026-02-28"
-description: "Epoch: Unseen 초상화 작업에서 프롬프트를 직접 관리하는 대신, 태그 기반 입력 체계와 로컬 ComfyUI 파이프라인으로 반복 생성 흐름을 시스템화했다."
+description: "Epoch: Unseen 초상화 작업을 위해 태그 기반 입력 체계와 로컬 ComfyUI 파이프라인을 묶어 둔 기록."
 categories: ['AI/AgenticCoding']
 open: true
 type: article
@@ -10,7 +10,7 @@ project: "project-t"
 
 ## 만든 이유
 
-Epoch: Unseen용 캐릭터 초상화를 만들다 보니, 정작 먼저 걸리는 건 이미지 생성 성능이 아니라 프롬프트 관리였다. 프롬프트를 매번 손으로 만지면 결과가 쉽게 흔들렸고, 어떤 조합이 괜찮았는지 다시 찾는 것도 번거로웠다.
+Epoch: Unseen용 캐릭터 초상화를 만들다 보니, 먼저 막히는 건 이미지 생성 성능이 아니라 프롬프트 관리였다. 프롬프트를 매번 손으로 만지면 결과가 쉽게 흔들렸고, 어떤 조합이 괜찮았는지 다시 찾는 것도 번거로웠다.
 
 그래서 ComfyUI를 그대로 쓰기보다, 캐릭터 초상화용 입력 체계를 한 겹 감싼 `Character Forge`를 만들었다. 목표는 더 영리한 프롬프트 한 줄을 찾는 게 아니라, 비슷한 조건에서 여러 시도를 빠르게 반복할 수 있는 흐름을 만드는 것이었다.
 

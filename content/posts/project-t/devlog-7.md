@@ -1,7 +1,7 @@
 ---
-title: "Epoch: Unseen Devlog 7"
+title: "Epoch: Unseen Devlog 7 - Lua 전환과 클래스 트리 정리"
 date: "2026-03-07"
-description: "데이터 구조 변경, 클래스 트리와 UI 작업을 정리한 개발 일지."
+description: "Graph 자산을 걷어내고 Lua/코드 기반 데이터 구조로 되돌린 뒤 클래스 트리와 UI까지 정리한 회차."
 categories: []
 open: true
 type: "devlog"
@@ -9,7 +9,7 @@ project: "project-t"
 series: "epoch-unseen-devlog"
 ---
 
-이번 주는 작업량이 많아서 2주를 못 채우고 일주일 만에 개발 일지를 쓴다.
+이번엔 기존 Graph 자산 구조를 접고 텍스트 기반 데이터로 되돌리는 큰 방향 전환이 있었다. 여기에 클래스 트리, 타이틀, 정비 UI 정리까지 한 번에 몰아서 했다.
 
 ## 데이터 구조 변경
 

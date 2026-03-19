@@ -1,7 +1,9 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { getAllProjectSlugs, getProjectBySlug } from "@/lib/projects";
+import { getProjectPostGroups, type PostMeta } from "@/lib/posts";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { BackButton } from "@/components/BackButton";
@@ -13,6 +15,29 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
+}
+
+function ProjectPostCard({ post }: { post: PostMeta }) {
+  return (
+    <Link
+      href={`/posts/${post.slug}`}
+      className="group block rounded-2xl border px-5 py-4 transition-colors"
+      style={{ borderColor: "var(--card-border)" }}
+    >
+      <div className="mb-3 text-xs" style={{ color: "var(--text-muted)" }}>
+        <time dateTime={post.date}>{post.date}</time>
+      </div>
+      <h3 className="text-lg font-semibold leading-snug group-hover:underline">
+        {post.title}
+      </h3>
+      <p
+        className="mt-2 text-sm leading-6"
+        style={{ color: "var(--text-secondary)" }}
+      >
+        {post.description}
+      </p>
+    </Link>
+  );
 }
 
 export async function generateStaticParams() {
@@ -76,6 +101,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   if (!project.open) {
     notFound();
   }
+
+  const relatedPosts = getProjectPostGroups(slug);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -174,6 +201,41 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             }}
           />
         </div>
+        {(relatedPosts.devlogs.length > 0 || relatedPosts.articles.length > 0) && (
+          <section
+            className="mt-12 border-t pt-10"
+            style={{ borderColor: "var(--card-border)" }}
+          >
+            <div className="space-y-10">
+              <div>
+                <p className="section-kicker mb-2">프로젝트 기록</p>
+                <h2 className="text-2xl font-semibold">관련 글</h2>
+              </div>
+
+              {relatedPosts.devlogs.length > 0 && (
+                <div>
+                  <h3 className="mb-4 text-xl font-semibold">개발 기록</h3>
+                  <div className="space-y-4">
+                    {relatedPosts.devlogs.map((post) => (
+                      <ProjectPostCard key={post.slug} post={post} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {relatedPosts.articles.length > 0 && (
+                <div>
+                  <h3 className="mb-4 text-xl font-semibold">같이 읽을 글</h3>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {relatedPosts.articles.map((post) => (
+                      <ProjectPostCard key={post.slug} post={post} />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
       </article>
       <ScrollToTop />
     </div>
