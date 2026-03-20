@@ -1,6 +1,7 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllPostSlugs, getPostBySlug } from "@/lib/posts";
+import { getAdjacentPosts, getAllPostSlugs, getPostBySlug } from "@/lib/posts";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { BackButton } from "@/components/BackButton";
@@ -70,13 +71,16 @@ export async function generateMetadata({
 
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;
+  const currentSlug = slug.join("/");
   let post;
 
   try {
-    post = getPostBySlug(slug.join("/"));
+    post = getPostBySlug(currentSlug);
   } catch {
     notFound();
   }
+
+  const { prev, next } = getAdjacentPosts(currentSlug);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -135,6 +139,47 @@ export default async function PostPage({ params }: PostPageProps) {
           />
         </div>
       </article>
+      {(prev || next) && (
+        <nav
+          className="mt-12 pt-8 border-t flex justify-between gap-4"
+          style={{ borderColor: "var(--card-border)" }}
+          aria-label="포스트 탐색"
+        >
+          {prev ? (
+            <Link href={`/posts/${prev.slug}`} className="flex-1 group">
+              <span
+                className="text-xs"
+                style={{ color: "var(--text-muted)" }}
+              >
+                ← 이전 글
+              </span>
+              <p className="text-sm font-medium mt-1 group-hover:underline">
+                {prev.title}
+              </p>
+            </Link>
+          ) : (
+            <div className="flex-1" />
+          )}
+          {next ? (
+            <Link
+              href={`/posts/${next.slug}`}
+              className="flex-1 text-right group"
+            >
+              <span
+                className="text-xs"
+                style={{ color: "var(--text-muted)" }}
+              >
+                다음 글 →
+              </span>
+              <p className="text-sm font-medium mt-1 group-hover:underline">
+                {next.title}
+              </p>
+            </Link>
+          ) : (
+            <div className="flex-1" />
+          )}
+        </nav>
+      )}
       <Comments />
       <ScrollToTop />
     </div>
