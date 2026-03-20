@@ -64,6 +64,13 @@ export default function RootLayout({
     <html lang="ko" suppressHydrationWarning>
       <body className="antialiased min-h-screen">
         <ThemeProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-medium"
+            style={{ backgroundColor: "var(--accent)", color: "white" }}
+          >
+            본문으로 건너뛰기
+          </a>
           <header
             className="w-full py-4 sm:py-8 border-b"
             style={{
@@ -90,7 +97,7 @@ export default function RootLayout({
               </nav>
             </div>
           </header>
-          <main>{children}</main>
+          <main id="main-content">{children}</main>
         </ThemeProvider>
       </body>
     </html>

@@ -188,6 +188,7 @@ export function ProjectsHome({ projects, tagTree }: ProjectsHomeProps) {
             <input
               type="text"
               placeholder={siteContent.projects.searchPlaceholder}
+              aria-label="프로젝트 검색"
               value={searchQuery}
               onChange={handleSearchChange}
               className="w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all"

@@ -222,6 +222,7 @@ export function BlogHome({
             <input
               type="text"
               placeholder="검색..."
+              aria-label="블로그 검색"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full rounded-lg border py-2 pl-10 pr-4 outline-none transition-colors"
@@ -417,7 +418,7 @@ export function BlogHome({
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-10 flex justify-center items-center gap-2">
+          <nav aria-label="페이지 탐색" className="mt-10 flex justify-center items-center gap-2">
             <button
               onClick={() => setPage(currentPage - 1)}
               disabled={currentPage === 1}
@@ -463,7 +464,7 @@ export function BlogHome({
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </button>
-          </div>
+          </nav>
         )}
       </div>
     </div>
