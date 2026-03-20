@@ -305,6 +305,21 @@ export function BlogHome({
           </div>
         )}
 
+        {(selectedTags.length > 0 || selectedProjects.length > 0 || searchQuery) && (
+          <div className="mb-4 flex justify-end">
+            <button
+              onClick={() => updateUrl([], [], "", 1, postsPerPage)}
+              className="text-xs px-3 py-1 rounded-full transition-colors hover:opacity-80"
+              style={{
+                backgroundColor: "var(--card-border)",
+                color: "var(--text-secondary)",
+              }}
+            >
+              전체 초기화
+            </button>
+          </div>
+        )}
+
         {/* Selected filters display */}
         {(selectedProjects.length > 0 || selectedTags.length > 0) && (
           <div className="mb-5 flex flex-wrap gap-2">
