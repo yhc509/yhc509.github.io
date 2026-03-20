@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { buildTagTree, type TagNode } from "./tagTree";
 
 const projectsDirectory = path.join(process.cwd(), "content/projects");
 const projectFileExtensions = [".md", ".mdx"];
@@ -237,55 +238,8 @@ export function getAllProjects(): ProjectMeta[] {
     });
 }
 
-export interface ProjectTagNode {
-  name: string;
-  fullPath: string;
-  children: ProjectTagNode[];
-  count: number;
-}
+export type ProjectTagNode = TagNode;
 
-export function buildProjectTagTree(projects: ProjectMeta[]): ProjectTagNode[] {
-  const tagMap = new Map<string, number>();
-
-  projects.forEach((project) => {
-    project.tags.forEach((tag) => {
-      const parts = tag.split("/");
-      for (let i = 1; i <= parts.length; i++) {
-        const partialPath = parts.slice(0, i).join("/");
-        tagMap.set(partialPath, (tagMap.get(partialPath) || 0) + 1);
-      }
-    });
-  });
-
-  const root: ProjectTagNode[] = [];
-  const sortedTags = Array.from(tagMap.keys()).sort();
-
-  sortedTags.forEach((tagPath) => {
-    const parts = tagPath.split("/");
-    if (parts.length === 1) {
-      root.push({
-        name: parts[0],
-        fullPath: tagPath,
-        children: [],
-        count: tagMap.get(tagPath) || 0,
-      });
-    } else {
-      let current = root;
-      for (let i = 0; i < parts.length - 1; i++) {
-        const parentPath = parts.slice(0, i + 1).join("/");
-        const parent = current.find((n) => n.fullPath === parentPath);
-        if (parent) {
-          current = parent.children;
-        }
-      }
-      current.push({
-        name: parts[parts.length - 1],
-        fullPath: tagPath,
-        children: [],
-        count: tagMap.get(tagPath) || 0,
-      });
-    }
-  });
-
-  return root;
+export function buildProjectTagTree(projects: ProjectMeta[]): TagNode[] {
+  return buildTagTree(projects);
 }
