@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
+export { filterPostsByProjects, filterPostsBySearch } from "./postFilters";
 import { buildTagTree, type TagNode } from "./tagTree";
 
 const postsDirectory = path.join(process.cwd(), "content/posts");

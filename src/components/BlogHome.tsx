@@ -4,6 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { PostProjectFilter } from "./PostProjectFilter";
 import { TagFilter } from "./TagFilter";
+import { filterPostsByProjects, filterPostsBySearch } from "@/lib/postFilters";
 import type { PostMeta, PostProjectOption, TagNode } from "@/lib/posts";
 
 interface BlogHomeProps {
@@ -22,29 +23,6 @@ function filterPostsByTags(posts: PostMeta[], selectedTags: string[]): PostMeta[
           postTag === selectedTag || postTag.startsWith(selectedTag + "/")
       )
     )
-  );
-}
-
-function filterPostsBySearch(posts: PostMeta[], query: string): PostMeta[] {
-  if (!query.trim()) return posts;
-
-  const lowerQuery = query.toLowerCase();
-  return posts.filter(
-    (post) =>
-      post.title.toLowerCase().includes(lowerQuery) ||
-      post.description.toLowerCase().includes(lowerQuery) ||
-      post.tags.some((tag) => tag.toLowerCase().includes(lowerQuery))
-  );
-}
-
-function filterPostsByProjects(
-  posts: PostMeta[],
-  selectedProjects: string[]
-): PostMeta[] {
-  if (selectedProjects.length === 0) return posts;
-
-  return posts.filter(
-    (post) => post.project && selectedProjects.includes(post.project)
   );
 }
 
