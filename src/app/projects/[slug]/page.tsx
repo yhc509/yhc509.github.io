@@ -11,8 +11,8 @@ import { createMarkdownComponents } from "@/components/MarkdownComponents";
 import { ProjectExternalLinks } from "@/components/ProjectExternalLinks";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import type { Metadata } from "next";
+import { toSiteUrl } from "@/lib/site";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
 const EMPTY_PROJECT_SLUG = "__empty__";
 
 interface ProjectPageProps {
@@ -62,7 +62,7 @@ export async function generateMetadata({
         title: "Project Not Found",
       };
     }
-    const url = `${BASE_URL}/projects/${slug}`;
+    const url = toSiteUrl(`/projects/${slug}`);
 
     return {
       title: project.title,
@@ -75,13 +75,13 @@ export async function generateMetadata({
         url,
         publishedTime: project.date,
         tags: project.tags,
-        images: [project.thumbnail],
+        images: [toSiteUrl(project.thumbnail)],
       },
       twitter: {
         card: "summary_large_image",
         title: project.title,
         description: project.description,
-        images: [project.thumbnail],
+        images: [toSiteUrl(project.thumbnail)],
       },
       alternates: {
         canonical: url,
@@ -127,7 +127,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       name: "yhc509",
     },
     keywords: project.tags.join(", "),
-    image: project.thumbnail,
+    image: toSiteUrl(project.thumbnail),
   };
 
   return (

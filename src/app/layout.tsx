@@ -3,13 +3,12 @@ import Link from "next/link";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { NavLinks } from "@/components/NavLinks";
+import { SITE_URL, toSiteUrl } from "@/lib/site";
 import { siteContent } from "@/lib/siteContent";
 import "./globals.css";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: siteContent.name,
     template: `%s | ${siteContent.name}`,
@@ -20,13 +19,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: BASE_URL,
+    url: SITE_URL,
     siteName: siteContent.name,
     title: siteContent.name,
     description: siteContent.description,
     images: [
       {
-        url: `${BASE_URL}/profile.png`,
+        url: toSiteUrl("/profile.png"),
         width: 400,
         height: 400,
         alt: siteContent.name,
@@ -37,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteContent.name,
     description: siteContent.description,
-    images: [`${BASE_URL}/profile.png`],
+    images: [toSiteUrl("/profile.png")],
   },
   robots: {
     index: true,

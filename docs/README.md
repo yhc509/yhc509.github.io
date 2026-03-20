@@ -2,6 +2,8 @@
 
 Next.js 16 + MDX 기반 정적 블로그입니다.
 
+이 저장소 하나가 소스 저장소이자 GitHub Pages 배포 기준 저장소입니다.
+
 ## 목차
 
 - [프로젝트 구조](./project-structure.md)
@@ -11,15 +13,18 @@ Next.js 16 + MDX 기반 정적 블로그입니다.
 ## 빠른 시작
 
 ```bash
-# 의존성 설치
-npm install
-
-# 개발 서버 실행
+npm ci
 npm run dev
-
-# 프로덕션 빌드
+npm run lint
 npm run build
+npm run preview
 ```
+
+## 배포 흐름
+
+1. 이 저장소에서 수정합니다.
+2. `main` 브랜치에 push 합니다.
+3. GitHub Actions가 정적 사이트를 빌드해서 GitHub Pages에 배포합니다.
 
 ## 주요 기능
 

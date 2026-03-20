@@ -2,12 +2,14 @@
 
 ## 환경 변수
 
-`.env.local` 파일 생성:
+`.env.local`은 선택 사항입니다.
 
 ```env
-# 필수: 사이트 기본 URL (SEO에 사용)
-NEXT_PUBLIC_BASE_URL=https://your-domain.com
+# 선택: 사이트 기본 URL 덮어쓰기
+NEXT_PUBLIC_BASE_URL=https://yhc509.github.io
 ```
+
+값이 없으면 기본값으로 `https://yhc509.github.io`를 사용합니다.
 
 ## 사이트 정보 변경
 
@@ -208,6 +210,12 @@ const withMDX = createMDX({
 
 이 프로젝트는 정적 export 결과물을 GitHub Actions를 통해 GitHub Pages에 배포합니다. 로컬에서는 `npm run build`로 동일한 산출물을 확인할 수 있습니다.
 
+배포 흐름은 이 저장소 하나로 끝납니다.
+
+1. 이 저장소에서 수정합니다.
+2. `main` 브랜치에 push 합니다.
+3. GitHub Actions가 `out/`을 업로드하고 GitHub Pages에 반영합니다.
+
 ### 정적 내보내기
 
 `next.config.ts`:
@@ -222,4 +230,10 @@ const nextConfig: NextConfig = {
 ```bash
 npm run build
 # out/ 폴더에 정적 파일 생성
+```
+
+정적 결과물을 로컬에서 확인할 때는 아래 명령을 사용합니다.
+
+```bash
+npm run preview
 ```

@@ -12,8 +12,7 @@ import {
   resolvePostAssetSrc,
 } from "@/lib/postAssets";
 import { createMarkdownComponents } from "@/components/MarkdownComponents";
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
+import { toSiteUrl } from "@/lib/site";
 
 interface PostPageProps {
   params: Promise<{ slug: string[] }>;
@@ -30,7 +29,7 @@ export async function generateMetadata({
   const { slug } = await params;
   try {
     const post = getPostBySlug(slug.join("/"));
-    const url = `${BASE_URL}/posts/${slug.join("/")}`;
+    const url = toSiteUrl(`/posts/${slug.join("/")}`);
 
     return {
       title: post.title,
