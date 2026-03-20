@@ -156,10 +156,14 @@ function toPublicProject(project: RawProject): Project {
     failInvalidProject(project.slug, "role is required for public projects.");
   }
 
-  if (!project.highlights || project.highlights.length !== 3) {
+  if (
+    !project.highlights ||
+    project.highlights.length < 2 ||
+    project.highlights.length > 5
+  ) {
     failInvalidProject(
       project.slug,
-      "highlights must contain exactly three items for public projects."
+      "highlights must contain 2–5 items for public projects."
     );
   }
 
