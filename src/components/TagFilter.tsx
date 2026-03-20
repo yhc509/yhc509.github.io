@@ -10,65 +10,24 @@ interface TagFilterProps {
   onTagsChange: (tags: string[]) => void;
 }
 
-type TagGroupKey = "game-engine" | "graphics" | "ai";
-
 interface TagGroup {
-  key: TagGroupKey;
+  key: string;
   label: string;
   count: number;
   defaultExpanded: boolean;
   nodes: TagNode[];
 }
 
-const TAG_GROUP_CONFIG: Record<
-  TagGroupKey,
-  { label: string; defaultExpanded: boolean }
-> = {
-  "game-engine": { label: "Game Engine", defaultExpanded: true },
-  graphics: { label: "Graphics", defaultExpanded: true },
-  ai: { label: "AI", defaultExpanded: true },
-};
-
-function getTagGroupKey(fullPath: string): TagGroupKey | undefined {
-  if (fullPath === "Game Engine") {
-    return "game-engine";
-  }
-  if (fullPath === "Graphics") {
-    return "graphics";
-  }
-  if (fullPath === "AI") {
-    return "ai";
-  }
-  return undefined;
-}
-
 function buildTagGroups(tagTree: TagNode[]): TagGroup[] {
-  const groups = new Map<TagGroupKey, TagNode[]>();
-
-  tagTree.forEach((node) => {
-    const groupKey = getTagGroupKey(node.fullPath);
-    if (!groupKey) {
-      return;
-    }
-    const nodes = groups.get(groupKey) ?? [];
-    nodes.push(node);
-    groups.set(groupKey, nodes);
-  });
-
-  return (Object.entries(TAG_GROUP_CONFIG) as Array<
-    [TagGroupKey, { label: string; defaultExpanded: boolean }]
-  >)
-    .map(([key, config]) => {
-      const nodes = groups.get(key) ?? [];
-      return {
-        key,
-        label: config.label,
-        count: nodes.reduce((sum, node) => sum + node.count, 0),
-        defaultExpanded: config.defaultExpanded,
-        nodes,
-      };
-    })
-    .filter((group) => group.nodes.length > 0);
+  return tagTree
+    .filter((node) => node.count > 0)
+    .map((node) => ({
+      key: node.fullPath,
+      label: node.name,
+      count: node.count,
+      defaultExpanded: true,
+      nodes: [node],
+    }));
 }
 
 function TagItem({
