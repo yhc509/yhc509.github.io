@@ -11,6 +11,7 @@ import {
   createPostAssetRemarkPlugin,
   resolvePostAssetSrc,
 } from "@/lib/postAssets";
+import { createMarkdownComponents } from "@/components/MarkdownComponents";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
 
@@ -86,34 +87,9 @@ export default async function PostPage({ params }: PostPageProps) {
   // If slug is "hello-world", dirname is "." (but we want empty string effectively for joining).
   const postDir = slug.length > 1 ? slug.slice(0, -1).join("/") : "";
 
-  const components = {
-    img: (props: React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>) => {
-      const src = resolvePostAssetSrc(
-        typeof props.src === "string" ? props.src : undefined,
-        postDir
-      );
-      // eslint-disable-next-line @next/next/no-img-element
-      return <img {...props} src={src as string} alt={props.alt || ""} />;
-    },
-    video: (props: React.DetailedHTMLProps<React.VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement>) => {
-      const src = resolvePostAssetSrc(
-        typeof props.src === "string" ? props.src : undefined,
-        postDir
-      );
-      const poster = resolvePostAssetSrc(
-        typeof props.poster === "string" ? props.poster : undefined,
-        postDir
-      );
-      return <video {...props} src={src} poster={poster} />;
-    },
-    source: (props: React.DetailedHTMLProps<React.SourceHTMLAttributes<HTMLSourceElement>, HTMLSourceElement>) => {
-      const src = resolvePostAssetSrc(
-        typeof props.src === "string" ? props.src : undefined,
-        postDir
-      );
-      return <source {...props} src={src} />;
-    },
-  };
+  const components = createMarkdownComponents({
+    resolveAssetSrc: (src) => resolvePostAssetSrc(src, postDir),
+  });
 
   return (
     <div className="max-w-3xl mx-auto px-5 py-10">

@@ -7,6 +7,7 @@ import { getProjectPostGroups, type PostMeta } from "@/lib/posts";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { BackButton } from "@/components/BackButton";
+import { createMarkdownComponents } from "@/components/MarkdownComponents";
 import { ProjectExternalLinks } from "@/components/ProjectExternalLinks";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import type { Metadata } from "next";
@@ -194,6 +195,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="prose max-w-none">
           <MDXRemote
             source={project.content}
+            components={createMarkdownComponents()}
             options={{
               mdxOptions: {
                 remarkPlugins: [remarkGfm],

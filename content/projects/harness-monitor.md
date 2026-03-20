@@ -1,35 +1,34 @@
 ---
 title: "Harness-Monitor"
 date: "2026-03-18"
-description: "로컬 Codex 활동 데이터를 모아 세션, 메모리, 연동 도구, 토큰 사용량을 한 화면에서 보는 모니터링 UI입니다."
+description: "로컬 하네스 데이터를 읽어 토큰 추세, 세션 기록, 연동 상태를 한 화면에서 보는 모니터링 도구다."
 thumbnail: "/images/projects/harness-monitor.png"
 tags:
   - "Harness"
 open: true
-role: "데이터 수집 구조 설계, Fastify API, React/Vite 대시보드 구현"
+role: "데이터 계층 설계, 로컬 수집기 구현, 대시보드 UI 구현"
 highlights:
-  - "세션 로그와 token_count 이벤트 재가공"
-  - "프로젝트/시간대 기준 대시보드"
-  - "공급자별 데이터 계층 분리"
+  - "토큰 추세와 프로젝트별 사용량 집계"
+  - "세션 기록과 연동 상태 탐색"
+  - "Codex에서 시작해 다른 하네스로 확장 가능한 구조"
 links:
   github: "https://github.com/yhc509/Harness-Monitor"
 ---
 
 ## 개요
 
-로컬 Codex 활동을 보는 모니터링 UI입니다. 세션, 메모리, MCP, 토큰 사용량을 한 화면에서 확인할 수 있습니다.
+Codex 기준으로 시작한 로컬 하네스 모니터링 도구다. 토큰 추세, 과거 세션, skill, MCP, hook 상태를 한 화면에서 본다. 이름을 `Harness-Monitor`로 잡은 것도 Codex 전용 도구로 두지 않기 위해서다.
 
 ## 문제/배경
 
-로그, 메모리, 설정, 토큰 이벤트가 여러 위치에 흩어져 있어 흐름을 보기 어렵습니다. 프로젝트별 사용량이나 세션 흐름도 바로 파악하기 힘듭니다.
+하네스를 오래 쓰면 세션, 메모리, 설정, `token_count` 이벤트가 각자 다른 파일과 폴더에 쌓인다. 파일을 직접 뒤지는 방식으로는 사용량 추세나 설정 상태를 계속 점검하기 어렵다. 이 프로젝트는 흩어진 로컬 데이터를 한곳에 모아 하네스를 계속 관찰할 수 있게 만들었다.
 
 ## 핵심 구현
 
-1. `~/.codex`, `~/.agents`, `token_count` 이벤트를 읽어 분석 데이터를 만듭니다.
-2. Fastify API와 React/Vite UI를 분리했습니다.
-3. 프로젝트별 세션 탐색, 시간대별 사용량, 토큰 분포 화면을 제공합니다.
-4. 공급자별 데이터 계층을 분리해 Codex 외 다른 도구도 붙일 수 있게 했습니다.
+1. `~/.codex`, `~/.agents`, `token_count` 이벤트를 읽어 프로젝트, 모델, 날짜 기준의 분석 데이터로 다시 묶는다.
+2. 토큰 페이지, 세션 페이지, Integrations 페이지를 나눠 사용량 추세와 대화 기록, 설정 상태를 같이 보게 했다.
+3. 공급자별 데이터 계층을 따로 두어 Codex에서 시작하되 다른 하네스도 붙일 수 있게 잡았다.
 
 ## 링크
 
-- GitHub: [github.com/yhc509/Harness-Monitor](https://github.com/yhc509/Harness-Monitor)
+GitHub는 위 링크에서, 관련 글은 아래 허브에서 확인할 수 있다.

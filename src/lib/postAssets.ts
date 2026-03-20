@@ -1,4 +1,5 @@
 import { visit } from "unist-util-visit";
+import type { Node } from "unist";
 
 const assetPropertyKeys = new Set(["src", "poster"]);
 
@@ -46,7 +47,7 @@ function rewriteHtmlAssetAttributes(value: string, postDir: string) {
 
 export function createPostAssetRemarkPlugin(postDir: string) {
   return function remarkPostAssetPaths() {
-    return function transform(tree: unknown) {
+    return function transform(tree: Node) {
       visit(tree, (node: unknown) => {
         const assetNode = node as AssetNodeCandidate;
 

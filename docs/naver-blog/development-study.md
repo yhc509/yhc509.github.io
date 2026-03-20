@@ -1,0 +1,16 @@
+# 개발 / 학습 목록
+
+- [Python 환경변수 (dotenv)](https://blog.naver.com/timus23/223415171779)
+- [Python 가상 환경 세팅](https://blog.naver.com/timus23/223375717732)
+- [Deep Learning Specialization](https://blog.naver.com/timus23/223537616533)
+- [Coursera - Neural Networks and Deep Learning 수료](https://blog.naver.com/timus23/223429612886)
+- [Coursera - DeepLearning 특화 과정](https://blog.naver.com/timus23/223420974416)
+- [Coursera Machine Learning 전문화 과정 수료](https://blog.naver.com/timus23/223374194311)
+- [AWS Certified Cloud Practitioner](https://blog.naver.com/timus23/223465437940)
+- [AWS 자격증](https://blog.naver.com/timus23/223458372531)
+- [AWS summit seoul 2024](https://blog.naver.com/timus23/223450026474)
+- [[SD-Lora] timu v0.2.2 (중간 점검)](https://blog.naver.com/timus23/223393381537)
+- [[Stable Diffusion] 직접 학습시킨 모델](https://blog.naver.com/timus23/223340404049)
+- [[Stable Diffusion] 삼국지 게임 스타일 AI 신무장](https://blog.naver.com/timus23/223334955318)
+- [04/13 Midjourney Describe 체험](https://blog.naver.com/timus23/223073662298)
+- [미드저니(Midjourney)로 그림 그려보기](https://blog.naver.com/timus23/223051965376)
