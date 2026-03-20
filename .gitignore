@@ -18,6 +18,9 @@
 /out/
 /public/posts-images/
 
+# Generated OG images
+public/og/
+
 # production
 /build
 

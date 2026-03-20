@@ -75,13 +75,20 @@ export async function generateMetadata({
         url,
         publishedTime: project.date,
         tags: project.tags,
-        images: [toSiteUrl(project.thumbnail)],
+        images: [
+          {
+            url: toSiteUrl(`/og/projects/${slug}.png`),
+            width: 1200,
+            height: 630,
+            alt: project.title,
+          },
+        ],
       },
       twitter: {
         card: "summary_large_image",
         title: project.title,
         description: project.description,
-        images: [toSiteUrl(project.thumbnail)],
+        images: [toSiteUrl(`/og/projects/${slug}.png`)],
       },
       alternates: {
         canonical: url,
