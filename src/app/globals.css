@@ -16,6 +16,8 @@
   --hero-outline: rgba(74, 111, 165, 0.18);
   --hero-chip-bg: rgba(255, 255, 255, 0.72);
   --hero-shadow: rgba(44, 49, 61, 0.12);
+  --code-bg: #2d2d2d;
+  --code-text: #f8f8f2;
 }
 
 [data-theme="dark"] {
@@ -32,6 +34,8 @@
   --hero-outline: rgba(107, 155, 210, 0.25);
   --hero-chip-bg: rgba(58, 58, 60, 0.9);
   --hero-shadow: rgba(0, 0, 0, 0.35);
+  --code-bg: #1e1e1e;
+  --code-text: #d4d4d4;
 }
 
 body {
@@ -83,7 +87,7 @@ body {
 }
 
 .prose pre {
-  background: #2d2d2d;
+  background: var(--code-bg);
   border-radius: 8px;
 }
 
@@ -97,7 +101,7 @@ body {
 .prose pre code {
   background: transparent;
   padding: 0;
-  color: #f8f8f2;
+  color: var(--code-text);
 }
 
 .prose a {
@@ -170,9 +174,9 @@ body {
   margin-top: 0.875rem;
   overflow-x: auto;
   border-radius: 8px;
-  background: #2d2d2d;
+  background: var(--code-bg);
   padding: 0.875rem 1rem;
-  color: #f8f8f2;
+  color: var(--code-text);
   font-family: ui-monospace, SFMono-Regular, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 0.875rem;
   line-height: 1.6;
