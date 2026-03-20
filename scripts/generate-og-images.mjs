@@ -103,6 +103,30 @@ function getMarkdownFiles(dir) {
     .sort((a, b) => a.localeCompare(b));
 }
 
+function getPngFilesRecursively(dir) {
+  if (!pathExists(dir)) {
+    return [];
+  }
+
+  const files = [];
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+
+    if (entry.isDirectory()) {
+      files.push(...getPngFilesRecursively(fullPath));
+      continue;
+    }
+
+    if (path.extname(entry.name).toLowerCase() === ".png") {
+      files.push(fullPath);
+    }
+  }
+
+  return files.sort((a, b) => a.localeCompare(b));
+}
+
 function readFrontmatter(filePath) {
   const source = fs.readFileSync(filePath, "utf8");
   return matter(source).data;
@@ -290,9 +314,27 @@ async function renderCardToFile(fontData, card, targetPath) {
   await sharp(Buffer.from(svg)).png().toFile(targetPath);
 }
 
+async function shouldGenerateImage(sourcePath, targetPath) {
+  try {
+    const [sourceStat, targetStat] = await Promise.all([
+      fs.promises.stat(sourcePath),
+      fs.promises.stat(targetPath),
+    ]);
+
+    return sourceStat.mtimeMs > targetStat.mtimeMs;
+  } catch (error) {
+    if (error && typeof error === "object" && "code" in error && error.code === "ENOENT") {
+      return true;
+    }
+
+    throw error;
+  }
+}
+
 async function generatePostImages(fontData) {
   const postFiles = getFilesRecursively(postsDir);
   let generatedCount = 0;
+  const expectedFiles = new Set();
 
   for (const filePath of postFiles) {
     const data = readFrontmatter(filePath);
@@ -305,22 +347,30 @@ async function generatePostImages(fontData) {
     const title = readOptionalString(data.title) || slug;
     const tags = readStringArray(data.tags ?? data.categories).slice(0, 3);
     const date = formatDate(data.date);
+    const targetPath = path.join(outputDir, `${slug}.png`);
+
+    expectedFiles.add(targetPath);
+
+    if (!(await shouldGenerateImage(filePath, targetPath))) {
+      continue;
+    }
 
     await renderCardToFile(
       fontData,
       { title, tags, date },
-      path.join(outputDir, `${slug}.png`)
+      targetPath
     );
 
     generatedCount += 1;
   }
 
-  return generatedCount;
+  return { generatedCount, expectedFiles };
 }
 
 async function generateProjectImages(fontData) {
   const projectFiles = getMarkdownFiles(projectsDir);
   let generatedCount = 0;
+  const expectedFiles = new Set();
 
   for (const filePath of projectFiles) {
     const data = readFrontmatter(filePath);
@@ -332,17 +382,40 @@ async function generateProjectImages(fontData) {
     const title = readOptionalString(data.title) || slug;
     const tags = readStringArray(data.tags).slice(0, 3);
     const date = formatDate(data.date);
+    const targetPath = path.join(outputDir, "projects", `${slug}.png`);
+
+    expectedFiles.add(targetPath);
+
+    if (!(await shouldGenerateImage(filePath, targetPath))) {
+      continue;
+    }
 
     await renderCardToFile(
       fontData,
       { title, tags, date },
-      path.join(outputDir, "projects", `${slug}.png`)
+      targetPath
     );
 
     generatedCount += 1;
   }
 
-  return generatedCount;
+  return { generatedCount, expectedFiles };
+}
+
+async function cleanupOrphanImages(expectedFiles) {
+  const existingFiles = getPngFilesRecursively(outputDir);
+  let deletedCount = 0;
+
+  for (const filePath of existingFiles) {
+    if (expectedFiles.has(filePath)) {
+      continue;
+    }
+
+    await fs.promises.rm(filePath, { force: true });
+    deletedCount += 1;
+  }
+
+  return deletedCount;
 }
 
 async function main() {
@@ -350,15 +423,19 @@ async function main() {
     throw new Error(`Font not found: ${fontPath}`);
   }
 
-  await fs.promises.rm(outputDir, { recursive: true, force: true });
   await fs.promises.mkdir(outputDir, { recursive: true });
 
   const fontData = await fs.promises.readFile(fontPath);
-  const postCount = await generatePostImages(fontData);
-  const projectCount = await generateProjectImages(fontData);
+  const { generatedCount: postCount, expectedFiles: expectedPostFiles } =
+    await generatePostImages(fontData);
+  const { generatedCount: projectCount, expectedFiles: expectedProjectFiles } =
+    await generateProjectImages(fontData);
+  const deletedCount = await cleanupOrphanImages(
+    new Set([...expectedPostFiles, ...expectedProjectFiles])
+  );
 
   console.log(
-    `Generated ${postCount} post OG images and ${projectCount} project OG images.`
+    `Generated ${postCount} post OG images and ${projectCount} project OG images. Deleted ${deletedCount} orphan images.`
   );
 }
 
