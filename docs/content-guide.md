@@ -19,9 +19,12 @@ content/posts/your-post-slug.mdx
 title: "포스트 제목"
 date: "2025-12-17"
 description: "포스트에 대한 짧은 설명 (SEO 메타 설명으로 사용)"
-tags:
-  - "태그1"
-  - "태그2"
+categories:
+  - "AI/AgenticCoding"
+  - "Game Engine/Unity"
+open: true
+type: "article"
+project: "project-slug"
 ---
 
 # 본문 시작
@@ -36,7 +39,44 @@ tags:
 | `title` | ✅ | 포스트 제목 |
 | `date` | ✅ | 작성일 (YYYY-MM-DD) |
 | `description` | ✅ | 짧은 설명 (SEO용) |
-| `tags` | ❌ | 태그 배열 |
+| `categories` or `tags` | ❌ | 주제 탐색용 태그 배열 |
+| `open` | ❌ | `false`면 공개 목록과 정적 생성에서 제외 |
+| `type` | ❌ | `article`, `devlog`, `archive_candidate` |
+| `project` | 프로젝트 글에서 권장 | 연결할 프로젝트 slug |
+| `series` | ❌ | 연재 식별자 |
+
+### 포스트 타입 규칙
+
+- `article`: 학습 기록, 도구 후기, 개념 정리
+- `devlog`: 실제 프로젝트에 연결되는 진행 기록
+- `archive_candidate`: 보관 또는 재작성 후보
+
+`type: devlog`인 글은 `project`를 함께 적고, 제목은 `Project Name Devlog N` 형식으로 맞춥니다.
+
+### 태그 기준
+
+- `categories`는 **주제만** 담습니다.
+- 프로젝트명은 `categories`에 넣지 않고 `project` 필드로만 연결합니다.
+- `Archive`는 사용자에게 보이는 태그가 아니라 `open: false` 또는 `type: archive_candidate` 같은 상태로 처리합니다.
+- 권장 주제 축은 아래 정도입니다.
+  - `AI/AgenticCoding`
+  - `Game Engine/Unity`
+  - `Game Engine/Unreal`
+  - `Graphics/OpenGL`
+
+예시:
+
+- `Epoch: Unseen Devlog 3`
+  - `type: devlog`
+  - `project: project-t`
+  - `categories: []`
+- `Character Forge`
+  - `type: article`
+  - `project: project-t`
+  - `categories: ['AI/AgenticCoding']`
+- `UE5 애니메이션을 처음 공부하며 먼저 구분한 5가지`
+  - `type: article`
+  - `categories: ['Game Engine/Unreal']`
 
 ## 프로젝트 생성
 

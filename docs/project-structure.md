@@ -72,10 +72,18 @@ blog/
 
 | 함수 | 설명 |
 |------|------|
-| `getAllProjectSlugs()` | 모든 프로젝트 slug 목록 반환 |
-| `getProjectBySlug(slug)` | slug로 프로젝트 조회 |
-| `getAllProjects()` | 모든 프로젝트 메타데이터 (날짜순 정렬) |
+| `getAllProjectSlugs()` | 공개 프로젝트 slug 목록 반환 |
+| `getProjectBySlug(slug)` | 공개 프로젝트를 slug로 조회 |
+| `getAllProjects()` | 공개 프로젝트 메타데이터 (날짜순 정렬) |
 | `buildProjectTagTree(projects)` | 프로젝트 계층형 태그 트리 생성 |
+
+프로젝트 frontmatter는 기본 메타데이터 외에 다음 필드를 사용합니다:
+
+| 필드 | 설명 |
+|------|------|
+| `role` | 내가 맡은 역할 요약 |
+| `highlights` | 카드와 상세 헤더에 노출할 핵심 구현 포인트 |
+| `links.github` / `links.demo` / `links.docs` / `links.devlog` | 공개 가능한 링크들. 최소 1개 필요 |
 
 ### `src/components/BlogHome.tsx`
 
@@ -87,10 +95,11 @@ blog/
 ### `src/components/ProjectsHome.tsx`
 
 프로젝트 목록 컴포넌트:
-- 이미지 중심 2열 그리드 레이아웃
+- 날짜순 단일 목록 구조
 - 포스트와 독립적인 태그 시스템
 - URL 쿼리 파라미터로 상태 관리
 - 검색 및 태그 필터링
+- 목록 항목은 썸네일, 제목, `highlights` 3개, 상세 보기만 노출
 
 ### `src/components/ThemeProvider.tsx`
 

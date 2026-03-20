@@ -78,6 +78,8 @@ body {
   --tw-prose-links: var(--accent);
   --tw-prose-bold: var(--foreground);
   --tw-prose-code: var(--foreground);
+  --tw-prose-quotes: var(--foreground);
+  --tw-prose-quote-borders: var(--accent);
 }
 
 .prose pre {
@@ -106,4 +108,73 @@ body {
 
 .prose a:hover {
   opacity: 0.8;
+}
+
+.prose blockquote {
+  margin: 1.75rem 0;
+  border-left: 4px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+  background: color-mix(in srgb, var(--accent-soft) 55%, var(--card-bg));
+  padding: 1rem 1.25rem;
+  color: var(--foreground);
+  font-style: normal;
+}
+
+.prose blockquote p {
+  margin: 0;
+}
+
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:last-of-type::after {
+  content: none;
+}
+
+.prose .mermaid-diagram {
+  margin: 1.75rem 0;
+}
+
+.prose .mermaid-diagram__surface,
+.prose .mermaid-diagram__loading,
+.prose .mermaid-diagram__error {
+  overflow-x: auto;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--card-bg) 94%, transparent);
+  padding: 1rem;
+}
+
+.prose .mermaid-diagram__surface svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.prose .mermaid-diagram__surface p {
+  margin: 0;
+}
+
+.prose .mermaid-diagram__loading,
+.prose .mermaid-diagram__message,
+.prose .mermaid-diagram__details {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.prose .mermaid-diagram__details {
+  margin-top: 0.5rem;
+}
+
+.prose .mermaid-diagram__code {
+  margin-top: 0.875rem;
+  overflow-x: auto;
+  border-radius: 8px;
+  background: #2d2d2d;
+  padding: 0.875rem 1rem;
+  color: #f8f8f2;
+  font-family: ui-monospace, SFMono-Regular, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  white-space: pre;
 }

@@ -7,7 +7,13 @@ import { BackButton } from "@/components/BackButton";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { Comments } from "@/components/Comments";
 import type { Metadata } from "next";
-import { SITE_URL } from "@/lib/site";
+import {
+  createPostAssetRemarkPlugin,
+  resolvePostAssetSrc,
+} from "@/lib/postAssets";
+import { createMarkdownComponents } from "@/components/MarkdownComponents";
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
 
 interface PostPageProps {
   params: Promise<{ slug: string[] }>;
@@ -24,7 +30,7 @@ export async function generateMetadata({
   const { slug } = await params;
   try {
     const post = getPostBySlug(slug.join("/"));
-    const url = `${SITE_URL}/posts/${slug.join("/")}`;
+    const url = `${BASE_URL}/posts/${slug.join("/")}`;
 
     return {
       title: post.title,
@@ -81,20 +87,9 @@ export default async function PostPage({ params }: PostPageProps) {
   // If slug is "hello-world", dirname is "." (but we want empty string effectively for joining).
   const postDir = slug.length > 1 ? slug.slice(0, -1).join("/") : "";
 
-  const components = {
-    img: (props: React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>) => {
-      let src = props.src;
-      if (typeof src === "string" && src && !src.startsWith("http") && !src.startsWith("/")) {
-        // Resolve relative path
-        // e.g. src="./img/cloud.png", postDir="aws" -> "aws/img/cloud.png"
-        const cleanSrc = src.replace(/^\.\//, "");
-        const relativePath = postDir ? `${postDir}/${cleanSrc}` : cleanSrc;
-        src = `/posts-images/${relativePath}`;
-      }
-      // eslint-disable-next-line @next/next/no-img-element
-      return <img {...props} src={src as string} alt={props.alt || ""} />;
-    },
-  };
+  const components = createMarkdownComponents({
+    resolveAssetSrc: (src) => resolvePostAssetSrc(src, postDir),
+  });
 
   return (
     <div className="max-w-3xl mx-auto px-5 py-10">
@@ -126,7 +121,7 @@ export default async function PostPage({ params }: PostPageProps) {
             components={components}
             options={{
               mdxOptions: {
-                remarkPlugins: [remarkGfm],
+                remarkPlugins: [remarkGfm, createPostAssetRemarkPlugin(postDir)],
               },
             }}
           />

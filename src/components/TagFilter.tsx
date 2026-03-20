@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useState } from "react";
 import type { TagNode } from "@/lib/posts";
 
@@ -9,12 +10,74 @@ interface TagFilterProps {
   onTagsChange: (tags: string[]) => void;
 }
 
+type TagGroupKey = "game-engine" | "graphics" | "ai";
+
+interface TagGroup {
+  key: TagGroupKey;
+  label: string;
+  count: number;
+  defaultExpanded: boolean;
+  nodes: TagNode[];
+}
+
+const TAG_GROUP_CONFIG: Record<
+  TagGroupKey,
+  { label: string; defaultExpanded: boolean }
+> = {
+  "game-engine": { label: "Game Engine", defaultExpanded: true },
+  graphics: { label: "Graphics", defaultExpanded: true },
+  ai: { label: "AI", defaultExpanded: true },
+};
+
+function getTagGroupKey(fullPath: string): TagGroupKey | undefined {
+  if (fullPath === "Game Engine") {
+    return "game-engine";
+  }
+  if (fullPath === "Graphics") {
+    return "graphics";
+  }
+  if (fullPath === "AI") {
+    return "ai";
+  }
+  return undefined;
+}
+
+function buildTagGroups(tagTree: TagNode[]): TagGroup[] {
+  const groups = new Map<TagGroupKey, TagNode[]>();
+
+  tagTree.forEach((node) => {
+    const groupKey = getTagGroupKey(node.fullPath);
+    if (!groupKey) {
+      return;
+    }
+    const nodes = groups.get(groupKey) ?? [];
+    nodes.push(node);
+    groups.set(groupKey, nodes);
+  });
+
+  return (Object.entries(TAG_GROUP_CONFIG) as Array<
+    [TagGroupKey, { label: string; defaultExpanded: boolean }]
+  >)
+    .map(([key, config]) => {
+      const nodes = groups.get(key) ?? [];
+      return {
+        key,
+        label: config.label,
+        count: nodes.reduce((sum, node) => sum + node.count, 0),
+        defaultExpanded: config.defaultExpanded,
+        nodes,
+      };
+    })
+    .filter((group) => group.nodes.length > 0);
+}
+
 function TagItem({
   node,
   selectedTags,
   onSelect,
   onAdd,
   onRemove,
+  label,
   depth = 0,
 }: {
   node: TagNode;
@@ -22,6 +85,7 @@ function TagItem({
   onSelect: (tag: string) => void;
   onAdd: (tag: string) => void;
   onRemove: (tag: string) => void;
+  label?: string;
   depth?: number;
 }) {
   const [expanded, setExpanded] = useState(true);
@@ -55,7 +119,7 @@ function TagItem({
             color: isSelected ? "var(--accent)" : "var(--text-secondary)",
           }}
         >
-          <span className="group-hover:underline">#{node.name}</span>
+          <span className="group-hover:underline">#{label ?? node.name}</span>
           <span
             className="text-xs"
             style={{ color: "var(--text-muted)" }}
@@ -115,6 +179,41 @@ function TagItem({
   );
 }
 
+function TagGroupSection({
+  group,
+  children,
+}: {
+  group: TagGroup;
+  children: ReactNode;
+}) {
+  const [expanded, setExpanded] = useState(group.defaultExpanded);
+
+  return (
+    <section className="border-t pt-3 first:border-t-0 first:pt-0">
+      <button
+        type="button"
+        onClick={() => setExpanded((prev) => !prev)}
+        className="mb-2 flex w-full items-center justify-between text-left"
+      >
+        <span
+          className="text-xs font-semibold uppercase tracking-[0.08em]"
+          style={{ color: "var(--text-muted)" }}
+        >
+          {group.label}
+        </span>
+        <span
+          className="flex items-center gap-2 text-xs"
+          style={{ color: "var(--text-muted)" }}
+        >
+          <span>{group.count}</span>
+          <span>{expanded ? "−" : "+"}</span>
+        </span>
+      </button>
+      {expanded && <div>{children}</div>}
+    </section>
+  );
+}
+
 export function TagFilter({
   tagTree,
   selectedTags,
@@ -147,6 +246,8 @@ export function TagFilter({
     onTagsChange([]);
   };
 
+  const tagGroups = buildTagGroups(tagTree);
+
   return (
     <div
       className="p-4 rounded-xl border"
@@ -156,7 +257,7 @@ export function TagFilter({
       }}
     >
       <div className="flex items-center justify-between mb-3">
-        <h2 className="font-bold text-sm">Tags</h2>
+        <h2 className="font-bold text-sm">Topics</h2>
         {selectedTags.length > 0 && (
           <button
             onClick={handleClear}
@@ -170,16 +271,21 @@ export function TagFilter({
           </button>
         )}
       </div>
-      <div>
-        {tagTree.map((node) => (
-          <TagItem
-            key={node.fullPath}
-            node={node}
-            selectedTags={selectedTags}
-            onSelect={handleSelect}
-            onAdd={handleAdd}
-            onRemove={handleRemove}
-          />
+      <div className="space-y-4">
+        {tagGroups.map((group) => (
+          <TagGroupSection key={group.key} group={group}>
+            {group.nodes.map((node) => (
+              <TagItem
+                key={node.fullPath}
+                node={node}
+                selectedTags={selectedTags}
+                onSelect={handleSelect}
+                onAdd={handleAdd}
+                onRemove={handleRemove}
+                label={node.children.length === 0 ? undefined : "전체"}
+              />
+            ))}
+          </TagGroupSection>
         ))}
       </div>
     </div>

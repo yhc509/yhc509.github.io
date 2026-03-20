@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
+import { createMarkdownComponents } from "@/components/MarkdownComponents";
 import { siteContent } from "@/lib/siteContent";
 
 export const metadata: Metadata = {
@@ -56,6 +57,7 @@ export default function AboutPage() {
       <div className="prose max-w-none">
         <MDXRemote
           source={content}
+          components={createMarkdownComponents()}
           options={{
             mdxOptions: {
               remarkPlugins: [remarkGfm],

@@ -1,55 +1,51 @@
-import fs from "node:fs";
-import path from "node:path";
+import { promises as fs } from "fs";
+import path from "path";
 
-const sourceDir = path.join(process.cwd(), "content", "posts");
-const targetDir = path.join(process.cwd(), "public", "posts-images");
+const postsRoot = path.join(process.cwd(), "content/posts");
+const outputRoot = path.join(process.cwd(), "public/posts-images");
 const markdownExtensions = new Set([".md", ".mdx"]);
-const assetExtensions = new Set([
-  ".png",
-  ".jpg",
-  ".jpeg",
-  ".gif",
-  ".webp",
-  ".svg",
-  ".ico",
-  ".avif",
-]);
 
-function resetDirectory(dirPath) {
-  fs.rmSync(dirPath, { recursive: true, force: true });
-  fs.mkdirSync(dirPath, { recursive: true });
-}
-
-function copyAssets(sourcePath, destinationPath) {
-  const entries = fs.readdirSync(sourcePath, { withFileTypes: true });
+async function collectAssetFiles(dir) {
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+  const files = [];
 
   for (const entry of entries) {
-    const from = path.join(sourcePath, entry.name);
-    const to = path.join(destinationPath, entry.name);
+    const fullPath = path.join(dir, entry.name);
 
     if (entry.isDirectory()) {
-      fs.mkdirSync(to, { recursive: true });
-      copyAssets(from, to);
+      files.push(...(await collectAssetFiles(fullPath)));
       continue;
     }
 
-    if (entry.name === ".DS_Store") {
+    if (markdownExtensions.has(path.extname(entry.name).toLowerCase())) {
       continue;
     }
 
-    const extension = path.extname(entry.name).toLowerCase();
-    if (markdownExtensions.has(extension)) {
-      continue;
-    }
-
-    if (!assetExtensions.has(extension)) {
-      continue;
-    }
-
-    fs.mkdirSync(path.dirname(to), { recursive: true });
-    fs.copyFileSync(from, to);
+    files.push(fullPath);
   }
+
+  return files;
 }
 
-resetDirectory(targetDir);
-copyAssets(sourceDir, targetDir);
+async function main() {
+  await fs.rm(outputRoot, { recursive: true, force: true });
+  await fs.mkdir(outputRoot, { recursive: true });
+
+  const assetFiles = await collectAssetFiles(postsRoot);
+
+  for (const assetFile of assetFiles) {
+    const relativePath = path.relative(postsRoot, assetFile);
+    const destinationPath = path.join(outputRoot, relativePath);
+
+    await fs.mkdir(path.dirname(destinationPath), { recursive: true });
+    await fs.copyFile(assetFile, destinationPath);
+  }
+
+  console.log(`Synced ${assetFiles.length} post assets to public/posts-images`);
+}
+
+main().catch((error) => {
+  console.error("Failed to sync post assets.");
+  console.error(error);
+  process.exit(1);
+});

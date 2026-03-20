@@ -5,6 +5,8 @@ import readingTime from "reading-time";
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
+export type PostType = "article" | "devlog" | "archive_candidate";
+
 export interface PostMeta {
   slug: string;
   title: string;
@@ -13,10 +15,40 @@ export interface PostMeta {
   readingTime: string;
   tags: string[];
   open: boolean;
+  type: PostType;
+  project?: string;
+  series?: string;
 }
 
 export interface Post extends PostMeta {
   content: string;
+}
+
+const postTypes = new Set<PostType>(["article", "devlog", "archive_candidate"]);
+
+function readOptionalString(value: unknown): string | undefined {
+  if (typeof value !== "string") {
+    return undefined;
+  }
+
+  const normalizedValue = value.trim();
+  return normalizedValue.length > 0 ? normalizedValue : undefined;
+}
+
+function readTags(value: unknown): string[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value.filter((item): item is string => typeof item === "string");
+}
+
+function readPostType(value: unknown): PostType {
+  if (typeof value === "string" && postTypes.has(value as PostType)) {
+    return value as PostType;
+  }
+
+  return "article";
 }
 
 // Helper to recursively find files
@@ -74,7 +106,7 @@ export function getPostBySlug(slug: string): Post {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  const tags: string[] = data.tags || (data.categories && Array.isArray(data.categories) ? data.categories : []);
+  const tags = readTags(data.tags ?? data.categories);
 
   return {
     slug,
@@ -85,6 +117,9 @@ export function getPostBySlug(slug: string): Post {
     readingTime: readingTime(content).text,
     tags,
     open: data.open !== false, // 기본값은 true (공개)
+    type: readPostType(data.type),
+    project: readOptionalString(data.project),
+    series: readOptionalString(data.series),
   };
 }
 
@@ -101,6 +136,9 @@ export function getAllPosts(): PostMeta[] {
         readingTime: post.readingTime,
         tags: post.tags,
         open: post.open,
+        type: post.type,
+        project: post.project,
+        series: post.series,
       };
     })
     .filter((post) => post.open) // open: false인 포스트는 목록에서 제외
@@ -114,6 +152,47 @@ export interface TagNode {
   fullPath: string;
   children: TagNode[];
   count: number;
+}
+
+export interface PostProjectOption {
+  slug: string;
+  title: string;
+  count: number;
+}
+
+export interface ProjectPostGroups {
+  devlogs: PostMeta[];
+  articles: PostMeta[];
+}
+
+function comparePostsByDateAscending(a: PostMeta, b: PostMeta): number {
+  const dateDiff = new Date(a.date).getTime() - new Date(b.date).getTime();
+  if (dateDiff !== 0) {
+    return dateDiff;
+  }
+
+  return a.title.localeCompare(b.title, "ko");
+}
+
+function readDevlogNumber(title: string): number | undefined {
+  const match = title.match(/devlog\s+(\d+)\s*$/i);
+  if (!match) {
+    return undefined;
+  }
+
+  const value = Number(match[1]);
+  return Number.isFinite(value) ? value : undefined;
+}
+
+function compareDevlogs(a: PostMeta, b: PostMeta): number {
+  const aNumber = readDevlogNumber(a.title);
+  const bNumber = readDevlogNumber(b.title);
+
+  if (aNumber !== undefined && bNumber !== undefined && aNumber !== bNumber) {
+    return aNumber - bNumber;
+  }
+
+  return comparePostsByDateAscending(a, b);
 }
 
 export function buildTagTree(posts: PostMeta[]): TagNode[] {
@@ -164,6 +243,54 @@ export function buildTagTree(posts: PostMeta[]): TagNode[] {
   });
 
   return root;
+}
+
+export function buildPostProjectOptions(
+  posts: PostMeta[],
+  projectTitleMap: Record<string, string> = {}
+): PostProjectOption[] {
+  const counts = new Map<string, number>();
+
+  posts.forEach((post) => {
+    if (!post.project) {
+      return;
+    }
+
+    counts.set(post.project, (counts.get(post.project) || 0) + 1);
+  });
+
+  return Array.from(counts.entries())
+    .map(([slug, count]) => ({
+      slug,
+      title: projectTitleMap[slug] || slug,
+      count,
+    }))
+    .sort((a, b) => {
+      if (b.count !== a.count) {
+        return b.count - a.count;
+      }
+
+      return a.title.localeCompare(b.title, "ko");
+    });
+}
+
+export function getPostsByProject(projectSlug: string): PostMeta[] {
+  return getAllPosts()
+    .filter((post) => post.project === projectSlug)
+    .sort(comparePostsByDateAscending);
+}
+
+export function getProjectPostGroups(projectSlug: string): ProjectPostGroups {
+  const relatedPosts = getPostsByProject(projectSlug);
+
+  return {
+    devlogs: relatedPosts
+      .filter((post) => post.type === "devlog")
+      .sort(compareDevlogs),
+    articles: relatedPosts
+      .filter((post) => post.type === "article")
+      .sort(comparePostsByDateAscending),
+  };
 }
 
 export function filterPostsByTags(
