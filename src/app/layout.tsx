@@ -14,6 +14,11 @@ export const metadata: Metadata = {
     template: `%s | ${siteContent.name}`,
   },
   description: siteContent.description,
+  alternates: {
+    types: {
+      "application/rss+xml": toSiteUrl("/feed.xml"),
+    },
+  },
   keywords: [...siteContent.keywords],
   authors: [{ name: "yhc509" }],
   openGraph: {

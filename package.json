@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "node scripts/sync-post-assets.mjs && node scripts/generate-og-images.mjs",
+    "predev": "node scripts/sync-post-assets.mjs && node scripts/generate-og-images.mjs && node scripts/generate-rss.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/sync-post-assets.mjs && node scripts/generate-og-images.mjs",
+    "prebuild": "node scripts/sync-post-assets.mjs && node scripts/generate-og-images.mjs && node scripts/generate-rss.mjs",
     "build": "next build",
     "lint": "eslint",
     "preview": "serve out"

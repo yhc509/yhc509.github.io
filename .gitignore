@@ -20,6 +20,7 @@
 
 # Generated OG images
 public/og/
+public/feed.xml
 
 # production
 /build
