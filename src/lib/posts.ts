@@ -51,6 +51,17 @@ function readPostType(value: unknown): PostType {
   return "article";
 }
 
+function formatDateString(raw: unknown): string {
+  const d = raw ? new Date(raw as string | number) : new Date();
+  if (isNaN(d.getTime())) {
+    return new Date().toISOString().split("T")[0];
+  }
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
 // Helper to recursively find files
 function getFilesRecursively(dir: string): string[] {
   let results: string[] = [];
@@ -111,7 +122,7 @@ export function getPostBySlug(slug: string): Post {
   return {
     slug,
     title: data.title || slug,
-    date: data.date ? new Date(data.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+    date: formatDateString(data.date),
     description: data.description || "",
     content,
     readingTime: readingTime(content).text,
