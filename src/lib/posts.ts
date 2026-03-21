@@ -67,6 +67,13 @@ function formatDateString(raw: unknown): string {
   return `${yyyy}-${mm}-${dd}`;
 }
 
+function isPublishable(dateStr: string): boolean {
+  if (process.env.NODE_ENV === "development") return true;
+  const today = new Date();
+  today.setHours(23, 59, 59, 999);
+  return new Date(dateStr) <= today;
+}
+
 // Helper to recursively find files
 function getFilesRecursively(dir: string): string[] {
   let results: string[] = [];
@@ -95,7 +102,7 @@ export function getAllPostSlugs(): string[] {
       // open: false인 포스트는 정적 파일로 생성하지 않음
       try {
         const post = getPostBySlug(slug);
-        return post.open;
+        return post.open && isPublishable(post.date);
       } catch {
         return false;
       }
@@ -157,7 +164,7 @@ export function getAllPosts(): PostMeta[] {
         series: post.series,
       };
     })
-    .filter((post) => post.open) // open: false인 포스트는 목록에서 제외
+    .filter((post) => post.open && isPublishable(post.date)) // open: false이거나 미래 날짜인 포스트는 목록에서 제외
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? -1 : 1));
 
   return posts;
