@@ -1,86 +1,83 @@
 ---
-title: "From Zero Ideas to a Deployed SaaS in 22 Hours"
-date: "2026-03-24"
-description: "I decided to build and sell a SaaS with vibe coding. From idea exploration to deploying OnceWrite — everything that happened in 22 hours."
+title: "OnceWrite — A Content Repurposing Tool I Built for Myself"
+date: "2026-03-23"
+description: "Solo devs need to share their process. But I don't know social media. So I built this for myself."
 categories: ["AI/AgenticCoding"]
-open: false
+open: true
 type: devlog
 ---
 
-I wanted to build something with vibe coding and sell it. No idea what. Drew up an elaborate plan, then burned a full session finding ideas, killing them, finding more. A content repurposing tool called OnceWrite eventually made it to production. Twenty-two hours, first commit to deploy.
+I know solo devs are supposed to share their process. Build in public, devlogs, social media presence. All good advice, except I don't know social media. I have a Twitter account I barely use. No Instagram. Writing one blog post already costs energy. Rewriting the same thing in a different tone for each platform? No.
 
-## Started with the workflow, not the product
+So I built one. Paste a blog post, get five versions: Twitter thread, Reddit post, Threads post, Instagram caption, and Bluesky post. Called it OnceWrite. Write once, post five places. Built it for myself from the start.
 
-Didn't start with "let's build this." Designed the full pipeline first — vibe-coding a web service and selling it. Tech stack comparisons, idea generation, marketing automation, revenue models. Made templates too — CLAUDE.md, PRD, .env — copy into any new project and go.
+## Stack
 
-Smooth so far. Then the hard part. Build what?
+Next.js + Clerk (auth) + LemonSqueezy (payments) + Supabase (DB) + Claude API (conversion).
 
-## Took plenty of detours
+Stripe doesn't work in South Korea, so LemonSqueezy. It's a Merchant of Record — handles global sales tax and VAT automatically. More realistic for a solo dev based in Korea selling globally.
 
-"Could freelancing be automated?" I researched the Upwork API and picked an actual gig to practice with — an Instagram DM automation SaaS. Except I don't use Instagram. Don't even have an account. Switching to Twitter meant $200/month for the API. When I suggested mock data, the AI was blunt.
+## Delegated the code, set up the infra myself
 
-> Building a practice project is "coding practice," not "business practice."
+Handed the code to Codex and focused on account setup. Clerk, Supabase, LemonSqueezy, Anthropic API — created accounts, grabbed keys, passed them over. Not writing code myself meant I could focus on the human work like prompt design.
 
-Dropped it.
+Not smooth sailing. CAPTCHA error on Clerk signup (turning off Bot Protection fixed it), ran out of API credits ($5 top-up), typo in the repo name (OnceWrtie). Build passed.
 
-Researched Product Hunt. AI tools made up 40–50% of listings. Game dev tools were niche. The only game-related hit, Meshy, had positioned itself as "AI 3D model generator," not "game dev tool." My Character Forge had a similar shape, but the market was saturated.
+## First test
 
-Game ideas came next. A balance simulator tempted me — drew up a full plan. But I hadn't done real balance tuning myself. The AI seemed to wing it too. And who pays for a CLI?
+Fed it my own blog post. $0.02 per conversion. English was fine. Korean broke JSON parsing. Haiku couldn't maintain JSON format when outputting Korean. Added explicit schema to the prompt and retry logic on parse failure. Fixed.
 
-> If you keep researching, you'll never start.
+## Pre-deployment review
 
-Fair point. Just pick one and ship it within two weeks.
+A working MVP doesn't mean it's ready to deploy. Ran a three-phase review — security, logic, legal — and found six critical issues. Exposed API keys, missing DB access controls, incomplete terms of service. The faster you build with vibe coding, the easier it is to miss these things.
 
-## OnceWrite
+First time deploying a SaaS, so I learned security and legal on the fly. Took longer than writing the code.
 
-I picked "content repurposing tool." Paste a blog post, get six versions: Twitter thread, LinkedIn post, Reddit post, newsletter, summary, and tips list. Named it OnceWrite. Write once, post six times.
+## Credit system
 
-Stack: Next.js + Clerk (auth) + LemonSqueezy (payments) + Supabase (DB) + Claude API (conversion). Stripe doesn't work in South Korea, so LemonSqueezy was the replacement. It's a Merchant of Record, handling global sales tax and VAT automatically. More realistic for a solo dev based in Korea.
+Went with daily credits. Ten per day, one credit per platform conversion. Credits refill on login only.
 
-## MVP in a day
+Initially, selecting all five platforms counted as one use. Five times the cost, one credit deducted — doesn't work. Switched to per-platform billing. The point is "a reason to come back every day." Credits refill on login, so if the habit sticks, that's the signal for demand.
 
-I delegated development to Codex and focused on setting up accounts. Clerk, Supabase, LemonSqueezy, Anthropic API — made accounts, copied keys, handed them over.
+## Model cost optimization
 
-Not smooth. CAPTCHA error on Clerk signup (turning off Bot Protection fixed it), insufficient API credits ($5 top-up), typo in the repo name (OnceWrtie). Build passed anyway. Tested with my own blog post — $0.02 per conversion. English worked. Korean broke JSON parsing. Haiku was mangling JSON format on Korean output. Fixed.
+Set Gemini Flash Lite as primary, Claude Haiku as fallback. Gemini's free tier allows 1,500 requests per day. Enough for early traffic.
 
-## Six critical issues before deployment
+Quality was the problem. Korean-to-Japanese conversion broke when profile settings were enabled. Profile data in the system prompt made Gemini ignore the output language instruction. Small models start dropping fine-grained instructions as the prompt gets longer. The tug-of-war between free and quality will keep going.
 
-Working MVP doesn't mean deploy-ready. Three-phase review — security, logic, legal — turned up six critical issues.
+## Rewrote the architecture three times
 
-Highlights: Google AI API key exposed as a URL query parameter — plaintext in every proxy log. Moved to header. Governing law was Korean, but Terms of Service existed only in English — E-Commerce Act violation risk. Korea's data privacy law required fields that were missing entirely.
+### Pipeline separation
 
-First SaaS deployment. Learned security and legal on the go. The most common Supabase incident turned out to be forgetting RLS. In 2025, over 170 Lovable-built apps exposed their entire databases that way.
+Originally fed the entire source text to the AI and pulled all results at once. Analysis and generation tangled in one prompt made output unstable. Split into analyze → generate → validate. Stabilized, and input tokens dropped by half.
 
-## Overhauled the pricing model
+### Per-platform calls
 
-The original plan was $9/month Pro + 3 free uses.
+Initially generated all five platforms in a single AI call. Fast, but the tone flattened across platforms. Switched to individual calls per platform, run in parallel. Output changed from JSON to plain text. Parsing issues disappeared, and tone differences between platforms became pronounced.
 
-> It'll be tough. "I can do this for free with ChatGPT" — the classic AI wrapper trap.
+### Platform swap
 
-Blunt and correct. Restructured. Locked paid plans behind "Coming Soon," switched to daily credits — ten per day, one per platform conversion. Credits refill on login only, so there's a reason to come back.
+Dropped LinkedIn and Facebook, added Bluesky. Target audience is solo/indie/anonymous developers — LinkedIn's professional tone and Facebook's community tone didn't fit. Tried Hacker News too, then dropped it. HN is just a title line — no repurposing value.
 
-The old model counted one generation as one use no matter how many platforms you picked. Six at once cost the same as one. Per-platform charging fixed the imbalance.
-
-## Put Gemini first, ran into limits
-
-To cut costs, I set Gemini Flash Lite as the primary model with Claude Haiku as fallback. Gemini's free tier allows 1,500 requests per day, enough for early-stage traffic.
-
-Quality broke first. Korean-to-Japanese conversion with a profile (name, role, tone) enabled — translation fell apart. Profile data in the system prompt made Gemini ignore the output language and follow the input language instead. Removing the name field fixed it.
-
-Small models lose fine-grained instructions as prompts grow. Free and quality will keep pulling in opposite directions.
+Removed the tone selection dropdown too. Instead of letting users pick professional, casual, or humorous, baked the tone into each platform's guide. Twitter gets bold energy, Bluesky gets quiet confidence, Reddit gets honest and humble. Letting the platform decide the tone is more natural.
 
 ## 22 hours
 
-First commit to Vercel production: twenty-two hours.
+First commit to Vercel deploy: twenty-two hours. Without AI coding tools, easily one to two weeks.
 
-Idea exploration → freelancing, Product Hunt, game tools eliminated → OnceWrite confirmed → full-stack build → security review → credit system overhaul → bilingual legal docs → model fallback → UI polish → deploy. Without AI coding tools, easily one to two weeks.
+## My workflow
 
-## What's next?
+OnceWrite is the last step in my content pipeline.
 
-Deployed. Zero users. No marketing connections. Chronic lurker by temperament.
+1. **Development** — Build with Claude and Codex.
+2. **Session analysis → draft** — After development, have Claude analyze the conversation session and turn it into a blog post draft.
+3. **Polish** — Read the draft, set the tone, fill in missing context. This step is human.
+4. **OnceWrite** — Feed the finished post in. Out come the social media versions.
 
-What's left is building in public. Reddit first, Twitter to document the process, Product Hunt to launch. An anonymous alt account is fine. In indie hacker circles, nobody cares about your handle. Visibly building something is all that matters.
+Development to social media posting in one flow. OnceWrite removes the last hurdle.
 
-One metric to watch: does anyone come back? If someone burns through their daily credits every day, regardless of DAU, that's paid demand.
+## So now
 
-Twenty-two hours. Started with nothing, reached production. From here it stops being about building and starts being about validation. Planning to keep documenting.
+Deployed. Zero users. Built for myself to begin with.
+
+I'm the first user. I use it daily and fix what's missing as I go. No marketing connections. Chronic lurker by temperament. Community engagement doesn't come naturally. That's why I needed this tool. Just lowering the hurdle of distributing one post across multiple platforms — for someone like me, that's enough.
