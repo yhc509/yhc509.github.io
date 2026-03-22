@@ -27,10 +27,57 @@ export function getConfiguredDevLanguage(): DevLanguage | null {
   );
 }
 
-export function shouldUseEnglish(): boolean {
-  if (!isDevelopmentEnvironment()) {
-    return true;
+function readBrowserStoredDevLanguage(): DevLanguage | null {
+  if (typeof window === "undefined") {
+    return null;
   }
 
-  return getConfiguredDevLanguage() === "en";
+  try {
+    return parseDevLanguage(window.localStorage.getItem(DEV_LANGUAGE_STORAGE_KEY));
+  } catch {
+    return null;
+  }
+}
+
+function readBrowserCookieDevLanguage(): DevLanguage | null {
+  if (typeof document === "undefined") {
+    return null;
+  }
+
+  const cookieValue = document.cookie
+    .split("; ")
+    .find((entry) => entry.startsWith(`${DEV_LANGUAGE_COOKIE_NAME}=`))
+    ?.split("=")[1];
+
+  return parseDevLanguage(cookieValue);
+}
+
+function readServerRenderedDevLanguage(): DevLanguage | null {
+  if (typeof document === "undefined") {
+    return null;
+  }
+
+  return parseDevLanguage(document.documentElement.dataset.devLanguage);
+}
+
+export function getCurrentDevLanguage(): DevLanguage {
+  if (!isDevelopmentEnvironment()) {
+    return "en";
+  }
+
+  if (typeof window === "undefined") {
+    return getConfiguredDevLanguage() ?? DEFAULT_DEV_LANGUAGE;
+  }
+
+  return (
+    readBrowserStoredDevLanguage() ??
+    readBrowserCookieDevLanguage() ??
+    readServerRenderedDevLanguage() ??
+    getConfiguredDevLanguage() ??
+    DEFAULT_DEV_LANGUAGE
+  );
+}
+
+export function shouldUseEnglish(): boolean {
+  return getCurrentDevLanguage() === "en";
 }

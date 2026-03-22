@@ -5,6 +5,7 @@ import {
   DEV_LANGUAGE_COOKIE_MAX_AGE,
   DEV_LANGUAGE_COOKIE_NAME,
   DEV_LANGUAGE_STORAGE_KEY,
+  getConfiguredDevLanguage,
   getDefaultDevLanguage,
   getToggledDevLanguage,
   parseDevLanguage,
@@ -30,8 +31,28 @@ function persistLanguage(language: DevLanguage) {
   document.cookie = `${DEV_LANGUAGE_COOKIE_NAME}=${language}; path=/; max-age=${DEV_LANGUAGE_COOKIE_MAX_AGE}; samesite=lax`;
 }
 
+function readServerLanguage(): DevLanguage | null {
+  return parseDevLanguage(document.documentElement.dataset.devLanguage);
+}
+
 function getClientLanguageSnapshot(): DevLanguage {
-  return readStoredLanguage() ?? readCookieLanguage() ?? getDefaultDevLanguage();
+  return (
+    readStoredLanguage() ??
+    readCookieLanguage() ??
+    readServerLanguage() ??
+    getConfiguredDevLanguage() ??
+    getDefaultDevLanguage()
+  );
+}
+
+async function syncServerLanguage(language: DevLanguage): Promise<void> {
+  const response = await fetch(`/dev-language-sync/${language}`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to synchronize server language: ${response.status}`);
+  }
 }
 
 export function DevLanguageToggle() {
@@ -47,22 +68,23 @@ export function DevLanguageToggle() {
   );
 
   useEffect(() => {
+    const preferredLanguage = getClientLanguageSnapshot();
     const storedLanguage = readStoredLanguage();
     const cookieLanguage = readCookieLanguage();
+    const serverLanguage = readServerLanguage();
 
-    if (storedLanguage && storedLanguage !== cookieLanguage) {
-      persistLanguage(storedLanguage);
-      window.location.reload();
-      return;
+    if (storedLanguage !== preferredLanguage || cookieLanguage !== preferredLanguage) {
+      persistLanguage(preferredLanguage);
     }
 
-    if (cookieLanguage && cookieLanguage !== storedLanguage) {
-      window.localStorage.setItem(DEV_LANGUAGE_STORAGE_KEY, cookieLanguage);
-      return;
-    }
-
-    if (!storedLanguage && !cookieLanguage) {
-      window.localStorage.setItem(DEV_LANGUAGE_STORAGE_KEY, getDefaultDevLanguage());
+    if (serverLanguage !== preferredLanguage) {
+      void syncServerLanguage(preferredLanguage)
+        .then(() => {
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   }, []);
 
@@ -82,7 +104,13 @@ export function DevLanguageToggle() {
       onClick={() => {
         const nextLanguage = getToggledDevLanguage(language);
         persistLanguage(nextLanguage);
-        window.location.reload();
+        void syncServerLanguage(nextLanguage)
+          .then(() => {
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       }}
       className="dev-language-toggle"
       aria-label={ariaLabel}

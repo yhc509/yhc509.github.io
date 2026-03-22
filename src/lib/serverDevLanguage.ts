@@ -6,6 +6,14 @@ import {
   getConfiguredDevLanguage,
 } from "./devLanguage";
 
+export function setServerDevLanguage(language: DevLanguage): void {
+  if (process.env.NODE_ENV !== "development") {
+    return;
+  }
+
+  process.env.DEV_LANGUAGE = language;
+}
+
 export async function getServerDevLanguage(): Promise<DevLanguage | null> {
   if (process.env.NODE_ENV !== "development") {
     return null;
@@ -15,6 +23,10 @@ export async function getServerDevLanguage(): Promise<DevLanguage | null> {
 }
 
 export async function getRequestDevLanguage(): Promise<DevLanguage> {
+  if (process.env.NODE_ENV !== "development") {
+    return "en";
+  }
+
   return (await getServerDevLanguage()) ?? DEFAULT_DEV_LANGUAGE;
 }
 

@@ -5,7 +5,7 @@ import { DevLanguageToggle } from "@/components/DevLanguageToggle";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { NavLinks } from "@/components/NavLinks";
-import { shouldUseEnglish } from "@/lib/devLanguage";
+import { getRequestDevLanguage } from "@/lib/serverDevLanguage";
 import { SITE_URL, toSiteUrl } from "@/lib/site";
 import { siteContent } from "@/lib/siteContent";
 import "./globals.css";
@@ -17,13 +17,7 @@ const hahmlet = Hahmlet({
   variable: "--font-hahmlet",
 });
 
-const useEnglish = shouldUseEnglish();
-const siteDescription = useEnglish
-  ? siteContent.descriptionEn
-  : siteContent.description;
-const skipToContentLabel = useEnglish
-  ? "Skip to content"
-  : "본문으로 건너뛰기";
+const siteDescription = siteContent.descriptionEn;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -41,7 +35,7 @@ export const metadata: Metadata = {
   authors: [{ name: "yhc509" }],
   openGraph: {
     type: "website",
-    locale: useEnglish ? "en_US" : "ko_KR",
+    locale: "en_US",
     url: SITE_URL,
     siteName: siteContent.name,
     title: siteContent.name,
@@ -78,14 +72,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const requestLanguage = await getRequestDevLanguage();
+  const useEnglish = requestLanguage === "en";
+  const skipToContentLabel = useEnglish
+    ? "Skip to content"
+    : "본문으로 건너뛰기";
+
   return (
     <html
       lang={useEnglish ? "en" : "ko"}
+      data-dev-language={requestLanguage}
       suppressHydrationWarning
       className={hahmlet.variable}
     >
