@@ -7,7 +7,7 @@ import { getAboutContent, getAboutPageCopy } from "@/lib/aboutContent";
 
 
 export async function generateMetadata(): Promise<Metadata> {
-  const about = await getAboutPageCopy();
+  const about = getAboutPageCopy();
 
   return {
     title: about.title,
@@ -16,7 +16,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const [content, about] = await Promise.all([getAboutContent(), getAboutPageCopy()]);
+  const content = getAboutContent();
+  const about = getAboutPageCopy();
 
   return (
     <div className="max-w-3xl mx-auto px-5 py-10">
