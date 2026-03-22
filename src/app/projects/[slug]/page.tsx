@@ -11,13 +11,16 @@ import { createMarkdownComponents } from "@/components/MarkdownComponents";
 import { ProjectExternalLinks } from "@/components/ProjectExternalLinks";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import type { Metadata } from "next";
+import { shouldUseEnglish } from "@/lib/devLanguage";
 import { toSiteUrl } from "@/lib/site";
+import { getSiteCopy } from "@/lib/siteContent";
 
 const EMPTY_PROJECT_SLUG = "__empty__";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
 }
+
 
 function ProjectPostCard({ post }: { post: PostMeta }) {
   return (
@@ -103,6 +106,8 @@ export async function generateMetadata({
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
+  const useEnglish = shouldUseEnglish();
+  const { author } = getSiteCopy();
 
   if (slug === EMPTY_PROJECT_SLUG) {
     notFound();
@@ -121,6 +126,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   const relatedPosts = getProjectPostGroups(slug);
+  const roleLabel = useEnglish ? "Role" : "역할";
+  const tagsLabel = useEnglish ? "Tags" : "태그";
+  const linksLabel = useEnglish ? "Links" : "링크";
+  const highlightsLabel = useEnglish ? "Highlights" : "구성";
+  const projectLogsLabel = useEnglish ? "Project logs" : "프로젝트 기록";
+  const relatedPostsLabel = useEnglish ? "Related posts" : "관련 글";
+  const developmentLogsLabel = useEnglish ? "Development logs" : "개발 기록";
+  const furtherReadingLabel = useEnglish ? "Further reading" : "같이 읽을 글";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -132,6 +145,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     author: {
       "@type": "Person",
       name: "yhc509",
+      jobTitle: author,
     },
     keywords: project.tags.join(", "),
     image: toSiteUrl(project.thumbnail),
@@ -178,10 +192,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             style={{ borderColor: "var(--card-border)" }}
           >
             <div className="grid gap-y-4 sm:grid-cols-[72px_minmax(0,1fr)] sm:gap-x-6">
-              <p className="section-kicker sm:pt-1">역할</p>
+              <p className="section-kicker sm:pt-1">{roleLabel}</p>
               <p className="text-sm leading-6">{project.role}</p>
 
-              <p className="section-kicker sm:pt-1">태그</p>
+              <p className="section-kicker sm:pt-1">{tagsLabel}</p>
               <div
                 className="flex flex-wrap gap-x-3 gap-y-1 text-sm"
                 style={{ color: "var(--text-muted)" }}
@@ -191,10 +205,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 ))}
               </div>
 
-              <p className="section-kicker sm:pt-1">링크</p>
+              <p className="section-kicker sm:pt-1">{linksLabel}</p>
               <ProjectExternalLinks links={project.links} variant="plain" />
 
-              <p className="section-kicker sm:pt-1">구성</p>
+              <p className="section-kicker sm:pt-1">{highlightsLabel}</p>
               <ul className="space-y-2 text-sm leading-6">
                 {project.highlights.map((highlight) => (
                   <li key={highlight} className="flex items-start gap-3">
@@ -227,13 +241,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           >
             <div className="space-y-10">
               <div>
-                <p className="section-kicker mb-2">프로젝트 기록</p>
-                <h2 className="text-2xl font-semibold">관련 글</h2>
+                <p className="section-kicker mb-2">{projectLogsLabel}</p>
+                <h2 className="text-2xl font-semibold">{relatedPostsLabel}</h2>
               </div>
 
               {relatedPosts.devlogs.length > 0 && (
                 <div>
-                  <h3 className="mb-4 text-xl font-semibold">개발 기록</h3>
+                  <h3 className="mb-4 text-xl font-semibold">
+                    {developmentLogsLabel}
+                  </h3>
                   <div className="space-y-4">
                     {relatedPosts.devlogs.map((post) => (
                       <ProjectPostCard key={post.slug} post={post} />
@@ -244,7 +260,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
               {relatedPosts.articles.length > 0 && (
                 <div>
-                  <h3 className="mb-4 text-xl font-semibold">같이 읽을 글</h3>
+                  <h3 className="mb-4 text-xl font-semibold">
+                    {furtherReadingLabel}
+                  </h3>
                   <div className="grid gap-4 md:grid-cols-2">
                     {relatedPosts.articles.map((post) => (
                       <ProjectPostCard key={post.slug} post={post} />

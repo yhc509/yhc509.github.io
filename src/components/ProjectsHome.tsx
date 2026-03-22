@@ -3,8 +3,9 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { shouldUseEnglish } from "@/lib/devLanguage";
 import type { ProjectMeta, ProjectTagNode } from "@/lib/projects";
-import { siteContent } from "@/lib/siteContent";
+import { getProjectsCopy } from "@/lib/siteContent";
 import { ProjectTagFilter } from "./ProjectTagFilter";
 
 interface ProjectsHomeProps {
@@ -18,6 +19,9 @@ interface ProjectCardProps {
 }
 
 function ProjectSummaryCard({ project, href }: ProjectCardProps) {
+  const useEnglish = shouldUseEnglish();
+  const detailLinkLabel = useEnglish ? "View details" : "상세 보기";
+
   return (
     <article
       className="border-b py-8 first:pt-0 last:border-b-0 last:pb-0"
@@ -59,7 +63,7 @@ function ProjectSummaryCard({ project, href }: ProjectCardProps) {
           className="inline-flex items-center gap-2 text-sm underline underline-offset-4 transition-opacity hover:opacity-70"
           style={{ color: "var(--foreground)" }}
         >
-          상세 보기
+          {detailLinkLabel}
           <svg
             width="14"
             height="14"
@@ -80,6 +84,9 @@ function ProjectSummaryCard({ project, href }: ProjectCardProps) {
 }
 
 export function ProjectsHome({ projects, tagTree }: ProjectsHomeProps) {
+  const { headline, description, searchPlaceholder, emptyStateTitle, emptyStateDescription } =
+    getProjectsCopy();
+  const useEnglish = shouldUseEnglish();
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedTags =
@@ -147,6 +154,12 @@ export function ProjectsHome({ projects, tagTree }: ProjectsHomeProps) {
     projectQueryString
       ? `/projects/${slug}?${projectQueryString}`
       : `/projects/${slug}`;
+  const searchAriaLabel = useEnglish ? "Search projects" : "프로젝트 검색";
+  const removeTagAriaLabel = (tag: string) =>
+    useEnglish ? `Remove ${tag} tag` : `${tag} 태그 제거`;
+  const emptySearchResultLabel = useEnglish
+    ? "No results found."
+    : "검색 결과가 없습니다.";
 
   return (
     <div className="max-w-3xl mx-auto px-5 py-10 relative">
@@ -156,13 +169,13 @@ export function ProjectsHome({ projects, tagTree }: ProjectsHomeProps) {
       >
         <p className="section-kicker">PROJECTS</p>
         <h1 className="mt-2 text-2xl font-bold leading-snug sm:text-3xl">
-          {siteContent.projects.headline}
+          {headline}
         </h1>
         <p
           className="mt-3 max-w-2xl text-sm leading-6 sm:text-[15px]"
           style={{ color: "var(--text-secondary)" }}
         >
-          {siteContent.projects.intro}
+          {description}
         </p>
       </section>
 
@@ -187,8 +200,8 @@ export function ProjectsHome({ projects, tagTree }: ProjectsHomeProps) {
           <div className="relative mb-4">
             <input
               type="text"
-              placeholder={siteContent.projects.searchPlaceholder}
-              aria-label="프로젝트 검색"
+              placeholder={searchPlaceholder}
+              aria-label={searchAriaLabel}
               value={searchQuery}
               onChange={handleSearchChange}
               className="w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all"
@@ -230,7 +243,7 @@ export function ProjectsHome({ projects, tagTree }: ProjectsHomeProps) {
                   <button
                     onClick={() => handleRemoveTag(tag)}
                     className="ml-1 transition-opacity hover:opacity-70"
-                    aria-label={`Remove ${tag} tag`}
+                    aria-label={removeTagAriaLabel(tag)}
                   >
                     <svg
                       width="14"
@@ -271,12 +284,12 @@ export function ProjectsHome({ projects, tagTree }: ProjectsHomeProps) {
             backgroundColor: "var(--card-bg)",
           }}
         >
-          <h2 className="text-xl font-bold">{siteContent.projects.emptyStateTitle}</h2>
+          <h2 className="text-xl font-bold">{emptyStateTitle}</h2>
           <p
             className="mt-3 text-sm leading-6"
             style={{ color: "var(--text-secondary)" }}
           >
-            {siteContent.projects.emptyStateDescription}
+            {emptyStateDescription}
           </p>
         </div>
       )}
@@ -300,7 +313,7 @@ export function ProjectsHome({ projects, tagTree }: ProjectsHomeProps) {
               borderColor: "var(--card-border)",
             }}
           >
-            검색 결과가 없습니다.
+            {emptySearchResultLabel}
           </div>
         )
       )}

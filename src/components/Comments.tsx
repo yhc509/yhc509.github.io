@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { shouldUseEnglish } from "@/lib/devLanguage";
 import { useTheme } from "./ThemeProvider";
 
 export function Comments() {
   const ref = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
+  const useEnglish = shouldUseEnglish();
   const scriptLoaded = useRef(false);
   const [loadFailed, setLoadFailed] = useState(false);
 
@@ -27,13 +29,13 @@ export function Comments() {
     scriptEl.setAttribute("data-emit-metadata", "0");
     scriptEl.setAttribute("data-input-position", "bottom");
     scriptEl.setAttribute("data-theme", theme === "dark" ? "dark" : "light");
-    scriptEl.setAttribute("data-lang", "ko");
+    scriptEl.setAttribute("data-lang", useEnglish ? "en" : "ko");
 
     scriptEl.onerror = () => setLoadFailed(true);
 
     ref.current.appendChild(scriptEl);
     scriptLoaded.current = true;
-  }, [theme]);
+  }, [theme, useEnglish]);
 
   useEffect(() => {
     const iframe = document.querySelector<HTMLIFrameElement>(
@@ -61,7 +63,9 @@ export function Comments() {
     >
       {loadFailed && (
         <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-          댓글을 불러올 수 없습니다.
+          {useEnglish
+            ? "Unable to load comments."
+            : "댓글을 불러올 수 없습니다."}
         </p>
       )}
     </section>

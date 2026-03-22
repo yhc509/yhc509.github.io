@@ -1,10 +1,12 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { shouldUseEnglish } from "@/lib/devLanguage";
 import { useTheme } from "./ThemeProvider";
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
+  const useEnglish = shouldUseEnglish();
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,
@@ -20,12 +22,21 @@ export function ThemeToggle() {
     );
   }
 
+  const ariaLabel =
+    theme === "light"
+      ? useEnglish
+        ? "Switch to dark mode"
+        : "다크 모드로 전환"
+      : useEnglish
+        ? "Switch to light mode"
+        : "라이트 모드로 전환";
+
   return (
     <button
       onClick={toggleTheme}
       className="p-2 rounded-lg transition-colors"
       style={{ backgroundColor: "var(--card-bg)" }}
-      aria-label={theme === "light" ? "다크 모드로 전환" : "라이트 모드로 전환"}
+      aria-label={ariaLabel}
     >
       {theme === "light" ? (
         <svg

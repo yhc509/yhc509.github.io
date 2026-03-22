@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import { shouldUseEnglish } from "@/lib/devLanguage";
 import { useTheme } from "@/components/ThemeProvider";
 
 interface MermaidDiagramProps {
@@ -9,6 +10,7 @@ interface MermaidDiagramProps {
 
 export function MermaidDiagram({ chart }: MermaidDiagramProps) {
   const { theme } = useTheme();
+  const useEnglish = shouldUseEnglish();
   const diagramId = useId().replace(/:/g, "");
   const [svg, setSvg] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -60,7 +62,9 @@ export function MermaidDiagram({ chart }: MermaidDiagramProps) {
       <div className="not-prose mermaid-diagram">
         <div className="mermaid-diagram__error">
           <p className="mermaid-diagram__message">
-            다이어그램을 렌더링하지 못했습니다.
+            {useEnglish
+              ? "Failed to render diagram."
+              : "다이어그램을 렌더링하지 못했습니다."}
           </p>
           <p className="mermaid-diagram__details">{error}</p>
           <pre className="mermaid-diagram__code">{chart}</pre>
@@ -77,7 +81,9 @@ export function MermaidDiagram({ chart }: MermaidDiagramProps) {
           dangerouslySetInnerHTML={{ __html: svg }}
         />
       ) : (
-        <div className="mermaid-diagram__loading">다이어그램을 불러오는 중입니다.</div>
+        <div className="mermaid-diagram__loading">
+          {useEnglish ? "Loading diagram." : "다이어그램을 불러오는 중입니다."}
+        </div>
       )}
     </div>
   );

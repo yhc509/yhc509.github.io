@@ -1,7 +1,7 @@
-import { siteContent } from "@/lib/siteContent";
+import { getBlogCopy } from "@/lib/siteContent";
 
 export function HomeHero() {
-  const { headline } = siteContent.homeHero;
+  const { headline } = getBlogCopy();
 
   return (
     <section className="max-w-3xl mx-auto px-5 pt-6 pb-1 sm:pt-7">

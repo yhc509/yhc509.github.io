@@ -1,30 +1,22 @@
-import fs from "fs";
-import path from "path";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { createMarkdownComponents } from "@/components/MarkdownComponents";
-import { siteContent } from "@/lib/siteContent";
+import { getAboutContent, getAboutPageCopy } from "@/lib/aboutContent";
 
-export const metadata: Metadata = {
-  title: "소개",
-  description: siteContent.about.intro,
-};
 
-function getAboutContent(): string {
-  const extensions = [".mdx", ".md"];
-  for (const ext of extensions) {
-    const filePath = path.join(process.cwd(), `content/about${ext}`);
-    if (fs.existsSync(filePath)) {
-      return fs.readFileSync(filePath, "utf8");
-    }
-  }
-  throw new Error("About content not found");
+export async function generateMetadata(): Promise<Metadata> {
+  const about = await getAboutPageCopy();
+
+  return {
+    title: about.title,
+    description: about.intro,
+  };
 }
 
-export default function AboutPage() {
-  const content = getAboutContent();
+export default async function AboutPage() {
+  const [content, about] = await Promise.all([getAboutContent(), getAboutPageCopy()]);
 
   return (
     <div className="max-w-3xl mx-auto px-5 py-10">
@@ -36,7 +28,7 @@ export default function AboutPage() {
           <div className="mx-auto shrink-0 sm:mx-0">
             <Image
               src="/profile.png"
-              alt="yhc509 프로필"
+              alt={about.imageAlt}
               width={120}
               height={120}
               className="rounded-full object-cover"
@@ -46,11 +38,11 @@ export default function AboutPage() {
             />
           </div>
           <div>
-            <p className="section-kicker">소개</p>
+            <p className="section-kicker">{about.title}</p>
             <h1 className="mt-2 text-2xl font-bold leading-snug sm:text-3xl">
-              {siteContent.about.headline}
+              {about.headline}
             </h1>
-            <p className="mt-2 text-sm leading-6">- Unity 클라이언트 프로그래머</p>
+            <p className="mt-2 text-sm leading-6">{about.role}</p>
           </div>
         </div>
       </section>

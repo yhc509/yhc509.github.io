@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import { buildTagTree, type TagNode } from "./tagTree";
 
 const projectsDirectory = path.join(process.cwd(), "content/projects");
-const projectFileExtensions = [".md", ".mdx"];
+const projectFileExtensions = [".mdx", ".md"];
 
 export interface ProjectLinks {
   github?: string;
@@ -113,7 +113,7 @@ function readOptionalLinks(slug: string, value: unknown): Partial<ProjectLinks> 
   };
 }
 
-function resolveProjectFilePath(slug: string): string {
+function findProjectPath(slug: string): string | null {
   for (const extension of projectFileExtensions) {
     const fullPath = path.join(projectsDirectory, `${slug}${extension}`);
     if (fs.existsSync(fullPath)) {
@@ -121,12 +121,42 @@ function resolveProjectFilePath(slug: string): string {
     }
   }
 
+  return null;
+}
+
+function shouldUseEnglishVersion(slug: string): boolean {
+  if (findProjectPath(`${slug}-en`) === null) {
+    return false;
+  }
+
+  if (process.env.NODE_ENV === "development") {
+    const devLang = process.env.DEV_LANGUAGE ?? process.env.NEXT_PUBLIC_DEV_LANGUAGE;
+    return devLang === "en";
+  }
+
+  return true;
+}
+
+function isEnglishVariantFilePath(filePath: string): boolean {
+  return /-en\.(md|mdx)$/.test(filePath);
+}
+
+function resolveProjectFilePath(slug: string): string {
+  const englishPath = shouldUseEnglishVersion(slug)
+    ? findProjectPath(`${slug}-en`)
+    : null;
+  const fullPath = englishPath ?? findProjectPath(slug);
+
+  if (fullPath) {
+    return fullPath;
+  }
+
   throw new Error(`Project file not found for slug "${slug}".`);
 }
 
 function readRawProjectBySlug(slug: string): RawProject {
-  const fullPath = resolveProjectFilePath(slug);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const resolvedPath = resolveProjectFilePath(slug);
+  const fileContents = fs.readFileSync(resolvedPath, "utf8");
   const { data, content } = matter(fileContents);
   const open = data.open !== false;
 
@@ -201,7 +231,11 @@ export function getAllProjectSlugs(): string[] {
   }
   const fileNames = fs.readdirSync(projectsDirectory);
   return fileNames
-    .filter((name) => name.endsWith(".md") || name.endsWith(".mdx"))
+    .filter(
+      (name) =>
+        (name.endsWith(".md") || name.endsWith(".mdx")) &&
+        !isEnglishVariantFilePath(name)
+    )
     .map((name) => name.replace(/\.mdx?$/, ""))
     .filter((slug) => readRawProjectBySlug(slug).open);
 }

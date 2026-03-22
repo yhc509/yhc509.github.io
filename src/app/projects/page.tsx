@@ -1,12 +1,19 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import { getAllProjects, buildProjectTagTree } from "@/lib/projects";
 import { ProjectsHome } from "@/components/ProjectsHome";
+import { shouldUseEnglish } from "@/lib/devLanguage";
 import { siteContent } from "@/lib/siteContent";
-import type { Metadata } from "next";
+
+const useEnglish = shouldUseEnglish();
 
 export const metadata: Metadata = {
-  title: "프로젝트",
-  description: siteContent.projects.intro,
+  title: useEnglish
+    ? siteContent.projects.headlineEn
+    : siteContent.projects.headline,
+  description: useEnglish
+    ? siteContent.projects.descriptionEn
+    : siteContent.projects.description,
 };
 
 export default function ProjectsPage() {

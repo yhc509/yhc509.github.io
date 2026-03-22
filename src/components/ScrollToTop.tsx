@@ -1,6 +1,10 @@
 "use client";
 
+import { shouldUseEnglish } from "@/lib/devLanguage";
+
 export function ScrollToTop() {
+  const useEnglish = shouldUseEnglish();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -27,7 +31,7 @@ export function ScrollToTop() {
       >
         <path d="M18 15l-6-6-6 6" />
       </svg>
-      맨 위로
+      {useEnglish ? "Back to top" : "맨 위로"}
     </button>
   );
 }

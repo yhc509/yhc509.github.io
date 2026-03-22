@@ -4,7 +4,9 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { PostProjectFilter } from "./PostProjectFilter";
 import { TagFilter } from "./TagFilter";
+import { shouldUseEnglish } from "@/lib/devLanguage";
 import { filterPostsByProjects, filterPostsBySearch } from "@/lib/postFilters";
+import { getBlogCopy } from "@/lib/siteContent";
 import type { PostMeta, PostProjectOption, TagNode } from "@/lib/posts";
 
 interface BlogHomeProps {
@@ -31,6 +33,8 @@ export function BlogHome({
   tagTree,
   projectOptions,
 }: BlogHomeProps) {
+  const { searchPlaceholder } = getBlogCopy();
+  const useEnglish = shouldUseEnglish();
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -142,6 +146,19 @@ export function BlogHome({
     pageNumbers.push(i);
   }
 
+  const searchAriaLabel = useEnglish ? "Search posts" : "블로그 검색";
+  const clearFiltersLabel = useEnglish ? "Clear all" : "전체 초기화";
+  const projectFilterLabel = useEnglish ? "Project" : "프로젝트";
+  const emptySearchResultLabel = useEnglish
+    ? "No results found."
+    : "검색 결과가 없습니다.";
+  const emptyFilteredPostsLabel = useEnglish
+    ? "No posts match the selected topics or projects."
+    : "선택한 주제나 프로젝트에 해당하는 포스트가 없습니다.";
+  const paginationAriaLabel = useEnglish ? "Page navigation" : "페이지 탐색";
+  const previousPageAriaLabel = useEnglish ? "Previous page" : "이전 페이지";
+  const nextPageAriaLabel = useEnglish ? "Next page" : "다음 페이지";
+
   return (
     <div id="posts-feed" className="pb-10">
       {/* Main content - 중앙 고정 */}
@@ -199,8 +216,8 @@ export function BlogHome({
             </svg>
             <input
               type="text"
-              placeholder="검색..."
-              aria-label="블로그 검색"
+              placeholder={searchPlaceholder}
+              aria-label={searchAriaLabel}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full rounded-lg border py-2 pl-10 pr-4 outline-none transition-colors"
@@ -244,10 +261,10 @@ export function BlogHome({
                 color: "var(--foreground)",
               }}
             >
-              <option value={5}>5개</option>
-              <option value={10}>10개</option>
-              <option value={30}>30개</option>
-              <option value={50}>50개</option>
+              <option value={5}>{useEnglish ? "5" : "5개"}</option>
+              <option value={10}>{useEnglish ? "10" : "10개"}</option>
+              <option value={30}>{useEnglish ? "30" : "30개"}</option>
+              <option value={50}>{useEnglish ? "50" : "50개"}</option>
             </select>
             <svg
               className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
@@ -278,7 +295,7 @@ export function BlogHome({
                 color: "var(--text-secondary)",
               }}
             >
-              전체 초기화
+              {clearFiltersLabel}
             </button>
           </div>
         )}
@@ -293,7 +310,7 @@ export function BlogHome({
                 color: "var(--text-secondary)",
               }}
             >
-              전체 초기화
+              {clearFiltersLabel}
             </button>
           </div>
         )}
@@ -315,7 +332,7 @@ export function BlogHome({
                   color: "var(--foreground)",
                 }}
               >
-                프로젝트: {projectTitleMap.get(projectSlug) || projectSlug}
+                {projectFilterLabel}: {projectTitleMap.get(projectSlug) || projectSlug}
                 <svg
                   width="14"
                   height="14"
@@ -371,8 +388,8 @@ export function BlogHome({
               }}
             >
               {searchQuery
-                ? "검색 결과가 없습니다."
-                : "선택한 주제나 프로젝트에 해당하는 포스트가 없습니다."}
+                ? emptySearchResultLabel
+                : emptyFilteredPostsLabel}
             </div>
           ) : (
             currentPosts.map((post) => (
@@ -394,7 +411,7 @@ export function BlogHome({
                       <>
                         <span>·</span>
                         <span>
-                          Project: {projectTitleMap.get(post.project)}
+                          {projectFilterLabel}: {projectTitleMap.get(post.project)}
                         </span>
                       </>
                     )}
@@ -428,7 +445,10 @@ export function BlogHome({
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <nav aria-label="페이지 탐색" className="mt-10 flex justify-center items-center gap-2">
+          <nav
+            aria-label={paginationAriaLabel}
+            className="mt-10 flex justify-center items-center gap-2"
+          >
             <button
               onClick={() => setPage(currentPage - 1)}
               disabled={currentPage === 1}
@@ -437,7 +457,7 @@ export function BlogHome({
                 borderColor: "var(--card-border)",
                 color: "var(--text-secondary)"
               }}
-              aria-label="Previous page"
+              aria-label={previousPageAriaLabel}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="15 18 9 12 15 6"></polyline>
@@ -468,7 +488,7 @@ export function BlogHome({
                 borderColor: "var(--card-border)",
                 color: "var(--text-secondary)"
               }}
-              aria-label="Next page"
+              aria-label={nextPageAriaLabel}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="9 18 15 12 9 6"></polyline>

@@ -74,6 +74,39 @@ function isPublishable(dateStr: string): boolean {
   return new Date(dateStr) <= today;
 }
 
+function isOpen(open: boolean): boolean {
+  if (process.env.NODE_ENV === "development") return true;
+  return open;
+}
+
+function findPostPath(slug: string): string | null {
+  const extensions = [".mdx", ".md"];
+
+  for (const ext of extensions) {
+    const fullPath = path.join(postsDirectory, `${slug}${ext}`);
+    if (fs.existsSync(fullPath)) {
+      return fullPath;
+    }
+  }
+
+  return null;
+}
+
+function shouldUseEnglishVersion(slug: string): boolean {
+  if (findPostPath(`${slug}-en`) === null) {
+    return false;
+  }
+  if (process.env.NODE_ENV === "development") {
+    const devLang = process.env.DEV_LANGUAGE ?? process.env.NEXT_PUBLIC_DEV_LANGUAGE;
+    return devLang === "en";
+  }
+  return true;
+}
+
+function isEnglishVariantFilePath(filePath: string): boolean {
+  return /-en\.(md|mdx)$/.test(filePath);
+}
+
 // Helper to recursively find files
 function getFilesRecursively(dir: string): string[] {
   let results: string[] = [];
@@ -93,39 +126,25 @@ function getFilesRecursively(dir: string): string[] {
 export function getAllPostSlugs(): string[] {
   const filePaths = getFilesRecursively(postsDirectory);
   return filePaths
-    .filter((filePath) => /\.(md|mdx)$/.test(filePath))
+    .filter(
+      (filePath) => /\.(md|mdx)$/.test(filePath) && !isEnglishVariantFilePath(filePath)
+    )
     .map((filePath) => {
       const relativePath = path.relative(postsDirectory, filePath);
       return relativePath.replace(/\.(md|mdx)$/, "");
     })
     .filter((slug) => {
-      // open: false인 포스트는 정적 파일로 생성하지 않음
+      // production에서는 open: false / 미래 날짜 포스트를 정적 파일로 생성하지 않음
       try {
         const post = getPostBySlug(slug);
-        return post.open && isPublishable(post.date);
+        return isOpen(post.open) && isPublishable(post.date);
       } catch {
         return false;
       }
     });
 }
 
-export function getPostBySlug(slug: string): Post {
-  // Check for .md or .mdx
-  const extensions = [".mdx", ".md"];
-  let fullPath = "";
-
-  for (const ext of extensions) {
-    const p = path.join(postsDirectory, `${slug}${ext}`);
-    if (fs.existsSync(p)) {
-      fullPath = p;
-      break;
-    }
-  }
-
-  if (!fullPath) {
-    throw new Error(`Post not found: ${slug}`);
-  }
-
+function parsePostFile(fullPath: string, slug: string): Post {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
@@ -146,6 +165,19 @@ export function getPostBySlug(slug: string): Post {
   };
 }
 
+export function getPostBySlug(slug: string): Post {
+  const englishPath = shouldUseEnglishVersion(slug)
+    ? findPostPath(`${slug}-en`)
+    : null;
+  const fullPath = englishPath ?? findPostPath(slug);
+
+  if (!fullPath) {
+    throw new Error(`Post not found: ${slug}`);
+  }
+
+  return parsePostFile(fullPath, slug);
+}
+
 export function getAllPosts(): PostMeta[] {
   const slugs = getAllPostSlugs();
   const posts = slugs
@@ -164,7 +196,7 @@ export function getAllPosts(): PostMeta[] {
         series: post.series,
       };
     })
-    .filter((post) => post.open && isPublishable(post.date)) // open: false이거나 미래 날짜인 포스트는 목록에서 제외
+    .filter((post) => isOpen(post.open) && isPublishable(post.date)) // production에서는 open: false이거나 미래 날짜인 포스트를 목록에서 제외
     .sort((a, b) => (new Date(a.date) > new Date(b.date) ? -1 : 1));
 
   return posts;
@@ -262,7 +294,9 @@ export function getPostsByProject(projectSlug: string): PostMeta[] {
     .sort(comparePostsByDateAscending);
 }
 
-export function getProjectPostGroups(projectSlug: string): ProjectPostGroups {
+export function getProjectPostGroups(
+  projectSlug: string
+): ProjectPostGroups {
   const relatedPosts = getPostsByProject(projectSlug);
 
   return {

@@ -4,7 +4,8 @@ import { getAllPosts, buildPostProjectOptions, buildTagTree } from "@/lib/posts"
 import { BlogHome } from "@/components/BlogHome";
 import { HomeHero } from "@/components/HomeHero";
 
-export default function Home() {
+
+export default async function Home() {
   const posts = getAllPosts();
   const projects = getAllProjects();
   const tagTree = buildTagTree(posts);

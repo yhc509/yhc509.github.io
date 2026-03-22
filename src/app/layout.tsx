@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Hahmlet } from "next/font/google";
+import { DevLanguageToggle } from "@/components/DevLanguageToggle";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { NavLinks } from "@/components/NavLinks";
+import { shouldUseEnglish } from "@/lib/devLanguage";
 import { SITE_URL, toSiteUrl } from "@/lib/site";
 import { siteContent } from "@/lib/siteContent";
 import "./globals.css";
@@ -15,13 +17,21 @@ const hahmlet = Hahmlet({
   variable: "--font-hahmlet",
 });
 
+const useEnglish = shouldUseEnglish();
+const siteDescription = useEnglish
+  ? siteContent.descriptionEn
+  : siteContent.description;
+const skipToContentLabel = useEnglish
+  ? "Skip to content"
+  : "본문으로 건너뛰기";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: siteContent.name,
     template: `%s | ${siteContent.name}`,
   },
-  description: siteContent.description,
+  description: siteDescription,
   alternates: {
     types: {
       "application/rss+xml": toSiteUrl("/feed.xml"),
@@ -31,11 +41,11 @@ export const metadata: Metadata = {
   authors: [{ name: "yhc509" }],
   openGraph: {
     type: "website",
-    locale: "ko_KR",
+    locale: useEnglish ? "en_US" : "ko_KR",
     url: SITE_URL,
     siteName: siteContent.name,
     title: siteContent.name,
-    description: siteContent.description,
+    description: siteDescription,
     images: [
       {
         url: toSiteUrl("/profile.png"),
@@ -48,7 +58,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: siteContent.name,
-    description: siteContent.description,
+    description: siteDescription,
     images: [toSiteUrl("/profile.png")],
   },
   robots: {
@@ -74,7 +84,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" suppressHydrationWarning className={hahmlet.variable}>
+    <html
+      lang={useEnglish ? "en" : "ko"}
+      suppressHydrationWarning
+      className={hahmlet.variable}
+    >
       <body className="antialiased min-h-screen">
         <ThemeProvider>
           <a
@@ -82,7 +96,7 @@ export default function RootLayout({
             className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-medium"
             style={{ backgroundColor: "var(--accent)", color: "white" }}
           >
-            본문으로 건너뛰기
+            {skipToContentLabel}
           </a>
           <header
             className="w-full py-4 sm:py-8 border-b"
@@ -111,6 +125,9 @@ export default function RootLayout({
             </div>
           </header>
           <main id="main-content">{children}</main>
+          {process.env.NODE_ENV === "development" ? (
+            <DevLanguageToggle />
+          ) : null}
         </ThemeProvider>
       </body>
     </html>

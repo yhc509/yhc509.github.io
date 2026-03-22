@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { shouldUseEnglish } from "@/lib/devLanguage";
 import type { PostProjectOption } from "@/lib/posts";
 
 interface PostProjectFilterProps {
@@ -14,6 +15,14 @@ export function PostProjectFilter({
   selectedProjects,
   onProjectsChange,
 }: PostProjectFilterProps) {
+  const useEnglish = shouldUseEnglish();
+  const headingLabel = useEnglish ? "Projects" : "프로젝트";
+  const clearLabel = useEnglish ? "Clear" : "초기화";
+  const addTitle = useEnglish ? "Add to selection" : "선택에 추가";
+  const removeTitle = useEnglish
+    ? "Remove from selection"
+    : "선택에서 제거";
+
   const handleSelect = (projectSlug: string) => {
     if (selectedProjects.includes(projectSlug) && selectedProjects.length === 1) {
       onProjectsChange([]);
@@ -50,7 +59,7 @@ export function PostProjectFilter({
       }}
     >
       <div className="flex items-center justify-between mb-3">
-        <h2 className="font-bold text-sm">Projects</h2>
+        <h2 className="font-bold text-sm">{headingLabel}</h2>
         {selectedProjects.length > 0 && (
           <button
             onClick={handleClear}
@@ -60,7 +69,7 @@ export function PostProjectFilter({
               backgroundColor: "var(--card-border)",
             }}
           >
-            초기화
+            {clearLabel}
           </button>
         )}
       </div>
@@ -74,6 +83,8 @@ export function PostProjectFilter({
             onSelect={handleSelect}
             onAdd={handleAdd}
             onRemove={handleRemove}
+            addTitle={addTitle}
+            removeTitle={removeTitle}
           />
         ))}
       </div>
@@ -87,12 +98,16 @@ function ProjectItem({
   onSelect,
   onAdd,
   onRemove,
+  addTitle,
+  removeTitle,
 }: {
   project: PostProjectOption;
   selectedProjects: string[];
   onSelect: (projectSlug: string) => void;
   onAdd: (projectSlug: string) => void;
   onRemove: (projectSlug: string) => void;
+  addTitle: string;
+  removeTitle: string;
 }) {
   const [hovered, setHovered] = useState(false);
   const isSelected = selectedProjects.includes(project.slug);
@@ -131,7 +146,7 @@ function ProjectItem({
             color: "var(--accent)",
             backgroundColor: "var(--card-border)",
           }}
-          title="선택에 추가"
+          title={addTitle}
         >
           +
         </button>
@@ -148,7 +163,7 @@ function ProjectItem({
             color: "var(--text-muted)",
             backgroundColor: "var(--card-border)",
           }}
-          title="선택에서 제거"
+          title={removeTitle}
         >
           −
         </button>

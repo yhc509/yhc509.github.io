@@ -2,12 +2,14 @@
 
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { shouldUseEnglish } from "@/lib/devLanguage";
 
 interface BackButtonProps {
   basePath?: string;
 }
 
 export function BackButton({ basePath = "/" }: BackButtonProps) {
+  const useEnglish = shouldUseEnglish();
   const searchParams = useSearchParams();
   const tags = searchParams.get("tags");
   const query = searchParams.get("q");
@@ -37,7 +39,7 @@ export function BackButton({ basePath = "/" }: BackButtonProps) {
         <path d="M19 12H5" />
         <path d="M12 19l-7-7 7-7" />
       </svg>
-      목록으로
+      {useEnglish ? "Back to list" : "목록으로"}
     </Link>
   );
 }

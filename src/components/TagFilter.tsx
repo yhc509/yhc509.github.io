@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { useState } from "react";
+import { shouldUseEnglish } from "@/lib/devLanguage";
 import type { TagNode } from "@/lib/posts";
 
 interface TagFilterProps {
@@ -37,6 +38,8 @@ function TagItem({
   onAdd,
   onRemove,
   label,
+  addTitle,
+  removeTitle,
   depth = 0,
 }: {
   node: TagNode;
@@ -45,6 +48,8 @@ function TagItem({
   onAdd: (tag: string) => void;
   onRemove: (tag: string) => void;
   label?: string;
+  addTitle: string;
+  removeTitle: string;
   depth?: number;
 }) {
   const [expanded, setExpanded] = useState(true);
@@ -72,8 +77,9 @@ function TagItem({
         {!hasChildren && <span className="w-4" />}
         <button
           onClick={() => onSelect(node.fullPath)}
-          className={`flex items-center gap-2 text-sm transition-colors ${isSelected ? "font-medium" : ""
-            }`}
+          className={`flex items-center gap-2 text-sm transition-colors ${
+            isSelected ? "font-medium" : ""
+          }`}
           style={{
             color: isSelected ? "var(--accent)" : "var(--text-secondary)",
           }}
@@ -97,7 +103,7 @@ function TagItem({
               color: "var(--accent)",
               backgroundColor: "var(--card-border)",
             }}
-            title="선택에 추가"
+            title={addTitle}
           >
             +
           </button>
@@ -113,7 +119,7 @@ function TagItem({
               color: "var(--text-muted)",
               backgroundColor: "var(--card-border)",
             }}
-            title="선택에서 제거"
+            title={removeTitle}
           >
             −
           </button>
@@ -129,6 +135,8 @@ function TagItem({
               onSelect={onSelect}
               onAdd={onAdd}
               onRemove={onRemove}
+              addTitle={addTitle}
+              removeTitle={removeTitle}
               depth={depth + 1}
             />
           ))}
@@ -178,6 +186,15 @@ export function TagFilter({
   selectedTags,
   onTagsChange,
 }: TagFilterProps) {
+  const useEnglish = shouldUseEnglish();
+  const headingLabel = useEnglish ? "Topics" : "주제";
+  const clearLabel = useEnglish ? "Clear" : "초기화";
+  const addTitle = useEnglish ? "Add to selection" : "선택에 추가";
+  const removeTitle = useEnglish
+    ? "Remove from selection"
+    : "선택에서 제거";
+  const allLabel = useEnglish ? "All" : "전체";
+
   // 단일 선택: 해당 태그만 선택
   const handleSelect = (tag: string) => {
     if (selectedTags.includes(tag) && selectedTags.length === 1) {
@@ -216,7 +233,7 @@ export function TagFilter({
       }}
     >
       <div className="flex items-center justify-between mb-3">
-        <h2 className="font-bold text-sm">Topics</h2>
+        <h2 className="font-bold text-sm">{headingLabel}</h2>
         {selectedTags.length > 0 && (
           <button
             onClick={handleClear}
@@ -226,7 +243,7 @@ export function TagFilter({
               backgroundColor: "var(--card-border)",
             }}
           >
-            초기화
+            {clearLabel}
           </button>
         )}
       </div>
@@ -241,7 +258,9 @@ export function TagFilter({
                 onSelect={handleSelect}
                 onAdd={handleAdd}
                 onRemove={handleRemove}
-                label={node.children.length === 0 ? undefined : "전체"}
+                label={node.children.length === 0 ? undefined : allLabel}
+                addTitle={addTitle}
+                removeTitle={removeTitle}
               />
             ))}
           </TagGroupSection>

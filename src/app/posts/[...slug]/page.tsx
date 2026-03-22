@@ -13,11 +13,14 @@ import {
   resolvePostAssetSrc,
 } from "@/lib/postAssets";
 import { createMarkdownComponents } from "@/components/MarkdownComponents";
+import { shouldUseEnglish } from "@/lib/devLanguage";
 import { toSiteUrl } from "@/lib/site";
+import { getSiteCopy } from "@/lib/siteContent";
 
 interface PostPageProps {
   params: Promise<{ slug: string[] }>;
 }
+
 
 export async function generateStaticParams() {
   const slugs = getAllPostSlugs();
@@ -71,6 +74,8 @@ export async function generateMetadata({
 
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;
+  const useEnglish = shouldUseEnglish();
+  const { author } = getSiteCopy();
   const currentSlug = slug.join("/");
   let post;
 
@@ -91,6 +96,7 @@ export default async function PostPage({ params }: PostPageProps) {
     author: {
       "@type": "Person",
       name: "yhc509",
+      jobTitle: author,
     },
     keywords: post.tags.join(", "),
   };
@@ -102,6 +108,9 @@ export default async function PostPage({ params }: PostPageProps) {
   const components = createMarkdownComponents({
     resolveAssetSrc: (src) => resolvePostAssetSrc(src, postDir),
   });
+  const postNavigationLabel = useEnglish ? "Post navigation" : "포스트 탐색";
+  const previousPostLabel = useEnglish ? "← Previous post" : "← 이전 글";
+  const nextPostLabel = useEnglish ? "Next post →" : "다음 글 →";
 
   return (
     <div className="max-w-3xl mx-auto px-5 py-10">
@@ -143,7 +152,7 @@ export default async function PostPage({ params }: PostPageProps) {
         <nav
           className="mt-12 pt-8 border-t flex justify-between gap-4"
           style={{ borderColor: "var(--card-border)" }}
-          aria-label="포스트 탐색"
+          aria-label={postNavigationLabel}
         >
           {prev ? (
             <Link href={`/posts/${prev.slug}`} className="flex-1 group">
@@ -151,7 +160,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 className="text-xs"
                 style={{ color: "var(--text-muted)" }}
               >
-                ← 이전 글
+                {previousPostLabel}
               </span>
               <p className="text-sm font-medium mt-1 group-hover:underline">
                 {prev.title}
@@ -169,7 +178,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 className="text-xs"
                 style={{ color: "var(--text-muted)" }}
               >
-                다음 글 →
+                {nextPostLabel}
               </span>
               <p className="text-sm font-medium mt-1 group-hover:underline">
                 {next.title}

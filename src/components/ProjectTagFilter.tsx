@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { shouldUseEnglish } from "@/lib/devLanguage";
 import type { ProjectTagNode } from "@/lib/projects";
 
 interface ProjectTagFilterProps {
@@ -77,6 +78,10 @@ export function ProjectTagFilter({
   selectedTags,
   onTagsChange,
 }: ProjectTagFilterProps) {
+  const useEnglish = shouldUseEnglish();
+  const headingLabel = useEnglish ? "Tags" : "태그";
+  const clearLabel = useEnglish ? "Clear" : "초기화";
+
   const handleToggle = (tag: string) => {
     if (selectedTags.includes(tag)) {
       onTagsChange(selectedTags.filter((t) => t !== tag));
@@ -102,7 +107,7 @@ export function ProjectTagFilter({
       }}
     >
       <div className="flex items-center justify-between mb-3">
-        <h2 className="font-bold text-sm">Tags</h2>
+        <h2 className="font-bold text-sm">{headingLabel}</h2>
         {selectedTags.length > 0 && (
           <button
             onClick={handleClear}
@@ -112,7 +117,7 @@ export function ProjectTagFilter({
               backgroundColor: "var(--card-border)",
             }}
           >
-            초기화
+            {clearLabel}
           </button>
         )}
       </div>
