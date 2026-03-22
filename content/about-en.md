@@ -6,7 +6,7 @@ Lately I've been deep into AI-assisted development workflows. Most of the recent
 
 ## About this blog
 
-A dev journal of things I've built, broken, and learned from. New experiments, hard-won lessons, notes for future me.
+A dev journal focused on things I've built and experienced firsthand.
 
 Public projects are listed [here](/projects).
 

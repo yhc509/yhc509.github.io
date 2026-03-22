@@ -16,7 +16,7 @@ The block wasn't from above. It was ambient culture. Stepping up meant risk.
 
 The person who did the work explains it most accurately. Especially for context-heavy subjects like AI experiments — which settings produced which results, why that direction was chosen, what tradeoffs were accepted. Only the person who did the work can explain these properly.
 
-But volunteer to present and the reactions are awkward. Do well: "stepped up and did fine." Do poorly: "told you not to bother." Either way, the person who stepped up loses.
+But volunteer to present and the reactions are awkward. Do well: "well look who stepped up." Do poorly: "told you not to bother." Either way, the person who stepped up loses.
 
 Experience this a few times and everyone chooses to stay quiet. Those who know stay silent. Those who don't also stay silent. Nobody stands in front, so presentations rotate by role or turn order. Accuracy stops being a factor.
 

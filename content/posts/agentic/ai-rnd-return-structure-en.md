@@ -46,6 +46,6 @@ Ultimately, "who received the benefit" and "who does the return work" need separ
 
 Individual excellence isn't enough. Return needs structural design to sustain.
 
-What I want isn't grand. Someone experiments and writes it up. The team reads, gives feedback. Next time someone else takes the write-up. Without that, experimenters burn out, sharing drops, and the team loses its learning loop.
+What I want isn't grand. Someone experiments and writes it up. The team reads, gives feedback. Next time someone else takes the write-up. Everyone pitching in together. Without that, experimenters burn out, sharing drops, and the team loses its learning loop.
 
 R&D support doesn't end at distributing budgets. The loop where the team absorbs experimental knowledge together — that's what makes support work.

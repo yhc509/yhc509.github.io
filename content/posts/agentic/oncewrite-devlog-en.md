@@ -79,7 +79,7 @@ Idea exploration → freelancing, Product Hunt, game tools eliminated → OnceWr
 
 Deployed. Zero users. No marketing connections. Chronic lurker by temperament.
 
-What's left is building in public. Reddit first, Twitter to document the process, Product Hunt to launch. An anonymous alt account is fine. In indie hacker circles, nobody cares about real names. Visibly building something is all that matters.
+What's left is building in public. Reddit first, Twitter to document the process, Product Hunt to launch. An anonymous alt account is fine. In indie hacker circles, nobody cares about your handle. Visibly building something is all that matters.
 
 One metric to watch: does anyone come back? If someone burns through their daily credits every day, regardless of DAU, that's paid demand.
 

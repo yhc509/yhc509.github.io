@@ -17,7 +17,7 @@ Same top-tier plan, very different usage patterns.
 
 Some people just use a lot. Results disappoint, rephrase, retry. Usage runs high, but they never track where it goes.
 
-Others also run high, but for survival. Near the ceiling every day, work stops the moment headroom disappears. High usage — but not operating. Hand-to-mouth.
+Others also run high, but for survival. Near the ceiling every day, work stops the moment headroom disappears. High usage — but not operating. Always scraping the limit.
 
 The pattern that matters: manage daily usage, then burst hard when it counts. Parallel tasks, long runs, heavy reasoning, comparison experiments — all at once. The top plan isn't "unlimited usage." It's capacity to go big when needed.
 

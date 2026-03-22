@@ -15,11 +15,11 @@ links:
   devlog: "/posts/project-t/devlog-7"
 ---
 
-Pulled out an old SRPG I'd stopped working on. Reopening the code was humbling — it was terrible. The setting felt off against current taste too, so rather than restoring, I rebuilt around what I want now.
+Pulled out an old SRPG I'd stopped working on. Reopened the code — absolute garbage. The setting felt off against current taste too, so rather than restoring, I rebuilt around what I want now.
 
 Closest comparison: Fire Emblem. Echoes, Three Houses — that lineage. A story-driven medieval fantasy SRPG carrying that feel.
 
-The protagonist Erich can trigger clutch command skills based on ally formation, and can take control of enemies to use as pawns. These two mechanics anchor stage strategy. Class growth, battlefield direction, character portraits — all shaping the game's tone.
+The protagonist Erich can trigger game-turning command skills based on ally formation, and can take control of enemies to use as minions. These two mechanics anchor stage strategy. Class growth, battlefield direction, character portraits — all shaping the game's tone.
 
 Most satisfying part: the late-game story. Still far from reaching it, but the feeling that it'll be good is there.
 
