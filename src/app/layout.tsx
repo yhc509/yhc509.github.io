@@ -17,13 +17,14 @@ const hahmlet = Hahmlet({
   variable: "--font-hahmlet",
 });
 
+const siteTitle = siteContent.name;
 const siteDescription = siteContent.descriptionEn;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: siteContent.name,
-    template: `%s | ${siteContent.name}`,
+    default: siteTitle,
+    template: `%s | ${siteTitle}`,
   },
   description: siteDescription,
   alternates: {
@@ -32,26 +33,26 @@ export const metadata: Metadata = {
     },
   },
   keywords: [...siteContent.keywords],
-  authors: [{ name: "yhc509" }],
+  authors: [{ name: "KineticKeeper" }],
   openGraph: {
     type: "website",
     locale: "en_US",
     url: SITE_URL,
-    siteName: siteContent.name,
-    title: siteContent.name,
+    siteName: siteTitle,
+    title: siteTitle,
     description: siteDescription,
     images: [
       {
         url: toSiteUrl("/profile.png"),
         width: 400,
         height: 400,
-        alt: siteContent.name,
+        alt: siteTitle,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteContent.name,
+    title: siteTitle,
     description: siteDescription,
     images: [toSiteUrl("/profile.png")],
   },
@@ -112,8 +113,8 @@ export default async function RootLayout({
                 className="text-lg sm:text-2xl font-bold transition-opacity hover:opacity-70 flex-shrink-0"
                 style={{ color: "var(--foreground)" }}
               >
-                <span className="hidden sm:inline">{siteContent.name}</span>
-                <span className="sm:hidden">yhc509</span>
+                <span className="hidden sm:inline">{siteTitle}</span>
+                <span className="sm:hidden">KineticKeeper</span>
               </Link>
               <nav className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
                 <NavLinks />

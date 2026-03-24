@@ -5,6 +5,7 @@ description: "Solo devs need to share their process. But I don't know social med
 categories: ["AI/AgenticCoding"]
 open: true
 type: devlog
+project: once-write
 ---
 
 I know solo devs are supposed to share their process. Build in public, devlogs, social media presence. All good advice, except I don't know social media. I have a Twitter account I barely use. No Instagram. Writing one blog post already costs energy. Rewriting the same thing in a different tone for each platform? No.

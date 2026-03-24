@@ -95,7 +95,7 @@ export default async function PostPage({ params }: PostPageProps) {
     datePublished: post.date,
     author: {
       "@type": "Person",
-      name: "yhc509",
+      name: "KineticKeeper",
       jobTitle: author,
     },
     keywords: post.tags.join(", "),

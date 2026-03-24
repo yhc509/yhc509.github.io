@@ -13,7 +13,7 @@ const markdownExtensions = new Set([".md", ".mdx"]);
 
 const WIDTH = 1200;
 const HEIGHT = 630;
-const BLOG_NAME = "yhc509's Dev Journey";
+const BLOG_NAME = "Don't Stop the Loop";
 
 const COLORS = {
   bg: "#f8f7f4",

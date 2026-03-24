@@ -8,7 +8,7 @@ import remarkGfm from "remark-gfm";
 import { visit } from "unist-util-visit";
 
 const SITE_URL = "https://yhc509.github.io";
-const SITE_TITLE = "yhc509's Dev Journey";
+const SITE_TITLE = "Don't Stop the Loop";
 const SITE_DESCRIPTION =
   "Unity 클라이언트 프로그래머의 게임 엔진, 그래픽스, Agentic Coding, Harness Engineering 노트.";
 const SITE_LANGUAGE = "ko";

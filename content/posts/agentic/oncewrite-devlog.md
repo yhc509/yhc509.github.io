@@ -5,6 +5,7 @@ description: "1인 개발자는 과정을 드러내야 한다. 그런데 나는 
 categories: ["AI/AgenticCoding"]
 open: true
 type: devlog
+project: once-write
 ---
 
 1인 개발을 하면 과정을 드러내는 게 중요하다는 건 안다. 빌드인퍼블릭, 데브로그, SNS 기록. 다 좋은 말인데 나는 SNS를 잘 모른다. 트위터 계정은 있지만 거의 안 쓰고, 인스타는 계정이 없다. 블로그 글 하나 쓰는 것도 에너지인데, 같은 내용을 플랫폼마다 톤을 바꿔서 다시 쓰라니.

@@ -7,21 +7,21 @@ open: true
 type: article
 ---
 
-This evening, I wasn't in the mood to code. Figured I'd install a Claude Code plugin I'd been eyeing. Ouroboros — adds autonomous loops to AI coding agents. A well-known AI professor had recommended it. Zero suspicion. A minute after installing, my Mac started choking.
+This evening, I wasn't in the mood to code. Figured I'd install a Claude Code plugin I'd been eyeing. It's called Ouroboros, adds autonomous loops to AI coding agents. A well-known AI professor had recommended it. Zero suspicion. A minute after installing, my Mac started choking.
 
 ## 1,000 python3.12 Processes
 
-Rebooted three or four times. Every time I launched Claude Code, it froze again. Then I remembered — I'd just installed Ouroboros. Decided not to launch Claude at all. Opened Codex CLI instead and had it inspect the processes. That was the move that saved me.
+Rebooted three or four times. Every time I launched Claude Code, it froze again. Then I remembered I'd just installed Ouroboros. Decided not to launch Claude at all. Opened Codex CLI instead and had it inspect the processes. That was the move that saved me.
 
 Over a thousand `python3.12` processes were running. Couldn't even spawn a new shell — `fork failed: resource temporarily unavailable`. Not CPU. The sheer number of processes was suffocating the system.
 
-Most had `PPID=1`. Orphans — parent processes dead, children left behind. Not normal workers. A runaway explosion of spawns in a short window.
+Most had `PPID=1`. Orphans. Parent processes dead, children left behind. Not normal workers. A runaway explosion of spawns in a short window.
 
 ## It Was Malware
 
 Not just a runaway. The command line of a Python interpreter under the `uv` cache contained a `base64`-encoded payload. Decoded, it was a script that collected credential files and sent them to `https://models.litellm.cloud/`.
 
-Infection chain:
+Here's the infection chain.
 
 ```
 Ouroboros install
@@ -38,9 +38,9 @@ The process explosion was actually a bug in the malware. The `.pth` auto-executi
 
 ## Supply Chain Attack
 
-Ouroboros itself wasn't malicious. The culprit was `litellm 1.82.8` — someone planted a backdoor in a package that Ouroboros pulled in as a dependency.
+Ouroboros itself wasn't malicious. The culprit was `litellm 1.82.8`. Someone planted a backdoor in a package that Ouroboros pulled in as a dependency.
 
-Public analysis released the same day:
+Public analysis released the same day
 
 - Both `litellm 1.82.7` and `1.82.8` were compromised
 - Uploaded directly to PyPI with no corresponding GitHub release or tag
@@ -51,7 +51,7 @@ No evidence points to the Ouroboros developer. Nor to any LiteLLM maintainer per
 
 ## What It Targeted
 
-The malware's collection targets:
+Here's what the malware was trying to scrape.
 
 - `.env` files (API keys, DB passwords, service secrets)
 - SSH keys, AWS/GCP/Azure credentials
@@ -84,10 +84,10 @@ After reboot: no `python3.12`, `litellm`, or `sysmon` processes reappearing. Rel
 Can't confirm.
 
 - **Malware execution**: Confirmed
-- **Exfiltration attempt**: Highly likely. Persistence artifacts were created, which means the preceding stages — collection and upload — likely executed too
+- **Exfiltration attempt**: Likely. If persistence artifacts were created, the preceding stages (collection and upload) likely executed too
 - **Exfiltration success**: Unconfirmable without network logs
 
-The malware was designed to send data silently, `curl -s -o /dev/null` style. Without packet capture or DNS logs, there's no way to prove whether it succeeded. I wasn't running a network monitor like Little Snitch or LuLu.
+Malware was designed to send data silently, `curl -s -o /dev/null` style. Without packet capture or DNS logs, there's no way to prove whether it succeeded. I wasn't running a network monitor like Little Snitch or LuLu.
 
 Only option is to assume exfiltration occurred and respond accordingly.
 
@@ -103,7 +103,7 @@ What this incident made clear: no matter how careful I am, a compromised depende
 
 **"Don't get breached" is less realistic than "keep the blast radius small."** Perfect prevention is impossible. Separate your main environment from your experiment environment. Use short-lived tokens instead of long-lived ones. Isolate projects with lots of secrets from environments where you try new tools.
 
-**New plugins go in an isolated environment first.** I installed this on my main dev machine — the one with dozens of `.env` files. Running it in a VM or a separate user session first would have drastically limited the damage.
+**New plugins go in an isolated environment first.** I installed this on my main dev machine, the one with dozens of `.env` files. Running it in a VM or a separate user session first would have drastically limited the damage.
 
 **You need a network monitor.** Little Snitch or LuLu would have caught the traffic to `models.litellm.cloud` and let me confirm whether exfiltration actually succeeded. A developer machine without a network monitor is a blind spot.
 

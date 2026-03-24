@@ -1,7 +1,7 @@
 import { shouldUseEnglish } from "./devLanguage";
 
 export const siteContent = {
-  name: "yhc509's Dev Journey",
+  name: "Don't Stop the Loop",
   description:
     "Unity 클라이언트 프로그래머의 게임 엔진, 그래픽스, Agentic Coding, Harness Engineering 노트.",
   descriptionEn:
@@ -31,7 +31,7 @@ export const siteContent = {
     headlineEn: "Posts",
   },
   about: {
-    headline: "yhc509",
+    headline: "KineticKeeper",
     title: "소개",
     titleEn: "About",
     intro:
@@ -40,8 +40,8 @@ export const siteContent = {
       "Unity mobile game client programmer since 2017. Writing about development work and AI-assisted workflows.",
     role: "- Unity 모바일 게임 클라이언트 프로그래머",
     roleEn: "- Unity mobile game client programmer",
-    imageAlt: "yhc509 프로필",
-    imageAltEn: "yhc509 profile",
+    imageAlt: "KineticKeeper 프로필",
+    imageAltEn: "KineticKeeper profile",
   },
   projects: {
     headline: "프로젝트",
