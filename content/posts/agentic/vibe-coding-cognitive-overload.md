@@ -1,6 +1,6 @@
 ---
 title: "바이브 코딩 하다가 뇌가 튀겨진다"
-date: "2026-03-24"
+date: "2026-03-25"
 description: "빠르게 생성되는 코드, 느리게 튀겨지는 뇌. AI의 속도를 사람이 따라가지 못할 때 생기는 일을 셀프 인터뷰로 정리했다."
 categories: ["AI/AgenticCoding"]
 open: true
