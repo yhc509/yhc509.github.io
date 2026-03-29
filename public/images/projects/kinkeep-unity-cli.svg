@@ -16,6 +16,6 @@
   <path d="M360 206h58" stroke="#8FC1F0" stroke-width="10" stroke-linecap="round"/>
   <path d="M386 180l36 26-36 26" stroke="#8FC1F0" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
   <circle cx="400" cy="206" r="42" stroke="#8FC1F0" stroke-opacity="0.28" stroke-width="6"/>
-  <text x="82" y="380" fill="white" fill-opacity="0.92" font-family="Hahmlet, serif" font-size="42" font-weight="700">PUC</text>
-  <text x="82" y="408" fill="#D7E4F4" fill-opacity="0.76" font-family="Hahmlet, serif" font-size="18">Portless Unity CLI</text>
+  <text x="82" y="380" fill="white" fill-opacity="0.92" font-family="Hahmlet, serif" font-size="32" font-weight="700">kinkeep-unity-cli</text>
+  <text x="82" y="408" fill="#D7E4F4" fill-opacity="0.76" font-family="Hahmlet, serif" font-size="18">Keep Unity Editors Connected</text>
 </svg>
