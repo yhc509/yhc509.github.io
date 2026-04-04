@@ -3,7 +3,7 @@ title: "Claude의 메모리를 버리고 Obsidian으로 갈아탔다"
 date: "2026-04-04"
 description: "AI 에이전트의 기억을 디렉토리 단위 메모리에서 Obsidian vault 하나로 통합했다. 프로젝트를 넘나드는 지식 공유가 되고, 문서가 썩는 걸 cron으로 잡는다."
 categories: ["AI/AgenticCoding"]
-open: false
+open: true
 type: article
 ---
 
