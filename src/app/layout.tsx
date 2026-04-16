@@ -92,6 +92,31 @@ export default async function RootLayout({
       className={hahmlet.variable}
     >
       <body className="antialiased min-h-screen">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: siteTitle,
+                url: SITE_URL,
+                description: siteDescription,
+                author: {
+                  "@type": "Person",
+                  name: "KineticKeeper",
+                },
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                name: "KineticKeeper",
+                url: SITE_URL,
+                jobTitle: "Game Programmer",
+              },
+            ]),
+          }}
+        />
         <ThemeProvider>
           <a
             href="#main-content"
