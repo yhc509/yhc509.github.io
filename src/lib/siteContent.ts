@@ -1,7 +1,7 @@
 import { shouldUseEnglish } from "./devLanguage";
 
 export const siteContent = {
-  name: "Don't Stop the Loop",
+  name: "kinkeep.dev",
   description:
     "Unity 클라이언트 프로그래머의 게임 엔진, 그래픽스, Agentic Coding, Harness Engineering 노트.",
   descriptionEn:
