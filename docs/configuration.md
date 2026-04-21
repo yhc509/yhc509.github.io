@@ -6,10 +6,10 @@
 
 ```env
 # 선택: 사이트 기본 URL 덮어쓰기
-NEXT_PUBLIC_BASE_URL=https://yhc509.github.io
+NEXT_PUBLIC_BASE_URL=https://kinkeep.dev
 ```
 
-값이 없으면 기본값으로 `https://yhc509.github.io`를 사용합니다.
+값이 없으면 기본값으로 `https://kinkeep.dev`를 사용합니다.
 
 ## 사이트 정보 변경
 

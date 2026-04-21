@@ -44,7 +44,7 @@ jobs:
       - name: Build static site
         run: npm run build
         env:
-          NEXT_PUBLIC_BASE_URL: https://yhc509.github.io
+          NEXT_PUBLIC_BASE_URL: https://kinkeep.dev
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
