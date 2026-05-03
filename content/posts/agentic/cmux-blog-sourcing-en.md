@@ -3,7 +3,7 @@ title: "Turning Other Sessions' Conversations into Blog Material"
 date: "2026-03-29"
 description: "Used cmux to read conversations from other Claude Code sessions and judge whether they'd make blog posts. Out of 4 sessions, one became a post."
 categories: ["AI/AgenticCoding"]
-open: true
+open: false
 type: article
 ---
 

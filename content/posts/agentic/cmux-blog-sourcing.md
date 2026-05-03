@@ -3,7 +3,7 @@ title: "다른 세션의 대화를 블로그 소재로 쓴다"
 date: "2026-03-29"
 description: "cmux로 다른 Claude Code 세션의 대화를 읽고, 블로그 글감이 되는지 판단하는 과정을 기록했다. 4개 세션 중 쓸 만한 소재는 하나였다."
 categories: ["AI/AgenticCoding"]
-open: true
+open: false
 type: article
 ---
 
