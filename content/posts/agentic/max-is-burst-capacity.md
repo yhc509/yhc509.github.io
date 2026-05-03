@@ -3,7 +3,7 @@ title: "맥스를 소비하는 사람과 운용하는 사람은 다르다"
 date: "2026-03-19"
 description: "AI 플랜의 가치는 평소 많이 쓰는 데보다, 병렬 작업과 장기 검증 실험을 감당할 수 있는 버스트 용량에 더 가깝다고 보게 됐다."
 categories: ['AI/HarnessEngineering']
-open: true
+open: false
 type: article
 ---
 

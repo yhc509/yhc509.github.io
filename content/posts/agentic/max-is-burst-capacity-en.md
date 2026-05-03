@@ -3,7 +3,7 @@ title: "Consuming Your AI Plan vs. Operating It"
 date: "2026-03-19"
 description: "The value of a top-tier AI plan isn't daily volume — it's burst capacity for parallel work and long experiments when they matter most."
 categories: ['AI/HarnessEngineering']
-open: true
+open: false
 type: article
 ---
 
