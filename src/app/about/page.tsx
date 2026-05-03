@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
+import { ContactLinks } from "@/components/ContactLinks";
 import { createMarkdownComponents } from "@/components/MarkdownComponents";
 import { getAboutContent, getAboutPageCopy } from "@/lib/aboutContent";
 
@@ -57,6 +58,7 @@ export default async function AboutPage() {
             },
           }}
         />
+        <ContactLinks />
       </div>
     </div>
   );
