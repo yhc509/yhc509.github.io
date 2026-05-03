@@ -42,24 +42,26 @@ const links: ContactLink[] = [
 
 export function ContactLinks() {
   return (
-    <ul className="not-prose flex items-center gap-3 list-none p-0 mt-4 mb-0">
-      {links.map(({ href, label, icon }) => (
-        <li key={label} className="m-0 p-0">
-          <a
-            href={href}
-            aria-label={label}
-            target={href.startsWith("mailto:") ? undefined : "_blank"}
-            rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full transition-colors"
-            style={{
-              color: "var(--foreground)",
-              border: "1px solid var(--card-border)",
-            }}
-          >
-            <span className="block h-5 w-5">{icon}</span>
-          </a>
-        </li>
-      ))}
-    </ul>
+    <div className="not-prose flex items-center gap-3 mt-6">
+      <span className="text-base font-medium" style={{ color: "var(--foreground)" }}>
+        Contact :
+      </span>
+      <ul className="flex items-center gap-2 list-none p-0 m-0">
+        {links.map(({ href, label, icon }) => (
+          <li key={label} className="m-0 p-0">
+            <a
+              href={href}
+              aria-label={label}
+              target={href.startsWith("mailto:") ? undefined : "_blank"}
+              rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full transition-opacity hover:opacity-70"
+              style={{ color: "var(--foreground)" }}
+            >
+              <span className="block h-5 w-5">{icon}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
