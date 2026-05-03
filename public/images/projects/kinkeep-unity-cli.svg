@@ -1,0 +1,21 @@
+<svg width="800" height="450" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#203449"/>
+  <rect x="44" y="40" width="712" height="370" rx="32" fill="#F8F7F4" fill-opacity="0.08"/>
+  <rect x="82" y="92" width="278" height="230" rx="22" fill="#132434"/>
+  <rect x="106" y="122" width="230" height="18" rx="9" fill="#6B9BD2" fill-opacity="0.65"/>
+  <rect x="106" y="160" width="184" height="12" rx="6" fill="white" fill-opacity="0.3"/>
+  <rect x="106" y="188" width="148" height="12" rx="6" fill="white" fill-opacity="0.22"/>
+  <rect x="106" y="230" width="110" height="52" rx="16" fill="#8FC1F0" fill-opacity="0.22"/>
+  <path d="M136 256h50" stroke="#DDEBFA" stroke-width="8" stroke-linecap="round"/>
+  <path d="M430 122h186" stroke="#D7E4F4" stroke-width="14" stroke-linecap="round"/>
+  <path d="M430 160h144" stroke="#D7E4F4" stroke-opacity="0.8" stroke-width="14" stroke-linecap="round"/>
+  <rect x="430" y="202" width="220" height="126" rx="26" fill="#F8F7F4" fill-opacity="0.12"/>
+  <rect x="462" y="232" width="72" height="56" rx="14" fill="#8FC1F0" fill-opacity="0.28"/>
+  <rect x="552" y="232" width="66" height="18" rx="9" fill="white" fill-opacity="0.36"/>
+  <rect x="552" y="264" width="98" height="18" rx="9" fill="white" fill-opacity="0.24"/>
+  <path d="M360 206h58" stroke="#8FC1F0" stroke-width="10" stroke-linecap="round"/>
+  <path d="M386 180l36 26-36 26" stroke="#8FC1F0" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="400" cy="206" r="42" stroke="#8FC1F0" stroke-opacity="0.28" stroke-width="6"/>
+  <text x="82" y="380" fill="white" fill-opacity="0.92" font-family="Hahmlet, serif" font-size="32" font-weight="700">kinkeep-unity-cli</text>
+  <text x="82" y="408" fill="#D7E4F4" fill-opacity="0.76" font-family="Hahmlet, serif" font-size="18">Keep Unity Editors Connected</text>
+</svg>
