@@ -144,7 +144,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     codeRepository: project.links.github,
     author: {
       "@type": "Person",
-      name: "KineticKeeper",
+      name: "yhc509",
       jobTitle: author,
     },
     keywords: project.tags.join(", "),

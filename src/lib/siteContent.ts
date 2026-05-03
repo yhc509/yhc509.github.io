@@ -31,7 +31,7 @@ export const siteContent = {
     headlineEn: "Posts",
   },
   about: {
-    headline: "KineticKeeper",
+    headline: "yhc509",
     title: "소개",
     titleEn: "About",
     intro:
@@ -40,8 +40,8 @@ export const siteContent = {
       "Unity mobile game client programmer since 2017. Writing about development work and AI-assisted workflows.",
     role: "- Unity 모바일 게임 클라이언트 프로그래머",
     roleEn: "- Unity mobile game client programmer",
-    imageAlt: "KineticKeeper 프로필",
-    imageAltEn: "KineticKeeper profile",
+    imageAlt: "yhc509 프로필",
+    imageAltEn: "yhc509 profile",
   },
   projects: {
     headline: "프로젝트",

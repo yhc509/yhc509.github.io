@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     },
   },
   keywords: [...siteContent.keywords],
-  authors: [{ name: "KineticKeeper" }],
+  authors: [{ name: "yhc509" }],
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -104,13 +104,13 @@ export default async function RootLayout({
                 description: siteDescription,
                 author: {
                   "@type": "Person",
-                  name: "KineticKeeper",
+                  name: "yhc509",
                 },
               },
               {
                 "@context": "https://schema.org",
                 "@type": "Person",
-                name: "KineticKeeper",
+                name: "yhc509",
                 url: SITE_URL,
                 jobTitle: "Game Programmer",
               },
@@ -139,7 +139,7 @@ export default async function RootLayout({
                 style={{ color: "var(--foreground)" }}
               >
                 <span className="hidden sm:inline">{siteTitle}</span>
-                <span className="sm:hidden">KineticKeeper</span>
+                <span className="sm:hidden">yhc509</span>
               </Link>
               <nav className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
                 <NavLinks />

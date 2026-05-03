@@ -8,9 +8,8 @@
 
 직접 만들고 겪은 것 위주로 적는 개발 일지입니다. 새로 시도한 것, 삽질한 것, 거기서 알게 된 것을 기록으로 남깁니다.
 
-공개한 프로젝트는 [여기](/projects)에서 볼 수 있습니다.
-
 ## Contact
 
 - GitHub: [@yhc5091](https://github.com/yhc509)
+- LinkedIn: [yhc5091](https://www.linkedin.com/in/yhc5091/)
 - Email: [yhc5091@gmail.com](mailto:yhc5091@gmail.com)

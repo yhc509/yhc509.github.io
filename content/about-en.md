@@ -8,9 +8,8 @@ Lately I've been deep into AI-assisted development workflows. Most of the recent
 
 A dev journal focused on things I've built and experienced firsthand.
 
-Public projects are listed [here](/projects).
-
 ## Contact
 
 - GitHub: [@yhc509](https://github.com/yhc509)
+- LinkedIn: [yhc5091](https://www.linkedin.com/in/yhc5091/)
 - Email: [yhc5091@gmail.com](mailto:yhc5091@gmail.com)

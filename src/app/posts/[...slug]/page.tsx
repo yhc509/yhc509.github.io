@@ -98,12 +98,12 @@ export default async function PostPage({ params }: PostPageProps) {
     dateModified: post.date,
     author: {
       "@type": "Person",
-      name: "KineticKeeper",
+      name: "yhc509",
       jobTitle: author,
     },
     keywords: post.tags.join(", "),
     wordCount: post.content.split(/\s+/).length,
-    publisher: { "@type": "Person", name: "KineticKeeper" },
+    publisher: { "@type": "Person", name: "yhc509" },
   };
 
   // If the slug is "aws/1_cloud", dirname is "aws". 
