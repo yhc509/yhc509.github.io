@@ -1,12 +1,12 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { shouldUseEnglish } from "@/lib/devLanguage";
+import { useDevLanguage } from "@/components/DevLanguageProvider";
 import { useTheme } from "./ThemeProvider";
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
-  const useEnglish = shouldUseEnglish();
+  const useEnglish = useDevLanguage() === "en";
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,

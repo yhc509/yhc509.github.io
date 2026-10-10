@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
-import { shouldUseEnglish } from "@/lib/devLanguage";
+import { useDevLanguage } from "@/components/DevLanguageProvider";
 import { useTheme } from "@/components/ThemeProvider";
 
 interface MermaidDiagramProps {
@@ -10,7 +10,7 @@ interface MermaidDiagramProps {
 
 export function MermaidDiagram({ chart }: MermaidDiagramProps) {
   const { theme } = useTheme();
-  const useEnglish = shouldUseEnglish();
+  const useEnglish = useDevLanguage() === "en";
   const diagramId = useId().replace(/:/g, "");
   const [svg, setSvg] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);

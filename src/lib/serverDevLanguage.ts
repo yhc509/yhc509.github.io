@@ -24,7 +24,7 @@ export async function getServerDevLanguage(): Promise<DevLanguage | null> {
 
 export async function getRequestDevLanguage(): Promise<DevLanguage> {
   if (process.env.NODE_ENV !== "development") {
-    return "ko";
+    return DEFAULT_DEV_LANGUAGE;
   }
 
   return (await getServerDevLanguage()) ?? DEFAULT_DEV_LANGUAGE;

@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { shouldUseEnglish } from "@/lib/devLanguage";
+import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
 
-export default function NotFound() {
-  const useEnglish = shouldUseEnglish();
+export function NotFoundView({ language }: { language: DevLanguage }) {
+  const useEnglish = language === "en";
 
   return (
     <div
@@ -19,7 +19,7 @@ export default function NotFound() {
         {useEnglish ? "Page not found." : "페이지를 찾을 수 없습니다."}
       </p>
       <Link
-        href="/"
+        href={localizedPath("/", language)}
         className="inline-block px-6 py-3 rounded-lg text-sm font-medium transition-opacity hover:opacity-80"
         style={{
           backgroundColor: "var(--accent)",

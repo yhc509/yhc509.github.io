@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { DevLanguageSyncClient } from "@/components/DevLanguageSyncClient";
 import { parseDevLanguage } from "@/lib/devLanguage";
 import { setServerDevLanguage } from "@/lib/serverDevLanguage";
 
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
     index: false,
     follow: false,
   },
+  title: "Language",
 };
 
 export function generateStaticParams() {
@@ -32,9 +34,5 @@ export default async function DevLanguagePage({ params }: DevLanguagePageProps) 
     setServerDevLanguage(devLanguage);
   }
 
-  return (
-    <div className="px-5 py-10 text-sm" style={{ color: "var(--text-secondary)" }}>
-      Development language synchronized.
-    </div>
-  );
+  return <DevLanguageSyncClient language={devLanguage} />;
 }

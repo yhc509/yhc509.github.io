@@ -7,33 +7,56 @@ import remarkGfm from "remark-gfm";
 import { BackButton } from "@/components/BackButton";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { Comments } from "@/components/Comments";
+import { KoreanFallbackNote } from "@/components/KoreanFallbackNote";
 import type { Metadata } from "next";
 import {
   createPostAssetRemarkPlugin,
   resolvePostAssetSrc,
 } from "@/lib/postAssets";
 import { createMarkdownComponents } from "@/components/MarkdownComponents";
-import { shouldUseEnglish } from "@/lib/devLanguage";
-import { toSiteUrl } from "@/lib/site";
+import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
+import { languageAlternates, toSiteUrl } from "@/lib/site";
 import { getSiteCopy } from "@/lib/siteContent";
 
-interface PostPageProps {
+export interface PostPageProps {
   params: Promise<{ slug: string[] }>;
 }
 
+function postPaths(slug: string) {
+  return {
+    englishPath: `/posts/${slug}`,
+    koreanPath: `/ko/posts/${slug}`,
+  };
+}
 
-export async function generateStaticParams() {
+function postImagePath(slug: string, language: DevLanguage) {
+  return language === "ko" ? `/og/ko/${slug}.png` : `/og/${slug}.png`;
+}
+
+export function generatePostStaticParams() {
   const slugs = getAllPostSlugs();
   return slugs.map((slug) => ({ slug: slug.split("/") }));
 }
 
-export async function generateMetadata({
-  params,
-}: PostPageProps): Promise<Metadata> {
+export async function generatePostMetadata(
+  { params }: PostPageProps,
+  language: DevLanguage
+): Promise<Metadata> {
   const { slug } = await params;
+  const currentSlug = slug.join("/");
+
   try {
-    const post = getPostBySlug(slug.join("/"));
-    const url = toSiteUrl(`/posts/${slug.join("/")}`);
+    const post = getPostBySlug(currentSlug, language);
+    const { englishPath, koreanPath } = postPaths(currentSlug);
+    const canonicalPath =
+      language === "en" && post.missingEnglish
+        ? koreanPath
+        : language === "en"
+          ? englishPath
+          : koreanPath;
+    const url = toSiteUrl(canonicalPath);
+    const imagePath = postImagePath(currentSlug, language);
+    const contentLanguage = language === "ko" || post.missingEnglish ? "ko" : "en";
 
     return {
       title: post.title,
@@ -41,6 +64,7 @@ export async function generateMetadata({
       keywords: post.tags,
       openGraph: {
         type: "article",
+        locale: contentLanguage === "en" ? "en_US" : "ko_KR",
         title: post.title,
         description: post.description,
         url,
@@ -48,7 +72,7 @@ export async function generateMetadata({
         tags: post.tags,
         images: [
           {
-            url: toSiteUrl(`/og/${slug.join("/")}.png`),
+            url: toSiteUrl(imagePath),
             width: 1200,
             height: 630,
             alt: post.title,
@@ -59,11 +83,9 @@ export async function generateMetadata({
         card: "summary_large_image",
         title: post.title,
         description: post.description,
-        images: [toSiteUrl(`/og/${slug.join("/")}.png`)],
+        images: [toSiteUrl(imagePath)],
       },
-      alternates: {
-        canonical: url,
-      },
+      alternates: languageAlternates(canonicalPath, englishPath, koreanPath),
     };
   } catch {
     return {
@@ -72,28 +94,36 @@ export async function generateMetadata({
   }
 }
 
-export default async function PostPage({ params }: PostPageProps) {
+export async function PostScreen({
+  params,
+  language,
+}: PostPageProps & { language: DevLanguage }) {
   const { slug } = await params;
-  const useEnglish = shouldUseEnglish();
-  const { author } = getSiteCopy();
+  const useEnglish = language === "en";
+  const { author } = getSiteCopy(language);
   const currentSlug = slug.join("/");
   let post;
 
   try {
-    post = getPostBySlug(currentSlug);
+    post = getPostBySlug(currentSlug, language);
   } catch {
     notFound();
   }
 
-  const { prev, next } = getAdjacentPosts(currentSlug);
+  const { prev, next } = getAdjacentPosts(currentSlug, language);
+  const { englishPath } = postPaths(currentSlug);
+  const pagePath = localizedPath(englishPath, language);
+  const contentLanguage = language === "ko" || post.missingEnglish ? "ko" : "en";
+  const imagePath = postImagePath(currentSlug, language);
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
-    image: toSiteUrl(`/og/${currentSlug}.png`),
-    url: toSiteUrl(`/posts/${currentSlug}`),
+    inLanguage: contentLanguage,
+    image: toSiteUrl(imagePath),
+    url: toSiteUrl(pagePath),
     datePublished: post.date,
     dateModified: post.date,
     author: {
@@ -106,8 +136,6 @@ export default async function PostPage({ params }: PostPageProps) {
     publisher: { "@type": "Person", name: "yhc509" },
   };
 
-  // If the slug is "aws/1_cloud", dirname is "aws". 
-  // If slug is "hello-world", dirname is "." (but we want empty string effectively for joining).
   const postDir = slug.length > 1 ? slug.slice(0, -1).join("/") : "";
 
   const components = createMarkdownComponents({
@@ -126,7 +154,11 @@ export default async function PostPage({ params }: PostPageProps) {
       <Suspense>
         <BackButton />
       </Suspense>
-      <article>
+      <KoreanFallbackNote
+        show={useEnglish && post.missingEnglish}
+        message="This post is only available in Korean."
+      />
+      <article lang={contentLanguage}>
         <header
           className="mb-8 pb-8 border-b"
           style={{ borderColor: "var(--card-border)" }}
@@ -160,7 +192,10 @@ export default async function PostPage({ params }: PostPageProps) {
           aria-label={postNavigationLabel}
         >
           {prev ? (
-            <Link href={`/posts/${prev.slug}`} className="flex-1 group">
+            <Link
+              href={localizedPath(`/posts/${prev.slug}`, language)}
+              className="flex-1 group"
+            >
               <span
                 className="text-xs"
                 style={{ color: "var(--text-muted)" }}
@@ -176,7 +211,7 @@ export default async function PostPage({ params }: PostPageProps) {
           )}
           {next ? (
             <Link
-              href={`/posts/${next.slug}`}
+              href={localizedPath(`/posts/${next.slug}`, language)}
               className="flex-1 text-right group"
             >
               <span

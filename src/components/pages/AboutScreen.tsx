@@ -3,28 +3,41 @@ import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { ContactLinks } from "@/components/ContactLinks";
+import { KoreanFallbackNote } from "@/components/KoreanFallbackNote";
 import { createMarkdownComponents } from "@/components/MarkdownComponents";
 import { getAboutContent, getAboutPageCopy } from "@/lib/aboutContent";
+import type { DevLanguage } from "@/lib/devLanguage";
+import { languageAlternates } from "@/lib/site";
 
-
-export async function generateMetadata(): Promise<Metadata> {
-  const about = getAboutPageCopy();
+export async function aboutMetadata(language: DevLanguage): Promise<Metadata> {
+  const about = getAboutPageCopy(language);
+  const englishPath = "/about";
+  const koreanPath = "/ko/about";
+  const canonicalPath =
+    language === "en" && about.missingEnglish ? koreanPath : language === "en" ? englishPath : koreanPath;
 
   return {
     title: about.title,
     description: about.intro,
+    alternates: languageAlternates(canonicalPath, englishPath, koreanPath),
   };
 }
 
-export default async function AboutPage() {
-  const content = getAboutContent();
-  const about = getAboutPageCopy();
+export function AboutScreen({ language }: { language: DevLanguage }) {
+  const content = getAboutContent(language);
+  const about = getAboutPageCopy(language);
+  const contentLanguage = language === "ko" || about.missingEnglish ? "ko" : "en";
 
   return (
     <div className="max-w-3xl mx-auto px-5 py-10">
+      <KoreanFallbackNote
+        show={language === "en" && about.missingEnglish}
+        message="This page is only available in Korean."
+      />
       <section
         className="mb-10 border-b pb-8"
         style={{ borderColor: "var(--card-border)" }}
+        lang={contentLanguage}
       >
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
           <div className="mx-auto shrink-0 sm:mx-0">
@@ -48,7 +61,7 @@ export default async function AboutPage() {
           </div>
         </div>
       </section>
-      <div className="prose max-w-none">
+      <div className="prose max-w-none" lang={contentLanguage}>
         <MDXRemote
           source={content}
           components={createMarkdownComponents()}

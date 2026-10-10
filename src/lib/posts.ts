@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 export { filterPostsByProjects, filterPostsBySearch } from "./postFilters";
+import type { DevLanguage } from "./devLanguage";
 import { buildTagTree, type TagNode } from "./tagTree";
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
@@ -20,6 +21,7 @@ export interface PostMeta {
   type: PostType;
   project?: string;
   series?: string;
+  missingEnglish: boolean;
 }
 
 export interface Post extends PostMeta {
@@ -92,15 +94,8 @@ function findPostPath(slug: string): string | null {
   return null;
 }
 
-function shouldUseEnglishVersion(slug: string): boolean {
-  if (findPostPath(`${slug}-en`) === null) {
-    return false;
-  }
-  if (process.env.NODE_ENV === "development") {
-    const devLang = process.env.DEV_LANGUAGE ?? process.env.NEXT_PUBLIC_DEV_LANGUAGE;
-    return devLang === "en";
-  }
-  return false;
+function hasEnglishPost(slug: string): boolean {
+  return findPostPath(`${slug}-en`) !== null;
 }
 
 function isEnglishVariantFilePath(filePath: string): boolean {
@@ -136,7 +131,7 @@ export function getAllPostSlugs(): string[] {
     .filter((slug) => {
       // production에서는 open: false / 미래 날짜 포스트를 정적 파일로 생성하지 않음
       try {
-        const post = getPostBySlug(slug);
+        const post = getPostBySlug(slug, "ko");
         return isOpen(post.open) && isPublishable(post.date);
       } catch {
         return false;
@@ -144,7 +139,7 @@ export function getAllPostSlugs(): string[] {
     });
 }
 
-function parsePostFile(fullPath: string, slug: string): Post {
+function parsePostFile(fullPath: string, slug: string, missingEnglish: boolean): Post {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
@@ -162,27 +157,28 @@ function parsePostFile(fullPath: string, slug: string): Post {
     type: readPostType(data.type),
     project: readOptionalString(data.project),
     series: readOptionalString(data.series),
+    missingEnglish,
   };
 }
 
-export function getPostBySlug(slug: string): Post {
-  const englishPath = shouldUseEnglishVersion(slug)
-    ? findPostPath(`${slug}-en`)
-    : null;
+export function getPostBySlug(slug: string, language: DevLanguage = "en"): Post {
+  const missingEnglish = !hasEnglishPost(slug);
+  const englishPath =
+    language === "en" && !missingEnglish ? findPostPath(`${slug}-en`) : null;
   const fullPath = englishPath ?? findPostPath(slug);
 
   if (!fullPath) {
     throw new Error(`Post not found: ${slug}`);
   }
 
-  return parsePostFile(fullPath, slug);
+  return parsePostFile(fullPath, slug, missingEnglish);
 }
 
-export function getAllPosts(): PostMeta[] {
+export function getAllPosts(language: DevLanguage = "en"): PostMeta[] {
   const slugs = getAllPostSlugs();
   const posts = slugs
     .map((slug) => {
-      const post = getPostBySlug(slug);
+      const post = getPostBySlug(slug, language);
       return {
         slug: post.slug,
         title: post.title,
@@ -194,6 +190,7 @@ export function getAllPosts(): PostMeta[] {
         type: post.type,
         project: post.project,
         series: post.series,
+        missingEnglish: post.missingEnglish,
       };
     })
     .filter((post) => isOpen(post.open) && isPublishable(post.date)) // production에서는 open: false이거나 미래 날짜인 포스트를 목록에서 제외
@@ -203,9 +200,10 @@ export function getAllPosts(): PostMeta[] {
 }
 
 export function getAdjacentPosts(
-  slug: string
+  slug: string,
+  language: DevLanguage = "en"
 ): { prev: PostMeta | null; next: PostMeta | null } {
-  const posts = getAllPosts();
+  const posts = getAllPosts(language);
   const index = posts.findIndex((post) => post.slug === slug);
 
   if (index === -1) {
@@ -288,16 +286,20 @@ export function buildPostProjectOptions(
     });
 }
 
-export function getPostsByProject(projectSlug: string): PostMeta[] {
-  return getAllPosts()
+export function getPostsByProject(
+  projectSlug: string,
+  language: DevLanguage = "en"
+): PostMeta[] {
+  return getAllPosts(language)
     .filter((post) => post.project === projectSlug)
     .sort(comparePostsByDateAscending);
 }
 
 export function getProjectPostGroups(
-  projectSlug: string
+  projectSlug: string,
+  language: DevLanguage = "en"
 ): ProjectPostGroups {
-  const relatedPosts = getPostsByProject(projectSlug);
+  const relatedPosts = getPostsByProject(projectSlug, language);
 
   return {
     devlogs: relatedPosts

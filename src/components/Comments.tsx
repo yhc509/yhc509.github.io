@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { shouldUseEnglish } from "@/lib/devLanguage";
+import { useDevLanguage } from "@/components/DevLanguageProvider";
 import { useTheme } from "./ThemeProvider";
 
 export function Comments() {
   const ref = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
-  const useEnglish = shouldUseEnglish();
+  const useEnglish = useDevLanguage() === "en";
   const scriptLoaded = useRef(false);
   const [loadFailed, setLoadFailed] = useState(false);
 

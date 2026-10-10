@@ -3,7 +3,8 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { TagFilter } from "./TagFilter";
-import { shouldUseEnglish } from "@/lib/devLanguage";
+import { localizedPath } from "@/lib/devLanguage";
+import { useDevLanguage } from "@/components/DevLanguageProvider";
 import { filterPostsBySearch } from "@/lib/postFilters";
 import { getBlogCopy } from "@/lib/siteContent";
 import type { PostMeta, PostProjectOption, TagNode } from "@/lib/posts";
@@ -32,8 +33,9 @@ export function BlogHome({
   tagTree,
   projectOptions,
 }: BlogHomeProps) {
-  const { searchPlaceholder } = getBlogCopy();
-  const useEnglish = shouldUseEnglish();
+  const language = useDevLanguage();
+  const useEnglish = language === "en";
+  const { searchPlaceholder } = getBlogCopy(language);
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -72,7 +74,8 @@ export function BlogHome({
       params.set("limit", limit.toString());
     }
     const queryString = params.toString();
-    router.push(queryString ? `/?${queryString}` : "/", { scroll: false });
+    const homePath = localizedPath("/", language);
+    router.push(queryString ? `${homePath}?${queryString}` : homePath, { scroll: false });
   };
 
   const setSelectedTags = (tags: string[]) => {
@@ -106,7 +109,8 @@ export function BlogHome({
       params.set("limit", postsPerPage.toString());
     }
     const queryString = params.toString();
-    return queryString ? `/posts/${slug}?${queryString}` : `/posts/${slug}`;
+    const postPath = localizedPath(`/posts/${slug}`, language);
+    return queryString ? `${postPath}?${queryString}` : postPath;
   };
 
   // Calculate page range to show (max 10 pages)
@@ -330,6 +334,12 @@ export function BlogHome({
                     <time dateTime={post.date}>{post.date}</time>
                     <span>·</span>
                     <span>{post.readingTime}</span>
+                    {useEnglish && post.missingEnglish && (
+                      <>
+                        <span>·</span>
+                        <span>Korean only</span>
+                      </>
+                    )}
                     {post.project && projectTitleMap.has(post.project) && (
                       <>
                         <span>·</span>
@@ -339,11 +349,17 @@ export function BlogHome({
                       </>
                     )}
                   </div>
-                  <h2 className="text-lg font-bold leading-snug">{post.title}</h2>
+                  <h2
+                    className="text-lg font-bold leading-snug"
+                    lang={useEnglish && post.missingEnglish ? "ko" : undefined}
+                  >
+                    {post.title}
+                  </h2>
                   {post.description && (
                     <p
                       className="mt-2 text-sm leading-6"
                       style={{ color: "var(--text-secondary)" }}
+                      lang={useEnglish && post.missingEnglish ? "ko" : undefined}
                     >
                       {post.description}
                     </p>

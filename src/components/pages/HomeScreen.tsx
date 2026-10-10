@@ -1,13 +1,23 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import { getAllProjects } from "@/lib/projects";
 import { getAllPosts, buildPostProjectOptions, buildTagTree } from "@/lib/posts";
 import { BlogHome } from "@/components/BlogHome";
 import { HomeHero } from "@/components/HomeHero";
+import type { DevLanguage } from "@/lib/devLanguage";
+import { languageAlternates } from "@/lib/site";
 
+export function homeMetadata(language: DevLanguage): Metadata {
+  const canonicalPath = language === "en" ? "/" : "/ko";
 
-export default async function Home() {
-  const posts = getAllPosts();
-  const projects = getAllProjects();
+  return {
+    alternates: languageAlternates(canonicalPath, "/", "/ko"),
+  };
+}
+
+export function HomeScreen({ language }: { language: DevLanguage }) {
+  const posts = getAllPosts(language);
+  const projects = getAllProjects(language);
   const tagTree = buildTagTree(posts);
   const projectTitleMap = Object.fromEntries(
     projects.map((project) => [project.slug, project.title])
@@ -16,7 +26,7 @@ export default async function Home() {
 
   return (
     <>
-      <HomeHero />
+      <HomeHero language={language} />
       <Suspense>
         <BlogHome
           posts={posts}

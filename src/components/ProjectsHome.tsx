@@ -3,7 +3,8 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { shouldUseEnglish } from "@/lib/devLanguage";
+import { localizedPath } from "@/lib/devLanguage";
+import { useDevLanguage } from "@/components/DevLanguageProvider";
 import type { ProjectMeta, ProjectTagNode } from "@/lib/projects";
 import { getProjectsCopy } from "@/lib/siteContent";
 import { ProjectTagFilter } from "./ProjectTagFilter";
@@ -19,7 +20,7 @@ interface ProjectCardProps {
 }
 
 function ProjectSummaryCard({ project, href }: ProjectCardProps) {
-  const useEnglish = shouldUseEnglish();
+  const useEnglish = useDevLanguage() === "en";
   const detailLinkLabel = useEnglish ? "View details" : "상세 보기";
 
   return (
@@ -84,9 +85,10 @@ function ProjectSummaryCard({ project, href }: ProjectCardProps) {
 }
 
 export function ProjectsHome({ projects, tagTree }: ProjectsHomeProps) {
+  const language = useDevLanguage();
+  const useEnglish = language === "en";
   const { headline, description, searchPlaceholder, emptyStateTitle, emptyStateDescription } =
-    getProjectsCopy();
-  const useEnglish = shouldUseEnglish();
+    getProjectsCopy(language);
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedTags =
@@ -103,7 +105,8 @@ export function ProjectsHome({ projects, tagTree }: ProjectsHomeProps) {
       params.set("q", query);
     }
     const queryString = params.toString();
-    router.push(`/projects${queryString ? `?${queryString}` : ""}`, {
+    const projectsPath = localizedPath("/projects", language);
+    router.push(`${projectsPath}${queryString ? `?${queryString}` : ""}`, {
       scroll: false,
     });
   };
@@ -150,10 +153,10 @@ export function ProjectsHome({ projects, tagTree }: ProjectsHomeProps) {
 
   const hasProjects = projects.length > 0;
   const projectQueryString = searchParams.toString();
-  const getProjectHref = (slug: string) =>
-    projectQueryString
-      ? `/projects/${slug}?${projectQueryString}`
-      : `/projects/${slug}`;
+  const getProjectHref = (slug: string) => {
+    const projectPath = localizedPath(`/projects/${slug}`, language);
+    return projectQueryString ? `${projectPath}?${projectQueryString}` : projectPath;
+  };
   const searchAriaLabel = useEnglish ? "Search projects" : "프로젝트 검색";
   const removeTagAriaLabel = (tag: string) =>
     useEnglish ? `Remove ${tag} tag` : `${tag} 태그 제거`;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { shouldUseEnglish } from "@/lib/devLanguage";
+import { useDevLanguage } from "@/components/DevLanguageProvider";
 import type { ProjectTagNode } from "@/lib/projects";
 
 interface ProjectTagFilterProps {
@@ -78,7 +78,7 @@ export function ProjectTagFilter({
   selectedTags,
   onTagsChange,
 }: ProjectTagFilterProps) {
-  const useEnglish = shouldUseEnglish();
+  const useEnglish = useDevLanguage() === "en";
   const headingLabel = useEnglish ? "Tags" : "태그";
   const clearLabel = useEnglish ? "Clear" : "초기화";
 
