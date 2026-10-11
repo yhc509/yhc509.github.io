@@ -1,4 +1,4 @@
-import { shouldUseEnglish } from "./devLanguage";
+import type { DevLanguage } from "./devLanguage";
 
 export const siteContent = {
   name: "kinkeep.dev",
@@ -61,8 +61,8 @@ export const siteContent = {
   },
 } as const;
 
-export function getSiteCopy() {
-  const useEnglish = shouldUseEnglish();
+export function getSiteCopy(language: DevLanguage) {
+  const useEnglish = language === "en";
 
   return {
     description: useEnglish
@@ -72,8 +72,8 @@ export function getSiteCopy() {
   };
 }
 
-export function getBlogCopy() {
-  const useEnglish = shouldUseEnglish();
+export function getBlogCopy(language: DevLanguage) {
+  const useEnglish = language === "en";
 
   return {
     headline: useEnglish ? siteContent.blog.headlineEn : siteContent.blog.headline,
@@ -83,8 +83,8 @@ export function getBlogCopy() {
   };
 }
 
-export function getProjectsCopy() {
-  const useEnglish = shouldUseEnglish();
+export function getProjectsCopy(language: DevLanguage) {
+  const useEnglish = language === "en";
 
   return {
     headline: useEnglish

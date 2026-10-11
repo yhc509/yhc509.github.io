@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import type { DevLanguage } from "./devLanguage";
 import { buildTagTree, type TagNode } from "./tagTree";
 
 const projectsDirectory = path.join(process.cwd(), "content/projects");
@@ -24,6 +25,7 @@ export interface ProjectMeta {
   role: string;
   highlights: string[];
   links: ProjectLinks;
+  missingEnglish: boolean;
 }
 
 export interface Project extends ProjectMeta {
@@ -42,6 +44,7 @@ interface RawProject {
   role?: string;
   highlights?: string[];
   links?: Partial<ProjectLinks>;
+  missingEnglish: boolean;
 }
 
 function failInvalidProject(slug: string, message: string): never {
@@ -124,27 +127,17 @@ function findProjectPath(slug: string): string | null {
   return null;
 }
 
-function shouldUseEnglishVersion(slug: string): boolean {
-  if (findProjectPath(`${slug}-en`) === null) {
-    return false;
-  }
-
-  if (process.env.NODE_ENV === "development") {
-    const devLang = process.env.DEV_LANGUAGE ?? process.env.NEXT_PUBLIC_DEV_LANGUAGE;
-    return devLang === "en";
-  }
-
-  return false;
+function hasEnglishProject(slug: string): boolean {
+  return findProjectPath(`${slug}-en`) !== null;
 }
 
 function isEnglishVariantFilePath(filePath: string): boolean {
   return /-en\.(md|mdx)$/.test(filePath);
 }
 
-function resolveProjectFilePath(slug: string): string {
-  const englishPath = shouldUseEnglishVersion(slug)
-    ? findProjectPath(`${slug}-en`)
-    : null;
+function resolveProjectFilePath(slug: string, language: DevLanguage): string {
+  const englishPath =
+    language === "en" && hasEnglishProject(slug) ? findProjectPath(`${slug}-en`) : null;
   const fullPath = englishPath ?? findProjectPath(slug);
 
   if (fullPath) {
@@ -154,8 +147,8 @@ function resolveProjectFilePath(slug: string): string {
   throw new Error(`Project file not found for slug "${slug}".`);
 }
 
-function readRawProjectBySlug(slug: string): RawProject {
-  const resolvedPath = resolveProjectFilePath(slug);
+function readRawProjectBySlug(slug: string, language: DevLanguage): RawProject {
+  const resolvedPath = resolveProjectFilePath(slug, language);
   const fileContents = fs.readFileSync(resolvedPath, "utf8");
   const { data, content } = matter(fileContents);
   const open = data.open !== false;
@@ -175,6 +168,7 @@ function readRawProjectBySlug(slug: string): RawProject {
       ? readStringArray(slug, "highlights", data.highlights)
       : undefined,
     links: readOptionalLinks(slug, data.links),
+    missingEnglish: !hasEnglishProject(slug),
   };
 }
 
@@ -221,6 +215,7 @@ function toPublicProject(project: RawProject): Project {
       ...(project.links.docs ? { docs: project.links.docs } : {}),
       ...(project.links.devlog ? { devlog: project.links.devlog } : {}),
     },
+    missingEnglish: project.missingEnglish,
     content: project.content,
   };
 }
@@ -237,18 +232,18 @@ export function getAllProjectSlugs(): string[] {
         !isEnglishVariantFilePath(name)
     )
     .map((name) => name.replace(/\.mdx?$/, ""))
-    .filter((slug) => readRawProjectBySlug(slug).open);
+    .filter((slug) => readRawProjectBySlug(slug, "ko").open);
 }
 
-export function getProjectBySlug(slug: string): Project {
-  return toPublicProject(readRawProjectBySlug(slug));
+export function getProjectBySlug(slug: string, language: DevLanguage = "en"): Project {
+  return toPublicProject(readRawProjectBySlug(slug, language));
 }
 
-export function getAllProjects(): ProjectMeta[] {
+export function getAllProjects(language: DevLanguage = "en"): ProjectMeta[] {
   const slugs = getAllProjectSlugs();
   return slugs
     .map((slug) => {
-      const project = getProjectBySlug(slug);
+      const project = getProjectBySlug(slug, language);
       return {
         slug: project.slug,
         title: project.title,
@@ -260,6 +255,7 @@ export function getAllProjects(): ProjectMeta[] {
         role: project.role,
         highlights: project.highlights,
         links: project.links,
+        missingEnglish: project.missingEnglish,
       };
     })
     .sort((a, b) => {

@@ -1,9 +1,9 @@
 "use client";
 
-import { shouldUseEnglish } from "@/lib/devLanguage";
+import { useDevLanguage } from "@/components/DevLanguageProvider";
 
 export function ScrollToTop() {
-  const useEnglish = shouldUseEnglish();
+  const useEnglish = useDevLanguage() === "en";
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

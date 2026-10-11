@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { useState } from "react";
-import { shouldUseEnglish } from "@/lib/devLanguage";
+import { useDevLanguage } from "@/components/DevLanguageProvider";
 import type { TagNode } from "@/lib/posts";
 
 interface TagFilterProps {
@@ -186,7 +186,7 @@ export function TagFilter({
   selectedTags,
   onTagsChange,
 }: TagFilterProps) {
-  const useEnglish = shouldUseEnglish();
+  const useEnglish = useDevLanguage() === "en";
   const headingLabel = useEnglish ? "Topics" : "주제";
   const clearLabel = useEnglish ? "Clear" : "초기화";
   const addTitle = useEnglish ? "Add to selection" : "선택에 추가";

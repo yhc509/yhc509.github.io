@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { shouldUseEnglish } from "@/lib/devLanguage";
+import { useDevLanguage } from "@/components/DevLanguageProvider";
 import type { PostProjectOption } from "@/lib/posts";
 
 interface PostProjectFilterProps {
@@ -15,7 +15,7 @@ export function PostProjectFilter({
   selectedProjects,
   onProjectsChange,
 }: PostProjectFilterProps) {
-  const useEnglish = shouldUseEnglish();
+  const useEnglish = useDevLanguage() === "en";
   const headingLabel = useEnglish ? "Projects" : "프로젝트";
   const clearLabel = useEnglish ? "Clear" : "초기화";
   const addTitle = useEnglish ? "Add to selection" : "선택에 추가";

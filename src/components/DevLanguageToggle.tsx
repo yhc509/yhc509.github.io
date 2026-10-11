@@ -1,120 +1,39 @@
 "use client";
 
-import { useEffect, useSyncExternalStore } from "react";
+import { usePathname } from "next/navigation";
 import {
-  DEV_LANGUAGE_COOKIE_MAX_AGE,
-  DEV_LANGUAGE_COOKIE_NAME,
-  DEV_LANGUAGE_STORAGE_KEY,
-  getConfiguredDevLanguage,
-  getDefaultDevLanguage,
   getToggledDevLanguage,
-  parseDevLanguage,
-  type DevLanguage,
+  localizedPath,
+  persistDevLanguage,
 } from "@/lib/devLanguage";
-
-function readCookieLanguage(): DevLanguage | null {
-  const cookieValue = document.cookie
-    .split("; ")
-    .find((entry) => entry.startsWith(`${DEV_LANGUAGE_COOKIE_NAME}=`))
-    ?.split("=")[1];
-
-  return parseDevLanguage(cookieValue);
-}
-
-function readStoredLanguage(): DevLanguage | null {
-  const storedValue = window.localStorage.getItem(DEV_LANGUAGE_STORAGE_KEY);
-  return parseDevLanguage(storedValue);
-}
-
-function persistLanguage(language: DevLanguage) {
-  window.localStorage.setItem(DEV_LANGUAGE_STORAGE_KEY, language);
-  document.cookie = `${DEV_LANGUAGE_COOKIE_NAME}=${language}; path=/; max-age=${DEV_LANGUAGE_COOKIE_MAX_AGE}; samesite=lax`;
-}
-
-function readServerLanguage(): DevLanguage | null {
-  return parseDevLanguage(document.documentElement.dataset.devLanguage);
-}
-
-function getClientLanguageSnapshot(): DevLanguage {
-  return (
-    readStoredLanguage() ??
-    readCookieLanguage() ??
-    readServerLanguage() ??
-    getConfiguredDevLanguage() ??
-    getDefaultDevLanguage()
-  );
-}
-
-async function syncServerLanguage(language: DevLanguage): Promise<void> {
-  const response = await fetch(`/dev-language-sync/${language}`, {
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to synchronize server language: ${response.status}`);
-  }
-}
+import { useDevLanguage } from "@/components/DevLanguageProvider";
 
 export function DevLanguageToggle() {
-  const mounted = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false
-  );
-  const language = useSyncExternalStore(
-    () => () => {},
-    getClientLanguageSnapshot,
-    getDefaultDevLanguage
-  );
-
-  useEffect(() => {
-    const preferredLanguage = getClientLanguageSnapshot();
-    const storedLanguage = readStoredLanguage();
-    const cookieLanguage = readCookieLanguage();
-    const serverLanguage = readServerLanguage();
-
-    if (storedLanguage !== preferredLanguage || cookieLanguage !== preferredLanguage) {
-      persistLanguage(preferredLanguage);
-    }
-
-    if (serverLanguage !== preferredLanguage) {
-      void syncServerLanguage(preferredLanguage)
-        .then(() => {
-          window.location.reload();
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, []);
-
-  if (!mounted) {
-    return <div className="fixed right-4 bottom-4 z-[70] h-11 w-20 rounded-full" />;
-  }
-
-  const currentLanguageLabel = language === "en" ? "English" : "Korean";
+  const pathname = usePathname();
+  const language = useDevLanguage();
+  const nextLanguage = getToggledDevLanguage(language);
+  const href = localizedPath(pathname, nextLanguage);
+  const currentLanguageLabel = language === "en" ? "English" : "한국어";
+  const nextLanguageLabel = nextLanguage === "en" ? "English" : "한국어";
   const ariaLabel =
     language === "en"
-      ? `Development language toggle. Currently viewing ${currentLanguageLabel}.`
-      : "개발 언어 전환. 현재 한국어 보기";
+      ? `Language. Currently ${currentLanguageLabel}. Switch to ${nextLanguageLabel}.`
+      : `언어. 현재 ${currentLanguageLabel}. ${nextLanguageLabel}로 전환.`;
 
   return (
-    <button
-      type="button"
-      onClick={() => {
-        const nextLanguage = getToggledDevLanguage(language);
-        persistLanguage(nextLanguage);
-        void syncServerLanguage(nextLanguage)
-          .then(() => {
-            window.location.reload();
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+    <a
+      href={href}
+      onClick={(event) => {
+        event.preventDefault();
+        persistDevLanguage(nextLanguage);
+        const nextPath = localizedPath(window.location.pathname, nextLanguage);
+        window.location.assign(
+          `${nextPath}${window.location.search}${window.location.hash}`
+        );
       }}
       className="dev-language-toggle"
       aria-label={ariaLabel}
-      title={`Dev language: ${language.toUpperCase()}`}
+      title={language === "en" ? "Language: EN" : "언어: KO"}
     >
       <span className="dev-language-toggle__option" data-active={language === "en"}>
         EN
@@ -123,6 +42,6 @@ export function DevLanguageToggle() {
       <span className="dev-language-toggle__option" data-active={language === "ko"}>
         KO
       </span>
-    </button>
+    </a>
   );
 }

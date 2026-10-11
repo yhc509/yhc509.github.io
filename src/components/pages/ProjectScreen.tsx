@@ -8,24 +8,30 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { BackButton } from "@/components/BackButton";
 import { createMarkdownComponents } from "@/components/MarkdownComponents";
+import { KoreanFallbackNote } from "@/components/KoreanFallbackNote";
 import { ProjectExternalLinks } from "@/components/ProjectExternalLinks";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import type { Metadata } from "next";
-import { shouldUseEnglish } from "@/lib/devLanguage";
-import { toSiteUrl } from "@/lib/site";
+import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
+import { languageAlternates, toSiteUrl } from "@/lib/site";
 import { getSiteCopy } from "@/lib/siteContent";
 
 const EMPTY_PROJECT_SLUG = "__empty__";
 
-interface ProjectPageProps {
+export interface ProjectPageProps {
   params: Promise<{ slug: string }>;
 }
 
-
-function ProjectPostCard({ post }: { post: PostMeta }) {
+function ProjectPostCard({
+  post,
+  language,
+}: {
+  post: PostMeta;
+  language: DevLanguage;
+}) {
   return (
     <Link
-      href={`/posts/${post.slug}`}
+      href={localizedPath(`/posts/${post.slug}`, language)}
       className="group block rounded-2xl border px-5 py-4 transition-colors"
       style={{ borderColor: "var(--card-border)" }}
     >
@@ -45,7 +51,18 @@ function ProjectPostCard({ post }: { post: PostMeta }) {
   );
 }
 
-export async function generateStaticParams() {
+function projectPaths(slug: string) {
+  return {
+    englishPath: `/projects/${slug}`,
+    koreanPath: `/ko/projects/${slug}`,
+  };
+}
+
+function projectImagePath(slug: string, language: DevLanguage) {
+  return language === "ko" ? `/og/ko/projects/${slug}.png` : `/og/projects/${slug}.png`;
+}
+
+export function generateProjectStaticParams() {
   const slugs = getAllProjectSlugs();
   if (slugs.length === 0) {
     return [{ slug: EMPTY_PROJECT_SLUG }];
@@ -54,18 +71,28 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: ProjectPageProps): Promise<Metadata> {
+export async function generateProjectMetadata(
+  { params }: ProjectPageProps,
+  language: DevLanguage
+): Promise<Metadata> {
   const { slug } = await params;
   try {
-    const project = getProjectBySlug(slug);
+    const project = getProjectBySlug(slug, language);
     if (!project.open) {
       return {
         title: "Project Not Found",
       };
     }
-    const url = toSiteUrl(`/projects/${slug}`);
+    const { englishPath, koreanPath } = projectPaths(slug);
+    const canonicalPath =
+      language === "en" && project.missingEnglish
+        ? koreanPath
+        : language === "en"
+          ? englishPath
+          : koreanPath;
+    const url = toSiteUrl(canonicalPath);
+    const imagePath = projectImagePath(slug, language);
+    const contentLanguage = language === "ko" || project.missingEnglish ? "ko" : "en";
 
     return {
       title: project.title,
@@ -73,6 +100,7 @@ export async function generateMetadata({
       keywords: [...project.tags, project.role],
       openGraph: {
         type: "article",
+        locale: contentLanguage === "en" ? "en_US" : "ko_KR",
         title: project.title,
         description: project.description,
         url,
@@ -80,7 +108,7 @@ export async function generateMetadata({
         tags: project.tags,
         images: [
           {
-            url: toSiteUrl(`/og/projects/${slug}.png`),
+            url: toSiteUrl(imagePath),
             width: 1200,
             height: 630,
             alt: project.title,
@@ -91,11 +119,9 @@ export async function generateMetadata({
         card: "summary_large_image",
         title: project.title,
         description: project.description,
-        images: [toSiteUrl(`/og/projects/${slug}.png`)],
+        images: [toSiteUrl(imagePath)],
       },
-      alternates: {
-        canonical: url,
-      },
+      alternates: languageAlternates(canonicalPath, englishPath, koreanPath),
     };
   } catch {
     return {
@@ -104,10 +130,13 @@ export async function generateMetadata({
   }
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
+export async function ProjectScreen({
+  params,
+  language,
+}: ProjectPageProps & { language: DevLanguage }) {
   const { slug } = await params;
-  const useEnglish = shouldUseEnglish();
-  const { author } = getSiteCopy();
+  const useEnglish = language === "en";
+  const { author } = getSiteCopy(language);
 
   if (slug === EMPTY_PROJECT_SLUG) {
     notFound();
@@ -116,7 +145,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   let project: ReturnType<typeof getProjectBySlug>;
 
   try {
-    project = getProjectBySlug(slug);
+    project = getProjectBySlug(slug, language);
   } catch {
     notFound();
   }
@@ -125,7 +154,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  const relatedPosts = getProjectPostGroups(slug);
+  const relatedPosts = getProjectPostGroups(slug, language);
+  const contentLanguage = language === "ko" || project.missingEnglish ? "ko" : "en";
   const roleLabel = useEnglish ? "Role" : "역할";
   const tagsLabel = useEnglish ? "Tags" : "태그";
   const linksLabel = useEnglish ? "Links" : "링크";
@@ -140,6 +170,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     "@type": "SoftwareSourceCode",
     name: project.title,
     description: project.description,
+    inLanguage: contentLanguage,
     datePublished: project.date,
     codeRepository: project.links.github,
     author: {
@@ -160,7 +191,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <Suspense>
         <BackButton basePath="/projects" />
       </Suspense>
-      <article>
+      <KoreanFallbackNote
+        show={useEnglish && project.missingEnglish}
+        message="This project is only available in Korean."
+      />
+      <article lang={contentLanguage}>
         <header
           className="mb-8 pb-8 border-b"
           style={{ borderColor: "var(--card-border)" }}
@@ -252,7 +287,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </h3>
                   <div className="space-y-4">
                     {relatedPosts.devlogs.map((post) => (
-                      <ProjectPostCard key={post.slug} post={post} />
+                      <ProjectPostCard key={post.slug} post={post} language={language} />
                     ))}
                   </div>
                 </div>
@@ -265,7 +300,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </h3>
                   <div className="grid gap-4 md:grid-cols-2">
                     {relatedPosts.articles.map((post) => (
-                      <ProjectPostCard key={post.slug} post={post} />
+                      <ProjectPostCard key={post.slug} post={post} language={language} />
                     ))}
                   </div>
                 </div>

@@ -1,50 +1,56 @@
 import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/posts";
 import { getAllProjects } from "@/lib/projects";
-import { SITE_URL, toSiteUrl } from "@/lib/site";
+import { toSiteUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const posts = getAllPosts();
-  const projects = getAllProjects();
-
-  const buildTime = new Date();
-
-  const postUrls = posts.map((post) => ({
-    url: toSiteUrl(`/posts/${post.slug}`),
-    lastModified: buildTime,
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }));
-
-  const projectUrls = projects.map((project) => ({
-    url: toSiteUrl(`/projects/${project.slug}`),
-    lastModified: buildTime,
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }));
+function languageEntry(
+  englishPath: string,
+  lastModified: Date,
+  changeFrequency: "weekly" | "monthly",
+  priority: number
+): MetadataRoute.Sitemap {
+  const koreanPath = englishPath === "/" ? "/ko" : `/ko${englishPath}`;
+  const alternates = {
+    languages: {
+      en: toSiteUrl(englishPath),
+      ko: toSiteUrl(koreanPath),
+    },
+  };
 
   return [
     {
-      url: SITE_URL,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
+      url: toSiteUrl(englishPath),
+      lastModified,
+      changeFrequency,
+      priority,
+      alternates,
     },
     {
-      url: toSiteUrl("/projects"),
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
+      url: toSiteUrl(koreanPath),
+      lastModified,
+      changeFrequency,
+      priority,
+      alternates,
     },
-    {
-      url: toSiteUrl("/about"),
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    ...postUrls,
-    ...projectUrls,
+  ];
+}
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const posts = getAllPosts("en");
+  const projects = getAllProjects("en");
+  const buildTime = new Date();
+
+  return [
+    ...languageEntry("/", buildTime, "weekly", 1),
+    ...languageEntry("/projects", buildTime, "weekly", 0.9),
+    ...languageEntry("/about", buildTime, "monthly", 0.7),
+    ...posts.flatMap((post) =>
+      languageEntry(`/posts/${post.slug}`, buildTime, "monthly", 0.8)
+    ),
+    ...projects.flatMap((project) =>
+      languageEntry(`/projects/${project.slug}`, buildTime, "monthly", 0.8)
+    ),
   ];
 }

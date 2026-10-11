@@ -10,8 +10,8 @@ import { visit } from "unist-util-visit";
 const SITE_URL = "https://kinkeep.dev";
 const SITE_TITLE = "kinkeep.dev";
 const SITE_DESCRIPTION =
-  "Unity 클라이언트 프로그래머의 게임 엔진, 그래픽스, Agentic Coding, Harness Engineering 노트.";
-const SITE_LANGUAGE = "ko";
+  "Notes on game engines, graphics, agentic coding, and harness engineering from a Unity client programmer.";
+const SITE_LANGUAGE = "en";
 
 const POSTS_DIR = path.join(process.cwd(), "content/posts");
 const OUTPUT_PATH = path.join(process.cwd(), "public/feed.xml");
@@ -230,7 +230,16 @@ async function renderPostContent(content, postDir) {
   return renderToStaticMarkup(compiledContent);
 }
 
-async function readPostItem(filePath) {
+function isEnglishVariant(filePath) {
+  return /-en\.(md|mdx)$/i.test(filePath);
+}
+
+function canonicalSlug(filePath) {
+  const relativePath = path.relative(POSTS_DIR, filePath);
+  return relativePath.replace(/\.(md|mdx)$/i, "").replace(/-en$/, "");
+}
+
+async function readPostItem(filePath, slug = canonicalSlug(filePath)) {
   const source = await fs.readFile(filePath, "utf8");
   const { data, content } = matter(source);
 
@@ -238,8 +247,6 @@ async function readPostItem(filePath) {
     return null;
   }
 
-  const relativePath = path.relative(POSTS_DIR, filePath);
-  const slug = relativePath.replace(/\.(md|mdx)$/i, "");
   const postDir = path.dirname(slug) === "." ? "" : path.dirname(slug);
   const date = normalizeDate(data.date);
   const link = new URL(`/posts/${slug}`, SITE_URL).toString();
@@ -278,7 +285,31 @@ function buildItemXml(item) {
 
 async function main() {
   const files = await getMarkdownFiles(POSTS_DIR);
-  const posts = (await Promise.all(files.map((filePath) => readPostItem(filePath))))
+  const groups = new Map();
+
+  for (const filePath of files) {
+    const slug = canonicalSlug(filePath);
+    const group = groups.get(slug) ?? {};
+    if (isEnglishVariant(filePath)) {
+      group.en = filePath;
+    } else {
+      group.ko = filePath;
+    }
+    groups.set(slug, group);
+  }
+
+  const posts = (
+    await Promise.all(
+      Array.from(groups.entries()).map(async ([slug, group]) => {
+        if (!group.ko) {
+          return null;
+        }
+
+        const englishItem = group.en ? await readPostItem(group.en, slug) : null;
+        return englishItem ?? (await readPostItem(group.ko, slug));
+      })
+    )
+  )
     .filter(Boolean)
     .sort((a, b) => {
       const timeDiff = b.date.getTime() - a.date.getTime();
@@ -286,7 +317,7 @@ async function main() {
         return timeDiff;
       }
 
-      return a.title.localeCompare(b.title, "ko");
+      return a.title.localeCompare(b.title, "en");
     });
 
   const latestDate = posts[0]?.date ?? new Date();

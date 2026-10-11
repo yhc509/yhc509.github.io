@@ -331,75 +331,115 @@ async function shouldGenerateImage(sourcePath, targetPath) {
   }
 }
 
-async function generatePostImages(fontData) {
-  const postFiles = getFilesRecursively(postsDir);
+function isEnglishVariant(filePath) {
+  return /-en\.(md|mdx)$/i.test(filePath);
+}
+
+function canonicalPostSlug(filePath) {
+  const relativePath = path.relative(postsDir, filePath);
+  return relativePath.replace(/\.(md|mdx)$/i, "").replace(/-en$/, "");
+}
+
+function canonicalProjectSlug(filePath) {
+  return path.basename(filePath).replace(/\.(md|mdx)$/i, "").replace(/-en$/, "");
+}
+
+async function renderFrontmatterCard(fontData, filePath, slug, targetPath) {
+  const data = readFrontmatter(filePath);
+  if (data.open === false) {
+    return { included: false, generated: false };
+  }
+
+  const title = readOptionalString(data.title) || slug;
+  const tags = readStringArray(data.tags ?? data.categories).slice(0, 3);
+  const date = formatDate(data.date);
+
+  if (!(await shouldGenerateImage(filePath, targetPath))) {
+    return { included: true, generated: false };
+  }
+
+  await renderCardToFile(fontData, { title, tags, date }, targetPath);
+  return { included: true, generated: true };
+}
+
+async function generateGroupedImages(fontData, groups, englishTarget, koreanTarget) {
   let generatedCount = 0;
   const expectedFiles = new Set();
 
-  for (const filePath of postFiles) {
-    const data = readFrontmatter(filePath);
-    if (data.open === false) {
+  for (const [slug, group] of groups) {
+    if (!group.ko) {
       continue;
     }
 
-    const relativePath = path.relative(postsDir, filePath);
-    const slug = relativePath.replace(/\.(md|mdx)$/i, "");
-    const title = readOptionalString(data.title) || slug;
-    const tags = readStringArray(data.tags ?? data.categories).slice(0, 3);
-    const date = formatDate(data.date);
-    const targetPath = path.join(outputDir, `${slug}.png`);
+    const englishSource = group.en ?? group.ko;
+    const koreanSource = group.ko ?? group.en;
+    const targets = [
+      [englishSource, englishTarget(slug)],
+      [koreanSource, koreanTarget(slug)],
+    ];
 
-    expectedFiles.add(targetPath);
+    for (const [sourcePath, targetPath] of targets) {
+      if (!sourcePath) {
+        continue;
+      }
 
-    if (!(await shouldGenerateImage(filePath, targetPath))) {
-      continue;
+      const result = await renderFrontmatterCard(fontData, sourcePath, slug, targetPath);
+      if (!result.included) {
+        continue;
+      }
+
+      expectedFiles.add(targetPath);
+      if (result.generated) {
+        generatedCount += 1;
+      }
     }
-
-    await renderCardToFile(
-      fontData,
-      { title, tags, date },
-      targetPath
-    );
-
-    generatedCount += 1;
   }
 
   return { generatedCount, expectedFiles };
 }
 
-async function generateProjectImages(fontData) {
-  const projectFiles = getMarkdownFiles(projectsDir);
-  let generatedCount = 0;
-  const expectedFiles = new Set();
+async function generatePostImages(fontData) {
+  const groups = new Map();
 
-  for (const filePath of projectFiles) {
-    const data = readFrontmatter(filePath);
-    if (data.open === false) {
-      continue;
+  for (const filePath of getFilesRecursively(postsDir)) {
+    const slug = canonicalPostSlug(filePath);
+    const group = groups.get(slug) ?? {};
+    if (isEnglishVariant(filePath)) {
+      group.en = filePath;
+    } else {
+      group.ko = filePath;
     }
-
-    const slug = path.basename(filePath).replace(/\.(md|mdx)$/i, "");
-    const title = readOptionalString(data.title) || slug;
-    const tags = readStringArray(data.tags).slice(0, 3);
-    const date = formatDate(data.date);
-    const targetPath = path.join(outputDir, "projects", `${slug}.png`);
-
-    expectedFiles.add(targetPath);
-
-    if (!(await shouldGenerateImage(filePath, targetPath))) {
-      continue;
-    }
-
-    await renderCardToFile(
-      fontData,
-      { title, tags, date },
-      targetPath
-    );
-
-    generatedCount += 1;
+    groups.set(slug, group);
   }
 
-  return { generatedCount, expectedFiles };
+  return generateGroupedImages(
+    fontData,
+    groups,
+    (slug) => path.join(outputDir, `${slug}.png`),
+    (slug) => path.join(outputDir, "ko", `${slug}.png`)
+  );
+}
+
+async function generateProjectImages(fontData) {
+  const groups = new Map();
+
+  for (const filePath of getMarkdownFiles(projectsDir)) {
+    const slug = canonicalProjectSlug(filePath);
+    const group = groups.get(slug) ?? {};
+    if (isEnglishVariant(filePath)) {
+      group.en = filePath;
+    } else {
+      group.ko = filePath;
+    }
+    groups.set(slug, group);
+  }
+
+  return generateGroupedImages(
+    fontData,
+    groups,
+    (slug) => path.join(outputDir, "projects", `${slug}.png`),
+    (slug) => path.join(outputDir, "ko", "projects", `${slug}.png`)
+  );
 }
 
 async function cleanupOrphanImages(expectedFiles) {

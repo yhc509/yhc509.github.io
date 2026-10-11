@@ -2,14 +2,16 @@
 
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { shouldUseEnglish } from "@/lib/devLanguage";
+import { localizedPath } from "@/lib/devLanguage";
+import { useDevLanguage } from "@/components/DevLanguageProvider";
 
 interface BackButtonProps {
   basePath?: string;
 }
 
 export function BackButton({ basePath = "/" }: BackButtonProps) {
-  const useEnglish = shouldUseEnglish();
+  const language = useDevLanguage();
+  const useEnglish = language === "en";
   const searchParams = useSearchParams();
   const tags = searchParams.get("tags");
   const query = searchParams.get("q");
@@ -18,7 +20,8 @@ export function BackButton({ basePath = "/" }: BackButtonProps) {
   if (tags) params.set("tags", tags);
   if (query) params.set("q", query);
   const queryString = params.toString();
-  const backUrl = queryString ? `${basePath}?${queryString}` : basePath;
+  const localizedBasePath = localizedPath(basePath, language);
+  const backUrl = queryString ? `${localizedBasePath}?${queryString}` : localizedBasePath;
 
   return (
     <Link

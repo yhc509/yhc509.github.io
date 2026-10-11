@@ -2,17 +2,21 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { localizedPath, stripLanguagePrefix } from "@/lib/devLanguage";
+import { useDevLanguage } from "@/components/DevLanguageProvider";
 
 export function NavLinks() {
   const pathname = usePathname();
+  const language = useDevLanguage();
+  const barePath = stripLanguagePrefix(pathname);
 
-  const isPostsActive = pathname === "/" || pathname.startsWith("/posts");
-  const isAboutActive = pathname === "/about";
+  const isPostsActive = barePath === "/" || barePath.startsWith("/posts");
+  const isAboutActive = barePath === "/about";
 
   return (
     <>
       <Link
-        href="/"
+        href={localizedPath("/", language)}
         className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-sm transition-colors"
         style={{
           backgroundColor: isPostsActive ? "var(--accent)" : "var(--card-bg)",
@@ -39,7 +43,7 @@ export function NavLinks() {
         <span className="hidden sm:inline">Posts</span>
       </Link>
       <Link
-        href="/about"
+        href={localizedPath("/about", language)}
         className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-sm transition-colors"
         style={{
           backgroundColor: isAboutActive ? "var(--accent)" : "var(--card-bg)",
