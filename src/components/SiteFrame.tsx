@@ -92,7 +92,7 @@ export function SiteFrame({
                   style={{ color: "var(--foreground)" }}
                 >
                   <span className="hidden sm:inline">{siteTitle}</span>
-                  <span className="sm:hidden">yhc509</span>
+                  <span className="sm:hidden">{siteTitle}</span>
                 </Link>
                 <nav className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
                   <NavLinks />
