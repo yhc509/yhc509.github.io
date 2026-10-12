@@ -156,6 +156,7 @@ export function BlogHome({
             archive={archive}
             selected={selectedPeriod}
             onSelect={setSelectedPeriod}
+            collapsible
           />
         </div>
 
