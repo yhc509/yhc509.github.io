@@ -1,6 +1,6 @@
 ---
 title: "AI Won't Find the Fun for You"
-date: "2026-10-12"
+date: "2026-10-09"
 description: "AI can build it, but it can't decide what's fun. Now that implementation cost is close to zero, the time saved should go into deciding what to pursue."
 open: true
 type: article
