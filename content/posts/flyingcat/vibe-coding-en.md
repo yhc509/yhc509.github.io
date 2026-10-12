@@ -1,7 +1,7 @@
 ---
 title: "What FlyingCat Showed Me About Vibe Coding"
 date: "2025-12-20"
-description: "Building FlyingCat with Antigravity and Gemini 3.0 Pro confirmed that small games, UI, WebGL deployment, and leaderboard integration are within reach of AI-assisted development."
+description: "Building FlyingCat with Antigravity and Gemini 3.0 Pro showed that small games, UI, WebGL, and leaderboards are within reach of AI-assisted development."
 categories: ['AI/AgenticCoding']
 open: true
 type: article

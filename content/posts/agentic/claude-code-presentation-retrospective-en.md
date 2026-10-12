@@ -1,7 +1,7 @@
 ---
 title: "I Presented Claude Code to Our Division's Developers"
 date: "2026-04-01"
-description: "Retrospective on presenting Claude Code to division developers. Development, issue tracking, spec-to-checklist conversion — what I thought about while preparing to show how I actually use it."
+description: "Retrospective on presenting Claude Code to division developers: how I actually use it for development, issue tracking, and spec-to-checklist conversion."
 categories: ["AI/AgenticCoding"]
 open: true
 type: devlog
@@ -53,7 +53,7 @@ There are limits. A spec is not the codebase. Features that look cleanly separat
 
 I also included a case where I tested LSP efficiency on a real project. I already wrote about this separately.
 
-Details here: [Does Claude Code's LSP Actually Save Tokens?](/posts/agentic/claude-code-lsp-token-efficiency-en)
+Details here: [Does Claude Code's LSP Actually Save Tokens?](/posts/agentic/claude-code-lsp-token-efficiency)
 
 I wanted to show the attitude of verifying things yourself instead of using something because everyone says it's good. You don't know what difference a tool actually makes until you run the test.
 

@@ -90,6 +90,12 @@ body {
   border-radius: 8px;
 }
 
+.prose video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 .prose code {
   background: var(--card-border);
   padding: 0.2em 0.4em;
