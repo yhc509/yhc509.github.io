@@ -2,7 +2,6 @@
 date: 2024-03-23
 title: URP Shader Graph에서 Saturation 없이 흑백 전환 만들기
 description: "Shader Graph에서 Saturation 노드 없이 그레이스케일을 만들고, lerp로 원본 컬러와 흑백을 섞는 가장 단순한 방법을 메모처럼 정리했다."
-categories: ['Game Engine/Unity']
 open: true
 type: article
 ---

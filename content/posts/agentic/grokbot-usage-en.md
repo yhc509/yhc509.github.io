@@ -2,7 +2,6 @@
 title: "How a Solo Developer Uses Grok Bot: One Bot per Purpose"
 date: "2026-10-12"
 description: "I make a bot for each new purpose and talk to each one directly, with no chief bot. How I split chores and dev work across Grok Bot, and the downsides."
-categories: ["AI/AgenticCoding"]
 open: true
 type: article
 ---

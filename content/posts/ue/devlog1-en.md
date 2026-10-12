@@ -2,7 +2,6 @@
 date: 2025-08-31
 title: "Five UE5 Animation Concepts I Sorted Out First"
 description: "Following a TPS sample, I separated montages, blend spaces, aim offsets, notifies, and IK rigs — the five animation features that confused me first."
-categories: ['Game Engine/Unreal']
 open: true
 type: article
 ---

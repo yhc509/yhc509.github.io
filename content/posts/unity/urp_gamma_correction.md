@@ -2,7 +2,6 @@
 date: 2024-03-23
 title: URP Shader Graph에서 Color와 Vector가 다르게 보였던 이유
 description: "Linear Color Space 프로젝트에서 Shader Graph의 Color 값과 Vector 값이 같은 숫자여도 다르게 보였던 이유를 실험 메모 중심으로 정리했다."
-categories: ['Game Engine/Unity']
 open: true
 type: article
 ---

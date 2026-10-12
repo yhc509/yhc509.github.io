@@ -2,7 +2,6 @@
 title: "AI 코딩 툴을 갈아타며 정리한 선택 기준"
 date: "2026-03-19"
 description: "Antigravity, OpenCode/OMO, Codex, Claude Code를 오가며 결국 성능보다 환각 허용치, 사용량, 자율성, 모델 조합 가능성을 더 먼저 보게 됐다."
-categories: ['AI/AgenticCoding']
 open: true
 type: article
 ---

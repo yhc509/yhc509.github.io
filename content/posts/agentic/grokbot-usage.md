@@ -2,7 +2,6 @@
 title: "개인 개발자의 Grok Bot 활용기: 목적 하나에 봇 하나"
 date: "2026-10-12"
 description: "목적이 생길 때마다 봇을 하나씩 만들고, chief 봇 없이 각 봇과 직접 이야기한다. 개인 개발자가 Grok Bot에 일상과 개발을 나눠 맡긴 사례와 단점을 정리했다."
-categories: ["AI/AgenticCoding"]
 open: true
 type: article
 ---

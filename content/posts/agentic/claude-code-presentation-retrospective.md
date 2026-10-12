@@ -2,7 +2,6 @@
 title: "본부 개발자 앞에서 Claude Code를 발표했다"
 date: "2026-04-01"
 description: "본부 개발자 대상 Claude Code 발표 후기. 개발, 이슈트래킹, 기획서 체크리스트 변환 등 직접 쓰고 있는 사례를 발표하면서 정리된 생각들."
-categories: ["AI/AgenticCoding"]
 open: true
 type: devlog
 ---

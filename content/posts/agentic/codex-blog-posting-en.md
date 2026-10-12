@@ -2,7 +2,6 @@
 title: "How I Run Blog Operations with Codex"
 date: "2026-03-20"
 description: "Not just drafting posts — sorting, interviewing, editing, wiring images, adding mermaid support. A blog maintenance workflow run alongside Codex."
-categories: ["AI/AgenticCoding"]
 open: true
 type: article
 ---

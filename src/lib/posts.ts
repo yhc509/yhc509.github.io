@@ -143,7 +143,7 @@ function parsePostFile(fullPath: string, slug: string, missingEnglish: boolean):
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  const tags = readTags(data.tags ?? data.categories);
+  const tags = readTags(data.tags);
 
   return {
     slug,

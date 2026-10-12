@@ -2,7 +2,6 @@
 title: "Running Game Dev from Telegram: Operating SLIME ARENA with OpenClaw"
 date: "2026-03-15"
 description: "Telegram, cron, GitHub issues and milestones wired together to run OpenClaw like a remote developer. A record of operating SLIME ARENA."
-categories: ['AI/AgenticCoding']
 open: true
 type: article
 ---

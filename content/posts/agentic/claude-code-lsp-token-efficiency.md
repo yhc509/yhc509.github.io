@@ -2,7 +2,6 @@
 title: "Claude Code의 LSP는 토큰을 줄여줄까"
 date: "2026-03-16"
 description: "LSP가 코드 탐색 품질을 높이면 토큰도 줄어들 거라 생각했지만, 대규모 프로젝트와 Unity 코드베이스에서는 결과가 더 단순하지 않았다."
-categories: ["AI/AgenticCoding"]
 open: true
 type: article
 ---

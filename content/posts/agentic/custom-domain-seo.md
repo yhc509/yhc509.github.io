@@ -2,7 +2,6 @@
 title: "github.io에서 커스텀 도메인으로 갈아탄 이유"
 date: "2026-04-21"
 description: "블로그를 만들고 한 달, 구글에 포스트가 하나도 안 잡혔다. 원인을 추적하다 보니 github.io 도메인 자체가 문제였다. kinkeep.dev를 사서 연결했더니 sitemap 처리부터 달라졌다."
-categories: ["AI/AgenticCoding"]
 open: true
 type: article
 ---

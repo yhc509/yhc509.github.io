@@ -2,7 +2,6 @@
 title: "바이브 코딩 이후 AI 활용에 관하여"
 date: "2026-10-08"
 description: "바이브 코딩 다음에 남는 문제. 의도 전달, 하네스, 그리고 지휘자와 하청으로 돌리는 작업."
-categories: ['AI/AgenticCoding']
 open: true
 type: article
 ---

@@ -2,7 +2,6 @@
 title: "Does Claude Code's LSP Actually Save Tokens?"
 date: "2026-03-16"
 description: "I expected LSP to reduce token usage by improving code navigation accuracy. On large projects and Unity codebases, the answer was more nuanced."
-categories: ["AI/AgenticCoding"]
 open: true
 type: article
 ---

@@ -2,7 +2,6 @@
 title: "텔레그램으로 게임 개발 굴리기: OpenClaw로 SLIME ARENA 운영한 기록"
 date: "2026-03-15"
 description: "Telegram, cron, GitHub issues와 milestones를 묶어 OpenClaw를 원격 개발자처럼 운영하며 SLIME ARENA를 만든 경험을 정리했다."
-categories: ['AI/AgenticCoding']
 open: true
 type: article
 ---

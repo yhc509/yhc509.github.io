@@ -2,7 +2,6 @@
 title: "오늘 내 맥에서 악성코드가 돌았다 — LiteLLM 공급망 공격 사후 기록"
 date: "2026-03-24"
 description: "Claude Code 플러그인 하나 깔았을 뿐인데, 하위 의존성에 심어진 백도어가 API 키와 자격증명을 털어갔다. 감지부터 대응까지의 기록."
-categories: ["AI/AgenticCoding"]
 open: true
 type: article
 ---

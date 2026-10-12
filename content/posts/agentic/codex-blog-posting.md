@@ -2,7 +2,6 @@
 title: "Codex로 블로그를 정리하고 포스팅하는 흐름"
 date: "2026-03-20"
 description: "글 초안만 맡긴 게 아니라 분류, 인터뷰, 본문 정리, 이미지 반영, 머메이드 지원까지 Codex와 같이 굴리며 정리한 블로그 작업 흐름."
-categories: ["AI/AgenticCoding"]
 open: true
 type: article
 ---

@@ -2,7 +2,6 @@
 title: "On Using AI After Vibe Coding"
 date: "2026-10-08"
 description: "What's left after vibe coding. Getting intent across, the harness, and running work through an orchestrator and subcontractors."
-categories: ['AI/AgenticCoding']
 open: true
 type: article
 ---
