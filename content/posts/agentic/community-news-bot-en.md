@@ -14,6 +14,8 @@ People who care about a topic find the news themselves. Beginners don't. For som
 
 The structure is simple. It collects posts from RSS, Hacker News, Reddit, and X. An LLM scores each one for how useful it is to game developers. Posts that pass get a summary and go to a Discord channel. It ran on schedule on a single Mac through launchd.
 
+![News agent architecture. RSS, Hacker News, Reddit, and X are collected in parallel, pass script filters and LLM scoring and summaries, then go from the queue to Discord.](./img/news-agent-architecture.jpg)
+
 ## The build took one night
 
 I wrote the spec, pipeline design, and implementation plan first. The next evening Claude committed the collectors, storage, scoring, summaries, and delivery from that plan in under 20 minutes. Right after, it fixed a handful of bugs: duplicate sends, Discord's character limit, SQLite locks during concurrent runs.
@@ -47,6 +49,25 @@ In every case the bot ran with no errors. That's why it took so long to notice. 
 Scoring and summaries first ran on Grok through the xAI API. Grok didn't perform as well as I wanted, so I moved them to the Claude CLI. X collection needs x_search, so in the last config it still runs on Grok.
 
 X had its own small trap. If the account list goes past 20, the rest gets cut with no warning. Add accounts without checking the count and the new ones quietly drop out.
+
+## Looking back
+
+I decided one thing at the start: split the probabilistic parts from the deterministic parts. The LLM runs only where judgment is needed, and anything a fixed rule can handle goes to a script. A big reason was to cut down on LLM calls, so the scripts ended up doing more than you'd expect.
+
+- **Scripts**: collecting from RSS, Hacker News, and Reddit. Title keyword prefilters per outlet. URL normalization and hashing to drop identical links. Body extraction. The queue, the daily send cap, and expiring posts older than three days. Sending to Discord with mentions disabled. Scheduled runs and the run lock.
+- **LLM**: scoring, same-event judgment, and the one-line summary. X was the exception. Collection itself had to go through x_search, so the LLM was in the collection step there too.
+
+The split makes it clear where to fix things. If a keyword filter drops too much, measure it and fix the list. If scores look wrong, look at the prompt. And the one place where I let the LLM judge even a little, X collection, is where it broke. The collection prompt asked only for news "meaningful to game developers," and for two days nothing came in from X. It was fixed only when collection took everything and all judgment moved to the scoring step.
+
+Pulling from many sources meant few stories slipped through. It also made dedup hard. The same announcement comes in separately from the official blog, press articles, HN, and X. A script can't catch that, so I kept revising the prompt sent to the LLM.
+
+- **At first**: the only check was a hash of the normalized URL. Different link, different post.
+- **July 23**: a Unity keynote went out 4 times in 27 hours, 3 of them time-shifted re-reports from the same feed. Now a list of recent titles goes with each batch, and a same-event item gets 1 point no matter the outlet or format. This rule overrides the other scoring anchors.
+- **July 25**: an official release post scored 2 for "release unconfirmed" and got cut. The URL wasn't in the prompt, so there was no way to tell it was the primary source. Now the URL goes in, and for the same event the primary source wins.
+- **July 26**: this time both were primary sources. One model launch went out twice, one second apart, as a blog post and a console page, then again two days later from X. The old rule only deduped "when there is no primary source." Now it always keeps exactly one, with a set order for which to keep.
+- **August 12**: tracing 5 duplicate publishes turned up three holes. Re-reports landed 3, 7, and 14 days later, but the reference window was 48 hours. Korean and English coverage of the same event didn't match on title alone. And when the primary source arrived later, there was no way to pull the item already queued. The window went to 14 days, date and source now go along with each title, and a better-sourced item can push out its queued duplicate.
+
+Looking back, dedup wasn't something you solve once. Close one hole and the next one showed up in real publishes. Repeats stopped only once each real case was pinned into the test data.
 
 ## A sign-up bot, briefly
 
