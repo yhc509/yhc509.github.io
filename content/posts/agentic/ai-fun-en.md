@@ -45,7 +45,7 @@ Agreed. It's actually the same point. However well a teammate helps, someone sti
 
 ### The prompt was just vague. An always-on AI will eventually make things by itself
 
-I don't agree that fixing the prompt solves it. Context should live in the harness, and deciding that harness is the person's job.
+I think "the prompt was vague" is the wrong diagnosis to begin with. Writing more specific prompts won't solve it. Context should live in the harness, the persistent setup the AI works within. And deciding what context goes there, what's fun, what the intent is, is still the person's job.
 
 ### Most human work is cookie-cutter too. Why be strict only with AI?
 
