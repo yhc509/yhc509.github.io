@@ -45,6 +45,8 @@ When I actually used it, it burned far too many tokens. Going through a chief bo
 
 Now, when a job clearly belongs to a bot, I talk to that bot directly. Mail goes to Post, the calendar to Clock, the blog to the Blog bot. I have to remember which bot to talk to, so it takes more thinking. I take on that cognitive load to save tokens.
 
+![My bot team. I talk to each group directly: Main, Dev, Marketing, Ops, Personal.](./img/grokbot-team-org.png)
+
 ## I make bots one at a time, when a purpose comes up
 
 I don't split bots by rank or department. When a job keeps repeating or a specific purpose comes up, I make one bot for it. I had the main bot search for products a few times, and its context got messy. So I made Cart, a bot just for search. Glyph and the Blog bot came about the same way.
