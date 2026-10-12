@@ -2,7 +2,6 @@
 title: "맥북프로를 샀다"
 date: "2026-04-16"
 description: "맥미니 하나로 SDXL, Unity, Rider까지 돌리다 한계가 왔다. 맥북프로 M5 Pro를 지르고 나서 개발은 맥북, AI는 맥미니로 나눴더니 생각보다 많은 게 달라졌다."
-categories: ["AI/AgenticCoding"]
 open: true
 type: article
 ---

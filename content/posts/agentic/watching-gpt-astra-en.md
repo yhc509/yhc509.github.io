@@ -2,7 +2,6 @@
 title: "Thoughts on Watching the GPT Astra Release"
 date: "2026-09-09"
 description: "Why trying GPT Astra left me surprised and afraid. What AI reduced was the pain of production, not the pain of creation."
-categories: ['AI/AgenticCoding']
 open: true
 type: article
 ---

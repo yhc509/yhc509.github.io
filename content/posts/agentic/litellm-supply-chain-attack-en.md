@@ -2,7 +2,6 @@
 title: "Malware Ran on My Mac Today — LiteLLM Supply Chain Attack Post-Mortem"
 date: "2026-03-24"
 description: "Installed one Claude Code plugin. A backdoor in a transitive dependency exfiltrated API keys and credentials. Detection through response, documented."
-categories: ["AI/AgenticCoding"]
 open: true
 type: article
 ---

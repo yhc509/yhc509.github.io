@@ -61,7 +61,6 @@ export async function generatePostMetadata(
     return {
       title: post.title,
       description: post.description,
-      keywords: post.tags,
       openGraph: {
         type: "article",
         locale: contentLanguage === "en" ? "en_US" : "ko_KR",
@@ -69,7 +68,6 @@ export async function generatePostMetadata(
         description: post.description,
         url,
         publishedTime: post.date,
-        tags: post.tags,
         images: [
           {
             url: toSiteUrl(imagePath),
@@ -131,7 +129,6 @@ export async function PostScreen({
       name: "yhc509",
       jobTitle: author,
     },
-    keywords: post.tags.join(", "),
     wordCount: post.content.split(/\s+/).length,
     publisher: { "@type": "Person", name: "yhc509" },
   };

@@ -1,7 +1,6 @@
 interface FilterablePost {
   title: string;
   description: string;
-  tags: string[];
   project?: string;
 }
 
@@ -18,8 +17,7 @@ export function filterPostsBySearch<T extends FilterablePost>(
   return posts.filter(
     (post) =>
       post.title.toLowerCase().includes(lowerQuery) ||
-      post.description.toLowerCase().includes(lowerQuery) ||
-      post.tags.some((tag) => tag.toLowerCase().includes(lowerQuery))
+      post.description.toLowerCase().includes(lowerQuery)
   );
 }
 

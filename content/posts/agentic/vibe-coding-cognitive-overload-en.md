@@ -2,7 +2,6 @@
 title: "Vibe Coding Is Frying My Brain"
 date: "2026-03-25"
 description: "Code generates fast. The brain fries slow. A self-interview on what happens when AI outpaces the human trying to keep up."
-categories: ["AI/AgenticCoding"]
 open: true
 type: article
 ---

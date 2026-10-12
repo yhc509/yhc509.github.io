@@ -2,7 +2,6 @@
 date: 2024-03-23
 title: "Grayscale Transition Without Saturation in URP Shader Graph"
 description: "Building a grayscale effect from scratch in Shader Graph — no Saturation node, just manual luminance weights and lerp."
-categories: ['Game Engine/Unity']
 open: true
 type: article
 ---

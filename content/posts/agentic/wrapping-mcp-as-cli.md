@@ -2,7 +2,6 @@
 title: "MCP를 직접 연결하지 마세요"
 date: "2026-05-30"
 description: "MCP를 병적으로 피하던 내가 Rider 디버거만은 코드로 감쌀 수밖에 없었던 이유. 등록 대신 on-demand 연결, CLI 레이어 토큰 필터링, 그리고 나중에야 안 Anthropic의 같은 결론."
-categories: ["AI/AgenticCoding"]
 open: true
 type: article
 ---

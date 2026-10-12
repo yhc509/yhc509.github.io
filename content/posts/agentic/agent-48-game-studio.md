@@ -2,7 +2,6 @@
 title: "에이전트 48개짜리 AI 게임 스튜디오를 까봤다"
 date: "2026-03-28"
 description: "GitHub Stars 6,500짜리 'AI 게임 스튜디오' 레포를 해부했다. 에이전트 48개 계층은 조직도 코스프레였고, 진짜 쓸 만한 건 Hook 스크립트 하나였다."
-categories: ["AI/AgenticCoding"]
 open: true
 type: article
 ---

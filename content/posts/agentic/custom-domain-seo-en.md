@@ -2,7 +2,6 @@
 title: "Why I Switched from github.io to a Custom Domain"
 date: "2026-04-21"
 description: "A month after launch, Google had indexed nothing. The github.io domain was the cause. Connecting kinkeep.dev changed sitemap processing immediately."
-categories: ["AI/AgenticCoding"]
 open: true
 type: article
 ---

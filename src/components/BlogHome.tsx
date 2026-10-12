@@ -2,35 +2,25 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { TagFilter } from "./TagFilter";
+import { ArchiveFilter, buildArchive, monthLabel } from "./ArchiveFilter";
 import { localizedPath } from "@/lib/devLanguage";
 import { useDevLanguage } from "@/components/DevLanguageProvider";
 import { filterPostsBySearch } from "@/lib/postFilters";
 import { getBlogCopy } from "@/lib/siteContent";
-import type { PostMeta, PostProjectOption, TagNode } from "@/lib/posts";
+import type { PostMeta, PostProjectOption } from "@/lib/posts";
 
 interface BlogHomeProps {
   posts: PostMeta[];
-  tagTree: TagNode[];
   projectOptions: PostProjectOption[];
 }
 
-function filterPostsByTags(posts: PostMeta[], selectedTags: string[]): PostMeta[] {
-  if (selectedTags.length === 0) return posts;
-
-  return posts.filter((post) =>
-    selectedTags.some((selectedTag) =>
-      post.tags.some(
-        (postTag) =>
-          postTag === selectedTag || postTag.startsWith(selectedTag + "/")
-      )
-    )
-  );
+function filterPostsByPeriod(posts: PostMeta[], period: string): PostMeta[] {
+  if (!period) return posts;
+  return posts.filter((post) => post.date.startsWith(period));
 }
 
 export function BlogHome({
   posts,
-  tagTree,
   projectOptions,
 }: BlogHomeProps) {
   const language = useDevLanguage();
@@ -39,7 +29,8 @@ export function BlogHome({
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const selectedTags = searchParams.get("tags")?.split(",").filter(Boolean) || [];
+  const monthParam = searchParams.get("month") || "";
+  const selectedPeriod = /^\d{4}(-\d{2})?$/.test(monthParam) ? monthParam : "";
   const searchQuery = searchParams.get("q") || "";
   const pageParam = searchParams.get("page");
   const limitParam = searchParams.get("limit");
@@ -51,18 +42,19 @@ export function BlogHome({
     projectOptions.map((project) => [project.slug, project.title])
   );
 
-  const filteredByTags = filterPostsByTags(posts, selectedTags);
-  const filteredPosts = filterPostsBySearch(filteredByTags, searchQuery);
+  const archive = buildArchive(posts.map((post) => post.date));
+  const filteredByPeriod = filterPostsByPeriod(posts, selectedPeriod);
+  const filteredPosts = filterPostsBySearch(filteredByPeriod, searchQuery);
 
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
 
-  const updateUrl = (tags: string[], query: string, page: number, limit: number) => {
+  const updateUrl = (period: string, query: string, page: number, limit: number) => {
     const params = new URLSearchParams();
-    if (tags.length > 0) {
-      params.set("tags", tags.join(","));
+    if (period) {
+      params.set("month", period);
     }
     if (query.trim()) {
       params.set("q", query);
@@ -78,26 +70,26 @@ export function BlogHome({
     router.push(queryString ? `${homePath}?${queryString}` : homePath, { scroll: false });
   };
 
-  const setSelectedTags = (tags: string[]) => {
-    updateUrl(tags, searchQuery, 1, postsPerPage);
+  const setSelectedPeriod = (period: string) => {
+    updateUrl(period, searchQuery, 1, postsPerPage);
   };
 
   const setSearchQuery = (query: string) => {
-    updateUrl(selectedTags, query, 1, postsPerPage);
+    updateUrl(selectedPeriod, query, 1, postsPerPage);
   };
 
   const setPage = (page: number) => {
-    updateUrl(selectedTags, searchQuery, page, postsPerPage);
+    updateUrl(selectedPeriod, searchQuery, page, postsPerPage);
   };
 
   const setLimit = (limit: number) => {
-    updateUrl(selectedTags, searchQuery, 1, limit);
+    updateUrl(selectedPeriod, searchQuery, 1, limit);
   };
 
   const getPostUrl = (slug: string) => {
     const params = new URLSearchParams();
-    if (selectedTags.length > 0) {
-      params.set("tags", selectedTags.join(","));
+    if (selectedPeriod) {
+      params.set("month", selectedPeriod);
     }
     if (searchQuery.trim()) {
       params.set("q", searchQuery);
@@ -137,8 +129,8 @@ export function BlogHome({
     ? "No results found."
     : "검색 결과가 없습니다.";
   const emptyFilteredPostsLabel = useEnglish
-    ? "No posts match the selected topics."
-    : "선택한 주제에 해당하는 포스트가 없습니다.";
+    ? "No posts in the selected period."
+    : "선택한 기간에 해당하는 포스트가 없습니다.";
   const paginationAriaLabel = useEnglish ? "Page navigation" : "페이지 탐색";
   const previousPageAriaLabel = useEnglish ? "Previous page" : "이전 페이지";
   const nextPageAriaLabel = useEnglish ? "Next page" : "다음 페이지";
@@ -150,20 +142,20 @@ export function BlogHome({
         {/* Sidebar - 포스트 영역 바로 왼쪽 */}
         <aside className="hidden lg:block absolute right-full mr-8 w-56 top-0">
           <div className="sticky top-8 space-y-4">
-            <TagFilter
-              tagTree={tagTree}
-              selectedTags={selectedTags}
-              onTagsChange={setSelectedTags}
+            <ArchiveFilter
+              archive={archive}
+              selected={selectedPeriod}
+              onSelect={setSelectedPeriod}
             />
           </div>
         </aside>
 
-        {/* Mobile tag filter */}
+        {/* Mobile archive filter */}
         <div className="lg:hidden mb-6 space-y-4">
-          <TagFilter
-            tagTree={tagTree}
-            selectedTags={selectedTags}
-            onTagsChange={setSelectedTags}
+          <ArchiveFilter
+            archive={archive}
+            selected={selectedPeriod}
+            onSelect={setSelectedPeriod}
           />
         </div>
 
@@ -257,10 +249,10 @@ export function BlogHome({
           </div>
         </div>
 
-        {(selectedTags.length > 0 || searchQuery) && (
+        {(selectedPeriod || searchQuery) && (
           <div className="mb-4 flex justify-end">
             <button
-              onClick={() => updateUrl([], "", 1, postsPerPage)}
+              onClick={() => updateUrl("", "", 1, postsPerPage)}
               className="text-xs px-3 py-1 rounded-full transition-colors hover:opacity-80"
               style={{
                 backgroundColor: "var(--card-border)",
@@ -272,38 +264,7 @@ export function BlogHome({
           </div>
         )}
 
-        {/* Selected filters display */}
-        {selectedTags.length > 0 && (
-          <div className="mb-5 flex flex-wrap gap-2">
-            {selectedTags.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => setSelectedTags(selectedTags.filter((t) => t !== tag))}
-                className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-full transition-opacity hover:opacity-80"
-                style={{
-                  backgroundColor: "var(--accent)",
-                  color: "white",
-                }}
-              >
-                #{tag}
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-              </button>
-            ))}
-          </div>
-        )}
-
+        
         {/* Posts list */}
         <div>
           {filteredPosts.length === 0 ? (
@@ -319,9 +280,23 @@ export function BlogHome({
                 : emptyFilteredPostsLabel}
             </div>
           ) : (
-            currentPosts.map((post) => (
+            currentPosts.map((post, index) => {
+              const periodKey = post.date.slice(0, 7);
+              const showHeading =
+                index === 0 || currentPosts[index - 1].date.slice(0, 7) !== periodKey;
+              return (
+              <div key={post.slug}>
+              {showHeading && (
+                <h3
+                  className="pt-6 pb-2 text-sm font-bold border-b"
+                  style={{ color: "var(--text-secondary)", borderColor: "var(--card-border)" }}
+                >
+                  {useEnglish
+                    ? `${monthLabel(Number(periodKey.slice(5, 7)), true)} ${periodKey.slice(0, 4)}`
+                    : `${periodKey.slice(0, 4)}년 ${monthLabel(Number(periodKey.slice(5, 7)), false)}`}
+                </h3>
+              )}
               <Link
-                key={post.slug}
                 href={getPostUrl(post.slug)}
                 className="block border-b py-5 transition-colors hover:opacity-85"
                 style={{ borderColor: "var(--card-border)" }}
@@ -364,21 +339,11 @@ export function BlogHome({
                       {post.description}
                     </p>
                   )}
-                  {post.tags.length > 0 && (
-                    <div className="mt-3 flex flex-wrap gap-2 text-xs">
-                      {post.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          style={{ color: "var(--text-muted)" }}
-                        >
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
                 </article>
               </Link>
-            ))
+              </div>
+              );
+            })
           )}
         </div>
 

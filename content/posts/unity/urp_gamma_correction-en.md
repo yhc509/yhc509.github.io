@@ -2,7 +2,6 @@
 date: 2024-03-23
 title: "Why Color and Vector Looked Different in URP Shader Graph"
 description: "In a Linear Color Space project, Color and Vector nodes with identical numbers produced different results in Shader Graph. Experiment notes on why."
-categories: ['Game Engine/Unity']
 open: true
 type: article
 ---

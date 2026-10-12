@@ -2,7 +2,6 @@
 title: "프론티어 모델 구간에서는 하네스가 더 큰 차이를 만든다"
 date: "2026-03-18"
 description: "프론티어 코딩 모델 구간에서는 같은 Claude와 GPT를 써도 컨텍스트 관리, memory, skill, subagent, LSP, 검증 루프 같은 하네스 차이가 실무 성능을 더 크게 흔든다고 보게 됐다."
-categories: ['AI/HarnessEngineering']
 open: true
 type: article
 ---

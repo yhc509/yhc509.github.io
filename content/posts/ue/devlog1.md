@@ -2,7 +2,6 @@
 date: 2025-08-31
 title: UE5 애니메이션을 처음 공부하며 먼저 구분한 5가지
 description: "TPS 샘플을 따라가며 UE5 애니메이션 기능 중 몽타주, 블렌드 스페이스, 에임 오프셋, 노티파이, IK 릭을 어떻게 나눠 이해했는지 정리했다."
-categories: ['Game Engine/Unreal']
 open: true
 type: article
 ---

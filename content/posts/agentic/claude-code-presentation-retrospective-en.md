@@ -2,7 +2,6 @@
 title: "I Presented Claude Code to Our Division's Developers"
 date: "2026-04-01"
 description: "Retrospective on presenting Claude Code to division developers: how I actually use it for development, issue tracking, and spec-to-checklist conversion."
-categories: ["AI/AgenticCoding"]
 open: true
 type: devlog
 ---

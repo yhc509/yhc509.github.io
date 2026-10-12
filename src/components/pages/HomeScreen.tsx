@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getAllProjects } from "@/lib/projects";
-import { getAllPosts, buildPostProjectOptions, buildTagTree } from "@/lib/posts";
+import { getAllPosts, buildPostProjectOptions } from "@/lib/posts";
 import { BlogHome } from "@/components/BlogHome";
 import { HomeHero } from "@/components/HomeHero";
 import type { DevLanguage } from "@/lib/devLanguage";
@@ -18,7 +18,6 @@ export function homeMetadata(language: DevLanguage): Metadata {
 export function HomeScreen({ language }: { language: DevLanguage }) {
   const posts = getAllPosts(language);
   const projects = getAllProjects(language);
-  const tagTree = buildTagTree(posts);
   const projectTitleMap = Object.fromEntries(
     projects.map((project) => [project.slug, project.title])
   );
@@ -30,7 +29,6 @@ export function HomeScreen({ language }: { language: DevLanguage }) {
       <Suspense>
         <BlogHome
           posts={posts}
-          tagTree={tagTree}
           projectOptions={projectOptions}
         />
       </Suspense>

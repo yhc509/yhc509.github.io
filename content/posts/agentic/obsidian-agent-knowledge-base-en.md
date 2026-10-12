@@ -2,7 +2,6 @@
 title: "Ditched Claude's Memory for Obsidian"
 date: "2026-04-04"
 description: "Moved AI agent memory from directory-scoped storage to a single Obsidian vault. Cross-project knowledge sharing works, and cron jobs keep the docs from rotting."
-categories: ["AI/AgenticCoding"]
 open: true
 type: article
 ---

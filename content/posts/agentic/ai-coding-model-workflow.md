@@ -2,7 +2,6 @@
 title: "AI 코딩 모델에 대한 느낀점 및 워크플로우"
 date: "2026-09-03"
 description: "Claude, GPT, Gemini, Grok을 써 본 소감과, 설계 다음에 GitHub 이슈로 넘기는 작업 방식."
-categories: ['AI/AgenticCoding']
 open: true
 type: article
 ---

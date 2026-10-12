@@ -2,7 +2,6 @@
 title: "Impressions of AI Coding Models, and the Workflow"
 date: "2026-09-03"
 description: "What Claude, GPT, Gemini, and Grok felt like to use, and a workflow that hands work off to a GitHub issue after the design."
-categories: ['AI/AgenticCoding']
 open: true
 type: article
 ---

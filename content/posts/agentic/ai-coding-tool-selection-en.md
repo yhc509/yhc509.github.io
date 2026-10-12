@@ -2,7 +2,6 @@
 title: "What I Actually Look for After Switching AI Coding Tools"
 date: "2026-03-19"
 description: "After Antigravity, OpenCode/OMO, Codex, and Claude Code, I compared hallucination tolerance, usage headroom, autonomy fit, and model composability."
-categories: ['AI/AgenticCoding']
 open: true
 type: article
 ---
