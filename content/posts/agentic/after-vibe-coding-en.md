@@ -61,7 +61,7 @@ This works because I told the agent the bar. What the output has to be. There's 
 5. The subcontractor works it again.
 6. And this runs in parallel, about 4 or 5 at the same time. In a cloud setup like Cursor Cloud, you could run more.
 
-![Diagram with an orchestrator on top and subcontractors below. Finished work is reported, reviewed against the bar, and sent back when it misses.](./img/orchestrator-subcontractors.png)
+![Diagram with an orchestrator on top and subcontractors below. Finished work is reported, reviewed against the bar, and sent back when it misses.](./img/orchestrator-subcontractors-en.png)
 
 Work goes on like this for a few hours. I also end up making several projects. Games, tools, systems, that kind of thing. It's gotten to where I don't have to put much time in. I check the results on a phone or an iPad.
 
