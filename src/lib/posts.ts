@@ -4,7 +4,6 @@ import matter from "gray-matter";
 import readingTime from "reading-time";
 export { filterPostsByProjects, filterPostsBySearch } from "./postFilters";
 import type { DevLanguage } from "./devLanguage";
-import { buildTagTree, type TagNode } from "./tagTree";
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
@@ -16,7 +15,6 @@ export interface PostMeta {
   date: string;
   description: string;
   readingTime: string;
-  tags: string[];
   open: boolean;
   type: PostType;
   project?: string;
@@ -28,8 +26,6 @@ export interface Post extends PostMeta {
   content: string;
 }
 
-export type { TagNode };
-export { buildTagTree };
 
 const postTypes = new Set<PostType>(["article", "devlog", "archive_candidate"]);
 
@@ -40,14 +36,6 @@ function readOptionalString(value: unknown): string | undefined {
 
   const normalizedValue = value.trim();
   return normalizedValue.length > 0 ? normalizedValue : undefined;
-}
-
-function readTags(value: unknown): string[] {
-  if (!Array.isArray(value)) {
-    return [];
-  }
-
-  return value.filter((item): item is string => typeof item === "string");
 }
 
 function readPostType(value: unknown): PostType {
@@ -143,8 +131,6 @@ function parsePostFile(fullPath: string, slug: string, missingEnglish: boolean):
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  const tags = readTags(data.tags);
-
   return {
     slug,
     title: data.title || slug,
@@ -152,7 +138,6 @@ function parsePostFile(fullPath: string, slug: string, missingEnglish: boolean):
     description: data.description || "",
     content,
     readingTime: readingTime(content).text,
-    tags,
     open: data.open !== false, // 기본값은 true (공개)
     type: readPostType(data.type),
     project: readOptionalString(data.project),
@@ -185,7 +170,6 @@ export function getAllPosts(language: DevLanguage = "en"): PostMeta[] {
         date: post.date,
         description: post.description,
         readingTime: post.readingTime,
-        tags: post.tags,
         open: post.open,
         type: post.type,
         project: post.project,
@@ -311,18 +295,3 @@ export function getProjectPostGroups(
   };
 }
 
-export function filterPostsByTags(
-  posts: PostMeta[],
-  selectedTags: string[]
-): PostMeta[] {
-  if (selectedTags.length === 0) return posts;
-
-  return posts.filter((post) =>
-    selectedTags.every((selectedTag) =>
-      post.tags.some(
-        (postTag) =>
-          postTag === selectedTag || postTag.startsWith(selectedTag + "/")
-      )
-    )
-  );
-}

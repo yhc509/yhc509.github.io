@@ -29,7 +29,8 @@ export function BlogHome({
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const selectedPeriod = searchParams.get("month") || "";
+  const monthParam = searchParams.get("month") || "";
+  const selectedPeriod = /^\d{4}(-\d{2})?$/.test(monthParam) ? monthParam : "";
   const searchQuery = searchParams.get("q") || "";
   const pageParam = searchParams.get("page");
   const limitParam = searchParams.get("limit");
@@ -42,8 +43,8 @@ export function BlogHome({
   );
 
   const archive = buildArchive(posts.map((post) => post.date));
-  const filteredByTags = filterPostsByPeriod(posts, selectedPeriod);
-  const filteredPosts = filterPostsBySearch(filteredByTags, searchQuery);
+  const filteredByPeriod = filterPostsByPeriod(posts, selectedPeriod);
+  const filteredPosts = filterPostsBySearch(filteredByPeriod, searchQuery);
 
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
   const indexOfLastPost = currentPage * postsPerPage;
@@ -149,13 +150,13 @@ export function BlogHome({
           </div>
         </aside>
 
-        {/* Mobile tag filter */}
+        {/* Mobile archive filter */}
         <div className="lg:hidden mb-6 space-y-4">
           <ArchiveFilter
-              archive={archive}
-              selected={selectedPeriod}
-              onSelect={setSelectedPeriod}
-            />
+            archive={archive}
+            selected={selectedPeriod}
+            onSelect={setSelectedPeriod}
+          />
         </div>
 
         {/* Search and Limit input */}
