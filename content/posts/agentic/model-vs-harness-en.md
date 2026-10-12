@@ -1,7 +1,7 @@
 ---
 title: "In the Frontier Model Range, the Harness Makes a Bigger Difference"
 date: "2026-03-18"
-description: "Among frontier coding models, context management, memory, skills, subagents, LSP, and verification loops — the harness layer — drive more practical difference than swapping models."
+description: "Among frontier coding models, the harness — context, memory, skills, subagents, LSP, and verification loops — matters more than swapping models."
 categories: ['AI/HarnessEngineering']
 open: true
 type: article

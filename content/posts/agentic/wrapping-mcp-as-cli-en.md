@@ -1,7 +1,7 @@
 ---
 title: "Don't Connect MCP Directly"
 date: "2026-05-30"
-description: "Why someone who compulsively avoids MCP had no choice but to wrap Rider's debugger in code. On-demand connection instead of registration, token filtering at the CLI layer, and the Anthropic conclusion I only found out about later."
+description: "Why someone who avoids MCP still wrapped Rider's debugger in code: on-demand connections, CLI token filtering, and an Anthropic conclusion found later."
 categories: ["AI/AgenticCoding"]
 open: true
 type: article

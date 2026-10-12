@@ -7,7 +7,10 @@ open: true
 type: article
 ---
 
-![devlog_1](./dvl_1.gif)
+<video autoPlay loop muted playsInline width="800" height="430" aria-label="devlog_1">
+  <source src="./dvl_1.webm" type="video/webm" />
+  <source src="./dvl_1.mp4" type="video/mp4" />
+</video>
 
 언리얼 엔진 공부를 계속 미뤄 두다가 이제야 손을 댔다. 블루프린트와 Paper2D 쪽을 먼저 보고, 3D 파트에서 TPS 샘플을 따라가기 시작했는데 제일 먼저 막힌 건 애니메이션 기능 이름이었다. 이름은 다 들어 본 것 같은데, 막상 어디에 써야 하는지는 잘 안 잡혔다.
 
@@ -15,7 +18,10 @@ type: article
 
 ### 애니메이션 몽타주
 
-![애니메이션 몽타주](./am_1.gif)
+<video autoPlay loop muted playsInline width="1060" height="534" aria-label="애니메이션 몽타주">
+  <source src="./am_1.webm" type="video/webm" />
+  <source src="./am_1.mp4" type="video/mp4" />
+</video>
 
 몽타주는 제일 먼저 손에 잡혔다. 계속 돌아가는 이동 애니메이션 쪽이 아니라, 공격이나 스킬처럼 `지금 이 동작을 재생해라` 하고 명확하게 걸어 주는 용도라고 받아들이니 이해가 쉬웠다.
 
@@ -25,7 +31,10 @@ TPS 샘플로 보면 공격 콤보나 무기 교체 같은 장면이 바로 떠�
 
 ### 블렌드 스페이스
 
-![블렌드 스페이스](./bs_1.gif)
+<video autoPlay loop muted playsInline width="1000" height="600" aria-label="블렌드 스페이스">
+  <source src="./bs_1.webm" type="video/webm" />
+  <source src="./bs_1.mp4" type="video/mp4" />
+</video>
 
 블렌드 스페이스는 반대로 `재생한다`기보다 `섞는다`는 느낌이 강했다. 속도나 방향처럼 계속 바뀌는 값을 받아서 포즈를 이어 붙이는 쪽이다.
 
@@ -45,7 +54,10 @@ TPS에서는 왜 필요한지가 바로 보였다. 캐릭터는 계속 움직이
 
 ### 애니메이션 노티파이
 
-![애니메이션 노티파이](./an_1.gif)
+<video autoPlay loop muted playsInline width="744" height="340" aria-label="애니메이션 노티파이">
+  <source src="./an_1.webm" type="video/webm" />
+  <source src="./an_1.mp4" type="video/mp4" />
+</video>
 
 노티파이는 기능 이름보다 쓰임새가 더 직관적이었다. 애니메이션 타임라인에 이벤트를 박아 두는 방식이다. 코드에서 시간을 계산하는 것보다 훨씬 눈에 잘 들어왔다.
 
@@ -59,7 +71,10 @@ TPS에서는 왜 필요한지가 바로 보였다. 캐릭터는 계속 움직이
 
 IK 릭과 리타게팅은 이 다섯 개 중에서 제일 낯설었다. 이름만 보면 어렵고, 처음에는 어디서부터 봐야 할지도 애매했다. 일단은 `다른 캐릭터의 애니메이션을 가져다 쓰기 위한 준비`라고 이해하고 있다.
 
-![IK 릭 리타게팅](./ik_2.gif)
+<video autoPlay loop muted playsInline width="750" height="416" aria-label="IK 릭 리타게팅">
+  <source src="./ik_2.webm" type="video/webm" />
+  <source src="./ik_2.mp4" type="video/mp4" />
+</video>
 
 내가 이해한 식으로 적으면, IK 릭은 특정 본 체계를 IK Solver 기준으로 다루기 위한 셋업이고, 리타게팅은 그 셋업을 바탕으로 다른 스켈레톤에 모션을 옮기는 단계다. 외부 애니메이션을 재사용하거나 캐릭터를 갈아끼우는 장면을 떠올리면 왜 필요한지 조금 납득이 갔다.
 

@@ -1,7 +1,7 @@
 ---
 title: "I Bought a MacBook Pro"
 date: "2026-04-16"
-description: "Running SDXL, Unity, and Rider on a single Mac Mini hit a wall. After picking up an M5 Pro MacBook Pro, splitting dev and AI across two machines changed more than I expected."
+description: "SDXL, Unity, and Rider on one Mac Mini hit a wall. An M5 Pro MacBook Pro, with dev and AI split across two machines, changed more than I expected."
 categories: ["AI/AgenticCoding"]
 open: true
 type: article

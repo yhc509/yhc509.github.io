@@ -1,7 +1,7 @@
 ---
 title: "I Tore Open a 48-Agent AI Game Studio"
 date: "2026-03-28"
-description: "Dissected a GitHub repo with 6,500 stars that runs a 'game studio' with 48 AI agents. The agent hierarchy was org chart cosplay. The real value was a single Hook script."
+description: "Dissected a 6,500-star repo that runs a game studio with 48 AI agents. The hierarchy was org-chart cosplay; the real value was one Hook script."
 categories: ["AI/AgenticCoding"]
 open: true
 type: article
