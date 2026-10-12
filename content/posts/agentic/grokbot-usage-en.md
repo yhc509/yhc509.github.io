@@ -33,7 +33,7 @@ The dev bots don't write code themselves. They give the work to cloud coding age
 
 All code comes in as PRs. I do the merging and deploying. I don't hand off the final call on quality.
 
-Every Monday, a bot reads the past 7 days of PRs in my main game repo, and if there's progress worth showing on screen, it asks "Want to record a video?" On the first run it picked the side-view battle staging and the panorama backgrounds, and I hit "Record it." Dev videos are easy to put off, but when the bot asks first, I end up recording them.
+Every Monday, Grok reads the past 7 days of PRs in my main game repo, and if there's progress worth showing on screen, it asks "Want to record a video?" On the first run it picked the side-view battle staging and the panorama backgrounds, and I hit "Record it." Dev videos are easy to put off, but when the bot asks first, I end up recording them.
 
 ## At first I built an org chart, like the tip posts said
 
