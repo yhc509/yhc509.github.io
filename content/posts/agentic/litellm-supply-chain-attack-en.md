@@ -12,7 +12,7 @@ This evening, I wasn't in the mood to code. Figured I'd install a Claude Code pl
 
 Rebooted three or four times. Every time I launched Claude Code, it froze again. Then I remembered I'd just installed Ouroboros. Decided not to launch Claude at all. Opened Codex CLI instead and had it inspect the processes. That was the move that saved me.
 
-Over a thousand `python3.12` processes were running. Couldn't even spawn a new shell — `fork failed: resource temporarily unavailable`. Not CPU. The sheer number of processes was suffocating the system.
+Over a thousand `python3.12` processes were running. Couldn't even spawn a new shell (`fork failed: resource temporarily unavailable`). Not CPU. The sheer number of processes was suffocating the system.
 
 Most had `PPID=1`. Orphans. Parent processes dead, children left behind. Not normal workers. A runaway explosion of spawns in a short window.
 

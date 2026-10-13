@@ -1,7 +1,7 @@
 ---
 title: "GPT Astra 출시를 바라보며 하는 생각"
 date: "2026-09-09"
-description: "GPT Astra를 써 보고 놀라고 두려웠던 이유. AI가 줄인 건 창작의 고통이 아니라 생산의 고통이라는 생각."
+description: "GPT Astra를 써 보고 놀라고 두려웠던 이유. AI가 줄여 준 건 생산의 고통이었고, 창작의 고통은 그대로 남았다."
 open: true
 type: article
 ---

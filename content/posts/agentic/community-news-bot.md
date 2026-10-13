@@ -14,7 +14,7 @@ type: article
 
 구조는 단순하다. RSS, Hacker News, Reddit, X에서 글을 모은다. LLM이 게임 개발자에게 쓸모 있는지 점수를 매긴다. 통과한 글만 요약을 붙여 디스코드 채널에 올린다. 맥 한 대에서 launchd로 정해진 시간마다 돌렸다.
 
-![뉴스 에이전트 구조. RSS, Hacker News, Reddit, X에서 병렬로 수집하고, 스크립트 필터와 LLM 점수·요약을 거쳐 대기열에서 디스코드로 발송한다.](./img/news-agent-architecture.jpg)
+![뉴스 에이전트 구조. RSS, Hacker News, Reddit, X에서 병렬로 수집하고, 스크립트 필터와 LLM 점수 매기기, 요약을 거쳐 대기열에서 디스코드로 발송한다.](./img/news-agent-architecture.jpg)
 
 ## 구현은 하룻밤이었다
 

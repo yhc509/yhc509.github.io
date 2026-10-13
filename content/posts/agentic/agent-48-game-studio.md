@@ -16,9 +16,9 @@ type: article
 
 에이전트 계층이 3단계로 나뉜다.
 
-- **Director** 3명 — Creative Director, Technical Director, Production Director. Opus 모델.
-- **Lead** 8명 — Game Designer, Engine Lead, AI Lead 등. Sonnet 모델.
-- **Specialist** 37명 — Gameplay Programmer, Shader Artist, QA Tester 등. Sonnet 또는 Haiku 모델.
+- **Director** 3명: Creative Director, Technical Director, Production Director. Opus 모델.
+- **Lead** 8명: Game Designer, Engine Lead, AI Lead 등. Sonnet 모델.
+- **Specialist** 37명: Gameplay Programmer, Shader Artist, QA Tester 등. Sonnet 또는 Haiku 모델.
 
 실제 회사 조직도를 그대로 옮겨 놨다.
 

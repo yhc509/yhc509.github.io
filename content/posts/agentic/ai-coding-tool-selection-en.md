@@ -18,13 +18,13 @@ Experience scope for this post:
 
 Not because I couldn't settle. As the work changed, the criteria sharpened, and the main tool shifted with them.
 
-First I wanted to know how far vibe coding could be trusted. Then I tested whether splitting roles across multiple models beat relying on one. Now the question is whether "throw a task, come back later" actually works — and whether I can control what comes back.
+First I wanted to know how far vibe coding could be trusted. Then I tested whether splitting roles across multiple models beat relying on one. Now the question is whether "throw a task, come back later" actually works, and whether I can control what comes back.
 
 ## Antigravity and Gemini 3.0 Pro: vibe coding starts here
 
 Antigravity was my first real vibe coding tool. Overhauled this blog with it, built a Unity mini-game called FlyingCat over a week. First time I felt AI could handle real implementation.
 
-Early speed was real — results moved forward without me writing every line. But limits appeared fast. Repeated compile errors hurt most — partly inexperience, partly Gemini 3.0 Pro hallucinating the same failures over and over. Antigravity proved vibe coding works. It didn't last as a daily driver.
+Early speed was real. Results moved forward without me writing every line. But limits appeared fast. Repeated compile errors hurt most: partly inexperience, partly Gemini 3.0 Pro hallucinating the same failures over and over. Antigravity proved vibe coding works. It didn't last as a daily driver.
 
 ## OpenCode/OMO: model composition clicks
 
@@ -34,15 +34,15 @@ Biggest takeaway: how you divide roles between models matters more than any sing
 
 OMO pulled me into harness internals. Read the project's source, tried adding features. My PR duplicated work already merged, but the process shaped how I evaluate harnesses. Extracted OMO's subagent layout and referenced it when building agent orchestration at work.
 
-Stopped using OpenCode daily, but my selection framework locked in here. A good tool doesn't solve everything alone — it lets you compose models your way.
+Stopped using OpenCode daily, but my selection framework locked in here. A good tool doesn't solve everything alone. It lets you compose models your way.
 
 ## Codex and GPT 5.4: trust to delegate
 
-Watched Codex for personal work since early February 2026. Through 5.3 it was rough — too robotic, bad at natural instructions. Trust came with 5.4.
+Watched Codex for personal work since early February 2026. Through 5.3 it was rough: too robotic, bad at natural instructions. Trust came with 5.4.
 
 I slice work small, define scope, throw it over, control what comes back. From 5.4, Codex matched that rhythm. Throw a task, it runs alone for thirty to forty minutes, returns with results. Some say Codex doesn't finish things. For me it stops about right.
 
-Claude Code feels like finding direction together. Codex feels like it picks direction on its own. Long refactors, structural cleanup, anything I can hand off and walk away from — Codex handles well.
+Claude Code feels like finding direction together. Codex feels like it picks direction on its own. Long refactors, structural cleanup, anything I can hand off and walk away from: Codex handles those well.
 
 One quirk: it codes defensively to a fault. Guard logic piles up thicker than needed, and results get heavier than they should. The perfectionism sometimes makes the code messier.
 
@@ -50,7 +50,7 @@ One quirk: it codes defensively to a fault. Guard logic piles up thicker than ne
 
 Codex alone isn't enough. I use Claude Code at work and plan to keep running both at home.
 
-Claude Code's harness is stronger. It sees the full shape of a problem better. Output feels more human-touched. When deciding how to split a problem, which direction to go, where to stop — Claude as mediator improves results.
+Claude Code's harness is stronger. It sees the full shape of a problem better. Output feels more human-touched. When deciding how to split a problem, which direction to go, and where to stop, Claude as mediator improves results.
 
 For sustained execution, Codex fits better. So the current setup: Claude sets direction, Codex pushes through. Most stable combination I've found.
 

@@ -35,13 +35,13 @@ cmux는 이 외에도 워크스페이스 생성/삭제, 메시지 전송(`send`)
 
 읽은 세션은 네 개였다.
 
-**surface 24** — Claude Code Game Studios라는 GitHub 레포(Stars 6,500) 분석. 에이전트 48개 계층 구조를 해부하고 실용적인 부분을 추렸다.
+**surface 24**: Claude Code Game Studios라는 GitHub 레포(Stars 6,500) 분석. 에이전트 48개 계층 구조를 해부하고 실용적인 부분을 추렸다.
 
-**surface 25** — garrytan/gstack 레포 분석. Hook, Skill 시스템 중심으로 쓸 만한 패턴을 A/B/C 등급으로 분류.
+**surface 25**: garrytan/gstack 레포 분석. Hook, Skill 시스템 중심으로 쓸 만한 패턴을 A/B/C 등급으로 분류.
 
-**surface 26** — cmux-collab 스킬 개발. AI 코디네이터의 작동 조건을 도출하고 프리플라이트 인터뷰 개념을 스킬에 반영했다.
+**surface 26**: cmux-collab 스킬 개발. AI 코디네이터의 작동 조건을 도출하고 프리플라이트 인터뷰 개념을 스킬에 반영했다.
 
-**surface 40** — Obsidian vault 3개를 하나로 합치는 작업. 커뮤니티 사례 조사, 심링크 구조 설계, hook 설정이 진행 중이었다.
+**surface 40**: Obsidian vault 3개를 하나로 합치는 작업. 커뮤니티 사례 조사, 심링크 구조 설계, hook 설정이 진행 중이었다.
 
 ## 4개 중 1개가 글이 됐다
 

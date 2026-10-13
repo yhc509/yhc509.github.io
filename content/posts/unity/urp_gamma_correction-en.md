@@ -6,7 +6,7 @@ open: true
 type: article
 ---
 
-Linear URP project. Adding Shader Graph values, I paused. `Color(0.5, 0.5, 0.5)` added twice — didn't reach white. Same numbers through Vector got the expected result.
+Linear URP project. Adding Shader Graph values, I paused. `Color(0.5, 0.5, 0.5)` added twice didn't reach white. Same numbers through Vector got the expected result.
 
 First thought: wiring mistake. The real issue was value semantics, not math. I'd been treating "visible color" and "computation number" as the same thing.
 
@@ -40,12 +40,12 @@ Rules I wrote down:
 - Inputs that mean "number" (Vector) are safer to read as computation values.
 - When adding or multiplying colors in Shader Graph, first ask: is this a "visible color" or a "computation value"?
 
-I didn't trace every internal implementation. But in practice, this distinction cut most of the confusion. When Shader Graph values look wrong, it's usually not the nodes — it's me treating values from different spaces as if they're the same.
+I didn't trace every internal implementation. But in practice, this distinction cut most of the confusion. When Shader Graph values look wrong, it's usually not the nodes. It's me treating values from different spaces as if they're the same.
 
 ## Notes
 
 - In Linear projects, don't trust Color Picker numbers as direct computation constants.
-- For coefficients, correction values, masks — use Vector or Float. Less confusing.
+- For coefficients, correction values, and masks, use Vector or Float. Less confusing.
 - For final color output, use Color input, but if intermediate math surprises you, suspect color space first.
 
 What confused me wasn't gamma theory itself. It was "how does this number enter the Shader Graph." When URP colors add up wrong, checking "is this a color or a number?" first was faster than reaching for theory.

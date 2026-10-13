@@ -40,11 +40,11 @@ type: article
 
 대표적인 게 chief of staff 봇이다. 봇 하나를 유일한 대화창으로 두고, 나머지 봇에게 일을 나눠 주게 하라는 것이다. "I talk only to you; you coordinate the rest." 같은 문장을 그대로 복사해 쓰라는 템플릿도 있다([groktemplates](https://groktemplates.dev/templates/team-in-10-minutes), [grokcamp](https://grokcamp.com/blog/how-to-run-a-grok-bot-team-with-a-chief-of-staff/)). 공식 소개글에도 사내에서 chief of staff 하나 밑에 분야별 봇을 둔다는 이야기가 나온다([Introducing Grok Bot](https://x.ai/news/introducing-grok-bot)).
 
-실제로 써보니 토큰이 너무 많이 들었다. chief 봇을 거치면 일 하나에 전달, 작업, 보고가 붙는다. 봇이 보고를 모아 다시 보고하니 알림도 쏟아졌다. 그래서 조직도를 걷어내고, 비서·마케팅·봇 관리 전담 봇을 메인 봇 하나로 모았다. 이름도 그록, 포스트, 클록, 핑, 잼처럼 짧은 한 단어로 바꿨다.
+실제로 써보니 토큰이 너무 많이 들었다. chief 봇을 거치면 일 하나에 전달, 작업, 보고가 붙는다. 봇이 보고를 모아 다시 보고하니 알림도 쏟아졌다. 그래서 조직도를 걷어내고, 비서, 마케팅, 봇 관리를 맡던 전담 봇들을 메인 봇 하나로 모았다. 이름도 그록, 포스트, 클록, 핑, 잼처럼 짧은 한 단어로 바꿨다.
 
 지금은 담당이 분명한 일은 그 봇에게 직접 말한다. 메일은 포스트, 일정은 클록, 블로그는 블로그 봇이다. 어느 봇에게 말할지 내가 기억해야 하니 머리는 더 쓴다. 토큰을 아끼려고 그 인지부하는 내가 감수한다.
 
-![봇 팀 구성도. 나는 그룹마다 직접 대화하고, 그룹은 메인·개발·마케팅·운영·개인으로 나뉜다.](./img/grokbot-team-org.png)
+![봇 팀 구성도. 나는 그룹마다 직접 대화하고, 그룹은 메인, 개발, 마케팅, 운영, 개인으로 나뉜다.](./img/grokbot-team-org.png)
 
 ## 봇은 목적이 생길 때 하나씩 만든다
 

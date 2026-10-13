@@ -1,7 +1,7 @@
 ---
 date: 2025-08-31
 title: "Five UE5 Animation Concepts I Sorted Out First"
-description: "Following a TPS sample, I separated montages, blend spaces, aim offsets, notifies, and IK rigs — the five animation features that confused me first."
+description: "Following a TPS sample, I separated the five animation features that confused me first: montages, blend spaces, aim offsets, notifies, and IK rigs."
 open: true
 type: article
 ---
@@ -13,7 +13,7 @@ type: article
 
 Kept putting off Unreal Engine. Finally started. Blueprints and Paper2D first, then 3D via a TPS sample. First wall: animation feature names. Heard all of them, couldn't tell where each fits.
 
-Wrote down the ones I kept bumping into. Not a docs rewrite — how I distinguished them on first contact.
+Wrote down the ones I kept bumping into. Not a docs rewrite, just how I distinguished them on first contact.
 
 ### Animation Montage
 
@@ -22,7 +22,7 @@ Wrote down the ones I kept bumping into. Not a docs rewrite — how I distinguis
   <source src="./am_1.mp4" type="video/mp4" />
 </video>
 
-Montage clicked first. Not the looping locomotion side — this is for "play this action now." Attacks, skills, explicit playback.
+Montage clicked first. Not the looping locomotion side. This is for "play this action now." Attacks, skills, explicit playback.
 
 In the TPS sample, attack combos and weapon swaps come to mind. Multiple sequences in one asset, with Blueprint controlling play timing and section jumps.
 
@@ -35,9 +35,9 @@ In the TPS sample, attack combos and weapon swaps come to mind. Multiple sequenc
   <source src="./bs_1.mp4" type="video/mp4" />
 </video>
 
-Blend Space felt the opposite — less "play" and more "mix." Takes continuously changing values like speed or direction and blends poses accordingly.
+Blend Space felt the opposite: less "play" and more "mix." Takes continuously changing values like speed or direction and blends poses accordingly.
 
-Walk to run transitions, directional strafing — that's where it shows up. Initially confused with montages. The rule "if the value keeps changing, it's a blend space" cleared things up.
+Walk to run transitions and directional strafing are where it shows up. Initially confused with montages. The rule "if the value keeps changing, it's a blend space" cleared things up.
 
 - [UE5 Documentation](https://dev.epicgames.com/documentation/en-us/unreal-engine/blend-spaces-in-unreal-engine)
 
@@ -60,7 +60,7 @@ Obvious why TPS needs it. Character moves continuously while the gun direction t
 
 Notify made more sense by usage than by name. Pin an event onto the animation timeline. More intuitive than computing timing in code.
 
-Hit detection, footsteps, VFX, camera shake — immediately clear why notifies exist. At the beginner stage, being able to set timing while looking at frames mattered a lot.
+Hit detection, footsteps, VFX, camera shake: immediately clear why notifies exist. At the beginner stage, being able to set timing while looking at frames mattered a lot.
 
 - [UE5 Documentation](https://dev.epicgames.com/documentation/en-us/unreal-engine/animation-notifies-in-unreal-engine)
 

@@ -43,7 +43,7 @@ FlyingCat은 내가 바이브 코딩을 다시 보게 된 첫 프로젝트였다
 
 ![FlyingCat 가이드 화면](./img/flyingcat-04-guide.png)
 
-결과물은 실제로 돌아가는 WebGL 게임까지 나왔다. itch.io에 올렸고, 별도 홍보 없이 자연 노출만 둔 상태에서 대략 10명 정도가 플레이했다. 여기서 멈춘 게 아니라 AWS Cognito와 Lambda를 붙여 랭킹 기능도 넣었다. AWS는 자격증 공부로 살짝 본 정도였지 실전 경험은 거의 없었는데, Gemini에게 물어가며 끝까지 붙였다.
+결과물은 실제로 돌아가는 WebGL 게임까지 나왔다. itch.io에 올렸고, 별도 홍보 없이 자연 노출만 둔 상태에서 대략 10명 정도가 플레이했다. 내친김에 AWS Cognito와 Lambda를 붙여 랭킹 기능도 넣었다. AWS는 자격증 공부로 살짝 본 정도였지 실전 경험은 거의 없었는데, Gemini에게 물어가며 끝까지 붙였다.
 
 ![FlyingCat 랭킹 화면](./img/flyingcat-02-leaderboard.png)
 
