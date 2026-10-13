@@ -11,6 +11,7 @@ export function NavLinks() {
   const barePath = stripLanguagePrefix(pathname);
 
   const isPostsActive = barePath === "/" || barePath.startsWith("/posts");
+  const isNewsActive = barePath === "/news" || barePath.startsWith("/news/");
   const isAboutActive = barePath === "/about";
 
   return (
@@ -41,6 +42,33 @@ export function NavLinks() {
           <polyline points="10 9 9 9 8 9" />
         </svg>
         <span className="hidden sm:inline">Posts</span>
+      </Link>
+      <Link
+        href={localizedPath("/news", language)}
+        className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-sm transition-colors"
+        style={{
+          backgroundColor: isNewsActive ? "var(--accent)" : "var(--card-bg)",
+          color: isNewsActive ? "white" : "var(--foreground)",
+        }}
+        aria-label="News"
+      >
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="flex-shrink-0"
+        >
+          <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
+          <path d="M18 14h-8" />
+          <path d="M15 18h-5" />
+          <path d="M10 6h8v4h-8V6Z" />
+        </svg>
+        <span className="hidden sm:inline">News</span>
       </Link>
       <Link
         href={localizedPath("/about", language)}

@@ -21,6 +21,8 @@
 # Generated OG images
 public/og/
 public/feed.xml
+public/news/
+public/ko/news/
 
 # production
 /build
