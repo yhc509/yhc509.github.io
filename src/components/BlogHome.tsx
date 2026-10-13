@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArchiveFilter, buildArchive, monthLabel } from "./ArchiveFilter";
 import { localizedPath } from "@/lib/devLanguage";
@@ -13,6 +14,9 @@ interface BlogHomeProps {
   posts: PostMeta[];
   projectOptions: PostProjectOption[];
 }
+
+const PAGE_SIZES = [5, 10, 30, 50] as const;
+const SEARCH_DEBOUNCE_MS = 300;
 
 function filterPostsByPeriod(posts: PostMeta[], period: string): PostMeta[] {
   if (!period) return posts;
@@ -34,8 +38,10 @@ export function BlogHome({
   const pageParam = searchParams.get("page");
   const limitParam = searchParams.get("limit");
 
-  const currentPage = pageParam ? parseInt(pageParam, 10) : 1;
-  const postsPerPage = limitParam ? parseInt(limitParam, 10) : 10;
+  const parsedLimit = Number(limitParam);
+  const postsPerPage = (PAGE_SIZES as readonly number[]).includes(parsedLimit) ? parsedLimit : 10;
+  const parsedPage = Number(pageParam);
+  const requestedPage = Number.isInteger(parsedPage) && parsedPage >= 1 ? parsedPage : 1;
 
   const projectTitleMap = new Map(
     projectOptions.map((project) => [project.slug, project.title])
@@ -46,11 +52,25 @@ export function BlogHome({
   const filteredPosts = filterPostsBySearch(filteredByPeriod, searchQuery);
 
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+  const currentPage = Math.min(requestedPage, Math.max(1, totalPages));
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
 
-  const updateUrl = (period: string, query: string, page: number, limit: number) => {
+  const [searchInput, setSearchInput] = useState(searchQuery);
+  const [syncedQuery, setSyncedQuery] = useState(searchQuery);
+  if (syncedQuery !== searchQuery) {
+    setSyncedQuery(searchQuery);
+    setSearchInput(searchQuery);
+  }
+
+  const updateUrl = (
+    period: string,
+    query: string,
+    page: number,
+    limit: number,
+    mode: "push" | "replace" = "push"
+  ) => {
     const params = new URLSearchParams();
     if (period) {
       params.set("month", period);
@@ -66,16 +86,21 @@ export function BlogHome({
     }
     const queryString = params.toString();
     const homePath = localizedPath("/", language);
-    navigate(queryString ? `${homePath}?${queryString}` : homePath);
+    navigate(queryString ? `${homePath}?${queryString}` : homePath, mode);
   };
 
   const setSelectedPeriod = (period: string) => {
     updateUrl(period, searchQuery, 1, postsPerPage);
   };
 
-  const setSearchQuery = (query: string) => {
-    updateUrl(selectedPeriod, query, 1, postsPerPage);
-  };
+  useEffect(() => {
+    if (searchInput === searchQuery) return;
+    const timer = setTimeout(() => {
+      updateUrl(selectedPeriod, searchInput, 1, postsPerPage, "replace");
+    }, SEARCH_DEBOUNCE_MS);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only the typed text should schedule a URL update
+  }, [searchInput]);
 
   const setPage = (page: number) => {
     updateUrl(selectedPeriod, searchQuery, page, postsPerPage);
@@ -184,8 +209,8 @@ export function BlogHome({
               type="text"
               placeholder={searchPlaceholder}
               aria-label={searchAriaLabel}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
               className="w-full rounded-lg border py-2 pl-10 pr-4 outline-none transition-colors"
               style={{
                 backgroundColor: "transparent",
@@ -193,9 +218,9 @@ export function BlogHome({
                 color: "var(--foreground)",
               }}
             />
-            {searchQuery && (
+            {searchInput && (
               <button
-                onClick={() => setSearchQuery("")}
+                onClick={() => setSearchInput("")}
                 className="absolute right-3 top-1/2 -translate-y-1/2"
                 style={{ color: "var(--text-muted)" }}
               >
@@ -252,7 +277,10 @@ export function BlogHome({
         {(selectedPeriod || searchQuery) && (
           <div className="mb-4 flex justify-end">
             <button
-              onClick={() => updateUrl("", "", 1, postsPerPage)}
+              onClick={() => {
+                setSearchInput("");
+                updateUrl("", "", 1, postsPerPage);
+              }}
               className="text-xs px-3 py-1 rounded-full transition-colors hover:opacity-80"
               style={{
                 backgroundColor: "var(--card-border)",

@@ -6,7 +6,6 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { NavLinks } from "@/components/NavLinks";
 import {
-  DEV_LANGUAGE_BOOTSTRAP_SCRIPT,
   localizedPath,
   type DevLanguage,
 } from "@/lib/devLanguage";
@@ -40,9 +39,6 @@ export function SiteFrame({
       className={hahmlet.variable}
     >
       <body className="antialiased min-h-screen">
-        <script
-          dangerouslySetInnerHTML={{ __html: DEV_LANGUAGE_BOOTSTRAP_SCRIPT }}
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

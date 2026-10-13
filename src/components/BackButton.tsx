@@ -5,6 +5,8 @@ import Link from "next/link";
 import { localizedPath } from "@/lib/devLanguage";
 import { useDevLanguage } from "@/components/DevLanguageProvider";
 
+const LIST_QUERY_KEYS = ["month", "q", "page", "limit", "tags"] as const;
+
 interface BackButtonProps {
   basePath?: string;
 }
@@ -13,12 +15,11 @@ export function BackButton({ basePath = "/" }: BackButtonProps) {
   const language = useDevLanguage();
   const useEnglish = language === "en";
   const searchParams = useSearchParams();
-  const tags = searchParams.get("tags");
-  const query = searchParams.get("q");
-
   const params = new URLSearchParams();
-  if (tags) params.set("tags", tags);
-  if (query) params.set("q", query);
+  for (const key of LIST_QUERY_KEYS) {
+    const value = searchParams.get(key);
+    if (value) params.set(key, value);
+  }
   const queryString = params.toString();
   const localizedBasePath = localizedPath(basePath, language);
   const backUrl = queryString ? `${localizedBasePath}?${queryString}` : localizedBasePath;

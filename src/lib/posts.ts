@@ -127,7 +127,17 @@ export function getAllPostSlugs(): string[] {
     });
 }
 
-function parsePostFile(fullPath: string, slug: string, missingEnglish: boolean): Post {
+function formatReadingTime(content: string, language: DevLanguage): string {
+  const stats = readingTime(content);
+  return language === "ko" ? `약 ${Math.max(1, Math.ceil(stats.minutes))}분` : stats.text;
+}
+
+function parsePostFile(
+  fullPath: string,
+  slug: string,
+  missingEnglish: boolean,
+  contentLanguage: DevLanguage
+): Post {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
@@ -137,7 +147,7 @@ function parsePostFile(fullPath: string, slug: string, missingEnglish: boolean):
     date: formatDateString(data.date),
     description: data.description || "",
     content,
-    readingTime: readingTime(content).text,
+    readingTime: formatReadingTime(content, contentLanguage),
     open: data.open !== false, // 기본값은 true (공개)
     type: readPostType(data.type),
     project: readOptionalString(data.project),
@@ -156,7 +166,7 @@ export function getPostBySlug(slug: string, language: DevLanguage = "en"): Post 
     throw new Error(`Post not found: ${slug}`);
   }
 
-  return parsePostFile(fullPath, slug, missingEnglish);
+  return parsePostFile(fullPath, slug, missingEnglish, englishPath ? "en" : "ko");
 }
 
 export function getAllPosts(language: DevLanguage = "en"): PostMeta[] {

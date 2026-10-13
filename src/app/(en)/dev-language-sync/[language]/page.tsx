@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DevLanguageSyncClient } from "@/components/DevLanguageSyncClient";
 import { parseDevLanguage } from "@/lib/devLanguage";
-import { setServerDevLanguage } from "@/lib/serverDevLanguage";
 
 interface DevLanguagePageProps {
   params: Promise<{ language: string }>;
@@ -28,10 +27,6 @@ export default async function DevLanguagePage({ params }: DevLanguagePageProps) 
 
   if (!devLanguage) {
     notFound();
-  }
-
-  if (process.env.NODE_ENV === "development") {
-    setServerDevLanguage(devLanguage);
   }
 
   return <DevLanguageSyncClient language={devLanguage} />;
