@@ -2,10 +2,11 @@ import Link from "next/link";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
 import { getAllNewsIssues } from "@/lib/news";
 import { getBlogCopy } from "@/lib/siteContent";
+import { SHOW_NEWS_ENTRY_POINTS } from "@/lib/newsVisibility";
 
 export function HomeHero({ language }: { language: DevLanguage }) {
   const { headline } = getBlogCopy(language);
-  const latestIssue = getAllNewsIssues(language)[0];
+  const latestIssue = SHOW_NEWS_ENTRY_POINTS ? getAllNewsIssues(language)[0] : undefined;
 
   return (
     <section className="max-w-3xl mx-auto px-5 pt-6 pb-1 sm:pt-7">
