@@ -23,6 +23,7 @@ public/og/
 public/feed.xml
 public/news/
 public/ko/news/
+public/news-img/
 
 # production
 /build

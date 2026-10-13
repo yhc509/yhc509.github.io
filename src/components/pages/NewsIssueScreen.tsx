@@ -10,6 +10,7 @@ import { KoreanFallbackNote } from "@/components/KoreanFallbackNote";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { createMarkdownComponents } from "@/components/MarkdownComponents";
 import { getAdjacentNewsIssues, getAllNewsIssues, getNewsIssue } from "@/lib/news";
+import { newsItemImagePath } from "@/lib/newsIssues.mjs";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
 import { languageAlternates, toSiteUrl } from "@/lib/site";
 
@@ -123,6 +124,15 @@ export async function NewsIssueScreen({
                   {item.title}
                 </a>
               </h2>
+              {item.image && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={newsItemImagePath(item.image)}
+                  alt={item.imageAlt ?? ""}
+                  loading="lazy"
+                  className="mt-3 h-auto w-full rounded-lg"
+                />
+              )}
               <p className="mt-2 leading-7">{item.summary}</p>
               {item.points && (
                 <ul className="mt-2 list-disc space-y-1 pl-5 leading-7">

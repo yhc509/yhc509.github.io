@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import satori from "satori";
 import sharp from "sharp";
-import { NEWS_DIR, NEWS_IMAGE_DIR, newsOgPath, readNewsIssues } from "../src/lib/newsIssues.mjs";
+import { NEWS_DIR, NEWS_IMAGE_DIR, newsItemImagePath, newsOgPath, readNewsIssues } from "../src/lib/newsIssues.mjs";
 
 const WIDTH = 1200;
 const HEIGHT = 630;
@@ -76,6 +76,12 @@ async function main() {
   let count = 0;
   for (const language of /** @type {const} */ (["en", "ko"])) {
     for (const issue of readNewsIssues(language, { includeHidden: true })) {
+      for (const item of issue.items) {
+        if (!item.image) continue;
+        const imageTarget = path.join(process.cwd(), "public", newsItemImagePath(item.image));
+        fs.mkdirSync(path.dirname(imageTarget), { recursive: true });
+        fs.copyFileSync(path.join(NEWS_IMAGE_DIR, item.image), imageTarget);
+      }
       if (!issue.thumbnailBase) continue;
       const target = path.join(process.cwd(), "public", newsOgPath(issue.id, issue.thumbnailLanguage));
       fs.mkdirSync(path.dirname(target), { recursive: true });

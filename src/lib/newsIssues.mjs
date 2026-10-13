@@ -10,7 +10,7 @@ export const MAX_ITEMS = 5;
 const ISSUE_FILE = /^(\d{4}-\d{2}-\d{2})(-en)?\.md$/;
 
 /**
- * @typedef {{ title: string, url: string, source: string, summary: string, points?: string[], comment?: string }} NewsItem
+ * @typedef {{ title: string, url: string, source: string, summary: string, points?: string[], image?: string, imageAlt?: string, comment?: string }} NewsItem
  * @typedef {{ id: string, issue: number, date: string, title: string, description: string,
  *   open: boolean, thumbnail: string | null, thumbnailBase: string | null,
  *   thumbnailLabel: string | null, thumbnailLanguage: "ko" | "en", items: NewsItem[], content: string, missingEnglish: boolean }} NewsIssue
@@ -32,6 +32,23 @@ function requireStringList(value, where) {
 }
 
 export const NEWS_IMAGE_DIR = path.join(NEWS_DIR, "img");
+
+/** Public URL of an item image copied from content/news/img by scripts/generate-news-og.mjs. @param {string} name */
+export function newsItemImagePath(name) {
+  return `/news-img/${name}`;
+}
+
+/**
+ * `image: img/<name>` names a per-item image in content/news/img; a missing file fails the build.
+ * @param {unknown} value @param {string} where @returns {string}
+ */
+function resolveItemImage(value, where) {
+  const name = requireString(value, `${where}.image`).replace(/^\.\//, "").replace(/^img\//, "");
+  if (!fs.existsSync(path.join(NEWS_IMAGE_DIR, name))) {
+    throw new Error(`${where}.image ${name} not found in content/news/img`);
+  }
+  return name;
+}
 
 /** Built thumbnail (base image + per-language label) path under public/. @param {string} id @param {"ko" | "en"} language */
 export function newsOgPath(id, language) {
@@ -79,6 +96,12 @@ function parseIssueFile(filePath, id, missingEnglish) {
       source: requireString(item.source, `${where}.source`),
       summary: requireString(item.summary, `${where}.summary`),
       ...(item.points == null ? {} : { points: requireStringList(item.points, `${where}.points`) }),
+      ...(item.image == null
+        ? {}
+        : {
+            image: resolveItemImage(item.image, where),
+            imageAlt: requireString(item.imageAlt, `${where}.imageAlt`),
+          }),
       ...(item.comment == null ? {} : { comment: requireString(item.comment, `${where}.comment`) }),
     };
   });
