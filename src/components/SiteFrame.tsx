@@ -5,6 +5,7 @@ import { DevLanguageToggle } from "@/components/DevLanguageToggle";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { NavLinks } from "@/components/NavLinks";
+import { GoatCounterScripts } from "@/components/GoatCounterScripts";
 import {
   localizedPath,
   type DevLanguage,
@@ -104,6 +105,7 @@ export function SiteFrame({
             <DevLanguageToggle />
           </DevLanguageProvider>
         </ThemeProvider>
+        <GoatCounterScripts />
       </body>
     </html>
   );
