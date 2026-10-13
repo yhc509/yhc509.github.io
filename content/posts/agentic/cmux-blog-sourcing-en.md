@@ -27,7 +27,7 @@ cmux read-screen --surface surface:24 --scrollback --lines 200  # read another s
 
 cmux supports plenty more: workspace management, message sending (`send`), browser control, screenshots, notifications. I've bundled these into a Claude Code skill called `cmux-collab`. The skill also defines protocols for swarm dispatch (parallel research) and adversarial debugging (multi-session bug debates), but what I used this time was the simplest pattern: reading other sessions.
 
-Two constraints. `read-screen` only reads what's in the terminal scrollback buffer. Collapsed output and anything past the buffer limit can't be read — older conversations lose their beginning. And every screen you read dumps that text into the current session's context. The more sessions you read, the less context headroom you have. You can't read everything, so pick the sessions that matter.
+Two constraints. `read-screen` only reads what's in the terminal scrollback buffer. Collapsed output and anything past the buffer limit can't be read, so older conversations lose their beginning. And every screen you read dumps that text into the current session's context. The more sessions you read, the less context headroom you have. You can't read everything, so pick the sessions that matter.
 
 ## Scanning 4 Sessions
 
