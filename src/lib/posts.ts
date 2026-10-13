@@ -2,8 +2,9 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
-export { filterPostsByProjects, filterPostsBySearch } from "./postFilters";
+export { filterPostsBySearch } from "./postFilters";
 import type { DevLanguage } from "./devLanguage";
+import { formatPostDate } from "./postAssets.mjs";
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
@@ -47,14 +48,7 @@ function readPostType(value: unknown): PostType {
 }
 
 function formatDateString(raw: unknown): string {
-  const d = raw ? new Date(raw as string | number) : new Date();
-  if (isNaN(d.getTime())) {
-    return new Date().toISOString().split("T")[0];
-  }
-  const yyyy = d.getFullYear();
-  const mm = String(d.getMonth() + 1).padStart(2, "0");
-  const dd = String(d.getDate()).padStart(2, "0");
-  return `${yyyy}-${mm}-${dd}`;
+  return formatPostDate(raw) ?? new Date().toISOString().split("T")[0];
 }
 
 function isPublishable(dateStr: string): boolean {
@@ -90,7 +84,6 @@ function isEnglishVariantFilePath(filePath: string): boolean {
   return /-en\.(md|mdx)$/.test(filePath);
 }
 
-// Helper to recursively find files
 function getFilesRecursively(dir: string): string[] {
   let results: string[] = [];
   const list = fs.readdirSync(dir);
@@ -148,7 +141,7 @@ function parsePostFile(
     description: data.description || "",
     content,
     readingTime: formatReadingTime(content, contentLanguage),
-    open: data.open !== false, // 기본값은 true (공개)
+    open: data.open !== false,
     type: readPostType(data.type),
     project: readOptionalString(data.project),
     series: readOptionalString(data.series),

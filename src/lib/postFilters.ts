@@ -20,16 +20,3 @@ export function filterPostsBySearch<T extends FilterablePost>(
       post.description.toLowerCase().includes(lowerQuery)
   );
 }
-
-export function filterPostsByProjects<T extends FilterablePost>(
-  posts: T[],
-  selectedProjects: string[]
-): T[] {
-  if (selectedProjects.length === 0) {
-    return posts;
-  }
-
-  return posts.filter(
-    (post) => post.project && selectedProjects.includes(post.project)
-  );
-}
