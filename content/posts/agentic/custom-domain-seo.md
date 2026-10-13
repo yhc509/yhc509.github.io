@@ -24,9 +24,9 @@ type: article
 
 커스텀 도메인이 유리한 점은 세 가지다.
 
-1. **독립적인 도메인 권한** — github.io에 세 들어 사는 게 아니라 내 도메인으로 신뢰도를 쌓을 수 있다
-2. **크롤 우선순위** — 공유 도메인보다 독립 도메인에 크롤러가 더 적극적으로 온다
-3. **장기적 유연성** — 나중에 GitHub Pages를 안 써도 도메인은 유지된다
+1. **독립적인 도메인 권한.** github.io에 세 들어 사는 대신 내 도메인으로 신뢰도를 쌓을 수 있다.
+2. **크롤 우선순위.** 공유 도메인보다 독립 도메인에 크롤러가 더 적극적으로 온다.
+3. **장기적 유연성.** 나중에 GitHub Pages를 안 써도 도메인은 유지된다.
 
 ## 도메인 선택과 구매
 
@@ -38,16 +38,16 @@ type: article
 
 GitHub Pages에 커스텀 도메인을 연결하는 건 생각보다 간단하다.
 
-**DNS 설정** — Cloudflare에서 A 레코드 4개를 추가한다. GitHub Pages 서버 IP로, 로드밸런싱을 위해 4개다. Proxy는 끄고 DNS only로 설정해야 한다. GitHub Pages가 자체 TLS를 쓰기 때문에 Cloudflare 프록시를 켜면 인증서가 충돌한다.
+**DNS 설정.** Cloudflare에서 A 레코드 4개를 추가한다. GitHub Pages 서버 IP로, 로드밸런싱을 위해 4개다. Proxy는 끄고 DNS only로 설정해야 한다. GitHub Pages가 자체 TLS를 쓰기 때문에 Cloudflare 프록시를 켜면 인증서가 충돌한다.
 
-**코드 변경** — 사이트 URL이 하드코딩된 곳을 전부 바꿔야 한다. 내 경우는 세 군데였다.
+**코드 변경.** 사이트 URL이 하드코딩된 곳을 전부 바꿔야 한다. 내 경우는 세 군데였다.
 - 사이트 기본 URL 설정
 - RSS 피드 생성 스크립트
 - GitHub Actions 빌드 환경변수
 
 그리고 `public/CNAME` 파일을 만들어서 도메인을 적어둔다. GitHub Pages가 이 파일을 보고 커스텀 도메인을 인식한다.
 
-**GitHub 설정** — 레포 Settings → Pages → Custom domain에 도메인을 넣으면 끝이다. HTTPS 인증서는 Let's Encrypt로 자동 발급된다.
+**GitHub 설정.** 레포 Settings → Pages → Custom domain에 도메인을 넣으면 끝이다. HTTPS 인증서는 Let's Encrypt로 자동 발급된다.
 
 ## 결과
 

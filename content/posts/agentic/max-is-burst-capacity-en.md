@@ -1,12 +1,12 @@
 ---
 title: "Consuming Your AI Plan vs. Operating It"
 date: "2026-03-19"
-description: "The value of a top-tier AI plan isn't daily volume — it's burst capacity for parallel work and long experiments when they matter most."
+description: "What a top-tier AI plan buys is burst capacity: parallel work and long experiments on the days that need them."
 open: false
 type: article
 ---
 
-Burned through the entire weekly GPT Pro quota running OpenClaw on Telegram for SLIME ARENA. More important work sat queued behind it. Couldn't touch it. First time I realized a plan's value isn't "can I use a lot" — it's "can I use it when I need to."
+Burned through the entire weekly GPT Pro quota running OpenClaw on Telegram for SLIME ARENA. More important work sat queued behind it. Couldn't touch it. First time I realized a plan's value isn't "can I use a lot." It's "can I use it when I need to."
 
 I used to judge AI plans by volume. Lots of usage per month, good plan. Hit limits fast, bad plan. Running coding agents daily changed that view. Less about average consumption, more about burst capacity.
 
@@ -16,9 +16,9 @@ Same top-tier plan, very different usage patterns.
 
 Some people just use a lot. Results disappoint, rephrase, retry. Usage runs high, but they never track where it goes.
 
-Others also run high, but for survival. Near the ceiling every day, work stops the moment headroom disappears. High usage — but not operating. Always scraping the limit.
+Others also run high, but for survival. Near the ceiling every day, work stops the moment headroom disappears. High usage, but not operating. Always scraping the limit.
 
-The pattern that matters: manage daily usage, then burst hard when it counts. Parallel tasks, long runs, heavy reasoning, comparison experiments — all at once. The top plan isn't "unlimited usage." It's capacity to go big when needed.
+The pattern that matters: manage daily usage, then burst hard when it counts. Parallel tasks, long runs, heavy reasoning, comparison experiments, all at once. The top plan isn't "unlimited usage." It's capacity to go big when needed.
 
 Same plan. Some consume. Some operate.
 

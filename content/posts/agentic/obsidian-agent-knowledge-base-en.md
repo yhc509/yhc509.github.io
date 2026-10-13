@@ -14,11 +14,11 @@ Documents were a problem too. Specs, design docs, and research notes were scatte
 
 ## One Obsidian Vault
 
-Decided to use Obsidian as the knowledge store. One vault only. Project specs, design docs, research notes, memory — everything goes in this vault. Projects only keep code.
+Decided to use Obsidian as the knowledge store. One vault only. Project specs, design docs, research notes, memory: everything goes in this vault. Projects only keep code.
 
 Claude Code accesses the vault entirely through CLI. Read, write, search. Knowledge gained during a session gets written to the vault as a document. Next session pulls from the vault when needed.
 
-The connective tissue is tags. Every document gets YAML frontmatter tags — project name, document type. When Claude Code enters a specific project, it finds related documents by tag. Since the link is tags rather than folder structure, a single document can span multiple projects.
+The connective tissue is tags. Every document gets YAML frontmatter tags (project name, document type). When Claude Code enters a specific project, it finds related documents by tag. Since the link is tags rather than folder structure, a single document can span multiple projects.
 
 Obsidian's graph view is for humans to grasp the overall structure. AI can't see the graph view. It follows wikilinks and tags inside documents instead. Wire the references well and the graph view becomes meaningful for humans, while AI can navigate to related documents too.
 
@@ -38,12 +38,12 @@ Manually reviewing documents every day is impossible. They keep piling up. Witho
 
 ## Knowledge Across Projects
 
-The clearest win right now is kinkeep-unity-cli. As I develop the CLI package, knowledge about Unity editor automation, scene handling, and asset management accumulates in the vault. When I open Claude Code in a game project that uses this CLI, the vault serves up how the CLI works and what its constraints are. Debugging "why isn't this command working" without CLI development context versus approaching it with knowledge of the internals — completely different.
+The clearest win right now is kinkeep-unity-cli. As I develop the CLI package, knowledge about Unity editor automation, scene handling, and asset management accumulates in the vault. When I open Claude Code in a game project that uses this CLI, the vault serves up how the CLI works and what its constraints are. Debugging "why isn't this command working" without CLI development context is completely different from approaching it with knowledge of the internals.
 
 Especially useful when splitting features into packages and running parallel work. Each package project lives in its own directory, but shared knowledge is in one vault. Directory boundaries don't break context.
 
 ## What I Don't Know Yet
 
-I don't know what happens when more documents pile up. Right now I'm satisfied. But whether search quality holds when the vault has hundreds or thousands of documents, whether the tag system scales, whether Claude accurately finds relevant documents — I'll only know by using it.
+I don't know what happens when more documents pile up. Right now I'm satisfied. But I'll only know by using it whether search quality holds at hundreds or thousands of documents, whether the tag system scales, and whether Claude accurately finds relevant documents.
 
-Andrej Karpathy seems to be trying something similar, though not with Obsidian. Giving the agent a separate external knowledge store. Different tools, same direction. Whether this is a passing trend or becomes basic infrastructure for running agents — I'll have to keep using it to find out.
+Andrej Karpathy seems to be trying something similar, though not with Obsidian. Giving the agent a separate external knowledge store. Different tools, same direction. Whether this is a passing trend or becomes basic infrastructure for running agents, I'll have to keep using it to find out.

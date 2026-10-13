@@ -12,9 +12,9 @@ The homepage was indexed. But with over 30 posts live, Google didn't know about 
 
 ## What Was Wrong
 
-I first suspected technical issues. Bad sitemap? Blocking robots.txt? Missing structured data? I checked everything — all clean. The sitemap was accessible with valid XML, robots.txt was wide open with `Allow: /`, and JSON-LD had full BlogPosting schema.
+I first suspected technical issues. Bad sitemap? Blocking robots.txt? Missing structured data? I checked everything, and it was all clean. The sitemap was accessible with valid XML, robots.txt was wide open with `Allow: /`, and JSON-LD had full BlogPosting schema.
 
-The problem was the sitemap — specifically, Google wasn't processing it. In Search Console, the sitemap status showed `isPending: true` five days after submission. Google received it and never opened it.
+The problem was the sitemap. Specifically, Google wasn't processing it. In Search Console, the sitemap status showed `isPending: true` five days after submission. Google received it and never opened it.
 
 The homepage got indexed not through the sitemap, but because a link from the GitHub repository page led Google to discover it by accident.
 
@@ -24,9 +24,9 @@ The homepage got indexed not through the sitemap, but because a link from the Gi
 
 A custom domain wins in three ways:
 
-1. **Independent domain authority** — you build trust on your own domain instead of renting space under GitHub's
-2. **Crawl priority** — crawlers are more aggressive with independent domains than shared ones
-3. **Long-term flexibility** — the domain stays yours even if you leave GitHub Pages
+1. **Domain authority.** Trust builds on your own domain, not on space rented under GitHub's.
+2. **Crawl priority.** Crawlers hit independent domains more aggressively than shared ones.
+3. **Flexibility.** The domain stays yours if you ever leave GitHub Pages.
 
 ## Choosing and Buying
 
@@ -38,22 +38,22 @@ I picked `kinkeep.dev`. The `.dev` TLD enforces HTTPS and fits a dev blog well. 
 
 Connecting a custom domain to GitHub Pages is straightforward.
 
-**DNS** — Add four A records in Cloudflare pointing to GitHub Pages server IPs for load balancing. Proxy must be off (DNS only) because GitHub Pages handles its own TLS — Cloudflare's proxy would cause certificate conflicts.
+**DNS:** Add four A records in Cloudflare pointing to GitHub Pages server IPs for load balancing. Proxy must be off (DNS only) because GitHub Pages handles its own TLS. Cloudflare's proxy would cause certificate conflicts.
 
-**Code changes** — Every hardcoded site URL needs updating. In my case, three places:
+**Code changes:** Every hardcoded site URL needs updating. In my case, three places:
 - The site base URL config
 - The RSS feed generation script
 - The GitHub Actions build environment variable
 
 Plus a `public/CNAME` file containing the domain name. GitHub Pages reads this to recognize the custom domain.
 
-**GitHub settings** — Repository Settings → Pages → Custom domain. Enter the domain, done. HTTPS certificates are auto-provisioned via Let's Encrypt.
+**GitHub settings:** Repository Settings → Pages → Custom domain. Enter the domain, done. HTTPS certificates are auto-provisioned via Let's Encrypt.
 
 ## Results
 
 After connecting the domain, I registered a new property in Google Search Console and submitted the sitemap. The difference was immediate.
 
-On github.io, the sitemap stayed `isPending` for five days. On kinkeep.dev, it was **processed instantly**. Same content, same sitemap structure — only the domain changed.
+On github.io, the sitemap stayed `isPending` for five days. On kinkeep.dev, it was **processed instantly**. Same content, same sitemap structure. Only the domain changed.
 
 All 37 URLs submitted via the Indexing API succeeded as well. I'll need to check actual indexing results in a few days, but the starting point is already different.
 

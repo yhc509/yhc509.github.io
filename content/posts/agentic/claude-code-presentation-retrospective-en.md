@@ -6,7 +6,7 @@ open: true
 type: devlog
 ---
 
-Yesterday I gave a Claude Code presentation to the developers in our division. Three of us split it up — the others covered why we picked Claude Code, the current state of agentic coding, and what harness engineering is. My section was real use cases.
+Yesterday I gave a Claude Code presentation to the developers in our division. Three of us split it up. The others covered why we picked Claude Code, the current state of agentic coding, and what harness engineering is. My section was real use cases.
 
 What I thought about most while preparing wasn't the cases themselves. It was the tone. I had no idea how these people felt about delegating code to AI. Some might be into it. Some might think it's reckless. That shaped how I framed everything.
 
@@ -26,7 +26,7 @@ Looking back at this progression while preparing the talk, it came down to feel.
 
 When an issue lands in Jira, I usually go to a crash collection service like Backtrace and manually search for related logs. Set filters, search, compare similar cases. Takes a while.
 
-I built a skill for this. Paste the Jira info and Claude reads the content, decides on filters, and queries the collection service via CLI. Reports similar cases too. Paste and wait — that's it.
+I built a skill for this. Paste the Jira info and Claude reads the content, decides on filters, and queries the collection service via CLI. Reports similar cases too. Paste and wait. That's it.
 
 I included this because the work runs in parallel. While I'm doing something else, Claude is digging through the issue. I don't have to stop what I'm working on to investigate.
 
@@ -40,11 +40,11 @@ I handed this to Claude.
 
 The first version (v1) just fed the spec and extracted a checklist. Results weren't bad. Actually produced about 3x more items than I'd make by hand. Thorough, but had gaps.
 
-v2 didn't go straight from spec to checklist. It decomposed and grouped the source text first. About 2x more granular than v1. But a new problem appeared. Claude couldn't judge gray areas — things the spec didn't explicitly define. "Should this be included?" items piled up and the list got unnecessarily long.
+v2 didn't go straight from spec to checklist. It decomposed and grouped the source text first. About 2x more granular than v1. But a new problem appeared. Claude couldn't judge gray areas, things the spec didn't explicitly define. "Should this be included?" items piled up and the list got unnecessarily long.
 
 This wasn't in the presentation, but today I built v3. Before analyzing the spec, it interviews me first. Asks "include this or skip it?" for each gray area, then builds the checklist from those answers.
 
-The checklist comes out as a markdown file. During development, Claude and I look at this file together — "let's build this one today."
+The checklist comes out as a markdown file. During development, Claude and I look at this file together: "let's build this one today."
 
 There are limits. A spec is not the codebase. Features that look cleanly separated in the spec can be tangled in code. Technical constraints not in the spec can exist. You can't just trust the checklist and code blindly.
 
@@ -64,7 +64,7 @@ It was useful for showing my own use cases in a condensed form, and I hoped the 
 
 ## After preparing the presentation
 
-Preparing the talk organized things for me too. Pulling out stuff I'd been using without much thought, trying to explain it to others — that's when it became clear why I use things the way I do.
+Preparing the talk organized things for me too. Pulling out stuff I'd been using without much thought and trying to explain it to others made it clear why I use things the way I do.
 
 Delegating to an agent isn't something I started with high trust. I started with small tasks and built a feel for it. Even now, the loop of delegating then checking never drops out. Without that loop, you can't use this at work.
 

@@ -55,9 +55,9 @@ export const siteContent = {
     emptyStateTitle: "공개 가능한 프로젝트를 정리 중입니다.",
     emptyStateTitleEn: "Public projects are being organized.",
     emptyStateDescription:
-      "보안과 공개 범위를 정리한 뒤, 실험 프로젝트와 재현용 데모부터 순서대로 올릴 예정입니다.",
+      "공개해도 되는 것부터 하나씩 올리겠습니다.",
     emptyStateDescriptionEn:
-      "After reviewing security and disclosure scope, experimental projects and reproducible demos will be published first.",
+      "Projects go up here one by one as they're cleared to share.",
   },
 } as const;
 

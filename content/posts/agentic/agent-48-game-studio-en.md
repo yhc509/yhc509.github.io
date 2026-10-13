@@ -16,9 +16,9 @@ Open the repo and there's no game code. Just agent definitions, skills, hooks, a
 
 Three-tier agent hierarchy:
 
-- **Director** x3 — Creative Director, Technical Director, Production Director. Opus model.
-- **Lead** x8 — Game Designer, Engine Lead, AI Lead, etc. Sonnet model.
-- **Specialist** x37 — Gameplay Programmer, Shader Artist, QA Tester, etc. Sonnet or Haiku model.
+- **Director** x3: Creative Director, Technical Director, Production Director. Opus model.
+- **Lead** x8: Game Designer, Engine Lead, AI Lead, etc. Sonnet model.
+- **Specialist** x37: Gameplay Programmer, Shader Artist, QA Tester, etc. Sonnet or Haiku model.
 
 A real company org chart, copy-pasted.
 
@@ -26,7 +26,7 @@ A real company org chart, copy-pasted.
 
 The exact problems I ran into were right there. Just at a bigger scale.
 
-Agents can't share state. Claude Code subagents start fresh every time. In a chain where Creative Director decides, Game Designer plans, and Gameplay Programmer codes — each agent has no idea what the previous one did. I already hit token waste and context loss with 2–3 agents. With 48, you can guess.
+Agents can't share state. Claude Code subagents start fresh every time. In a chain where Creative Director decides, Game Designer plans, and Gameplay Programmer codes, each agent has no idea what the previous one did. I already hit token waste and context loss with 2 or 3 agents. With 48, you can guess.
 
 Org structure is overhead for a solo developer. Studios need Director-Lead-Specialist hierarchies to manage communication bottlenecks between people. When you're working alone, why do you need an escalation path?
 
@@ -34,7 +34,7 @@ And drawing artificial boundaries slows things down. They split Gameplay Program
 
 ## Prompts Don't Differentiate Agent Roles
 
-From my own experience: what actually separates agent roles isn't prompt instructions — it's activated skills and tool permissions.
+From my own experience, what actually separates agent roles isn't prompt instructions. It's activated skills and tool permissions.
 
 Write "focus on bug analysis" in a prompt and there's no noticeable difference from a general-purpose agent. The agents I actually use well are the ones with a single narrow job. An agent that only resolves git merge conflicts. An agent that analyzes documents, breaks them apart, and reassembles them. Separation only means something when there's a clear role backed by matching tool permissions.
 
@@ -46,7 +46,7 @@ This is where it really starts smelling like paint-by-numbers.
 
 Directors get Opus. Specialists get Haiku. They copied the company hierarchy into model tiers instead of thinking about what each role actually needs.
 
-Directors are supposed to "guard the vision" — in practice that's high-level judgment. A few lines of prompt cover it. Opus is overkill. Meanwhile the Specialists who actually write code get Haiku. Game programming needs complex logic, optimization, and engine API knowledge. Can Haiku produce solid game code?
+Directors are supposed to "guard the vision," which in practice is high-level judgment. A few lines of prompt cover it. Opus is overkill. Meanwhile the Specialists who actually write code get Haiku. Game programming needs complex logic, optimization, and engine API knowledge. Can Haiku produce solid game code?
 
 Flip it. Judgment gets the lighter model. Coding gets the strongest.
 
@@ -58,7 +58,7 @@ Of the 37 skills, `/reverse-document` (backfill missing docs from existing code)
 
 Of the 8 hooks, `pre-compact.sh` (dump state before context compression) and `validate-commit.sh` (catch hardcoded values, validate JSON, enforce TODO format) work for any Claude Code project.
 
-The 11 rules encode real game dev domain knowledge. No hot-path allocations, server authoritative, 2ms AI budget — rules that come from actual experience.
+The 11 rules encode real game dev domain knowledge. No hot-path allocations, server authoritative, 2ms AI budget: rules that come from actual experience.
 
 ## gstack Was Different
 
@@ -76,6 +76,6 @@ Claude Code Game Studios got 6,500 stars because "48 AI agents building games" i
 
 Adding agents is easy. One more markdown file. Making those agents actually share context and collaborate is structurally impossible in the current Claude Code architecture.
 
-The star count reflects people's expectations. The direction — AI agents collaborating like an organization — is right. But right now there's no evidence it works.
+The star count reflects people's expectations. The direction (AI agents collaborating like an organization) is right. But right now there's no evidence it works.
 
-The real value in the repo isn't the agents. It's the skills, hooks, and rules system. If you're taking notes, benchmark the `.claude/skills/`, `.claude/hooks/`, `.claude/rules/` structure — but consolidate agents down to 5–10 with clear roles and distinct tool permissions.
+The real value in the repo isn't the agents. It's the skills, hooks, and rules system. If you're taking notes, benchmark the `.claude/skills/`, `.claude/hooks/`, `.claude/rules/` structure, but consolidate agents down to 5 to 10 with clear roles and distinct tool permissions.
