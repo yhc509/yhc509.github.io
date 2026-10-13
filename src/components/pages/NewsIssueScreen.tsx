@@ -124,6 +124,13 @@ export async function NewsIssueScreen({
                 </a>
               </h2>
               <p className="mt-2 leading-7">{item.summary}</p>
+              {item.points && (
+                <ul className="mt-2 list-disc space-y-1 pl-5 leading-7">
+                  {item.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+              )}
               {item.comment && (
                 <p className="mt-2 text-sm" style={{ color: "var(--text-muted)" }}>
                   {item.comment}

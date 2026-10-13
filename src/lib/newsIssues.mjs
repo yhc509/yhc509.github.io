@@ -10,7 +10,7 @@ export const MAX_ITEMS = 5;
 const ISSUE_FILE = /^(\d{4}-\d{2}-\d{2})(-en)?\.md$/;
 
 /**
- * @typedef {{ title: string, url: string, source: string, summary: string, comment?: string }} NewsItem
+ * @typedef {{ title: string, url: string, source: string, summary: string, points?: string[], comment?: string }} NewsItem
  * @typedef {{ id: string, issue: number, date: string, title: string, description: string,
  *   open: boolean, thumbnail: string | null, thumbnailBase: string | null,
  *   thumbnailLabel: string | null, thumbnailLanguage: "ko" | "en", items: NewsItem[], content: string, missingEnglish: boolean }} NewsIssue
@@ -22,6 +22,13 @@ function requireString(value, where) {
     throw new Error(`${where} must be a non-empty string`);
   }
   return value.trim();
+}
+
+function requireStringList(value, where) {
+  if (!Array.isArray(value) || value.length === 0) {
+    throw new Error(`${where} must be a non-empty list of strings`);
+  }
+  return value.map((entry, index) => requireString(entry, `${where}[${index}]`));
 }
 
 export const NEWS_IMAGE_DIR = path.join(NEWS_DIR, "img");
@@ -71,6 +78,7 @@ function parseIssueFile(filePath, id, missingEnglish) {
       url,
       source: requireString(item.source, `${where}.source`),
       summary: requireString(item.summary, `${where}.summary`),
+      ...(item.points == null ? {} : { points: requireStringList(item.points, `${where}.points`) }),
       ...(item.comment == null ? {} : { comment: requireString(item.comment, `${where}.comment`) }),
     };
   });
