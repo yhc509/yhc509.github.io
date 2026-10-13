@@ -226,7 +226,7 @@ export async function PostScreen({
           )}
         </nav>
       )}
-      <Comments />
+      <Comments term={`posts/${currentSlug}`} />
       <ScrollToTop />
     </div>
   );

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDevLanguage } from "@/components/DevLanguageProvider";
 import { useTheme } from "./ThemeProvider";
 
-export function Comments() {
+export function Comments({ term }: { term: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
   const useEnglish = useDevLanguage() === "en";
@@ -23,8 +23,9 @@ export function Comments() {
     scriptEl.setAttribute("data-repo-id", "R_kgDON6V84g");
     scriptEl.setAttribute("data-category", "Announcements");
     scriptEl.setAttribute("data-category-id", "DIC_kwDON6V84s4C0vjn");
-    scriptEl.setAttribute("data-mapping", "pathname");
-    scriptEl.setAttribute("data-strict", "0");
+    scriptEl.setAttribute("data-mapping", "specific");
+    scriptEl.setAttribute("data-term", term);
+    scriptEl.setAttribute("data-strict", "1");
     scriptEl.setAttribute("data-reactions-enabled", "1");
     scriptEl.setAttribute("data-emit-metadata", "0");
     scriptEl.setAttribute("data-input-position", "bottom");
@@ -35,7 +36,7 @@ export function Comments() {
 
     ref.current.appendChild(scriptEl);
     scriptLoaded.current = true;
-  }, [theme, useEnglish]);
+  }, [theme, useEnglish, term]);
 
   useEffect(() => {
     const iframe = document.querySelector<HTMLIFrameElement>(
