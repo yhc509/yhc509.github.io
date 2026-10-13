@@ -23,7 +23,9 @@ function issueHtml(issue) {
     .map(
       (item) =>
         `<li><p><a href="${escapeXml(item.url)}">${escapeXml(item.title)}</a> (${escapeXml(item.source)})</p>` +
-        `<p>${escapeXml(item.summary)}</p>${item.comment ? `<p><em>${escapeXml(item.comment)}</em></p>` : ""}</li>`
+        (item.summary ? `<p>${escapeXml(item.summary)}</p>` : "") +
+        (item.points ? `<ul>${item.points.map((point) => `<li>${escapeXml(point)}</li>`).join("")}</ul>` : "") +
+        `${item.comment ? `<p><em>${escapeXml(item.comment)}</em></p>` : ""}</li>`
     )
     .join("");
   return `<ol>${items}</ol>`;

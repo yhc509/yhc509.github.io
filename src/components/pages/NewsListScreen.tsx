@@ -7,16 +7,14 @@ import { languageAlternates, toSiteUrl } from "@/lib/site";
 const copy = {
   en: {
     title: "AI News",
-    description:
-      "A short AI newsletter: a few links per issue, each with a summary and a one-line take.",
+    description: "A few AI stories a day, summarized, with my take.",
     empty: "No issues yet.",
     koreanOnly: "Korean only",
   },
   ko: {
     title: "AI 뉴스",
-    description:
-      "짧은 AI 뉴스레터. 이슈마다 링크 몇 개와 요약, 한 줄 코멘트를 붙인다.",
-    empty: "아직 발행된 이슈가 없습니다.",
+    description: "매일 AI 소식 몇 개를 골라 짧게 정리하고 내 생각을 붙인다.",
+    empty: "아직 이슈가 없다.",
     koreanOnly: "Korean only",
   },
 } as const;
@@ -97,14 +95,14 @@ export function NewsListScreen({ language }: { language: DevLanguage }) {
                   className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs"
                   style={{ color: "var(--text-muted)" }}
                 >
-                  <span>#{issue.issue}</span>
-                  <span>·</span>
+                  <span>
+                    {language === "en"
+                      ? `Issue ${issue.issue}`
+                      : `${issue.issue}호`}
+                  </span>
                   <time dateTime={issue.date}>{issue.date}</time>
                   {language === "en" && issue.missingEnglish && (
-                    <>
-                      <span>·</span>
-                      <span>{text.koreanOnly}</span>
-                    </>
+                    <span>{text.koreanOnly}</span>
                   )}
                 </div>
                 <h2 className="text-lg font-bold leading-snug">
