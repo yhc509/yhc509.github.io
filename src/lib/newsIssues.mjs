@@ -10,9 +10,10 @@ export const MAX_ITEMS = 5;
 const ISSUE_FILE = /^(\d{4}-\d{2}-\d{2})(-en)?\.md$/;
 
 /**
- * @typedef {{ title: string, url: string, source: string, summary: string, comment: string }} NewsItem
+ * @typedef {{ title: string, url: string, source: string, summary: string, comment?: string }} NewsItem
  * @typedef {{ id: string, issue: number, date: string, title: string, description: string,
- *   open: boolean, items: NewsItem[], content: string, missingEnglish: boolean }} NewsIssue
+ *   open: boolean, thumbnail: string | null, thumbnailBase: string | null,
+ *   thumbnailLabel: string | null, thumbnailLanguage: "ko" | "en", items: NewsItem[], content: string, missingEnglish: boolean }} NewsIssue
  */
 
 /** @param {unknown} value @param {string} where */
@@ -21,6 +22,26 @@ function requireString(value, where) {
     throw new Error(`${where} must be a non-empty string`);
   }
   return value.trim();
+}
+
+export const NEWS_IMAGE_DIR = path.join(NEWS_DIR, "img");
+
+/** Built thumbnail (base image + per-language label) path under public/. @param {string} id @param {"ko" | "en"} language */
+export function newsOgPath(id, language) {
+  return language === "en" ? `/og/news/${id}.png` : `/og/ko/news/${id}.png`;
+}
+
+/**
+ * `thumbnail: ./img/<name>` names the base image in content/news/img. Missing field -> null; a named file that does not exist fails the build.
+ * @param {unknown} value @param {string} file @returns {string | null}
+ */
+function resolveThumbnailBase(value, file) {
+  if (value == null || value === "") return null;
+  const name = requireString(value, `${file}: thumbnail`).replace(/^\.\//, "").replace(/^img\//, "");
+  if (!fs.existsSync(path.join(NEWS_IMAGE_DIR, name))) {
+    throw new Error(`${file}: thumbnail ${name} not found in content/news/img`);
+  }
+  return name;
 }
 
 /** @param {string} filePath @param {string} id @param {boolean} missingEnglish @returns {NewsIssue} */
@@ -50,9 +71,12 @@ function parseIssueFile(filePath, id, missingEnglish) {
       url,
       source: requireString(item.source, `${where}.source`),
       summary: requireString(item.summary, `${where}.summary`),
-      comment: requireString(item.comment, `${where}.comment`),
+      ...(item.comment == null ? {} : { comment: requireString(item.comment, `${where}.comment`) }),
     };
   });
+
+  const thumbnailBase = resolveThumbnailBase(data.thumbnail, file);
+  const thumbnailLanguage = filePath.endsWith("-en.md") ? "en" : "ko";
 
   return {
     id,
@@ -61,6 +85,10 @@ function parseIssueFile(filePath, id, missingEnglish) {
     title: typeof data.title === "string" && data.title.trim() ? data.title.trim() : `AI News #${data.issue}`,
     description: typeof data.description === "string" ? data.description.trim() : "",
     open: data.open !== false,
+    thumbnail: thumbnailBase ? newsOgPath(id, thumbnailLanguage) : null,
+    thumbnailBase,
+    thumbnailLabel: typeof data.thumbnailLabel === "string" && data.thumbnailLabel.trim() ? data.thumbnailLabel.trim() : null,
+    thumbnailLanguage,
     items,
     content,
     missingEnglish,

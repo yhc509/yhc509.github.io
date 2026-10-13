@@ -11,7 +11,7 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import { createMarkdownComponents } from "@/components/MarkdownComponents";
 import { getAdjacentNewsIssues, getAllNewsIssues, getNewsIssue } from "@/lib/news";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
-import { languageAlternates } from "@/lib/site";
+import { languageAlternates, toSiteUrl } from "@/lib/site";
 
 const EMPTY_ISSUE_ID = "__empty__";
 
@@ -38,9 +38,28 @@ export async function generateNewsIssueMetadata(
   const koreanPath = `/ko/news/${id}`;
   const canonical = language === "en" && !issue.missingEnglish ? englishPath : koreanPath;
 
+  const images = issue.thumbnail
+    ? [{ url: toSiteUrl(issue.thumbnail), width: 1200, height: 630, alt: issue.title }]
+    : undefined;
+
   return {
     title: issue.title,
     description: issue.description,
+    openGraph: {
+      type: "article",
+      locale: language === "en" && !issue.missingEnglish ? "en_US" : "ko_KR",
+      title: issue.title,
+      description: issue.description,
+      url: toSiteUrl(canonical),
+      publishedTime: issue.date,
+      ...(images ? { images } : {}),
+    },
+    twitter: {
+      card: images ? "summary_large_image" : "summary",
+      title: issue.title,
+      description: issue.description,
+      ...(images ? { images: images.map((image) => image.url) } : {}),
+    },
     alternates: languageAlternates(canonical, englishPath, koreanPath),
   };
 }
@@ -71,6 +90,16 @@ export async function NewsIssueScreen({
       />
       <article lang={contentLanguage}>
         <header className="mb-8 pb-8 border-b" style={{ borderColor: "var(--card-border)" }}>
+          {issue.thumbnail && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={issue.thumbnail}
+              alt=""
+              width={1200}
+              height={630}
+              className="mb-6 aspect-[40/21] w-full rounded-lg object-cover"
+            />
+          )}
           <h1 className="text-3xl font-bold mb-4">{issue.title}</h1>
           <div className="flex items-center gap-3 text-sm" style={{ color: "var(--text-muted)" }}>
             <span>#{issue.issue}</span>
@@ -95,9 +124,11 @@ export async function NewsIssueScreen({
                 </a>
               </h2>
               <p className="mt-2 leading-7">{item.summary}</p>
-              <p className="mt-2 text-sm" style={{ color: "var(--text-muted)" }}>
-                {item.comment}
-              </p>
+              {item.comment && (
+                <p className="mt-2 text-sm" style={{ color: "var(--text-muted)" }}>
+                  {item.comment}
+                </p>
+              )}
             </li>
           ))}
         </ol>
