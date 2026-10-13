@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getAllProjects, buildProjectTagTree } from "@/lib/projects";
 import { ProjectsHome } from "@/components/ProjectsHome";
@@ -24,8 +23,8 @@ export function ProjectsScreen({ language }: { language: DevLanguage }) {
   const tagTree = buildProjectTagTree(projects);
 
   return (
-    <Suspense>
+    <>
       <ProjectsHome projects={projects} tagTree={tagTree} />
-    </Suspense>
+    </>
   );
 }

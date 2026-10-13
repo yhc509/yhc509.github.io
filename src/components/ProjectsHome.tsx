@@ -1,9 +1,9 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { localizedPath } from "@/lib/devLanguage";
+import { useLocationSearch } from "@/lib/useLocationSearch";
 import { useDevLanguage } from "@/components/DevLanguageProvider";
 import type { ProjectMeta, ProjectTagNode } from "@/lib/projects";
 import { getProjectsCopy } from "@/lib/siteContent";
@@ -89,8 +89,7 @@ export function ProjectsHome({ projects, tagTree }: ProjectsHomeProps) {
   const useEnglish = language === "en";
   const { headline, description, searchPlaceholder, emptyStateTitle, emptyStateDescription } =
     getProjectsCopy(language);
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const [searchParams, navigate] = useLocationSearch();
   const selectedTags =
     searchParams.get("tags")?.split(",").filter(Boolean) || [];
   const searchQuery = searchParams.get("q") || "";
@@ -106,9 +105,7 @@ export function ProjectsHome({ projects, tagTree }: ProjectsHomeProps) {
     }
     const queryString = params.toString();
     const projectsPath = localizedPath("/projects", language);
-    router.push(`${projectsPath}${queryString ? `?${queryString}` : ""}`, {
-      scroll: false,
-    });
+    navigate(`${projectsPath}${queryString ? `?${queryString}` : ""}`);
   };
 
   const handleTagsChange = (tags: string[]) => {

@@ -1,9 +1,9 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArchiveFilter, buildArchive, monthLabel } from "./ArchiveFilter";
 import { localizedPath } from "@/lib/devLanguage";
+import { useLocationSearch } from "@/lib/useLocationSearch";
 import { useDevLanguage } from "@/components/DevLanguageProvider";
 import { filterPostsBySearch } from "@/lib/postFilters";
 import { getBlogCopy } from "@/lib/siteContent";
@@ -26,8 +26,7 @@ export function BlogHome({
   const language = useDevLanguage();
   const useEnglish = language === "en";
   const { searchPlaceholder } = getBlogCopy(language);
-  const searchParams = useSearchParams();
-  const router = useRouter();
+  const [searchParams, navigate] = useLocationSearch();
 
   const monthParam = searchParams.get("month") || "";
   const selectedPeriod = /^\d{4}(-\d{2})?$/.test(monthParam) ? monthParam : "";
@@ -67,7 +66,7 @@ export function BlogHome({
     }
     const queryString = params.toString();
     const homePath = localizedPath("/", language);
-    router.push(queryString ? `${homePath}?${queryString}` : homePath, { scroll: false });
+    navigate(queryString ? `${homePath}?${queryString}` : homePath);
   };
 
   const setSelectedPeriod = (period: string) => {

@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getAllProjects } from "@/lib/projects";
 import { getAllPosts, buildPostProjectOptions } from "@/lib/posts";
@@ -26,12 +25,12 @@ export function HomeScreen({ language }: { language: DevLanguage }) {
   return (
     <>
       <HomeHero language={language} />
-      <Suspense>
+      <>
         <BlogHome
           posts={posts}
           projectOptions={projectOptions}
         />
-      </Suspense>
+      </>
     </>
   );
 }
