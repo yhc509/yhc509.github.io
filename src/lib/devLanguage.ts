@@ -1,27 +1,15 @@
 export type DevLanguage = "ko" | "en";
 
 export const DEFAULT_DEV_LANGUAGE: DevLanguage = "en";
-export const DEV_LANGUAGE_STORAGE_KEY = "devLanguage";
-export const KOREAN_PATH_PREFIX = "/ko";
+const DEV_LANGUAGE_STORAGE_KEY = "devLanguage";
+const KOREAN_PATH_PREFIX = "/ko";
 
 export function parseDevLanguage(value: string | null | undefined): DevLanguage | null {
   return value === "ko" || value === "en" ? value : null;
 }
 
-export function getDefaultDevLanguage(): DevLanguage {
-  return DEFAULT_DEV_LANGUAGE;
-}
-
 export function getToggledDevLanguage(language: DevLanguage): DevLanguage {
   return language === "en" ? "ko" : "en";
-}
-
-export function languageFromPathname(pathname: string): DevLanguage {
-  if (pathname === KOREAN_PATH_PREFIX || pathname.startsWith(`${KOREAN_PATH_PREFIX}/`)) {
-    return "ko";
-  }
-
-  return "en";
 }
 
 export function stripLanguagePrefix(pathname: string): string {

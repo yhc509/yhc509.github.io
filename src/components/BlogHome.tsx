@@ -129,7 +129,6 @@ export function BlogHome({
     return queryString ? `${postPath}?${queryString}` : postPath;
   };
 
-  // Calculate page range to show (max 10 pages)
   let startPage = Math.max(1, currentPage - 4);
   let endPage = Math.min(totalPages, currentPage + 5);
 
@@ -161,9 +160,7 @@ export function BlogHome({
 
   return (
     <div id="posts-feed" className="pb-10">
-      {/* Main content - 중앙 고정 */}
       <div className="relative max-w-3xl mx-auto px-5">
-        {/* Sidebar - 포스트 영역 바로 왼쪽 */}
         <aside className="hidden lg:block absolute right-full mr-8 w-56 top-0">
           <div className="sticky top-8 space-y-4">
             <ArchiveFilter
@@ -174,7 +171,6 @@ export function BlogHome({
           </div>
         </aside>
 
-        {/* Mobile archive filter */}
         <div className="lg:hidden mb-6 space-y-4">
           <ArchiveFilter
             archive={archive}
@@ -184,7 +180,6 @@ export function BlogHome({
           />
         </div>
 
-        {/* Search and Limit input */}
         <div
           className="mb-6 flex gap-3 border-b pb-4"
           style={{ borderColor: "var(--card-border)" }}
@@ -293,7 +288,6 @@ export function BlogHome({
         )}
 
         
-        {/* Posts list */}
         <div>
           {filteredPosts.length === 0 ? (
             <div
@@ -375,7 +369,6 @@ export function BlogHome({
           )}
         </div>
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <nav
             aria-label={paginationAriaLabel}

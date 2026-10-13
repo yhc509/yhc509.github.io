@@ -5,7 +5,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import matter from "gray-matter";
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
-import { visit } from "unist-util-visit";
+import { createPostAssetRemarkPlugin, resolvePostAssetSrc } from "../src/lib/postAssets.mjs";
 
 const SITE_URL = "https://kinkeep.dev";
 const SITE_TITLE = "kinkeep.dev";
@@ -74,73 +74,6 @@ function toAbsoluteUrl(value) {
   }
 
   return new URL(value, SITE_URL).toString();
-}
-
-function resolvePostAssetSrc(src, postDir) {
-  if (!src) {
-    return src;
-  }
-
-  if (
-    src.startsWith("http://") ||
-    src.startsWith("https://") ||
-    src.startsWith("/") ||
-    src.startsWith("data:") ||
-    src.startsWith("blob:")
-  ) {
-    return src;
-  }
-
-  const cleanSrc = src.replace(/^\.\//, "");
-  const relativePath = postDir ? `${postDir}/${cleanSrc}` : cleanSrc;
-  return `/posts-images/${relativePath}`;
-}
-
-function createPostAssetRemarkPlugin(postDir) {
-  return function remarkPostAssetPaths() {
-    return function transform(tree) {
-      visit(tree, (node) => {
-        if (node?.type === "image" && typeof node.url === "string") {
-          node.url = resolvePostAssetSrc(node.url, postDir);
-          return;
-        }
-
-        if (
-          (node?.type === "mdxJsxFlowElement" ||
-            node?.type === "mdxJsxTextElement") &&
-          Array.isArray(node.attributes)
-        ) {
-          node.attributes = node.attributes.map((attribute) => {
-            if (
-              attribute?.type !== "mdxJsxAttribute" ||
-              typeof attribute.name !== "string" ||
-              !["src", "poster"].includes(attribute.name) ||
-              typeof attribute.value !== "string"
-            ) {
-              return attribute;
-            }
-
-            return {
-              ...attribute,
-              value: resolvePostAssetSrc(attribute.value, postDir),
-            };
-          });
-          return;
-        }
-
-        if (node?.type === "html" && typeof node.value === "string") {
-          node.value = node.value.replace(
-            /\b(src|poster)=["']([^"']+)["']/g,
-            (_match, attributeName, attributeValue) => {
-              const resolvedValue =
-                resolvePostAssetSrc(attributeValue, postDir) ?? attributeValue;
-              return `${attributeName}="${resolvedValue}"`;
-            }
-          );
-        }
-      });
-    };
-  };
 }
 
 async function getMarkdownFiles(dir) {

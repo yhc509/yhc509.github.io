@@ -4,6 +4,7 @@ import { createElement } from "react";
 import matter from "gray-matter";
 import satori from "satori";
 import sharp from "sharp";
+import { formatPostDate } from "../src/lib/postAssets.mjs";
 
 const postsDir = path.join(process.cwd(), "content/posts");
 const projectsDir = path.join(process.cwd(), "content/projects");
@@ -45,22 +46,6 @@ function readStringArray(value) {
     .filter((item) => typeof item === "string")
     .map((item) => item.trim())
     .filter((item) => item.length > 0);
-}
-
-function formatDate(raw) {
-  if (!raw) {
-    return "";
-  }
-
-  const date = raw instanceof Date ? raw : new Date(raw);
-  if (Number.isNaN(date.getTime())) {
-    return "";
-  }
-
-  const yyyy = date.getFullYear();
-  const mm = String(date.getMonth() + 1).padStart(2, "0");
-  const dd = String(date.getDate()).padStart(2, "0");
-  return `${yyyy}-${mm}-${dd}`;
 }
 
 function getFilesRecursively(dir) {
@@ -352,7 +337,7 @@ async function renderFrontmatterCard(fontData, filePath, slug, targetPath) {
 
   const title = readOptionalString(data.title) || slug;
   const tags = readStringArray(data.tags ?? data.categories).slice(0, 3);
-  const date = formatDate(data.date);
+  const date = (formatPostDate(data.date) ?? "");
 
   if (!(await shouldGenerateImage(filePath, targetPath))) {
     return { included: true, generated: false };

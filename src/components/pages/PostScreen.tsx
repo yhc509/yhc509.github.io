@@ -12,7 +12,7 @@ import type { Metadata } from "next";
 import {
   createPostAssetRemarkPlugin,
   resolvePostAssetSrc,
-} from "@/lib/postAssets";
+} from "@/lib/postAssets.mjs";
 import { createMarkdownComponents } from "@/components/MarkdownComponents";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
 import { languageAlternates, toSiteUrl } from "@/lib/site";
