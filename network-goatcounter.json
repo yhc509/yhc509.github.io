@@ -1,0 +1,32 @@
+[
+  {
+    "phase": "first load https://kinkeep.dev/ko",
+    "status": 200,
+    "url": "https://gc.zgo.at/count.js"
+  },
+  {
+    "phase": "first load https://kinkeep.dev/ko",
+    "status": 200,
+    "url": "https://kinkeep.goatcounter.com/count?p=%2Fko&t=kinkeep.dev&s=1280&b=153&rnd=w2bxb"
+  },
+  {
+    "phase": "first load https://kinkeep.dev/",
+    "status": 200,
+    "url": "https://gc.zgo.at/count.js"
+  },
+  {
+    "phase": "first load https://kinkeep.dev/",
+    "status": 200,
+    "url": "https://kinkeep.goatcounter.com/count?p=%2F&t=kinkeep.dev&s=1280&b=153&rnd=urajc"
+  },
+  {
+    "phase": "client nav / -> /news",
+    "status": 200,
+    "url": "https://kinkeep.goatcounter.com/count?p=%2Fnews&t=AI%20News%20%7C%20kinkeep.dev&s=1280&b=153&rnd=xzs7o"
+  },
+  {
+    "phase": "client nav /news -> /about",
+    "status": 200,
+    "url": "https://kinkeep.goatcounter.com/count?p=%2Fabout&t=About%20%7C%20kinkeep.dev&s=1280&b=153&rnd=0aj9x"
+  }
+]
