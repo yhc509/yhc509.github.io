@@ -249,7 +249,7 @@ export async function NewsIssueScreen({
           ))}
         </ol>
         {issue.content.trim() && (
-          <div className="prose max-w-none mt-8">
+          <div className="prose max-w-none mt-8 overflow-x-auto">
             <MDXRemote
               source={issue.content}
               components={{ ...createMarkdownComponents(), XPost }}
