@@ -1,3 +1,4 @@
+import { authorPerson } from "@/lib/author";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -173,11 +174,7 @@ export async function ProjectScreen({
     inLanguage: contentLanguage,
     datePublished: project.date,
     codeRepository: project.links.github,
-    author: {
-      "@type": "Person",
-      name: "yhc509",
-      jobTitle: author,
-    },
+    author: authorPerson(author),
     keywords: project.tags.join(", "),
     image: toSiteUrl(project.thumbnail),
   };

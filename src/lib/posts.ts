@@ -5,6 +5,7 @@ import readingTime from "reading-time";
 export { filterPostsBySearch } from "./postFilters";
 import type { DevLanguage } from "./devLanguage";
 import { formatPostDate } from "./postAssets.mjs";
+import { resolveModifiedDate } from "./contentDates.mjs";
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
@@ -14,6 +15,7 @@ export interface PostMeta {
   slug: string;
   title: string;
   date: string;
+  modified: string;
   description: string;
   readingTime: string;
   open: boolean;
@@ -134,10 +136,13 @@ function parsePostFile(
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
+  const date = formatDateString(data.date);
+
   return {
     slug,
     title: data.title || slug,
-    date: formatDateString(data.date),
+    date,
+    modified: resolveModifiedDate(fullPath, date, data.updated, formatDateString),
     description: data.description || "",
     content,
     readingTime: formatReadingTime(content, contentLanguage),
@@ -171,6 +176,7 @@ export function getAllPosts(language: DevLanguage = "en"): PostMeta[] {
         slug: post.slug,
         title: post.title,
         date: post.date,
+        modified: post.modified,
         description: post.description,
         readingTime: post.readingTime,
         open: post.open,

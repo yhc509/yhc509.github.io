@@ -1,3 +1,4 @@
+import { AUTHOR_NAME, authorPerson } from "@/lib/author";
 import Link from "next/link";
 import { Hahmlet } from "next/font/google";
 import { DevLanguageProvider } from "@/components/DevLanguageProvider";
@@ -51,17 +52,11 @@ export function SiteFrame({
                 url: SITE_URL,
                 description,
                 inLanguage: useEnglish ? "en" : "ko",
-                author: {
-                  "@type": "Person",
-                  name: "yhc509",
-                },
+                author: { "@type": "Person", name: AUTHOR_NAME, url: SITE_URL },
               },
               {
                 "@context": "https://schema.org",
-                "@type": "Person",
-                name: "yhc509",
-                url: SITE_URL,
-                jobTitle: author,
+                ...authorPerson(author),
               },
             ]),
           }}

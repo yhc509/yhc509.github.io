@@ -1,3 +1,4 @@
+import { AUTHOR_NAME } from "./author";
 import type { Metadata } from "next";
 import type { DevLanguage } from "@/lib/devLanguage";
 import { SITE_URL, toSiteUrl } from "@/lib/site";
@@ -21,7 +22,7 @@ export function rootMetadata(language: DevLanguage): Metadata {
       },
     },
     keywords: [...siteContent.keywords],
-    authors: [{ name: "yhc509" }],
+    authors: [{ name: AUTHOR_NAME, url: SITE_URL }],
     openGraph: {
       type: "website",
       locale: language === "en" ? "en_US" : "ko_KR",
