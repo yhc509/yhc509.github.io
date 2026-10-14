@@ -22,7 +22,7 @@ export function MarkIcon({
       className={className ? `mark-glyph ${className}` : "mark-glyph"}
       viewBox={viewBox}
       style={style}
-      fill={icon.stroke ? "none" : undefined}
+      fill={icon.stroke ? "none" : icon.mono ? "currentColor" : undefined}
       stroke={icon.stroke ? "currentColor" : undefined}
       strokeWidth={icon.stroke ? 2 : undefined}
       strokeLinecap={icon.stroke ? "round" : undefined}

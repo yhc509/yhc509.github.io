@@ -96,6 +96,16 @@ export function scopeSvgIds(svg, prefix) {
   return out;
 }
 
+/** @param {string} attrs */
+function viewBoxFromSize(attrs) {
+  const width = Number(/width="([\d.]+)"/.exec(attrs)?.[1]);
+  const height = Number(/height="([\d.]+)"/.exec(attrs)?.[1]);
+  if (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0) {
+    return null;
+  }
+  return `0 0 ${width} ${height}`;
+}
+
 /** @param {string} svg */
 export function splitSvg(svg) {
   const source = svg.replace(/<!--[\s\S]*?-->/g, "").trim();
@@ -103,7 +113,10 @@ export function splitSvg(svg) {
   if (!open) {
     throw new Error("Icon SVG has no root element");
   }
-  const viewBox = /viewBox="([^"]+)"/.exec(open[1])?.[1] ?? "0 0 24 24";
+  const viewBox =
+    /viewBox="([^"]+)"/.exec(open[1])?.[1] ??
+    viewBoxFromSize(open[1]) ??
+    "0 0 24 24";
   const inner = source.slice(open.index + open[0].length).replace(/<\/svg>\s*$/, "");
   return { viewBox, inner };
 }
