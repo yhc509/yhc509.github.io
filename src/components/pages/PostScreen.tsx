@@ -15,6 +15,10 @@ import {
   resolvePostAssetSrc,
 } from "@/lib/postAssets.mjs";
 import { createMarkdownComponents } from "@/components/MarkdownComponents";
+import { Chart } from "@/components/Chart";
+import { XPost } from "@/components/XPost";
+import { remarkChart } from "@/lib/remarkChart.mjs";
+import { remarkXPost } from "@/lib/remarkXPost.mjs";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
 import { languageAlternates, toSiteUrl } from "@/lib/site";
 import { getSiteCopy } from "@/lib/siteContent";
@@ -132,9 +136,13 @@ export async function PostScreen({
 
   const postDir = slug.length > 1 ? slug.slice(0, -1).join("/") : "";
 
-  const components = createMarkdownComponents({
-    resolveAssetSrc: (src) => resolvePostAssetSrc(src, postDir),
-  });
+  const components = {
+    ...createMarkdownComponents({
+      resolveAssetSrc: (src) => resolvePostAssetSrc(src, postDir),
+    }),
+    XPost,
+    Chart,
+  };
   const postNavigationLabel = useEnglish ? "Post navigation" : "포스트 탐색";
   const previousPostLabel = useEnglish ? "← Previous post" : "← 이전 글";
   const nextPostLabel = useEnglish ? "Next post →" : "다음 글 →";
@@ -173,7 +181,12 @@ export async function PostScreen({
             components={components}
             options={{
               mdxOptions: {
-                remarkPlugins: [remarkGfm, createPostAssetRemarkPlugin(postDir)],
+                remarkPlugins: [
+                  remarkGfm,
+                  remarkChart,
+                  remarkXPost,
+                  createPostAssetRemarkPlugin(postDir),
+                ],
               },
             }}
           />

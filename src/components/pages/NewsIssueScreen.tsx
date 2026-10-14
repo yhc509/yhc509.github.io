@@ -10,6 +10,10 @@ import { Comments } from "@/components/Comments";
 import { KoreanFallbackNote } from "@/components/KoreanFallbackNote";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { createMarkdownComponents } from "@/components/MarkdownComponents";
+import { Chart } from "@/components/Chart";
+import { XPost } from "@/components/XPost";
+import { remarkChart } from "@/lib/remarkChart.mjs";
+import { remarkXPost } from "@/lib/remarkXPost.mjs";
 import {
   getAdjacentNewsIssues,
   getAllNewsIssues,
@@ -247,11 +251,13 @@ export async function NewsIssueScreen({
           ))}
         </ol>
         {issue.content.trim() && (
-          <div className="prose max-w-none mt-8">
+          <div className="prose max-w-none mt-8 overflow-x-auto">
             <MDXRemote
               source={issue.content}
-              components={createMarkdownComponents()}
-              options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+              components={{ ...createMarkdownComponents(), XPost, Chart }}
+              options={{
+                mdxOptions: { remarkPlugins: [remarkGfm, remarkChart, remarkXPost] },
+              }}
             />
           </div>
         )}
