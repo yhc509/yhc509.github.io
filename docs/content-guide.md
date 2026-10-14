@@ -207,6 +207,63 @@ console.log(greeting);
 
 지원 언어: `javascript`, `typescript`, `jsx`, `tsx`, `css`, `html`, `json`, `bash`, `python` 등
 
+### 카드와 비교표
+
+포스트와 뉴스 본문에서 `cards`, `matrix` 펜스로 그립니다. 보이는 문구는 그 언어 파일에 그대로 적습니다. 빌드 때 HTML과 SVG가 되고, 라이트와 다크는 사이트 `data-theme`를 따릅니다. 브라우저 스크립트는 없습니다.
+
+브랜드 아이콘은 `grok`, `cursor`, `x`, `gemini`, `openai`, `anthropic`입니다. 그 외 이름은 [Lucide](https://lucide.dev/icons/) 아이콘 이름입니다. 로고 줄에 Lucide 아이콘을 쓰면 `label`이 필요합니다.
+
+````markdown
+```cards
+logos:
+  - grok
+  - icon: bot
+    label: Grok Bot
+  - cursor
+  - x
+caption: 요금제 하나로
+```
+````
+
+````markdown
+```cards
+logo: cursor
+cards:
+  - icon: circle-check
+    label: 선택
+  - icon: thumbs-down
+    label: 단독 구매 끝
+    accent: rose
+```
+````
+
+`logos`는 위쪽 로고 줄, `logo`는 카드 위 로고 하나, `caption`은 아래 화살표와 한 줄입니다. 셋을 한꺼번에 쓰지 않아도 됩니다. `logos`와 `logo`는 같이 쓰지 않습니다. `accent`는 `rose` 또는 `#hex`입니다.
+
+````markdown
+```matrix
+columns: [Free, Plus, Premium, Super, Ultra]
+rows:
+  - icon: grok
+    label: Grok
+    cells:
+      - limited: 제한
+      - check
+      - none
+      - check
+      - 체크마크
+legend:
+  check: 포함
+  none: 미포함
+notes:
+  제한: 일부 사용량
+  체크마크: X Premium 대신 체크마크와 크리에이터 도구
+```
+````
+
+셀은 `check`, `none`, `{ limited: 짧은말 }`, 또는 그대로 보일 문장입니다. 범례는 쓰인 기호와 `notes`로 만들어집니다. `check`나 `none`을 쓰면 `legend`에 그 언어의 말을 적습니다.
+
+뉴스 항목 그림은 `image` 대신 `figure`에 같은 펜스를 넣습니다.
+
 ### 테이블
 
 ```markdown

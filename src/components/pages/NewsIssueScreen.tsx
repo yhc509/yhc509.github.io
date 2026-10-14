@@ -10,9 +10,12 @@ import { Comments } from "@/components/Comments";
 import { KoreanFallbackNote } from "@/components/KoreanFallbackNote";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { createMarkdownComponents } from "@/components/MarkdownComponents";
+import { Cards } from "@/components/Cards";
 import { Chart } from "@/components/Chart";
+import { Matrix } from "@/components/Matrix";
 import { XPost } from "@/components/XPost";
 import { remarkChart } from "@/lib/remarkChart.mjs";
+import { remarkCards, remarkMatrix } from "@/lib/remarkSpec.mjs";
 import { remarkXPost } from "@/lib/remarkXPost.mjs";
 import {
   getAdjacentNewsIssues,
@@ -199,7 +202,19 @@ export async function NewsIssueScreen({
                 </span>
                 <h2 className="text-lg font-bold leading-snug">{item.title}</h2>
               </div>
-              {item.image && (
+              {item.figure ? (
+                <div className="news-figure">
+                  <MDXRemote
+                    source={item.figure}
+                    components={{ Chart, Cards, Matrix }}
+                    options={{
+                      mdxOptions: {
+                        remarkPlugins: [remarkChart, remarkCards, remarkMatrix],
+                      },
+                    }}
+                  />
+                </div>
+              ) : item.image ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={newsItemImagePath(item.image)}
@@ -207,7 +222,7 @@ export async function NewsIssueScreen({
                   loading="lazy"
                   className="mt-3 h-auto w-full rounded-lg"
                 />
-              )}
+              ) : null}
               {item.summary && <p className="mt-3 leading-7">{item.summary}</p>}
               {item.points && (
                 <ul className="mt-3 list-disc space-y-1 pl-5 leading-7">
@@ -254,9 +269,11 @@ export async function NewsIssueScreen({
           <div className="prose max-w-none mt-8 overflow-x-auto">
             <MDXRemote
               source={issue.content}
-              components={{ ...createMarkdownComponents(), XPost, Chart }}
+              components={{ ...createMarkdownComponents(), XPost, Chart, Cards, Matrix }}
               options={{
-                mdxOptions: { remarkPlugins: [remarkGfm, remarkChart, remarkXPost] },
+                mdxOptions: {
+                  remarkPlugins: [remarkGfm, remarkChart, remarkCards, remarkMatrix, remarkXPost],
+                },
               }}
             />
           </div>
