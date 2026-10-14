@@ -7,6 +7,7 @@ import { KoreanFallbackNote } from "@/components/KoreanFallbackNote";
 import { createMarkdownComponents } from "@/components/MarkdownComponents";
 import { getAboutContent, getAboutPageCopy } from "@/lib/aboutContent";
 import type { DevLanguage } from "@/lib/devLanguage";
+import { absoluteDocumentTitle, indexDocumentTitle } from "@/lib/documentTitle";
 import { languageAlternates } from "@/lib/site";
 
 export async function aboutMetadata(language: DevLanguage): Promise<Metadata> {
@@ -17,7 +18,7 @@ export async function aboutMetadata(language: DevLanguage): Promise<Metadata> {
     language === "en" && about.missingEnglish ? koreanPath : language === "en" ? englishPath : koreanPath;
 
   return {
-    title: about.title,
+    ...absoluteDocumentTitle(indexDocumentTitle("about", language)),
     description: about.intro,
     alternates: languageAlternates(canonicalPath, englishPath, koreanPath),
   };
