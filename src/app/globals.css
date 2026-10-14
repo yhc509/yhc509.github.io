@@ -142,6 +142,79 @@ body {
   margin: 1.75rem 0;
 }
 
+.chart-block {
+  --chart-gemini: #3b82f6;
+  --chart-openai: #1fa971;
+  --chart-anthropic: #e08a62;
+  --chart-xai: #242428;
+  --chart-neutral: #8e939b;
+  --chart-track: color-mix(in srgb, var(--foreground) 10%, transparent);
+  position: relative;
+  margin: 1.75rem 0 1.25rem;
+  max-width: 100%;
+  color: var(--foreground);
+  font-family: inherit;
+}
+
+[data-theme="dark"] .chart-block {
+  --chart-xai: #d4d4d8;
+  --chart-neutral: #c2c6ce;
+}
+
+.chart-block .chart-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.chart-block .chart-source {
+  margin-top: 0.2rem;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.chart-block .chart-source a {
+  color: var(--accent);
+}
+
+.chart-block svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 0.75rem;
+}
+
+.chart-block svg text {
+  font-family: inherit;
+}
+
+.chart-block .chart-narrow {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .chart-block .chart-wide {
+    display: none;
+  }
+
+  .chart-block .chart-narrow {
+    display: block;
+  }
+}
+
+.chart-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .x-post {
   width: 100%;
   max-width: 550px;

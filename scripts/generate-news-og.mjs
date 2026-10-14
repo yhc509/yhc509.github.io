@@ -75,11 +75,19 @@ async function renderOverlay(label, issueNumber) {
 function copyNewsImageDir() {
   const targetDir = path.join(process.cwd(), "public", "news-img");
   fs.mkdirSync(targetDir, { recursive: true });
-  if (!fs.existsSync(NEWS_IMAGE_DIR)) return;
-  for (const name of fs.readdirSync(NEWS_IMAGE_DIR)) {
-    const from = path.join(NEWS_IMAGE_DIR, name);
-    if (!fs.statSync(from).isFile()) continue;
-    fs.copyFileSync(from, path.join(targetDir, name));
+  const keep = new Set();
+  if (fs.existsSync(NEWS_IMAGE_DIR)) {
+    for (const name of fs.readdirSync(NEWS_IMAGE_DIR)) {
+      const from = path.join(NEWS_IMAGE_DIR, name);
+      if (!fs.statSync(from).isFile()) continue;
+      keep.add(name);
+      fs.copyFileSync(from, path.join(targetDir, name));
+    }
+  }
+  for (const name of fs.readdirSync(targetDir)) {
+    const target = path.join(targetDir, name);
+    if (!fs.statSync(target).isFile() || keep.has(name)) continue;
+    fs.unlinkSync(target);
   }
 }
 
