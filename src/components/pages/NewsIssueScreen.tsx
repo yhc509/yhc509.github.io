@@ -223,9 +223,11 @@ export async function NewsIssueScreen({
                   className="mt-3 h-auto w-full rounded-lg"
                 />
               ) : null}
-              {item.summary && <p className="mt-3 leading-7">{item.summary}</p>}
+              {item.summary && (
+                <p className="news-copy mt-3 leading-7">{item.summary}</p>
+              )}
               {item.points && (
-                <ul className="mt-3 list-disc space-y-1 pl-5 leading-7">
+                <ul className="news-copy mt-3 list-disc space-y-1 pl-5 leading-7">
                   {item.points.map((point) => (
                     <li key={point}>{point}</li>
                   ))}
@@ -259,7 +261,7 @@ export async function NewsIssueScreen({
                   >
                     {useEnglish ? "My take" : "내 생각"}
                   </div>
-                  <p>{item.comment}</p>
+                  <p className="news-copy">{item.comment}</p>
                 </div>
               )}
             </li>

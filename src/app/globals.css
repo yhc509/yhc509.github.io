@@ -96,6 +96,11 @@ body {
   height: auto;
 }
 
+.prose :not(pre) > code,
+.news-copy {
+  overflow-wrap: anywhere;
+}
+
 .prose code {
   background: var(--card-border);
   padding: 0.2em 0.4em;
@@ -107,6 +112,7 @@ body {
   background: transparent;
   padding: 0;
   color: var(--code-text);
+  overflow-wrap: normal;
 }
 
 .prose a {
@@ -353,11 +359,15 @@ body {
 }
 
 .mark-matrix {
-  overflow: hidden;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .mark-matrix-scroll {
+  display: block;
+  width: 100%;
   max-width: 100%;
+  min-width: 0;
   overflow-x: auto;
   overscroll-behavior-x: contain;
 }
@@ -510,11 +520,19 @@ body {
   }
 
   .mark-matrix table {
+    width: 100%;
+    min-width: 0;
     font-size: 0.84rem;
   }
 
+  .mark-matrix th[scope="row"] {
+    max-width: 8.5rem;
+    white-space: normal;
+  }
+
   .mark-matrix td {
-    min-width: 6.2rem;
+    min-width: 0;
+    width: 1%;
   }
 }
 
