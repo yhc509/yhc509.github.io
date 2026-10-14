@@ -1,5 +1,31 @@
 import { execFileSync } from "child_process";
 
+const SEOUL = "Asia/Seoul";
+
+/** Calendar date `YYYY-MM-DD` in Asia/Seoul. Independent of the process timezone. @param {Date} [now] */
+export function seoulCalendarDate(now = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: SEOUL,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(now);
+  const value = (/** @type {Intl.DateTimeFormatPartTypes} */ type) =>
+    parts.find((part) => part.type === type)?.value;
+  return `${value("year")}-${value("month")}-${value("day")}`;
+}
+
+/**
+ * 23:59:59.999 in Asia/Seoul on the Seoul day that contains `now`.
+ * A date-only issue (`YYYY-MM-DD`) parses as UTC midnight, which is 09:00 KST that same day,
+ * so it is included for the whole Seoul calendar day and hidden on the next one.
+ * @param {Date} [now]
+ */
+export function endOfSeoulDay(now = new Date()) {
+  const [year, month, day] = seoulCalendarDate(now).split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1, day, 14, 59, 59, 999));
+}
+
 let shallow;
 function isShallowClone() {
   if (shallow === undefined) {
