@@ -5,7 +5,7 @@ import { GOATCOUNTER_SCRIPT_ID, GoatCounterTracker } from "@/components/GoatCoun
 export function GoatCounterScripts() {
   return (
     <>
-      <script dangerouslySetInnerHTML={{ __html: "window.goatcounter = { no_onload: true };" }} />
+      <script dangerouslySetInnerHTML={{ __html: "window.goatcounter = window.goatcounter || {}; window.goatcounter.no_onload = true;" }} />
       <script id={GOATCOUNTER_SCRIPT_ID} data-goatcounter={GOATCOUNTER_ENDPOINT} async src={GOATCOUNTER_SCRIPT} />
       <GoatCounterTracker />
     </>
