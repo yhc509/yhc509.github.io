@@ -10,6 +10,8 @@ import { Comments } from "@/components/Comments";
 import { KoreanFallbackNote } from "@/components/KoreanFallbackNote";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { createMarkdownComponents } from "@/components/MarkdownComponents";
+import { XPost } from "@/components/XPost";
+import { remarkXPost } from "@/lib/remarkXPost.mjs";
 import {
   getAdjacentNewsIssues,
   getAllNewsIssues,
@@ -250,8 +252,10 @@ export async function NewsIssueScreen({
           <div className="prose max-w-none mt-8">
             <MDXRemote
               source={issue.content}
-              components={createMarkdownComponents()}
-              options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+              components={{ ...createMarkdownComponents(), XPost }}
+              options={{
+                mdxOptions: { remarkPlugins: [remarkGfm, remarkXPost] },
+              }}
             />
           </div>
         )}

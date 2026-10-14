@@ -142,6 +142,91 @@ body {
   margin: 1.75rem 0;
 }
 
+.x-post {
+  width: 100%;
+  max-width: 550px;
+  margin: 1.5rem auto;
+}
+
+.x-post .react-tweet-theme {
+  max-width: 100%;
+  min-width: 0;
+  margin-inline: auto;
+}
+
+.x-post-fallback {
+  display: block;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  background: var(--card-bg);
+  padding: 0.9rem 1rem;
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+.x-post-fallback:hover {
+  background: color-mix(in srgb, var(--card-bg) 88%, var(--accent));
+}
+
+.x-post-fallback__label {
+  display: block;
+  color: var(--text-muted);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.x-post-fallback__title {
+  display: block;
+  margin-top: 0.25rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-weight: 700;
+}
+
+.x-post-fallback__url {
+  display: block;
+  margin-top: 0.35rem;
+  overflow-wrap: anywhere;
+  color: var(--accent);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 0.875rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="dark"]) .react-tweet-theme {
+    --tweet-skeleton-gradient: linear-gradient(
+      270deg,
+      #fafafa,
+      #eaeaea,
+      #eaeaea,
+      #fafafa
+    );
+    --tweet-border: 1px solid rgb(207, 217, 222);
+    --tweet-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif;
+    --tweet-font-color: rgb(15, 20, 25);
+    --tweet-font-color-secondary: rgb(83, 100, 113);
+    --tweet-bg-color: #fff;
+    --tweet-bg-color-hover: rgb(247, 249, 249);
+    --tweet-quoted-bg-color-hover: rgba(0, 0, 0, 0.03);
+    --tweet-color-blue-primary: rgb(29, 155, 240);
+    --tweet-color-blue-primary-hover: rgb(26, 140, 216);
+    --tweet-color-blue-secondary: rgb(0, 111, 214);
+    --tweet-color-blue-secondary-hover: rgba(0, 111, 214, 0.1);
+    --tweet-color-red-primary: rgb(249, 24, 128);
+    --tweet-color-red-primary-hover: rgba(249, 24, 128, 0.1);
+    --tweet-color-green-primary: rgb(0, 186, 124);
+    --tweet-color-green-primary-hover: rgba(0, 186, 124, 0.1);
+    --tweet-twitter-icon-color: var(--tweet-font-color);
+    --tweet-verified-old-color: rgb(130, 154, 171);
+    --tweet-verified-blue-color: var(--tweet-color-blue-primary);
+  }
+}
+
 .prose .mermaid-diagram__surface,
 .prose .mermaid-diagram__loading,
 .prose .mermaid-diagram__error {
