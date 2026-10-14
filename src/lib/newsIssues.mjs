@@ -1,3 +1,4 @@
+import { resolveModifiedDate } from "./contentDates.mjs";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -11,7 +12,7 @@ const ISSUE_FILE = /^(\d{4}-\d{2}-\d{2})(-en)?\.md$/;
 
 /**
  * @typedef {{ title: string, url: string, source: string, summary?: string, points?: string[], image?: string, imageAlt?: string, comment?: string }} NewsItem
- * @typedef {{ id: string, issue: number, date: string, title: string, description: string,
+ * @typedef {{ id: string, issue: number, date: string, modified: string, title: string, description: string,
  *   open: boolean, thumbnail: string | null, thumbnailBase: string | null,
  *   thumbnailLabel: string | null, thumbnailLanguage: "ko" | "en", items: NewsItem[], content: string, missingEnglish: boolean }} NewsIssue
  */
@@ -115,6 +116,7 @@ function parseIssueFile(filePath, id, missingEnglish) {
     id,
     issue: data.issue,
     date,
+    modified: resolveModifiedDate(filePath, date, data.updated, formatPostDate),
     title: typeof data.title === "string" && data.title.trim() ? data.title.trim() : `AI News #${data.issue}`,
     description: typeof data.description === "string" ? data.description.trim() : "",
     open: data.open !== false,

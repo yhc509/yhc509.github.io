@@ -1,3 +1,4 @@
+import { authorPerson } from "@/lib/author";
 import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -123,14 +124,10 @@ export async function PostScreen({
     image: toSiteUrl(imagePath),
     url: toSiteUrl(pagePath),
     datePublished: post.date,
-    dateModified: post.date,
-    author: {
-      "@type": "Person",
-      name: "yhc509",
-      jobTitle: author,
-    },
+    dateModified: post.modified,
+    author: authorPerson(author),
     wordCount: post.content.split(/\s+/).length,
-    publisher: { "@type": "Person", name: "yhc509" },
+    publisher: authorPerson(),
   };
 
   const postDir = slug.length > 1 ? slug.slice(0, -1).join("/") : "";

@@ -1,3 +1,4 @@
+import { authorPerson } from "@/lib/author";
 import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -118,8 +119,26 @@ export async function NewsIssueScreen({
   const issueLink = (target: { id: string }) =>
     localizedPath(`/news/${target.id}`, language);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: issue.title,
+    description: issue.description,
+    inLanguage: contentLanguage,
+    url: toSiteUrl(issueLink(issue)),
+    ...(issue.thumbnail ? { image: toSiteUrl(issue.thumbnail) } : {}),
+    datePublished: issue.date,
+    dateModified: issue.modified,
+    author: authorPerson(),
+    publisher: authorPerson(),
+  };
+
   return (
     <div className="max-w-3xl mx-auto px-5 py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Suspense>
         <BackButton basePath="/news" />
       </Suspense>
