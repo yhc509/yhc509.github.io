@@ -1,4 +1,4 @@
-import { resolveModifiedDate } from "./contentDates.mjs";
+import { endOfSeoulDay, resolveModifiedDate } from "./contentDates.mjs";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -133,11 +133,9 @@ function parseIssueFile(filePath, id, missingEnglish) {
   };
 }
 
-/** @param {NewsIssue} issue */
+/** Open issues whose date is today or earlier in Asia/Seoul. @param {NewsIssue} issue */
 function isVisible(issue) {
-  const endOfToday = new Date();
-  endOfToday.setHours(23, 59, 59, 999);
-  return issue.open && new Date(issue.date) <= endOfToday;
+  return issue.open && new Date(issue.date) <= endOfSeoulDay();
 }
 
 /**

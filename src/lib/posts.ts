@@ -5,7 +5,7 @@ import readingTime from "reading-time";
 export { filterPostsBySearch } from "./postFilters";
 import type { DevLanguage } from "./devLanguage";
 import { formatPostDate } from "./postAssets.mjs";
-import { resolveModifiedDate } from "./contentDates.mjs";
+import { endOfSeoulDay, resolveModifiedDate } from "./contentDates.mjs";
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
@@ -55,9 +55,7 @@ function formatDateString(raw: unknown): string {
 
 function isPublishable(dateStr: string): boolean {
   if (process.env.NODE_ENV === "development") return true;
-  const today = new Date();
-  today.setHours(23, 59, 59, 999);
-  return new Date(dateStr) <= today;
+  return new Date(dateStr) <= endOfSeoulDay();
 }
 
 function isOpen(open: boolean): boolean {
