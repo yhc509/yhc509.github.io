@@ -11,8 +11,8 @@ const indexDocumentTitles = {
     ko: "kinkeep.dev | 게임 엔진, 그래픽스, AI 에이전트 개발",
   },
   news: {
-    en: "kinkeep.dev | AI Tool News and Short Takes",
-    ko: "kinkeep.dev | AI 도구 뉴스 매일 짧게 정리",
+    en: "kinkeep.dev | News on the AI Tools I Actually Use",
+    ko: "kinkeep.dev | 내가 쓰는 AI 도구 뉴스 요약",
   },
   about: {
     en: "kinkeep.dev | About a Unity Game Programmer",
