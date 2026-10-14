@@ -41,7 +41,6 @@ export function getAboutPageCopy(language: DevLanguage) {
     headline: siteContent.about.headline,
     title: useEnglish ? siteContent.about.titleEn : siteContent.about.title,
     intro: useEnglish ? siteContent.about.introEn : siteContent.about.intro,
-    role: useEnglish ? siteContent.about.roleEn : siteContent.about.role,
     imageAlt: useEnglish ? siteContent.about.imageAltEn : siteContent.about.imageAlt,
     missingEnglish: !hasEnglishAbout(),
   };

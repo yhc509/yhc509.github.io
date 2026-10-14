@@ -1,9 +1,8 @@
-I've been building mobile game clients since 2017 — starting with modules and plugins, then moving through content systems and real-time PVP networking.
+I've been a Unity mobile game client programmer since 2017. On my own time, I'm building an HD-2D SRPG on a web engine I'm writing myself. I develop with AI agents: I build the harness, meaning the working environment and rules, and run the AI inside it.
 
-Lately I've been deep into AI-assisted development workflows. Most of the recent posts are about that.
+This blog covers:
 
----
-
-## About this blog
-
-A dev journal focused on things I've built and experienced firsthand.
+- Game engines and graphics
+- AI agent development and harness engineering
+- My own game development log
+- AI tool news (only tools I actually use)

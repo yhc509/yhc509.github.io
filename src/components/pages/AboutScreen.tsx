@@ -57,7 +57,6 @@ export function AboutScreen({ language }: { language: DevLanguage }) {
             <h1 className="mt-2 text-2xl font-bold leading-snug sm:text-3xl">
               {about.headline}
             </h1>
-            <p className="mt-2 text-sm leading-6">{about.role}</p>
           </div>
         </div>
       </section>
