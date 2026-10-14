@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getAllNewsIssues } from "@/lib/news";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
+import { absoluteDocumentTitle, indexDocumentTitle } from "@/lib/documentTitle";
 import { languageAlternates, toSiteUrl } from "@/lib/site";
 
 const copy = {
@@ -21,7 +22,7 @@ const copy = {
 
 export function newsListMetadata(language: DevLanguage): Metadata {
   return {
-    title: copy[language].title,
+    ...absoluteDocumentTitle(indexDocumentTitle("news", language)),
     description: copy[language].description,
     alternates: {
       ...languageAlternates(

@@ -28,7 +28,6 @@ export function rootMetadata(language: DevLanguage): Metadata {
       locale: language === "en" ? "en_US" : "ko_KR",
       url: language === "en" ? SITE_URL : toSiteUrl("/ko"),
       siteName: siteTitle,
-      title: siteTitle,
       description: siteDescription,
       images: [
         {
@@ -41,7 +40,6 @@ export function rootMetadata(language: DevLanguage): Metadata {
     },
     twitter: {
       card: "summary_large_image",
-      title: siteTitle,
       description: siteDescription,
       images: [toSiteUrl("/profile.png")],
     },
