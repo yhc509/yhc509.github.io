@@ -72,7 +72,19 @@ async function renderOverlay(label, issueNumber) {
   return Buffer.from(svg);
 }
 
+function copyNewsImageDir() {
+  const targetDir = path.join(process.cwd(), "public", "news-img");
+  fs.mkdirSync(targetDir, { recursive: true });
+  if (!fs.existsSync(NEWS_IMAGE_DIR)) return;
+  for (const name of fs.readdirSync(NEWS_IMAGE_DIR)) {
+    const from = path.join(NEWS_IMAGE_DIR, name);
+    if (!fs.statSync(from).isFile()) continue;
+    fs.copyFileSync(from, path.join(targetDir, name));
+  }
+}
+
 async function main() {
+  copyNewsImageDir();
   let count = 0;
   for (const language of /** @type {const} */ (["en", "ko"])) {
     for (const issue of readNewsIssues(language, { includeHidden: true })) {

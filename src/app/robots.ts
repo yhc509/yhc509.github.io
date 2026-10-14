@@ -8,11 +8,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: [
-        "/dev-language-sync/",
-        "/dev/x-embed-fixture",
-        "/ko/dev/x-embed-fixture",
-      ],
+      disallow: "/dev-language-sync/",
     },
     sitemap: toSiteUrl("/sitemap.xml"),
   };
