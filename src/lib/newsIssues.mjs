@@ -11,7 +11,7 @@ export const MAX_ITEMS = 5;
 const ISSUE_FILE = /^(\d{4}-\d{2}-\d{2})(-en)?\.md$/;
 
 /**
- * @typedef {{ title: string, url: string, source: string, summary?: string, points?: string[], image?: string, imageAlt?: string, comment?: string }} NewsItem
+ * @typedef {{ title: string, url: string, source: string, summary?: string, points?: string[], image?: string, imageAlt?: string, figure?: string, comment?: string }} NewsItem
  * @typedef {{ id: string, issue: number, date: string, modified: string, title: string, description: string,
  *   open: boolean, thumbnail: string | null, thumbnailBase: string | null,
  *   thumbnailLabel: string | null, thumbnailLanguage: "ko" | "en", items: NewsItem[], content: string, missingEnglish: boolean }} NewsIssue
@@ -105,6 +105,9 @@ function parseIssueFile(filePath, id, missingEnglish) {
             image: resolveItemImage(item.image, where),
             imageAlt: requireString(item.imageAlt, `${where}.imageAlt`),
           }),
+      ...(item.figure == null || item.figure === ""
+        ? {}
+        : { figure: requireString(item.figure, `${where}.figure`) }),
       ...(item.comment == null ? {} : { comment: requireString(item.comment, `${where}.comment`) }),
     };
   });
