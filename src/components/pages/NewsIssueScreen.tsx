@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { BackButton } from "@/components/BackButton";
+import { EditThisPage } from "@/components/EditThisPage";
 import { Comments } from "@/components/Comments";
 import { KoreanFallbackNote } from "@/components/KoreanFallbackNote";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -24,7 +25,7 @@ import {
 } from "@/lib/news";
 import { newsItemImagePath } from "@/lib/newsIssues.mjs";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
-import { languageAlternates, toSiteUrl } from "@/lib/site";
+import { languageAlternates, toAssetUrl, toSiteUrl } from "@/lib/site";
 
 const EMPTY_ISSUE_ID = "__empty__";
 
@@ -57,7 +58,7 @@ export async function generateNewsIssueMetadata(
   const images = issue.thumbnail
     ? [
         {
-          url: toSiteUrl(issue.thumbnail),
+          url: toAssetUrl(issue.thumbnail),
           width: 1200,
           height: 630,
           alt: issue.title,
@@ -133,7 +134,7 @@ export async function NewsIssueScreen({
     description: issue.description,
     inLanguage: contentLanguage,
     url: toSiteUrl(issueLink(issue)),
-    ...(issue.thumbnail ? { image: toSiteUrl(issue.thumbnail) } : {}),
+    ...(issue.thumbnail ? { image: toAssetUrl(issue.thumbnail) } : {}),
     datePublished: issue.date,
     dateModified: issue.modified,
     author: authorPerson(),
@@ -184,6 +185,7 @@ export async function NewsIssueScreen({
               {formatIssueDate(issue.date, useEnglish)}
             </time>
           </div>
+          <EditThisPage sourcePath={issue.sourcePath} language={language} />
         </header>
         <ol className="space-y-8">
           {issue.items.map((item, index) => (

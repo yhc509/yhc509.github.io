@@ -1,4 +1,5 @@
 import { endOfSeoulDay, resolveModifiedDate } from "./contentDates.mjs";
+import { includeFutureContent } from "./previewBuild.mjs";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -14,7 +15,7 @@ const ISSUE_FILE = /^(\d{4}-\d{2}-\d{2})(-en)?\.md$/;
  * @typedef {{ title: string, url: string, source: string, summary?: string, points?: string[], image?: string, imageAlt?: string, figure?: string, comment?: string }} NewsItem
  * @typedef {{ id: string, issue: number, date: string, modified: string, title: string, description: string,
  *   open: boolean, thumbnail: string | null, thumbnailBase: string | null,
- *   thumbnailLabel: string | null, thumbnailLanguage: "ko" | "en", items: NewsItem[], content: string, missingEnglish: boolean }} NewsIssue
+ *   thumbnailLabel: string | null, thumbnailLanguage: "ko" | "en", items: NewsItem[], content: string, missingEnglish: boolean, sourcePath: string }} NewsIssue
  */
 
 /** @param {unknown} value @param {string} where */
@@ -130,12 +131,15 @@ function parseIssueFile(filePath, id, missingEnglish) {
     items,
     content,
     missingEnglish,
+    sourcePath: file.split(path.sep).join("/"),
   };
 }
 
-/** Open issues whose date is today or earlier in Asia/Seoul. @param {NewsIssue} issue */
+/** Open issues whose date is today or earlier in Asia/Seoul. Preview builds and SHOW_FUTURE=1 keep future dates. @param {NewsIssue} issue */
 function isVisible(issue) {
-  return issue.open && new Date(issue.date) <= endOfSeoulDay();
+  if (!issue.open) return false;
+  if (includeFutureContent()) return true;
+  return new Date(issue.date) <= endOfSeoulDay();
 }
 
 /**

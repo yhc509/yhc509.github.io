@@ -6,6 +6,7 @@ export { filterPostsBySearch } from "./postFilters";
 import type { DevLanguage } from "./devLanguage";
 import { formatPostDate } from "./postAssets.mjs";
 import { endOfSeoulDay, resolveModifiedDate } from "./contentDates.mjs";
+import { includeFutureContent } from "./previewBuild.mjs";
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
@@ -27,6 +28,7 @@ export interface PostMeta {
 
 export interface Post extends PostMeta {
   content: string;
+  sourcePath: string;
 }
 
 
@@ -55,6 +57,7 @@ function formatDateString(raw: unknown): string {
 
 function isPublishable(dateStr: string): boolean {
   if (process.env.NODE_ENV === "development") return true;
+  if (includeFutureContent()) return true;
   return new Date(dateStr) <= endOfSeoulDay();
 }
 
@@ -143,6 +146,7 @@ function parsePostFile(
     modified: resolveModifiedDate(fullPath, date, data.updated, formatDateString),
     description: data.description || "",
     content,
+    sourcePath: path.relative(process.cwd(), fullPath).split(path.sep).join("/"),
     readingTime: formatReadingTime(content, contentLanguage),
     open: data.open !== false,
     type: readPostType(data.type),

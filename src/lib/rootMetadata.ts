@@ -1,7 +1,7 @@
 import { AUTHOR_NAME } from "./author";
 import type { Metadata } from "next";
 import type { DevLanguage } from "@/lib/devLanguage";
-import { SITE_URL, toSiteUrl } from "@/lib/site";
+import { deploymentOrigin, SITE_URL, toAssetUrl, toSiteUrl } from "@/lib/site";
 import { siteContent } from "@/lib/siteContent";
 
 const siteTitle = siteContent.name;
@@ -10,7 +10,7 @@ export function rootMetadata(language: DevLanguage): Metadata {
   const siteDescription = language === "en" ? siteContent.descriptionEn : siteContent.description;
 
   return {
-    metadataBase: new URL(SITE_URL),
+    metadataBase: new URL(deploymentOrigin()),
     title: {
       default: siteTitle,
       template: `%s | ${siteTitle}`,
@@ -31,7 +31,7 @@ export function rootMetadata(language: DevLanguage): Metadata {
       description: siteDescription,
       images: [
         {
-          url: toSiteUrl("/profile.png"),
+          url: toAssetUrl("/profile.png"),
           width: 400,
           height: 400,
           alt: siteTitle,
@@ -41,18 +41,21 @@ export function rootMetadata(language: DevLanguage): Metadata {
     twitter: {
       card: "summary_large_image",
       description: siteDescription,
-      images: [toSiteUrl("/profile.png")],
+      images: [toAssetUrl("/profile.png")],
     },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
-    },
+    robots:
+      process.env.VERCEL_ENV === "preview"
+        ? { index: false }
+        : {
+            index: true,
+            follow: true,
+            googleBot: {
+              index: true,
+              follow: true,
+              "max-video-preview": -1,
+              "max-image-preview": "large",
+              "max-snippet": -1,
+            },
+          },
   };
 }

@@ -3,6 +3,8 @@ import { GOATCOUNTER_SCRIPT_ID, GoatCounterTracker } from "@/components/GoatCoun
 
 /** GoatCounter SPA setup from goatcounter.com/help/spa: no_onload, then count() per route in GoatCounterTracker. */
 export function GoatCounterScripts() {
+  if (process.env.VERCEL_ENV === "preview") return null;
+
   return (
     <>
       <script dangerouslySetInnerHTML={{ __html: "window.goatcounter = window.goatcounter || {}; window.goatcounter.no_onload = true;" }} />
