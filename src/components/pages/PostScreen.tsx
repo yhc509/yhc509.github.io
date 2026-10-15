@@ -6,6 +6,7 @@ import { getAdjacentPosts, getAllPostSlugs, getPostBySlug } from "@/lib/posts";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { BackButton } from "@/components/BackButton";
+import { EditThisPage } from "@/components/EditThisPage";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { Comments } from "@/components/Comments";
 import { KoreanFallbackNote } from "@/components/KoreanFallbackNote";
@@ -23,7 +24,7 @@ import { remarkChart } from "@/lib/remarkChart.mjs";
 import { remarkCards, remarkMatrix } from "@/lib/remarkSpec.mjs";
 import { remarkXPost } from "@/lib/remarkXPost.mjs";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
-import { languageAlternates, toSiteUrl } from "@/lib/site";
+import { languageAlternates, toAssetUrl, toSiteUrl } from "@/lib/site";
 import { getSiteCopy } from "@/lib/siteContent";
 
 export interface PostPageProps {
@@ -78,7 +79,7 @@ export async function generatePostMetadata(
         publishedTime: post.date,
         images: [
           {
-            url: toSiteUrl(imagePath),
+            url: toAssetUrl(imagePath),
             width: 1200,
             height: 630,
             alt: post.title,
@@ -89,7 +90,7 @@ export async function generatePostMetadata(
         card: "summary_large_image",
         title: post.title,
         description: post.description,
-        images: [toSiteUrl(imagePath)],
+        images: [toAssetUrl(imagePath)],
       },
       alternates: languageAlternates(canonicalPath, englishPath, koreanPath),
     };
@@ -128,7 +129,7 @@ export async function PostScreen({
     headline: post.title,
     description: post.description,
     inLanguage: contentLanguage,
-    image: toSiteUrl(imagePath),
+    image: toAssetUrl(imagePath),
     url: toSiteUrl(pagePath),
     datePublished: post.date,
     dateModified: post.modified,
@@ -179,6 +180,7 @@ export async function PostScreen({
             <span>·</span>
             <span>{post.readingTime}</span>
           </div>
+          <EditThisPage sourcePath={post.sourcePath} language={language} />
         </header>
         <div className="prose max-w-none">
           <MDXRemote

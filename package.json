@@ -6,7 +6,7 @@
     "predev": "node scripts/sync-post-assets.mjs && node scripts/generate-og-images.mjs && node scripts/generate-rss.mjs && node scripts/generate-news-rss.mjs && node scripts/generate-news-og.mjs",
     "dev": "next dev",
     "prebuild": "node scripts/sync-post-assets.mjs && node scripts/generate-og-images.mjs && node scripts/generate-rss.mjs && node scripts/generate-news-rss.mjs && node scripts/generate-news-og.mjs",
-    "build": "next build",
+    "build": "next build && node scripts/check-no-edit-links.mjs",
     "lint": "eslint",
     "preview": "serve out"
   },

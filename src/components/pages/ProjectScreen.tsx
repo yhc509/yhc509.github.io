@@ -14,7 +14,7 @@ import { ProjectExternalLinks } from "@/components/ProjectExternalLinks";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import type { Metadata } from "next";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
-import { languageAlternates, toSiteUrl } from "@/lib/site";
+import { languageAlternates, toAssetUrl, toSiteUrl } from "@/lib/site";
 import { getSiteCopy } from "@/lib/siteContent";
 
 const EMPTY_PROJECT_SLUG = "__empty__";
@@ -109,7 +109,7 @@ export async function generateProjectMetadata(
         tags: project.tags,
         images: [
           {
-            url: toSiteUrl(imagePath),
+            url: toAssetUrl(imagePath),
             width: 1200,
             height: 630,
             alt: project.title,
@@ -120,7 +120,7 @@ export async function generateProjectMetadata(
         card: "summary_large_image",
         title: project.title,
         description: project.description,
-        images: [toSiteUrl(imagePath)],
+        images: [toAssetUrl(imagePath)],
       },
       alternates: languageAlternates(canonicalPath, englishPath, koreanPath),
     };
@@ -176,7 +176,7 @@ export async function ProjectScreen({
     codeRepository: project.links.github,
     author: authorPerson(author),
     keywords: project.tags.join(", "),
-    image: toSiteUrl(project.thumbnail),
+    image: toAssetUrl(project.thumbnail),
   };
 
   return (
