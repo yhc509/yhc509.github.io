@@ -1,0 +1,26 @@
+# kinkeep.dev
+
+> Notes on game engines, graphics, agentic coding, and harness engineering from a Unity client programmer.
+
+English URLs are primary. Korean pages live under /ko.
+
+News is published on Tuesday and Thursday.
+
+## Key pages
+
+- [About](https://kinkeep.dev/about): Unity client programmer. Korean: https://kinkeep.dev/ko/about
+- [AI News](https://kinkeep.dev/news): Tuesday and Thursday notes on AI tools I use. Korean: https://kinkeep.dev/ko/news
+
+## Game development
+
+- [Why Color and Vector Looked Different in URP Shader Graph](https://kinkeep.dev/posts/unity/urp_gamma_correction): Linear color space notes in Shader Graph. Korean: https://kinkeep.dev/ko/posts/unity/urp_gamma_correction
+- [Grayscale Transition Without Saturation in URP Shader Graph](https://kinkeep.dev/posts/unity/urp_grascale): Manual luminance weights in Shader Graph. Korean: https://kinkeep.dev/ko/posts/unity/urp_grascale
+- [Five UE5 Animation Concepts I Sorted Out First](https://kinkeep.dev/posts/ue/devlog1): Montages, blend spaces, aim offsets, notifies, and IK. Korean: https://kinkeep.dev/ko/posts/ue/devlog1
+- [What FlyingCat Showed Me About Vibe Coding](https://kinkeep.dev/posts/flyingcat/vibe-coding): A small WebGL game built with AI assistance. Korean: https://kinkeep.dev/ko/posts/flyingcat/vibe-coding
+
+## AI agent development
+
+- [In the Frontier Model Range, the Harness Makes a Bigger Difference](https://kinkeep.dev/posts/agentic/model-vs-harness): Harness versus swapping models. Korean: https://kinkeep.dev/ko/posts/agentic/model-vs-harness
+- [What I Actually Look for After Switching AI Coding Tools](https://kinkeep.dev/posts/agentic/ai-coding-tool-selection): How I compare coding agents. Korean: https://kinkeep.dev/ko/posts/agentic/ai-coding-tool-selection
+- [Claude Code vs Codex /goal: How Judging Differs, and a 44-Hour Unattended Bomberman Experiment](https://kinkeep.dev/posts/agentic/claude-code-codex-goal): Goal judging and a long unattended run. Korean: https://kinkeep.dev/ko/posts/agentic/claude-code-codex-goal
+- [Don't Connect MCP Directly](https://kinkeep.dev/posts/agentic/wrapping-mcp-as-cli): Wrapping an MCP debugger as a CLI. Korean: https://kinkeep.dev/ko/posts/agentic/wrapping-mcp-as-cli
