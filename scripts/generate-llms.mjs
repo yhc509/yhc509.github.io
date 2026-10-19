@@ -2,10 +2,10 @@ import { promises as fs } from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { endOfSeoulDay } from "../src/lib/contentDates.mjs";
+import { readNewsIssues } from "../src/lib/newsIssues.mjs";
 
 const SITE_URL = "https://kinkeep.dev";
 const POSTS_DIR = path.join(process.cwd(), "content/posts");
-const NEWS_DIR = path.join(process.cwd(), "content/news");
 const LLMS_PATH = path.join(process.cwd(), "public/llms.txt");
 const FULL_PATH = path.join(process.cwd(), "public/llms-full.txt");
 
@@ -86,37 +86,15 @@ async function posts() {
   return parsed.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-async function newsIssues() {
-  const files = (await fs.readdir(NEWS_DIR)).filter((name) => /^\d{4}-\d{2}-\d{2}\.md$/.test(name));
-
-  const parsed = [];
-  for (const name of files) {
-      const id = name.replace(/\.md$/, "");
-      const korean = await readMarkdown(path.join(NEWS_DIR, name));
-      if (korean.data.open === false || !isPublishable(dateString(korean.data.date))) {
-        continue;
-      }
-
-      const englishFile = path.join(NEWS_DIR, `${id}-en.md`);
-      let englishDoc = null;
-      try {
-        englishDoc = await readMarkdown(englishFile);
-      } catch {
-        englishDoc = null;
-      }
-
-      const source = englishDoc ?? korean;
-      parsed.push({
-        id,
-        title: String(source.data.title || id),
-        date: dateString(source.data.date || korean.data.date),
-        description: String(source.data.description || "").replace(/\s+/g, " ").trim(),
-        body: source.content,
-        koreanOnly: !englishDoc,
-      });
-  }
-
-  return parsed.sort((a, b) => (a.date < b.date ? 1 : -1));
+function newsIssues() {
+  return readNewsIssues("en").map((issue) => ({
+    id: issue.id,
+    title: issue.title,
+    date: issue.date,
+    description: issue.description.replace(/\s+/g, " ").trim(),
+    body: issue.content.trim(),
+    koreanOnly: issue.missingEnglish,
+  }));
 }
 
 function section(title, lines) {
