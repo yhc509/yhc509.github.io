@@ -34,13 +34,24 @@ export function getAboutContent(language: DevLanguage): string {
   return fs.readFileSync(filePath, "utf8");
 }
 
+function assertAboutDescription(description: string, language: DevLanguage) {
+  const sentences = description.split(/[.!?。]/u).map((part) => part.trim()).filter(Boolean);
+  if (description.length > 160 || sentences.length !== 1) {
+    throw new Error(
+      `About ${language} description must be one sentence of at most 160 characters. It is ${description.length} characters and ${sentences.length} sentences.`,
+    );
+  }
+}
+
 export function getAboutPageCopy(language: DevLanguage) {
   const useEnglish = language === "en" && hasEnglishAbout();
+  const description = useEnglish ? siteContent.about.descriptionEn : siteContent.about.description;
+  assertAboutDescription(description, useEnglish ? "en" : "ko");
 
   return {
-    headline: siteContent.about.headline,
+    headline: useEnglish ? siteContent.about.headlineEn : siteContent.about.headline,
     title: useEnglish ? siteContent.about.titleEn : siteContent.about.title,
-    intro: useEnglish ? siteContent.about.introEn : siteContent.about.intro,
+    description,
     imageAlt: useEnglish ? siteContent.about.imageAltEn : siteContent.about.imageAlt,
     missingEnglish: !hasEnglishAbout(),
   };

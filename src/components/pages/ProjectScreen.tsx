@@ -1,4 +1,4 @@
-import { authorPerson } from "@/lib/author";
+import { personReference } from "@/lib/author";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -14,8 +14,8 @@ import { ProjectExternalLinks } from "@/components/ProjectExternalLinks";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import type { Metadata } from "next";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
-import { languageAlternates, toSiteUrl } from "@/lib/site";
-import { getSiteCopy } from "@/lib/siteContent";
+import { clampMetaDescription } from "@/lib/metaDescription";
+import { pageAlternates, toSiteUrl } from "@/lib/site";
 
 const EMPTY_PROJECT_SLUG = "__empty__";
 
@@ -92,18 +92,19 @@ export async function generateProjectMetadata(
           ? englishPath
           : koreanPath;
     const url = toSiteUrl(canonicalPath);
+    const description = clampMetaDescription(project.description);
     const imagePath = projectImagePath(slug, language);
     const contentLanguage = language === "ko" || project.missingEnglish ? "ko" : "en";
 
     return {
       title: project.title,
-      description: project.description,
+      description,
       keywords: [...project.tags, project.role],
       openGraph: {
         type: "article",
         locale: contentLanguage === "en" ? "en_US" : "ko_KR",
         title: project.title,
-        description: project.description,
+        description,
         url,
         publishedTime: project.date,
         tags: project.tags,
@@ -119,10 +120,10 @@ export async function generateProjectMetadata(
       twitter: {
         card: "summary_large_image",
         title: project.title,
-        description: project.description,
+        description,
         images: [toSiteUrl(imagePath)],
       },
-      alternates: languageAlternates(canonicalPath, englishPath, koreanPath),
+      alternates: pageAlternates(language, canonicalPath, englishPath, koreanPath),
     };
   } catch {
     return {
@@ -137,7 +138,6 @@ export async function ProjectScreen({
 }: ProjectPageProps & { language: DevLanguage }) {
   const { slug } = await params;
   const useEnglish = language === "en";
-  const { author } = getSiteCopy(language);
 
   if (slug === EMPTY_PROJECT_SLUG) {
     notFound();
@@ -174,7 +174,7 @@ export async function ProjectScreen({
     inLanguage: contentLanguage,
     datePublished: project.date,
     codeRepository: project.links.github,
-    author: authorPerson(author),
+    author: personReference(),
     keywords: project.tags.join(", "),
     image: toSiteUrl(project.thumbnail),
   };

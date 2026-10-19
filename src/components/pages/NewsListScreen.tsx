@@ -3,48 +3,74 @@ import type { Metadata } from "next";
 import { getAllNewsIssues } from "@/lib/news";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
 import { absoluteDocumentTitle, indexDocumentTitle } from "@/lib/documentTitle";
-import { languageAlternates, toSiteUrl } from "@/lib/site";
+import { clampMetaDescription } from "@/lib/metaDescription";
+import { pageAlternates, pageSocial, toSiteUrl } from "@/lib/site";
+import {
+  breadcrumbList,
+  jsonLdGraph,
+  mainEntityOfPage,
+  websiteReference,
+} from "@/lib/structuredData";
 
 const copy = {
   en: {
     title: "AI News",
-    description: "A few AI stories a day, summarized, with my take.",
+    description: "A few AI stories each Tuesday and Thursday, summarized, with my take.",
     empty: "No issues yet.",
     koreanOnly: "Korean only",
+    home: "Home",
   },
   ko: {
     title: "AI 뉴스",
-    description: "매일 AI 소식 몇 개를 골라 짧게 정리하고 내 생각을 붙인다.",
+    description: "화요일과 목요일에 AI 소식 몇 개를 골라 짧게 정리하고 내 생각을 붙인다.",
     empty: "아직 이슈가 없다.",
     koreanOnly: "Korean only",
+    home: "홈",
   },
 } as const;
 
 export function newsListMetadata(language: DevLanguage): Metadata {
+  const description = clampMetaDescription(copy[language].description);
+  const title = indexDocumentTitle("news", language);
+  const path = language === "en" ? "/news" : "/ko/news";
+
   return {
-    ...absoluteDocumentTitle(indexDocumentTitle("news", language)),
-    description: copy[language].description,
-    alternates: {
-      ...languageAlternates(
-        language === "en" ? "/news" : "/ko/news",
-        "/news",
-        "/ko/news",
-      ),
-      types: {
-        "application/rss+xml": toSiteUrl(
-          language === "en" ? "/news/feed.xml" : "/ko/news/feed.xml",
-        ),
-      },
-    },
+    ...absoluteDocumentTitle(title),
+    description,
+    alternates: pageAlternates(language, path, "/news", "/ko/news"),
+    ...pageSocial(language, path, title, description),
   };
 }
 
 export function NewsListScreen({ language }: { language: DevLanguage }) {
   const issues = getAllNewsIssues(language);
   const text = copy[language];
+  const path = language === "en" ? "/news" : "/ko/news";
+  const pageUrl = toSiteUrl(path);
+  const homeUrl = toSiteUrl(language === "en" ? "/" : "/ko");
+  const listJsonLd = jsonLdGraph([
+    {
+      "@type": "CollectionPage",
+      "@id": pageUrl,
+      url: pageUrl,
+      name: text.title,
+      description: clampMetaDescription(text.description),
+      inLanguage: language,
+      isPartOf: websiteReference(),
+      mainEntityOfPage: mainEntityOfPage(pageUrl),
+    },
+    breadcrumbList([
+      { name: text.home, item: homeUrl },
+      { name: text.title, item: pageUrl },
+    ]),
+  ]);
 
   return (
     <div className="max-w-3xl mx-auto px-5 pb-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(listJsonLd) }}
+      />
       <section className="pt-6 pb-1 sm:pt-7">
         <div
           className="border-b pb-5"

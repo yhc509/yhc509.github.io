@@ -1,13 +1,16 @@
 import { AUTHOR_NAME } from "./author";
 import type { Metadata } from "next";
 import type { DevLanguage } from "@/lib/devLanguage";
-import { SITE_URL, toSiteUrl } from "@/lib/site";
+import { clampMetaDescription } from "@/lib/metaDescription";
+import { rssAlternateTypes, SITE_URL, toSiteUrl } from "@/lib/site";
 import { siteContent } from "@/lib/siteContent";
 
 const siteTitle = siteContent.name;
 
 export function rootMetadata(language: DevLanguage): Metadata {
-  const siteDescription = language === "en" ? siteContent.descriptionEn : siteContent.description;
+  const siteDescription = clampMetaDescription(
+    language === "en" ? siteContent.descriptionEn : siteContent.description,
+  );
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -17,9 +20,7 @@ export function rootMetadata(language: DevLanguage): Metadata {
     },
     description: siteDescription,
     alternates: {
-      types: {
-        "application/rss+xml": toSiteUrl("/feed.xml"),
-      },
+      types: rssAlternateTypes(language),
     },
     keywords: [...siteContent.keywords],
     authors: [{ name: AUTHOR_NAME, url: SITE_URL }],

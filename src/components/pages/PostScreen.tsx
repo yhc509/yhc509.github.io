@@ -1,4 +1,3 @@
-import { authorPerson } from "@/lib/author";
 import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -23,8 +22,15 @@ import { remarkChart } from "@/lib/remarkChart.mjs";
 import { remarkCards, remarkMatrix } from "@/lib/remarkSpec.mjs";
 import { remarkXPost } from "@/lib/remarkXPost.mjs";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
-import { languageAlternates, toSiteUrl } from "@/lib/site";
-import { getSiteCopy } from "@/lib/siteContent";
+import { clampMetaDescription } from "@/lib/metaDescription";
+import { pageAlternates, toSiteUrl } from "@/lib/site";
+import {
+  breadcrumbList,
+  jsonLdGraph,
+  mainEntityOfPage,
+  personReference,
+  websiteReference,
+} from "@/lib/structuredData";
 
 export interface PostPageProps {
   params: Promise<{ slug: string[] }>;
@@ -65,15 +71,16 @@ export async function generatePostMetadata(
     const url = toSiteUrl(canonicalPath);
     const imagePath = postImagePath(currentSlug, language);
     const contentLanguage = language === "ko" || post.missingEnglish ? "ko" : "en";
+    const description = clampMetaDescription(post.description);
 
     return {
       title: post.title,
-      description: post.description,
+      description,
       openGraph: {
         type: "article",
         locale: contentLanguage === "en" ? "en_US" : "ko_KR",
         title: post.title,
-        description: post.description,
+        description,
         url,
         publishedTime: post.date,
         images: [
@@ -88,10 +95,10 @@ export async function generatePostMetadata(
       twitter: {
         card: "summary_large_image",
         title: post.title,
-        description: post.description,
+        description,
         images: [toSiteUrl(imagePath)],
       },
-      alternates: languageAlternates(canonicalPath, englishPath, koreanPath),
+      alternates: pageAlternates(language, canonicalPath, englishPath, koreanPath),
     };
   } catch {
     return {
@@ -106,7 +113,6 @@ export async function PostScreen({
 }: PostPageProps & { language: DevLanguage }) {
   const { slug } = await params;
   const useEnglish = language === "en";
-  const { author } = getSiteCopy(language);
   const currentSlug = slug.join("/");
   let post;
 
@@ -122,20 +128,31 @@ export async function PostScreen({
   const contentLanguage = language === "ko" || post.missingEnglish ? "ko" : "en";
   const imagePath = postImagePath(currentSlug, language);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.description,
-    inLanguage: contentLanguage,
-    image: toSiteUrl(imagePath),
-    url: toSiteUrl(pagePath),
-    datePublished: post.date,
-    dateModified: post.modified,
-    author: authorPerson(author),
-    wordCount: post.content.split(/\s+/).length,
-    publisher: authorPerson(),
-  };
+  const pageUrl = toSiteUrl(pagePath);
+  const jsonLd = jsonLdGraph([
+    {
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: clampMetaDescription(post.description),
+      inLanguage: contentLanguage,
+      image: toSiteUrl(imagePath),
+      url: pageUrl,
+      mainEntityOfPage: mainEntityOfPage(pageUrl),
+      datePublished: post.date,
+      dateModified: post.modified,
+      author: personReference(),
+      publisher: websiteReference(),
+      isPartOf: websiteReference(),
+      wordCount: post.content.split(/\s+/).length,
+    },
+    breadcrumbList([
+      {
+        name: useEnglish ? "Home" : "홈",
+        item: toSiteUrl(localizedPath("/", language)),
+      },
+      { name: post.title, item: pageUrl },
+    ]),
+  ]);
 
   const postDir = slug.length > 1 ? slug.slice(0, -1).join("/") : "";
 
@@ -176,7 +193,6 @@ export async function PostScreen({
             style={{ color: "var(--text-muted)" }}
           >
             <time dateTime={post.date}>{post.date}</time>
-            <span>·</span>
             <span>{post.readingTime}</span>
           </div>
         </header>

@@ -1,8 +1,9 @@
 import { type DevLanguage } from "@/lib/devLanguage";
-import { getBlogCopy } from "@/lib/siteContent";
+import { siteContent } from "@/lib/siteContent";
 
 export function HomeHero({ language }: { language: DevLanguage }) {
-  const { headline } = getBlogCopy(language);
+  const headline =
+    language === "en" ? siteContent.homeHero.headlineEn : siteContent.homeHero.headline;
 
   return (
     <section className="max-w-3xl mx-auto px-5 pt-6 pb-1 sm:pt-7">

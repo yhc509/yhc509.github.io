@@ -65,3 +65,15 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Checkout IndexNow key
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Ping IndexNow
+        continue-on-error: true
+        run: node scripts/indexnow-ping.mjs
