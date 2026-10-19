@@ -27,27 +27,17 @@ export const siteContent = {
     searchPlaceholderEn: "Search...",
   },
   homeHero: {
-    headline: "Posts",
-    headlineEn: "Posts",
+    headline: "게임 엔진, 그래픽스, AI 에이전트 개발 노트",
+    headlineEn: "Notes on game engines, graphics, and AI agent development",
   },
   about: {
-    headline: "kinkeep.dev",
+    headline: "Unity 게임 프로그래머",
+    headlineEn: "Unity game programmer",
     title: "소개",
     titleEn: "About",
-    intro: `2017년부터 Unity 모바일 게임 클라이언트 프로그래머로 일하고 있습니다. 개인 작업으로는 자체 웹엔진을 만들며 HD-2D SRPG를 개발하고 있습니다. 개발은 AI 에이전트와 함께 합니다. 작업 환경과 규칙, 즉 하네스를 직접 만들고 그 안에서 AI를 굴리는 방식입니다.
-
-이 블로그에서는 이런 것들을 다룹니다.
-- 게임 엔진과 그래픽스
-- AI 에이전트 개발과 하네스 엔지니어링
-- 개인 게임 개발 기록
-- AI 도구 뉴스 (제가 직접 쓰는 도구만)`,
-    introEn: `I've been a Unity mobile game client programmer since 2017. On my own time, I'm building an HD-2D SRPG on a web engine I'm writing myself. I develop with AI agents: I build the harness, meaning the working environment and rules, and run the AI inside it.
-
-This blog covers:
-- Game engines and graphics
-- AI agent development and harness engineering
-- My own game development log
-- AI tool news (only tools I actually use)`,
+    description: "Unity 클라이언트 프로그래머가 게임 엔진, 그래픽스, AI 에이전트 개발을 기록합니다.",
+    descriptionEn:
+      "Unity client programmer writing notes on game engines, graphics, and AI agent development.",
     imageAlt: "kinkeep.dev 프로필",
     imageAltEn: "kinkeep.dev profile",
   },

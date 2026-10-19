@@ -1,4 +1,4 @@
-import { AUTHOR_NAME, authorPerson } from "@/lib/author";
+import { siteJsonLd } from "@/lib/structuredData";
 import Link from "next/link";
 import { Hahmlet } from "next/font/google";
 import { DevLanguageProvider } from "@/components/DevLanguageProvider";
@@ -11,7 +11,6 @@ import {
   localizedPath,
   type DevLanguage,
 } from "@/lib/devLanguage";
-import { SITE_URL } from "@/lib/site";
 import { getSiteCopy, siteContent } from "@/lib/siteContent";
 
 const hahmlet = Hahmlet({
@@ -44,21 +43,13 @@ export function SiteFrame({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify([
-              {
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                name: siteTitle,
-                url: SITE_URL,
+            __html: JSON.stringify(
+              siteJsonLd({
                 description,
+                jobTitle: author,
                 inLanguage: useEnglish ? "en" : "ko",
-                author: { "@type": "Person", name: AUTHOR_NAME, url: SITE_URL },
-              },
-              {
-                "@context": "https://schema.org",
-                ...authorPerson(author),
-              },
-            ]),
+              }),
+            ),
           }}
         />
         <ThemeProvider>

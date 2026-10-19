@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { getAllProjects, buildProjectTagTree } from "@/lib/projects";
 import { ProjectsHome } from "@/components/ProjectsHome";
 import type { DevLanguage } from "@/lib/devLanguage";
-import { languageAlternates } from "@/lib/site";
+import { clampMetaDescription } from "@/lib/metaDescription";
+import { pageAlternates } from "@/lib/site";
 import { getProjectsCopy } from "@/lib/siteContent";
 
 export function projectsMetadata(language: DevLanguage): Metadata {
@@ -13,8 +14,8 @@ export function projectsMetadata(language: DevLanguage): Metadata {
 
   return {
     title: copy.headline,
-    description: copy.description,
-    alternates: languageAlternates(canonicalPath, englishPath, koreanPath),
+    description: clampMetaDescription(copy.description),
+    alternates: pageAlternates(language, canonicalPath, englishPath, koreanPath),
   };
 }
 

@@ -8,7 +8,9 @@ import { createMarkdownComponents } from "@/components/MarkdownComponents";
 import { getAboutContent, getAboutPageCopy } from "@/lib/aboutContent";
 import type { DevLanguage } from "@/lib/devLanguage";
 import { absoluteDocumentTitle, indexDocumentTitle } from "@/lib/documentTitle";
-import { languageAlternates } from "@/lib/site";
+import { clampMetaDescription } from "@/lib/metaDescription";
+import { pageAlternates, toSiteUrl } from "@/lib/site";
+import { jsonLdGraph, personReference, websiteReference } from "@/lib/structuredData";
 
 export async function aboutMetadata(language: DevLanguage): Promise<Metadata> {
   const about = getAboutPageCopy(language);
@@ -16,11 +18,23 @@ export async function aboutMetadata(language: DevLanguage): Promise<Metadata> {
   const koreanPath = "/ko/about";
   const canonicalPath =
     language === "en" && about.missingEnglish ? koreanPath : language === "en" ? englishPath : koreanPath;
+  const description = clampMetaDescription(about.description);
+  const title = indexDocumentTitle("about", language);
 
   return {
-    ...absoluteDocumentTitle(indexDocumentTitle("about", language)),
-    description: about.intro,
-    alternates: languageAlternates(canonicalPath, englishPath, koreanPath),
+    ...absoluteDocumentTitle(title),
+    description,
+    alternates: pageAlternates(language, canonicalPath, englishPath, koreanPath),
+    openGraph: {
+      url: toSiteUrl(canonicalPath),
+      title,
+      description,
+      locale: language === "en" ? "en_US" : "ko_KR",
+    },
+    twitter: {
+      title,
+      description,
+    },
   };
 }
 
@@ -28,9 +42,27 @@ export function AboutScreen({ language }: { language: DevLanguage }) {
   const content = getAboutContent(language);
   const about = getAboutPageCopy(language);
   const contentLanguage = language === "ko" || about.missingEnglish ? "ko" : "en";
+  const pagePath = language === "en" && about.missingEnglish ? "/ko/about" : language === "en" ? "/about" : "/ko/about";
+  const pageUrl = toSiteUrl(pagePath);
+  const profileJsonLd = jsonLdGraph([
+    {
+      "@type": "ProfilePage",
+      "@id": pageUrl,
+      url: pageUrl,
+      name: about.headline,
+      description: clampMetaDescription(about.description),
+      inLanguage: contentLanguage,
+      mainEntity: personReference(),
+      isPartOf: websiteReference(),
+    },
+  ]);
 
   return (
     <div className="max-w-3xl mx-auto px-5 py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profileJsonLd) }}
+      />
       <KoreanFallbackNote
         show={language === "en" && about.missingEnglish}
         message="This page is only available in Korean."

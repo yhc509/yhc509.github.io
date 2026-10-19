@@ -1,4 +1,3 @@
-import { authorPerson } from "@/lib/author";
 import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -24,7 +23,15 @@ import {
 } from "@/lib/news";
 import { newsItemImagePath } from "@/lib/newsIssues.mjs";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
-import { languageAlternates, toSiteUrl } from "@/lib/site";
+import { clampMetaDescription } from "@/lib/metaDescription";
+import { pageAlternates, toSiteUrl } from "@/lib/site";
+import {
+  breadcrumbList,
+  jsonLdGraph,
+  mainEntityOfPage,
+  personReference,
+  websiteReference,
+} from "@/lib/structuredData";
 
 const EMPTY_ISSUE_ID = "__empty__";
 
@@ -65,14 +72,16 @@ export async function generateNewsIssueMetadata(
       ]
     : undefined;
 
+  const description = clampMetaDescription(issue.description);
+
   return {
     title: issue.title,
-    description: issue.description,
+    description,
     openGraph: {
       type: "article",
       locale: language === "en" && !issue.missingEnglish ? "en_US" : "ko_KR",
       title: issue.title,
-      description: issue.description,
+      description,
       url: toSiteUrl(canonical),
       publishedTime: issue.date,
       ...(images ? { images } : {}),
@@ -80,10 +89,10 @@ export async function generateNewsIssueMetadata(
     twitter: {
       card: images ? "summary_large_image" : "summary",
       title: issue.title,
-      description: issue.description,
+      description,
       ...(images ? { images: images.map((image) => image.url) } : {}),
     },
-    alternates: languageAlternates(canonical, englishPath, koreanPath),
+    alternates: pageAlternates(language, canonical, englishPath, koreanPath),
   };
 }
 
@@ -126,19 +135,32 @@ export async function NewsIssueScreen({
   const issueLink = (target: { id: string }) =>
     localizedPath(`/news/${target.id}`, language);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    headline: issue.title,
-    description: issue.description,
-    inLanguage: contentLanguage,
-    url: toSiteUrl(issueLink(issue)),
-    ...(issue.thumbnail ? { image: toSiteUrl(issue.thumbnail) } : {}),
-    datePublished: issue.date,
-    dateModified: issue.modified,
-    author: authorPerson(),
-    publisher: authorPerson(),
-  };
+  const pageUrl = toSiteUrl(issueLink(issue));
+  const listUrl = toSiteUrl(localizedPath("/news", language));
+  const jsonLd = jsonLdGraph([
+    {
+      "@type": "NewsArticle",
+      headline: issue.title,
+      description: clampMetaDescription(issue.description),
+      inLanguage: contentLanguage,
+      url: pageUrl,
+      mainEntityOfPage: mainEntityOfPage(pageUrl),
+      ...(issue.thumbnail ? { image: toSiteUrl(issue.thumbnail) } : {}),
+      datePublished: issue.date,
+      dateModified: issue.modified,
+      author: personReference(),
+      publisher: websiteReference(),
+      isPartOf: websiteReference(),
+    },
+    breadcrumbList([
+      {
+        name: useEnglish ? "Home" : "홈",
+        item: toSiteUrl(localizedPath("/", language)),
+      },
+      { name: useEnglish ? "AI News" : "AI 뉴스", item: listUrl },
+      { name: issue.title, item: pageUrl },
+    ]),
+  ]);
 
   return (
     <div className="max-w-3xl mx-auto px-5 py-10">

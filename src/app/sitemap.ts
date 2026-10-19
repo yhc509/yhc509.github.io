@@ -53,7 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...languageEntry("/", latestAny, "weekly", 1),
-    ...languageEntry("/projects", latestProject, "weekly", 0.9),
+    ...languageEntry("/projects", latestProject ?? latestAny, "weekly", 0.9),
     ...languageEntry("/about", latestAny, "monthly", 0.7),
     ...languageEntry("/news", latestNews, "weekly", 0.8),
     ...newsIssues.flatMap((issue) =>

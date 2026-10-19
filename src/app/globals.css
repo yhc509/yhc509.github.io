@@ -69,11 +69,6 @@ body {
   gap: 0.5rem;
 }
 
-.section-meta span:not(:last-child)::after {
-  content: "·";
-  color: var(--text-muted);
-}
-
 /* Prose styling for blog posts */
 .prose {
   --tw-prose-body: var(--foreground);

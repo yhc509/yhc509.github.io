@@ -329,21 +329,14 @@ export function BlogHome({
                     style={{ color: "var(--text-muted)" }}
                   >
                     <time dateTime={post.date}>{post.date}</time>
-                    <span>·</span>
                     <span>{post.readingTime}</span>
                     {useEnglish && post.missingEnglish && (
-                      <>
-                        <span>·</span>
-                        <span>Korean only</span>
-                      </>
+                      <span>Korean only</span>
                     )}
                     {post.project && projectTitleMap.has(post.project) && (
-                      <>
-                        <span>·</span>
-                        <span>
-                          {projectFilterLabel}: {projectTitleMap.get(post.project)}
-                        </span>
-                      </>
+                      <span>
+                        {projectFilterLabel}: {projectTitleMap.get(post.project)}
+                      </span>
                     )}
                   </div>
                   <h2
