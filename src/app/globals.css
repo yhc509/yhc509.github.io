@@ -69,7 +69,6 @@ body {
   gap: 0.5rem;
 }
 
-/* Prose styling for blog posts */
 .prose {
   --tw-prose-body: var(--foreground);
   --tw-prose-headings: var(--foreground);

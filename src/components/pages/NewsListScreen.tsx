@@ -4,7 +4,7 @@ import { getAllNewsIssues } from "@/lib/news";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
 import { absoluteDocumentTitle, indexDocumentTitle } from "@/lib/documentTitle";
 import { clampMetaDescription } from "@/lib/metaDescription";
-import { pageAlternates, toSiteUrl } from "@/lib/site";
+import { pageAlternates, pageSocial, toSiteUrl } from "@/lib/site";
 import {
   breadcrumbList,
   jsonLdGraph,
@@ -38,16 +38,7 @@ export function newsListMetadata(language: DevLanguage): Metadata {
     ...absoluteDocumentTitle(title),
     description,
     alternates: pageAlternates(language, path, "/news", "/ko/news"),
-    openGraph: {
-      url: toSiteUrl(path),
-      title,
-      description,
-      locale: language === "en" ? "en_US" : "ko_KR",
-    },
-    twitter: {
-      title,
-      description,
-    },
+    ...pageSocial(language, path, title, description),
   };
 }
 

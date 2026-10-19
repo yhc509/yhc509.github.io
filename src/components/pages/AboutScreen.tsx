@@ -9,7 +9,7 @@ import { getAboutContent, getAboutPageCopy } from "@/lib/aboutContent";
 import type { DevLanguage } from "@/lib/devLanguage";
 import { absoluteDocumentTitle, indexDocumentTitle } from "@/lib/documentTitle";
 import { clampMetaDescription } from "@/lib/metaDescription";
-import { pageAlternates, toSiteUrl } from "@/lib/site";
+import { pageAlternates, pageSocial, toSiteUrl } from "@/lib/site";
 import { jsonLdGraph, personReference, websiteReference } from "@/lib/structuredData";
 
 export async function aboutMetadata(language: DevLanguage): Promise<Metadata> {
@@ -25,16 +25,7 @@ export async function aboutMetadata(language: DevLanguage): Promise<Metadata> {
     ...absoluteDocumentTitle(title),
     description,
     alternates: pageAlternates(language, canonicalPath, englishPath, koreanPath),
-    openGraph: {
-      url: toSiteUrl(canonicalPath),
-      title,
-      description,
-      locale: language === "en" ? "en_US" : "ko_KR",
-    },
-    twitter: {
-      title,
-      description,
-    },
+    ...pageSocial(language, canonicalPath, title, description),
   };
 }
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { DevLanguage } from "./devLanguage";
+import { siteContent } from "./siteContent";
 
 export const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL || "https://kinkeep.dev";
@@ -40,6 +41,38 @@ export function languageAlternates(
       en: toSiteUrl(englishPath),
       ko: toSiteUrl(koreanPath),
       "x-default": toSiteUrl(englishPath),
+    },
+  };
+}
+
+const shareImage = {
+  url: toSiteUrl("/profile.png"),
+  width: 400,
+  height: 400,
+  alt: siteContent.name,
+};
+
+export function pageSocial(
+  language: DevLanguage,
+  path: string,
+  title: string,
+  description: string,
+): Pick<Metadata, "openGraph" | "twitter"> {
+  return {
+    openGraph: {
+      type: "website",
+      siteName: siteContent.name,
+      locale: language === "en" ? "en_US" : "ko_KR",
+      url: toSiteUrl(path),
+      title,
+      description,
+      images: [shareImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [shareImage.url],
     },
   };
 }
