@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { sectionIsUnscaled } from "./slideFit.mjs";
+import { webkitSlideZoom } from "./slideFit.mjs";
 import {
   clearSlideCache,
   deckAssetUrl,
@@ -13,10 +13,11 @@ import {
   splitMarpSlides,
 } from "./slides.mjs";
 
-test("the slide polyfill runs only when the section is still at the SVG user size", () => {
-  assert.equal(sectionIsUnscaled(1280, 390, 1280), true);
-  assert.equal(sectionIsUnscaled(393, 393, 1280), false);
-  assert.equal(sectionIsUnscaled(400, 393, 1280), false);
+test("WebKit slide zoom is the SVG box divided by the section's user size", () => {
+  assert.equal(webkitSlideZoom(393, 1280).startsWith("0.307"), true);
+  assert.equal(webkitSlideZoom(610, 1280).startsWith("0.476"), true);
+  assert.equal(webkitSlideZoom(0, 1280), "");
+  assert.equal(webkitSlideZoom(393, 0), "");
 });
 
 test("raster images are published as webp and other files keep their names", () => {

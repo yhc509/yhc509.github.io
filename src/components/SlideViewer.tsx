@@ -1,9 +1,8 @@
 "use client";
 
-import { webkit } from "@marp-team/marpit-svg-polyfill";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { KoreanFallbackNote } from "@/components/KoreanFallbackNote";
 import {
   getToggledDevLanguage,
@@ -11,7 +10,7 @@ import {
   persistDevLanguage,
   type DevLanguage,
 } from "@/lib/devLanguage";
-import { sectionIsUnscaled } from "@/lib/slideFit.mjs";
+import { webkitSlideZoom } from "@/lib/slideFit.mjs";
 
 type ViewMode = "scroll" | "presenter";
 
@@ -59,21 +58,24 @@ function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-function marpSectionNeedsPolyfill(svg: SVGSVGElement) {
-  const section = svg.querySelector("section");
-  if (!(section instanceof HTMLElement)) {
-    return false;
+function needsWebkitSlideZoom() {
+  return (
+    navigator.vendor === "Apple Computer, Inc." ||
+    CSS.supports("-webkit-touch-callout", "none")
+  );
+}
+
+function applyWebkitSlideZoom(root: ParentNode) {
+  if (!needsWebkitSlideZoom()) {
+    return;
   }
-  const svgWidth = svg.getBoundingClientRect().width;
-  if (svgWidth < 2) {
-    return false;
+  for (const svg of root.querySelectorAll<SVGSVGElement>("svg[data-marpit-svg]")) {
+    const section = svg.querySelector("section");
+    if (!(section instanceof HTMLElement)) {
+      continue;
+    }
+    section.style.zoom = webkitSlideZoom(svg.clientWidth, section.offsetWidth);
   }
-  const previous = section.style.transform;
-  section.style.transform = "none";
-  const sectionWidth = section.getBoundingClientRect().width;
-  section.style.transform = previous;
-  const userWidth = svg.viewBox.baseVal.width || 1280;
-  return sectionIsUnscaled(sectionWidth, svgWidth, userWidth);
 }
 
 function subscribePortrait(onChange: () => void) {
@@ -166,49 +168,23 @@ export function SlideViewer({
     controlsOnRef.current = controlsOn;
   }, [effectiveMode, index, controlsOn]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = rootRef.current;
     if (!root) {
       return;
     }
-    let frame = 0;
-    let stopped = false;
-
-    const apply = () => {
-      if (stopped) {
-        return;
-      }
-      const svgs = [...root.querySelectorAll<SVGSVGElement>("svg[data-marpit-svg]")];
-      if (!svgs.some((svg) => marpSectionNeedsPolyfill(svg))) {
-        for (const section of root.querySelectorAll<HTMLElement>("svg[data-marpit-svg] section")) {
-          if (section.style.transform.includes("translateZ(0.0001px)")) {
-            section.style.transform = "";
-          }
-        }
-        return;
-      }
-      webkit({ target: root });
-      frame = window.requestAnimationFrame(apply);
-    };
-
-    const schedule = () => {
-      window.cancelAnimationFrame(frame);
-      frame = window.requestAnimationFrame(apply);
-    };
-
-    schedule();
-    const observer = new ResizeObserver(schedule);
+    const apply = () => applyWebkitSlideZoom(root);
+    apply();
+    const observer = new ResizeObserver(apply);
     observer.observe(root);
-    window.addEventListener("resize", schedule);
-    window.addEventListener("orientationchange", schedule);
-    window.visualViewport?.addEventListener("resize", schedule);
+    window.addEventListener("resize", apply);
+    window.addEventListener("orientationchange", apply);
+    window.visualViewport?.addEventListener("resize", apply);
     return () => {
-      stopped = true;
-      window.cancelAnimationFrame(frame);
       observer.disconnect();
-      window.removeEventListener("resize", schedule);
-      window.removeEventListener("orientationchange", schedule);
-      window.visualViewport?.removeEventListener("resize", schedule);
+      window.removeEventListener("resize", apply);
+      window.removeEventListener("orientationchange", apply);
+      window.visualViewport?.removeEventListener("resize", apply);
     };
   }, [slides, effectiveMode, fullscreen, index]);
 
