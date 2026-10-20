@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { KoreanFallbackNote } from "@/components/KoreanFallbackNote";
 import {
   getToggledDevLanguage,
@@ -10,6 +10,7 @@ import {
   persistDevLanguage,
   type DevLanguage,
 } from "@/lib/devLanguage";
+import { webkitSlideZoom } from "@/lib/slideFit.mjs";
 
 type ViewMode = "scroll" | "presenter";
 
@@ -55,6 +56,26 @@ function readHash(total: number): number | null {
 
 function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function needsWebkitSlideZoom() {
+  return (
+    navigator.vendor === "Apple Computer, Inc." ||
+    CSS.supports("-webkit-touch-callout", "none")
+  );
+}
+
+function applyWebkitSlideZoom(root: ParentNode) {
+  if (!needsWebkitSlideZoom()) {
+    return;
+  }
+  for (const svg of root.querySelectorAll<SVGSVGElement>("svg[data-marpit-svg]")) {
+    const section = svg.querySelector("section");
+    if (!(section instanceof HTMLElement)) {
+      continue;
+    }
+    section.style.zoom = webkitSlideZoom(svg.clientWidth, section.offsetWidth);
+  }
 }
 
 function subscribePortrait(onChange: () => void) {
@@ -146,6 +167,26 @@ export function SlideViewer({
     indexRef.current = index;
     controlsOnRef.current = controlsOn;
   }, [effectiveMode, index, controlsOn]);
+
+  useLayoutEffect(() => {
+    const root = rootRef.current;
+    if (!root) {
+      return;
+    }
+    const apply = () => applyWebkitSlideZoom(root);
+    apply();
+    const observer = new ResizeObserver(apply);
+    observer.observe(root);
+    window.addEventListener("resize", apply);
+    window.addEventListener("orientationchange", apply);
+    window.visualViewport?.addEventListener("resize", apply);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", apply);
+      window.removeEventListener("orientationchange", apply);
+      window.visualViewport?.removeEventListener("resize", apply);
+    };
+  }, [slides, effectiveMode, fullscreen, index]);
 
   useEffect(() => {
     return () => {

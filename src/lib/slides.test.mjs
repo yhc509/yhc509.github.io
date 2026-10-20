@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { webkitSlideZoom } from "./slideFit.mjs";
 import {
   clearSlideCache,
   deckAssetUrl,
@@ -11,6 +12,13 @@ import {
   scopeMarpCss,
   splitMarpSlides,
 } from "./slides.mjs";
+
+test("WebKit slide zoom is the SVG box divided by the section's user size", () => {
+  assert.equal(webkitSlideZoom(393, 1280).startsWith("0.307"), true);
+  assert.equal(webkitSlideZoom(610, 1280).startsWith("0.476"), true);
+  assert.equal(webkitSlideZoom(0, 1280), "");
+  assert.equal(webkitSlideZoom(393, 0), "");
+});
 
 test("raster images are published as webp and other files keep their names", () => {
   assert.equal(
