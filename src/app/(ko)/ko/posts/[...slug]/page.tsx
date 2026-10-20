@@ -5,9 +5,7 @@ import {
   type PostPageProps,
 } from "@/components/pages/PostScreen";
 
-export function generateStaticParams() {
-  return generatePostStaticParams("ko");
-}
+export const generateStaticParams = generatePostStaticParams;
 
 export function generateMetadata(props: PostPageProps) {
   return generatePostMetadata(props, "ko");

@@ -39,27 +39,6 @@ function languageEntry(
   ];
 }
 
-function englishOnlyEntry(
-  englishPath: string,
-  lastModified: string | undefined,
-  changeFrequency: "weekly" | "monthly",
-  priority: number
-): MetadataRoute.Sitemap {
-  return [
-    {
-      url: toSiteUrl(englishPath),
-      lastModified,
-      changeFrequency,
-      priority,
-      alternates: {
-        languages: {
-          en: toSiteUrl(englishPath),
-        },
-      },
-    },
-  ];
-}
-
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts("en");
   const projects = getAllProjects("en");
@@ -93,9 +72,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       languageEntry(`/news/${issue.id}`, issue.modified, "monthly", 0.6)
     ),
     ...posts.flatMap((post) =>
-      post.missingKorean
-        ? englishOnlyEntry(`/posts/${post.slug}`, post.modified, "monthly", 0.8)
-        : languageEntry(`/posts/${post.slug}`, post.modified, "monthly", 0.8)
+      languageEntry(`/posts/${post.slug}`, post.modified, "monthly", 0.8)
     ),
     ...projects.flatMap((project) =>
       languageEntry(`/projects/${project.slug}`, project.date, "monthly", 0.8)
