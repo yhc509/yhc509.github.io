@@ -23,7 +23,6 @@ export interface PostMeta {
   project?: string;
   series?: string;
   missingEnglish: boolean;
-  missingKorean: boolean;
 }
 
 export interface Post extends PostMeta {
@@ -77,6 +76,10 @@ function findPostPath(slug: string): string | null {
   return null;
 }
 
+function hasEnglishPost(slug: string): boolean {
+  return findPostPath(`${slug}-en`) !== null;
+}
+
 function isEnglishVariantFilePath(filePath: string): boolean {
   return /-en\.(md|mdx)$/.test(filePath);
 }
@@ -96,54 +99,25 @@ function getFilesRecursively(dir: string): string[] {
   return results;
 }
 
-interface PostFileGroup {
-  slug: string;
-  koreanPath: string | null;
-  englishPath: string | null;
-}
-
-function listPostFileGroups(): PostFileGroup[] {
-  const groups = new Map<string, PostFileGroup>();
-
-  for (const filePath of getFilesRecursively(postsDirectory)) {
-    if (!/\.(md|mdx)$/.test(filePath)) {
-      continue;
-    }
-
-    const relativePath = path.relative(postsDirectory, filePath);
-    const withoutExt = relativePath.replace(/\.(md|mdx)$/, "");
-    const english = isEnglishVariantFilePath(filePath);
-    const slug = english ? withoutExt.replace(/-en$/, "") : withoutExt;
-    const group = groups.get(slug) ?? { slug, koreanPath: null, englishPath: null };
-
-    if (english) {
-      group.englishPath = filePath;
-    } else {
-      group.koreanPath = filePath;
-    }
-
-    groups.set(slug, group);
-  }
-
-  return [...groups.values()];
-}
-
-export function getAllPostSlugs(language: DevLanguage = "en"): string[] {
-  return listPostFileGroups()
-    .filter((group) =>
-      language === "ko" ? group.koreanPath : group.koreanPath || group.englishPath
+export function getAllPostSlugs(): string[] {
+  const filePaths = getFilesRecursively(postsDirectory);
+  return filePaths
+    .filter(
+      (filePath) => /\.(md|mdx)$/.test(filePath) && !isEnglishVariantFilePath(filePath)
     )
-    .filter((group) => {
+    .map((filePath) => {
+      const relativePath = path.relative(postsDirectory, filePath);
+      return relativePath.replace(/\.(md|mdx)$/, "");
+    })
+    .filter((slug) => {
       // production에서는 open: false / 미래 날짜 포스트를 정적 파일로 생성하지 않음
       try {
-        const gateLanguage: DevLanguage = group.koreanPath ? "ko" : "en";
-        const post = getPostBySlug(group.slug, gateLanguage);
+        const post = getPostBySlug(slug, "ko");
         return isOpen(post.open) && isPublishable(post.date);
       } catch {
         return false;
       }
-    })
-    .map((group) => group.slug);
+    });
 }
 
 function formatReadingTime(content: string, language: DevLanguage): string {
@@ -155,7 +129,6 @@ function parsePostFile(
   fullPath: string,
   slug: string,
   missingEnglish: boolean,
-  missingKorean: boolean,
   contentLanguage: DevLanguage
 ): Post {
   const fileContents = fs.readFileSync(fullPath, "utf8");
@@ -176,27 +149,24 @@ function parsePostFile(
     project: readOptionalString(data.project),
     series: readOptionalString(data.series),
     missingEnglish,
-    missingKorean,
   };
 }
 
 export function getPostBySlug(slug: string, language: DevLanguage = "en"): Post {
-  const englishPath = findPostPath(`${slug}-en`);
-  const koreanPath = findPostPath(slug);
-  const missingEnglish = englishPath === null;
-  const missingKorean = koreanPath === null;
-  const fullPath = language === "en" ? englishPath ?? koreanPath : koreanPath;
+  const missingEnglish = !hasEnglishPost(slug);
+  const englishPath =
+    language === "en" && !missingEnglish ? findPostPath(`${slug}-en`) : null;
+  const fullPath = englishPath ?? findPostPath(slug);
 
   if (!fullPath) {
     throw new Error(`Post not found: ${slug}`);
   }
 
-  const contentLanguage: DevLanguage = fullPath === englishPath ? "en" : "ko";
-  return parsePostFile(fullPath, slug, missingEnglish, missingKorean, contentLanguage);
+  return parsePostFile(fullPath, slug, missingEnglish, englishPath ? "en" : "ko");
 }
 
 export function getAllPosts(language: DevLanguage = "en"): PostMeta[] {
-  const slugs = getAllPostSlugs(language);
+  const slugs = getAllPostSlugs();
   const posts = slugs
     .map((slug) => {
       const post = getPostBySlug(slug, language);
@@ -212,7 +182,6 @@ export function getAllPosts(language: DevLanguage = "en"): PostMeta[] {
         project: post.project,
         series: post.series,
         missingEnglish: post.missingEnglish,
-        missingKorean: post.missingKorean,
       };
     })
     .filter((post) => isOpen(post.open) && isPublishable(post.date)) // production에서는 open: false이거나 미래 날짜인 포스트를 목록에서 제외

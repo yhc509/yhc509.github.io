@@ -352,15 +352,16 @@ async function generateGroupedImages(fontData, groups, englishTarget, koreanTarg
   const expectedFiles = new Set();
 
   for (const [slug, group] of groups) {
-    if (!group.ko && !group.en) {
+    if (!group.ko) {
       continue;
     }
 
     const englishSource = group.en ?? group.ko;
-    const targets = [[englishSource, englishTarget(slug)]];
-    if (group.ko) {
-      targets.push([group.ko, koreanTarget(slug)]);
-    }
+    const koreanSource = group.ko ?? group.en;
+    const targets = [
+      [englishSource, englishTarget(slug)],
+      [koreanSource, koreanTarget(slug)],
+    ];
 
     for (const [sourcePath, targetPath] of targets) {
       if (!sourcePath) {

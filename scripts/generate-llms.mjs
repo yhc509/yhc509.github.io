@@ -52,13 +52,9 @@ async function readMarkdown(filePath) {
 
 async function posts() {
   const files = (await walk(POSTS_DIR)).filter((filePath) => /\.mdx?$/.test(filePath));
-  const slugs = [
-    ...new Set(
-      files.map((filePath) =>
-        path.relative(POSTS_DIR, filePath).replace(/\.mdx?$/, "").replace(/-en$/, ""),
-      ),
-    ),
-  ];
+  const slugs = files
+    .filter((filePath) => !/-en\.mdx?$/.test(filePath))
+    .map((filePath) => path.relative(POSTS_DIR, filePath).replace(/\.mdx?$/, ""));
 
   const parsed = [];
   for (const slug of slugs) {
@@ -67,25 +63,7 @@ async function posts() {
         (filePath) =>
           filePath.endsWith(`${path.sep}${slug}-en.md`) || filePath.endsWith(`${path.sep}${slug}-en.mdx`),
       );
-      if (!koreanPath && !englishPath) {
-        continue;
-      }
-
       if (!koreanPath) {
-        const english = await readMarkdown(englishPath);
-        if (english.data.open === false || !isPublishable(dateString(english.data.date))) {
-          continue;
-        }
-
-        parsed.push({
-          slug,
-          title: String(english.data.title || slug),
-          date: dateString(english.data.date),
-          description: String(english.data.description || "").replace(/\s+/g, " ").trim(),
-          body: english.content,
-          koreanOnly: false,
-          englishOnly: true,
-        });
         continue;
       }
 
@@ -103,7 +81,6 @@ async function posts() {
         description: String(source.data.description || "").replace(/\s+/g, " ").trim(),
         body: source.content,
         koreanOnly: !english,
-        englishOnly: false,
       });
     }
 
@@ -212,12 +189,8 @@ const full = [
   ...publishedPosts.map((post) =>
     entry(post.title, `${SITE_URL}/posts/${post.slug}`, [
       `Date: ${post.date}`,
-      ...(post.englishOnly
-        ? ["Language: English only"]
-        : [
-            `Korean: ${SITE_URL}/ko/posts/${post.slug}`,
-            post.koreanOnly ? "Language: Korean only" : "Language: English",
-          ]),
+      `Korean: ${SITE_URL}/ko/posts/${post.slug}`,
+      post.koreanOnly ? "Language: Korean only" : "Language: English",
       "",
       post.description,
       "",

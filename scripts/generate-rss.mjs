@@ -234,12 +234,12 @@ async function main() {
   const posts = (
     await Promise.all(
       Array.from(groups.entries()).map(async ([slug, group]) => {
-        const source = group.en ?? group.ko;
-        if (!source) {
+        if (!group.ko) {
           return null;
         }
 
-        return readPostItem(source, slug);
+        const englishItem = group.en ? await readPostItem(group.en, slug) : null;
+        return englishItem ?? (await readPostItem(group.ko, slug));
       })
     )
   )

@@ -11,7 +11,6 @@ import {
   localizedPath,
   type DevLanguage,
 } from "@/lib/devLanguage";
-import { getAllPosts } from "@/lib/posts";
 import { getSiteCopy, siteContent } from "@/lib/siteContent";
 
 const hahmlet = Hahmlet({
@@ -29,9 +28,6 @@ export function SiteFrame({
   children: React.ReactNode;
 }) {
   const useEnglish = language === "en";
-  const englishOnlyPaths = getAllPosts("en")
-    .filter((post) => post.missingKorean)
-    .map((post) => `/posts/${post.slug}`);
   const { description, author } = getSiteCopy(language);
   const siteTitle = siteContent.name;
   const skipToContentLabel = useEnglish ? "Skip to content" : "본문으로 건너뛰기";
@@ -92,7 +88,7 @@ export function SiteFrame({
               </div>
             </header>
             <main id="main-content">{children}</main>
-            <DevLanguageToggle englishOnlyPaths={englishOnlyPaths} />
+            <DevLanguageToggle />
           </DevLanguageProvider>
         </ThemeProvider>
         <GoatCounterScripts />
