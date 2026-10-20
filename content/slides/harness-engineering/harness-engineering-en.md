@@ -1,5 +1,5 @@
 ---
-title: "Harness Engineering (for sharing)"
+title: "Harness Engineering"
 date: 2026-06
 description: "A talk on agent harnesses in the terminal."
 marp: true
@@ -31,7 +31,7 @@ style: |
 <!-- _class: title -->
 <!-- _paginate: false -->
 
-# Harness Engineering (for sharing)
+# Harness Engineering
 
 KineticKeeper, 2026.06
 

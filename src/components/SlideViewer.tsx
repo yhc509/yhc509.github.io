@@ -16,6 +16,30 @@ type ViewMode = "scroll" | "presenter";
 const PORTRAIT_PHONE = "(orientation: portrait) and (max-width: 767px)";
 const SHORT_LANDSCAPE = "(orientation: landscape) and (max-height: 500px)";
 const CONTROLS_HIDE_MS = 2800;
+const SCROLL_HINT_KEY = "kinkeep-slides-rotate-hint";
+const scrollHintListeners = new Set<() => void>();
+
+function subscribeScrollHint(onChange: () => void) {
+  scrollHintListeners.add(onChange);
+  return () => scrollHintListeners.delete(onChange);
+}
+
+function scrollHintSeen() {
+  try {
+    return localStorage.getItem(SCROLL_HINT_KEY) === "1";
+  } catch {
+    return true;
+  }
+}
+
+function markScrollHintSeen() {
+  try {
+    localStorage.setItem(SCROLL_HINT_KEY, "1");
+  } catch {
+    // Storage can be blocked. The hint still leaves with this view.
+  }
+  scrollHintListeners.forEach((listener) => listener());
+}
 
 function readHash(total: number): number | null {
   const match = /^#(\d+)$/.exec(window.location.hash);
@@ -92,6 +116,11 @@ export function SlideViewer({
     shortLandscapeSnapshot,
     () => false,
   );
+  const scrollHintSeenAlready = useSyncExternalStore(
+    subscribeScrollHint,
+    scrollHintSeen,
+    () => true,
+  );
   const hashIndex = useSyncExternalStore(
     (onChange) => {
       window.addEventListener("hashchange", onChange);
@@ -109,6 +138,8 @@ export function SlideViewer({
   const fullscreen = pseudoFs || nativeFs;
   const effectiveMode: ViewMode = modeOverride ?? (portraitPhone ? "scroll" : "presenter");
   const stageChrome = effectiveMode === "presenter" && (portraitPhone || shortLandscape);
+  const showScrollHint =
+    portraitPhone && effectiveMode === "scroll" && !scrollHintSeenAlready;
 
   useEffect(() => {
     modeRef.current = effectiveMode;
@@ -123,6 +154,15 @@ export function SlideViewer({
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (!showScrollHint) {
+      return;
+    }
+    return () => {
+      markScrollHintSeen();
+    };
+  }, [showScrollHint]);
 
   const revealControls = useCallback(() => {
     setControlsOn(true);
@@ -436,6 +476,7 @@ export function SlideViewer({
         position: `Slide ${index + 1} of ${total}`,
         language: "Switch to Korean",
         rotate: "Rotate your phone",
+        scrollHint: "Rotate for a larger view",
       }
     : {
         previous: "이전 슬라이드",
@@ -447,12 +488,13 @@ export function SlideViewer({
         position: `${index + 1} / ${total} 슬라이드`,
         language: "영어로 전환",
         rotate: "휴대폰을 가로로 돌리세요",
+        scrollHint: "가로로 돌리면 크게 볼 수 있어요",
       };
 
   return (
     <div
       ref={rootRef}
-      className={`deck-page${fullscreen ? " is-fs" : ""}${stageChrome ? " is-stage" : ""}`}
+      className={`deck-page${fullscreen ? " is-fs" : ""}${stageChrome ? " is-stage" : ""}${effectiveMode === "scroll" ? " is-scroll" : ""}`}
       data-mode={modeOverride ?? undefined}
       data-controls={controlsOn ? "on" : "off"}
     >
@@ -534,6 +576,11 @@ export function SlideViewer({
             {labels.rotate}
           </p>
         ) : null}
+        {showScrollHint ? (
+          <p className="slide-scroll-hint" role="status">
+            {labels.scrollHint}
+          </p>
+        ) : null}
         <div className="slide-frame" lang={contentLanguage}>
           {slides.map((slide, slideIndex) => (
             <div
@@ -542,6 +589,19 @@ export function SlideViewer({
               className="marpit slide-sheet"
               data-slide={slideIndex + 1}
               data-active={slideIndex === index ? "true" : "false"}
+              onClick={(event) => {
+                if (modeRef.current !== "scroll") {
+                  return;
+                }
+                const target = event.target;
+                if (
+                  target instanceof Element &&
+                  target.closest("a, button, video, input, textarea, select")
+                ) {
+                  return;
+                }
+                openInPresenter(slideIndex);
+              }}
               dangerouslySetInnerHTML={{ __html: slide }}
             />
           ))}

@@ -131,7 +131,11 @@ test("harness-engineering is published in Korean and English", () => {
     assert.equal(marpCssIsScoped(english.css), true);
     assert.match(korean.thumbnail, /\/slides-assets\/harness-engineering\/thumb-ko\.webp$/);
     assert.match(english.thumbnail, /\/slides-assets\/harness-engineering\/thumb-en\.webp$/);
+    assert.equal(korean.title, "Harness Engineering");
+    assert.equal(english.title, "Harness Engineering");
     assert.match(korean.slides[0], /Harness Engineering/);
+    assert.doesNotMatch(korean.slides[0], /공유용/);
+    assert.doesNotMatch(english.slides[0], /for sharing/);
     assert.match(
       korean.slides.join("\n"),
       /\/slides-assets\/harness-engineering\/img\/09-pricing-table\.webp/,

@@ -917,6 +917,18 @@ body:has(.deck-page) .dev-language-toggle {
   touch-action: pan-x pan-y pinch-zoom;
 }
 
+.slide-scroll-hint {
+  margin: 0.15rem 1rem 0.65rem;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.deck-page.is-scroll .slide-sheet {
+  cursor: pointer;
+}
+
 .slide-rotate-hint {
   position: absolute;
   top: max(10px, env(safe-area-inset-top));

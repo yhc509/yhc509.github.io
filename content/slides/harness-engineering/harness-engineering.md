@@ -1,5 +1,5 @@
 ---
-title: "Harness Engineering (공유용)"
+title: "Harness Engineering"
 date: 2026-06
 description: "에이전트 하네스를 터미널에서 다루는 발표 자료."
 marp: true
@@ -31,7 +31,7 @@ style: |
 <!-- _class: title -->
 <!-- _paginate: false -->
 
-# Harness Engineering (공유용)
+# Harness Engineering
 
 KineticKeeper, 2026.06
 
