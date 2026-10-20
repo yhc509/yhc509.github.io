@@ -23,7 +23,7 @@ import { remarkCards, remarkMatrix } from "@/lib/remarkSpec.mjs";
 import { remarkXPost } from "@/lib/remarkXPost.mjs";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
 import { clampMetaDescription } from "@/lib/metaDescription";
-import { pageAlternates, toSiteUrl } from "@/lib/site";
+import { pageAlternates, rssAlternateTypes, toSiteUrl } from "@/lib/site";
 import {
   breadcrumbList,
   jsonLdGraph,
@@ -47,9 +47,29 @@ function postImagePath(slug: string, language: DevLanguage) {
   return language === "ko" ? `/og/ko/${slug}.png` : `/og/${slug}.png`;
 }
 
-export function generatePostStaticParams() {
-  const slugs = getAllPostSlugs();
-  return slugs.map((slug) => ({ slug: slug.split("/") }));
+export function generatePostStaticParams(language: DevLanguage) {
+  return getAllPostSlugs(language).map((slug) => ({ slug: slug.split("/") }));
+}
+
+function postPageAlternates(
+  language: DevLanguage,
+  canonicalPath: string,
+  englishPath: string,
+  koreanPath: string,
+  missingKorean: boolean,
+): Metadata["alternates"] {
+  if (!missingKorean) {
+    return pageAlternates(language, canonicalPath, englishPath, koreanPath);
+  }
+
+  return {
+    canonical: toSiteUrl(englishPath),
+    languages: {
+      en: toSiteUrl(englishPath),
+      "x-default": toSiteUrl(englishPath),
+    },
+    types: rssAlternateTypes(language),
+  };
 }
 
 export async function generatePostMetadata(
@@ -98,7 +118,13 @@ export async function generatePostMetadata(
         description,
         images: [toSiteUrl(imagePath)],
       },
-      alternates: pageAlternates(language, canonicalPath, englishPath, koreanPath),
+      alternates: postPageAlternates(
+        language,
+        canonicalPath,
+        englishPath,
+        koreanPath,
+        post.missingKorean,
+      ),
     };
   } catch {
     return {

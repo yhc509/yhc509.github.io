@@ -5,12 +5,22 @@ import {
   getToggledDevLanguage,
   localizedPath,
   persistDevLanguage,
+  stripLanguagePrefix,
 } from "@/lib/devLanguage";
 import { useDevLanguage } from "@/components/DevLanguageProvider";
 
-export function DevLanguageToggle() {
-  const pathname = usePathname();
+export function DevLanguageToggle({
+  englishOnlyPaths = [],
+}: {
+  englishOnlyPaths?: readonly string[];
+}) {
+  const pathname = usePathname() || "/";
   const language = useDevLanguage();
+
+  if (englishOnlyPaths.includes(stripLanguagePrefix(pathname))) {
+    return null;
+  }
+
   const nextLanguage = getToggledDevLanguage(language);
   const href = localizedPath(pathname, nextLanguage);
   const currentLanguageLabel = language === "en" ? "English" : "한국어";
