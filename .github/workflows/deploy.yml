@@ -47,6 +47,8 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y /tmp/chrome.deb
           fi
+          test -s content/slides/theme/fonts/NotoSansKR-Regular.woff2
+          test -s content/slides/theme/fonts/NotoSansKR-Bold.woff2
 
       - name: Run lint
         run: npm run lint
