@@ -90,6 +90,66 @@ test("deck frontmatter requires title, date, description, lang, and the presenta
   assert.equal(fields.date, "2026-10-20");
 });
 
+test("a year-month date is kept for the gallery", () => {
+  const fields = parseDeckFields(
+    {
+      marp: true,
+      theme: "presentation",
+      size: "16:9",
+      title: "Harness",
+      date: "2026-06",
+      description: "A talk.",
+      lang: "ko",
+    },
+    "content/slides/harness-engineering/harness-engineering.md",
+    "harness-engineering",
+  );
+  assert.equal(fields.date, "2026-06");
+});
+
+test("harness-engineering is published in Korean and English", () => {
+  clearSlideCache();
+  const previous = process.env.SHOW_DRAFTS;
+  delete process.env.SHOW_DRAFTS;
+  try {
+    const published = readSlideDecks();
+    const korean = published.find(
+      (deck) => deck.slug === "harness-engineering" && deck.lang === "ko",
+    );
+    const english = published.find(
+      (deck) => deck.slug === "harness-engineering" && deck.lang === "en",
+    );
+    assert.ok(korean);
+    assert.ok(english);
+    assert.equal(korean.draft, false);
+    assert.equal(english.draft, false);
+    assert.equal(korean.date, "2026-06");
+    assert.equal(english.date, "2026-06");
+    assert.equal(korean.slideCount, english.slideCount);
+    assert.ok(korean.slideCount >= 40);
+    assert.equal(marpCssIsScoped(korean.css), true);
+    assert.equal(marpCssIsScoped(english.css), true);
+    assert.match(korean.thumbnail, /\/slides-assets\/harness-engineering\/thumb-ko\.webp$/);
+    assert.match(english.thumbnail, /\/slides-assets\/harness-engineering\/thumb-en\.webp$/);
+    assert.match(korean.slides[0], /Harness Engineering/);
+    assert.match(
+      korean.slides.join("\n"),
+      /\/slides-assets\/harness-engineering\/img\/09-pricing-table\.webp/,
+    );
+    assert.equal(
+      published.some((deck) => deck.slug === "sample"),
+      false,
+    );
+  } finally {
+    if (previous === undefined) {
+      delete process.env.SHOW_DRAFTS;
+    } else {
+      process.env.SHOW_DRAFTS = previous;
+    }
+    clearSlideCache();
+  }
+});
+
 test("the sample deck is a draft and stays out of the published list", () => {
   clearSlideCache();
   const previous = process.env.SHOW_DRAFTS;

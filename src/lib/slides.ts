@@ -11,6 +11,7 @@ export type SlideDeck = {
   slides: string[];
   css: string;
   slideCount: number;
+  thumbnail: string;
 };
 
 export function getAllSlides(): SlideDeck[] {
@@ -21,6 +22,10 @@ export function getSlidesForLanguage(language: DevLanguage): SlideDeck[] {
   return decksForLanguage(language) as SlideDeck[];
 }
 
-export function getSlide(slug: string): SlideDeck | null {
-  return getAllSlides().find((deck) => deck.slug === slug) ?? null;
+export function getSlide(slug: string, language: DevLanguage): SlideDeck | null {
+  return getSlidesForLanguage(language).find((deck) => deck.slug === slug) ?? null;
+}
+
+export function getSlideSlugs(): string[] {
+  return [...new Set(getAllSlides().map((deck) => deck.slug))];
 }

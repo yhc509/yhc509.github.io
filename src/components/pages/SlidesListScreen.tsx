@@ -66,7 +66,7 @@ export function SlidesListScreen({ language }: { language: DevLanguage }) {
   ]);
 
   return (
-    <div className="max-w-3xl mx-auto px-5 pb-10">
+    <div className="mx-auto max-w-6xl px-4 pb-12 sm:px-5">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(listJsonLd) }}
@@ -87,30 +87,29 @@ export function SlidesListScreen({ language }: { language: DevLanguage }) {
           {text.empty}
         </p>
       ) : (
-        decks.map((deck) => (
-          <Link
-            key={deck.slug}
-            href={localizedPath(`/slides/${deck.slug}`, language)}
-            className="block border-b py-5 transition-colors hover:opacity-85"
-            style={{ borderColor: "var(--card-border)" }}
-          >
-            <article>
-              <div
-                className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs"
-                style={{ color: "var(--text-muted)" }}
-              >
-                <time dateTime={deck.date}>{deck.date}</time>
-                <span>{text.slides(deck.slideCount)}</span>
-              </div>
-              <h2 className="text-lg font-bold leading-snug" lang={deck.lang}>
-                {deck.title}
-              </h2>
-              <p className="mt-1 text-sm" style={{ color: "var(--text-secondary)" }} lang={deck.lang}>
-                {deck.description}
-              </p>
-            </article>
-          </Link>
-        ))
+        <ul className="slide-gallery">
+          {decks.map((deck) => (
+            <li key={deck.slug}>
+              <Link href={localizedPath(`/slides/${deck.slug}`, language)}>
+                <span className="slide-thumb">
+                  <img
+                    src={deck.thumbnail}
+                    alt=""
+                    width={1280}
+                    height={720}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </span>
+                <h2 lang={deck.lang}>{deck.title}</h2>
+                <p>
+                  <time dateTime={deck.date}>{deck.date}</time>
+                  <span>{text.slides(deck.slideCount)}</span>
+                </p>
+              </Link>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );

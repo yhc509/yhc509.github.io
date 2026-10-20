@@ -88,14 +88,24 @@ async function posts() {
 }
 
 function slideDecks() {
-  return readSlideDecks().map((deck) => ({
-    slug: deck.slug,
-    title: deck.title,
-    date: deck.date,
-    description: deck.description.replace(/\s+/g, " ").trim(),
-    slideCount: deck.slideCount,
-    koreanOnly: deck.lang !== "en",
-  }));
+  /** @type {Map<string, { slug: string, ko: object | null, en: object | null }>} */
+  const groups = new Map();
+  for (const deck of readSlideDecks()) {
+    const group = groups.get(deck.slug) ?? { slug: deck.slug, ko: null, en: null };
+    group[deck.lang] = deck;
+    groups.set(deck.slug, group);
+  }
+  return [...groups.values()].map((group) => {
+    const primary = group.en ?? group.ko;
+    return {
+      slug: group.slug,
+      title: primary.title,
+      date: primary.date,
+      description: primary.description.replace(/\s+/g, " ").trim(),
+      slideCount: primary.slideCount,
+      koreanOnly: group.en == null,
+    };
+  });
 }
 
 function newsIssues() {
@@ -160,7 +170,7 @@ const full = [
       deck.koreanOnly
         ? `English list omits this deck. Korean: ${SITE_URL}/ko/slides/${deck.slug}`
         : `Korean: ${SITE_URL}/ko/slides/${deck.slug}`,
-      deck.koreanOnly ? "Language: Korean only" : "Language: English",
+      deck.koreanOnly ? "Language: Korean only" : "Language: English and Korean",
       "",
       deck.description,
     ]),

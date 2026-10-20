@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { SlideViewer } from "@/components/SlideViewer";
-import { getAllSlides, getSlide } from "@/lib/slides";
+import { getSlide, getSlideSlugs } from "@/lib/slides";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
 import { clampMetaDescription } from "@/lib/metaDescription";
 import { pageAlternates, toSiteUrl } from "@/lib/site";
@@ -20,7 +20,7 @@ export interface SlideDeckPageProps {
 }
 
 export function generateSlideStaticParams() {
-  const slugs = getAllSlides().map((deck) => deck.slug);
+  const slugs = getSlideSlugs();
   return slugs.length > 0 ? slugs.map((slug) => ({ slug })) : [{ slug: EMPTY_SLUG }];
 }
 
@@ -29,7 +29,7 @@ export async function generateSlideMetadata(
   language: DevLanguage,
 ): Promise<Metadata> {
   const { slug } = await params;
-  const deck = getSlide(slug);
+  const deck = getSlide(slug, language) ?? getSlide(slug, language === "en" ? "ko" : "en");
   if (!deck) {
     return { robots: { index: false, follow: false } };
   }
@@ -66,13 +66,14 @@ export async function SlideDeckScreen({
   language,
 }: SlideDeckPageProps & { language: DevLanguage }) {
   const { slug } = await params;
-  const deck = getSlide(slug);
+  const preferred = getSlide(slug, language);
+  const deck = preferred ?? getSlide(slug, language === "en" ? "ko" : "en");
   if (!deck || slug === EMPTY_SLUG) {
     notFound();
   }
 
   const useEnglish = language === "en";
-  const missingEnglish = deck.lang !== "en";
+  const missingEnglish = useEnglish && deck.lang !== "en";
   const pagePath = localizedPath(`/slides/${deck.slug}`, language);
   const pageUrl = toSiteUrl(pagePath);
   const listUrl = toSiteUrl(localizedPath("/slides", language));

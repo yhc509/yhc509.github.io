@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/posts";
 import { getAllProjects } from "@/lib/projects";
 import { getAllNewsIssues } from "@/lib/news";
-import { getAllSlides } from "@/lib/slides";
+import { getAllSlides, getSlideSlugs } from "@/lib/slides";
 import { toSiteUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -60,8 +60,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...languageEntry("/about", latestAny, "monthly", 0.7),
     ...languageEntry("/news", latestNews, "weekly", 0.8),
     ...languageEntry("/slides", latestSlide, "monthly", 0.6),
-    ...slideDecks.flatMap((deck) =>
-      languageEntry(`/slides/${deck.slug}`, deck.date, "monthly", 0.5)
+    ...getSlideSlugs().flatMap((slug) =>
+      languageEntry(
+        `/slides/${slug}`,
+        latest(slideDecks.filter((deck) => deck.slug === slug).map((deck) => deck.date)),
+        "monthly",
+        0.5,
+      )
     ),
     ...newsIssues.flatMap((issue) =>
       languageEntry(`/news/${issue.id}`, issue.modified, "monthly", 0.6)
