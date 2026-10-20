@@ -779,12 +779,19 @@ body:has(.deck-page) .dev-language-toggle {
   opacity: 0.72;
 }
 
-.slide-gallery p {
+.slide-gallery .slide-card-meta {
   display: flex;
   gap: 0.75rem;
   margin-top: 0.25rem;
   color: var(--text-muted);
   font-size: 0.75rem;
+}
+
+.slide-gallery .slide-card-desc {
+  margin-top: 0.35rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.45;
 }
 
 .slide-thumb {
@@ -1060,9 +1067,31 @@ body:has(.deck-page) .dev-language-toggle {
 /* Phone landscape: the slide fills the viewport. Header and title leave the flow. */
 @media (orientation: landscape) and (max-height: 500px) {
   body:has(.deck-page:not([data-mode="scroll"])) header,
-  body:has(.deck-page:not([data-mode="scroll"])) .deck-top,
+  body:has(.deck-page:not([data-mode="scroll"])) .deck-top h1,
+  body:has(.deck-page:not([data-mode="scroll"])) .deck-top time,
   body:has(.deck-page:not([data-mode="scroll"])) .language-fallback-note {
     display: none;
+  }
+
+  .deck-page:not([data-mode="scroll"]) .deck-top {
+    position: absolute;
+    top: max(8px, env(safe-area-inset-top));
+    left: max(8px, env(safe-area-inset-left));
+    z-index: 4;
+    display: block;
+    padding: 0;
+    pointer-events: none;
+  }
+
+  .deck-page:not([data-mode="scroll"]) .deck-back {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--card-bg) 84%, transparent);
+    padding: 0 0.85rem;
+    box-shadow: 0 8px 20px color-mix(in srgb, #000 18%, transparent);
   }
 
   .deck-page:not([data-mode="scroll"]) {
@@ -1141,9 +1170,31 @@ body:has(.deck-page) .dev-language-toggle {
 /* Portrait presenter, opened from a tapped slide: full viewport, hint stays over the letterbox. */
 @media (orientation: portrait) and (max-width: 767px) {
   body:has(.deck-page[data-mode="presenter"]) header,
-  body:has(.deck-page[data-mode="presenter"]) .deck-top,
+  body:has(.deck-page[data-mode="presenter"]) .deck-top h1,
+  body:has(.deck-page[data-mode="presenter"]) .deck-top time,
   body:has(.deck-page[data-mode="presenter"]) .language-fallback-note {
     display: none;
+  }
+
+  .deck-page[data-mode="presenter"] .deck-top {
+    position: absolute;
+    top: max(8px, env(safe-area-inset-top));
+    left: max(8px, env(safe-area-inset-left));
+    z-index: 4;
+    display: block;
+    padding: 0;
+    pointer-events: none;
+  }
+
+  .deck-page[data-mode="presenter"] .deck-back {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--card-bg) 84%, transparent);
+    padding: 0 0.85rem;
+    box-shadow: 0 8px 20px color-mix(in srgb, #000 18%, transparent);
   }
 
   .deck-page[data-mode="presenter"] {

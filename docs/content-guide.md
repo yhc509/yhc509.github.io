@@ -210,7 +210,7 @@ Marp로 적습니다. 슬라이드는 `---`로 나눕니다. 인라인 HTML을 �
 
 로컬에서 초안을 보려면 `SHOW_DRAFTS=1 npm run build`처럼 환경 변수를 켭니다.
 
-목록은 1번 슬라이드를 16:9 썸네일로 만든 갤러리입니다. 썸네일은 빌드가 `public/slides-assets/<slug>/thumb-ko.webp`, `thumb-en.webp`로 만듭니다.
+목록은 1번 슬라이드를 16:9 썸네일로 만든 갤러리입니다. 카드에는 썸네일, 제목, 날짜, 장수, 설명이 있고 날짜가 최근인 덱이 앞에 옵니다. 썸네일은 빌드가 `public/slides-assets/<slug>/thumb-ko.webp`, `thumb-en.webp`로 만듭니다.
 
 한국어 덱은 `/ko/slides/<slug>`에서 봅니다. 영어 주소로 열면 한국어만 있다는 안내가 붙습니다.
 

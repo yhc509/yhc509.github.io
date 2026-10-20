@@ -102,10 +102,15 @@ export function SlidesListScreen({ language }: { language: DevLanguage }) {
                   />
                 </span>
                 <h2 lang={deck.lang}>{deck.title}</h2>
-                <p>
+                <p className="slide-card-meta">
                   <time dateTime={deck.date}>{deck.date}</time>
                   <span>{text.slides(deck.slideCount)}</span>
                 </p>
+                {deck.description ? (
+                  <p className="slide-card-desc" lang={deck.lang}>
+                    {deck.description}
+                  </p>
+                ) : null}
               </Link>
             </li>
           ))}

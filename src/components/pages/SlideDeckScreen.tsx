@@ -78,6 +78,7 @@ export async function SlideDeckScreen({
   const pageUrl = toSiteUrl(pagePath);
   const listUrl = toSiteUrl(localizedPath("/slides", language));
   const listName = useEnglish ? "Slides" : "발표자료";
+  const backLabel = useEnglish ? "All slides" : "발표자료 목록";
   const jsonLd = jsonLdGraph([
     {
       "@type": "PresentationDigitalDocument",
@@ -113,7 +114,7 @@ export async function SlideDeckScreen({
         title={deck.title}
         date={deck.date}
         backHref={localizedPath("/slides", language)}
-        backLabel={listName}
+        backLabel={backLabel}
         note={useEnglish && missingEnglish ? "This deck is only available in Korean." : null}
         language={language}
         contentLanguage={deck.lang}

@@ -150,6 +150,39 @@ test("harness-engineering is published in Korean and English", () => {
   }
 });
 
+test("extra sample decks stay drafts and lists sort newest first", () => {
+  clearSlideCache();
+  const previous = process.env.SHOW_DRAFTS;
+  delete process.env.SHOW_DRAFTS;
+  try {
+    const published = readSlideDecks();
+    assert.equal(published.some((deck) => deck.slug === "frame-time"), false);
+    assert.equal(published.some((deck) => deck.slug === "short-context"), false);
+    const korean = decksForLanguage("ko", readSlideDecks({ includeDrafts: true }));
+    const dates = korean.map((deck) => deck.date);
+    assert.deepEqual(dates, [...dates].sort((a, b) => b.localeCompare(a)));
+    for (const slug of ["frame-time", "short-context"]) {
+      const deck = korean.find((item) => item.slug === slug);
+      assert.ok(deck);
+      assert.equal(deck.draft, true);
+      assert.ok(deck.description.length > 0);
+      assert.ok(deck.slideCount >= 8);
+      assert.match(deck.thumbnail, new RegExp(`thumb-ko\\.webp$`));
+    }
+    const english = decksForLanguage("en", readSlideDecks({ includeDrafts: true }));
+    assert.equal(english.some((deck) => deck.slug === "sample"), false);
+    assert.ok(english.some((deck) => deck.slug === "frame-time" && deck.lang === "en"));
+    assert.ok(english.some((deck) => deck.slug === "short-context" && deck.lang === "en"));
+  } finally {
+    if (previous === undefined) {
+      delete process.env.SHOW_DRAFTS;
+    } else {
+      process.env.SHOW_DRAFTS = previous;
+    }
+    clearSlideCache();
+  }
+});
+
 test("the sample deck is a draft and stays out of the published list", () => {
   clearSlideCache();
   const previous = process.env.SHOW_DRAFTS;
