@@ -84,6 +84,23 @@ body {
   border-radius: 8px;
 }
 
+.prose .md-table-scroll {
+  max-width: 100%;
+  margin-top: 1.75em;
+  margin-bottom: 1.75em;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.prose :is(h2, h3, h4, hr) + .md-table-scroll {
+  margin-top: 0;
+}
+
+.prose .md-table-scroll > table {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .prose video {
   display: block;
   max-width: 100%;
