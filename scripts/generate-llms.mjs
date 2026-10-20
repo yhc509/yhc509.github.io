@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { endOfSeoulDay } from "../src/lib/contentDates.mjs";
 import { readNewsIssues } from "../src/lib/newsIssues.mjs";
+import { readSlideDecks } from "../src/lib/slides.mjs";
 
 const SITE_URL = "https://kinkeep.dev";
 const POSTS_DIR = path.join(process.cwd(), "content/posts");
@@ -86,6 +87,27 @@ async function posts() {
   return parsed.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
+function slideDecks() {
+  /** @type {Map<string, { slug: string, ko: object | null, en: object | null }>} */
+  const groups = new Map();
+  for (const deck of readSlideDecks()) {
+    const group = groups.get(deck.slug) ?? { slug: deck.slug, ko: null, en: null };
+    group[deck.lang] = deck;
+    groups.set(deck.slug, group);
+  }
+  return [...groups.values()].map((group) => {
+    const primary = group.en ?? group.ko;
+    return {
+      slug: group.slug,
+      title: primary.title,
+      date: primary.date,
+      description: primary.description.replace(/\s+/g, " ").trim(),
+      slideCount: primary.slideCount,
+      koreanOnly: group.en == null,
+    };
+  });
+}
+
 function newsIssues() {
   return readNewsIssues("en").map((issue) => ({
     id: issue.id,
@@ -124,6 +146,7 @@ async function assertLlmsLinks(publishedPosts) {
 
 const publishedPosts = await posts();
 const issues = await newsIssues();
+const decks = slideDecks();
 await assertLlmsLinks(publishedPosts);
 
 const full = [
@@ -138,7 +161,20 @@ const full = [
   section("Key pages", [
     `- About: ${SITE_URL}/about (Korean: ${SITE_URL}/ko/about)`,
     `- AI News: ${SITE_URL}/news (Korean: ${SITE_URL}/ko/news)`,
+    `- Slides: ${SITE_URL}/slides (Korean: ${SITE_URL}/ko/slides)`,
   ]),
+  ...decks.map((deck) =>
+    entry(deck.title, deck.koreanOnly ? `${SITE_URL}/ko/slides/${deck.slug}` : `${SITE_URL}/slides/${deck.slug}`, [
+      `Date: ${deck.date}`,
+      `Slides: ${deck.slideCount}`,
+      deck.koreanOnly
+        ? `English list omits this deck. Korean: ${SITE_URL}/ko/slides/${deck.slug}`
+        : `Korean: ${SITE_URL}/ko/slides/${deck.slug}`,
+      deck.koreanOnly ? "Language: Korean only" : "Language: English and Korean",
+      "",
+      deck.description,
+    ]),
+  ),
   ...issues.map((issue) =>
     entry(issue.title, `${SITE_URL}/news/${issue.id}`, [
       `Date: ${issue.date}`,
@@ -164,4 +200,6 @@ const full = [
 ].join("\n");
 
 await fs.writeFile(FULL_PATH, `${full.trim()}\n`, "utf8");
-console.log(`Generated llms-full.txt with ${publishedPosts.length} posts and ${issues.length} news issues`);
+console.log(
+  `Generated llms-full.txt with ${publishedPosts.length} posts, ${issues.length} news issues, and ${decks.length} slide decks`,
+);
