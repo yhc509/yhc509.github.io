@@ -182,6 +182,36 @@ cards:
 코멘트 한 문단.
 ````
 
+## 발표자료
+
+덱은 `content/slides/<slug>/<slug>.md`에 둡니다. 그림과 영상은 같은 폴더의 `img/`에 둡니다. `<slug>`는 소문자, 숫자, 하이픈만 씁니다.
+
+Marp로 적습니다. 슬라이드는 `---`로 나눕니다. 인라인 HTML을 쓸 수 있습니다. 덱 안에 `<style>` 블록을 넣지 않습니다.
+
+| 필드 | 필수 | 설명 |
+|------|------|------|
+| `marp` | ✅ | `true` |
+| `theme` | ✅ | `presentation`. 테마 파일은 `content/slides/theme/presentation.css` 하나입니다 |
+| `size` | ✅ | `16:9` |
+| `paginate` | ❌ | `true`면 슬라이드 안에 쪽수를 그립니다 |
+| `title` | ✅ | 목록 제목 |
+| `date` | ✅ | `YYYY-MM-DD` |
+| `description` | ✅ | 짧은 설명. SEO 설명으로 씁니다 |
+| `lang` | ✅ | `ko` 또는 `en`. 영어 목록은 `en`만 보여 줍니다 |
+| `draft` | ❌ | `true`면 프로덕션 빌드, 사이트맵, 목록에서 빠집니다 |
+
+이미지는 덱 파일 기준 상대 경로입니다.
+
+```markdown
+![h:220](img/diagram.svg)
+```
+
+빌드가 `img/`를 `public/slides-assets/<slug>/`로 복사합니다. PNG와 JPEG는 WebP로 바꿉니다. SVG와 영상은 그대로 둡니다. 마크다운 경로는 고치지 않습니다. `draft: true` 덱의 파일은 프로덕션에 복사하지 않습니다.
+
+로컬에서 초안을 보려면 `SHOW_DRAFTS=1 npm run build`처럼 환경 변수를 켭니다.
+
+한국어 덱은 `/ko/slides/<slug>`에서 봅니다. 영어 주소로 열면 한국어만 있다는 안내가 붙습니다.
+
 ## 태그 시스템
 
 포스트와 프로젝트는 각각 **독립적인 태그 시스템**을 가지고 있습니다.

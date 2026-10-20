@@ -18,6 +18,10 @@ const indexDocumentTitles = {
     en: "kinkeep.dev | About a Unity Game Programmer",
     ko: "kinkeep.dev | Unity 게임 프로그래머 소개",
   },
+  slides: {
+    en: "kinkeep.dev | Slides from talks and sessions",
+    ko: "kinkeep.dev | 발표와 세션에서 보는 슬라이드",
+  },
 } as const satisfies Record<string, Record<DevLanguage, string>>;
 
 export type IndexDocumentPage = keyof typeof indexDocumentTitles;

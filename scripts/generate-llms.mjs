@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { endOfSeoulDay } from "../src/lib/contentDates.mjs";
 import { readNewsIssues } from "../src/lib/newsIssues.mjs";
+import { readSlideDecks } from "../src/lib/slides.mjs";
 
 const SITE_URL = "https://kinkeep.dev";
 const POSTS_DIR = path.join(process.cwd(), "content/posts");
@@ -86,6 +87,17 @@ async function posts() {
   return parsed.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
+function slideDecks() {
+  return readSlideDecks().map((deck) => ({
+    slug: deck.slug,
+    title: deck.title,
+    date: deck.date,
+    description: deck.description.replace(/\s+/g, " ").trim(),
+    slideCount: deck.slideCount,
+    koreanOnly: deck.lang !== "en",
+  }));
+}
+
 function newsIssues() {
   return readNewsIssues("en").map((issue) => ({
     id: issue.id,
@@ -124,6 +136,7 @@ async function assertLlmsLinks(publishedPosts) {
 
 const publishedPosts = await posts();
 const issues = await newsIssues();
+const decks = slideDecks();
 await assertLlmsLinks(publishedPosts);
 
 const full = [
@@ -138,7 +151,20 @@ const full = [
   section("Key pages", [
     `- About: ${SITE_URL}/about (Korean: ${SITE_URL}/ko/about)`,
     `- AI News: ${SITE_URL}/news (Korean: ${SITE_URL}/ko/news)`,
+    `- Slides: ${SITE_URL}/slides (Korean: ${SITE_URL}/ko/slides)`,
   ]),
+  ...decks.map((deck) =>
+    entry(deck.title, deck.koreanOnly ? `${SITE_URL}/ko/slides/${deck.slug}` : `${SITE_URL}/slides/${deck.slug}`, [
+      `Date: ${deck.date}`,
+      `Slides: ${deck.slideCount}`,
+      deck.koreanOnly
+        ? `English list omits this deck. Korean: ${SITE_URL}/ko/slides/${deck.slug}`
+        : `Korean: ${SITE_URL}/ko/slides/${deck.slug}`,
+      deck.koreanOnly ? "Language: Korean only" : "Language: English",
+      "",
+      deck.description,
+    ]),
+  ),
   ...issues.map((issue) =>
     entry(issue.title, `${SITE_URL}/news/${issue.id}`, [
       `Date: ${issue.date}`,
@@ -164,4 +190,6 @@ const full = [
 ].join("\n");
 
 await fs.writeFile(FULL_PATH, `${full.trim()}\n`, "utf8");
-console.log(`Generated llms-full.txt with ${publishedPosts.length} posts and ${issues.length} news issues`);
+console.log(
+  `Generated llms-full.txt with ${publishedPosts.length} posts, ${issues.length} news issues, and ${decks.length} slide decks`,
+);

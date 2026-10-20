@@ -12,6 +12,7 @@ export function NavLinks() {
 
   const isPostsActive = barePath === "/" || barePath.startsWith("/posts");
   const isNewsActive = barePath === "/news" || barePath.startsWith("/news/");
+  const isSlidesActive = barePath === "/slides" || barePath.startsWith("/slides/");
   const isAboutActive = barePath === "/about";
 
   return (
@@ -69,6 +70,32 @@ export function NavLinks() {
           <path d="M10 6h8v4h-8V6Z" />
         </svg>
         <span className="hidden sm:inline">News</span>
+      </Link>
+      <Link
+        href={localizedPath("/slides", language)}
+        className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-sm transition-colors"
+        style={{
+          backgroundColor: isSlidesActive ? "var(--accent)" : "var(--card-bg)",
+          color: isSlidesActive ? "white" : "var(--foreground)",
+        }}
+        aria-label="Slides"
+      >
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="flex-shrink-0"
+        >
+          <rect x="2" y="3" width="20" height="14" rx="2" />
+          <line x1="8" y1="21" x2="16" y2="21" />
+          <line x1="12" y1="17" x2="12" y2="21" />
+        </svg>
+        <span className="hidden sm:inline">Slides</span>
       </Link>
       <Link
         href={localizedPath("/about", language)}

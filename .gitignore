@@ -17,6 +17,7 @@
 /.next/
 /out/
 /public/posts-images/
+/public/slides-assets/
 
 # Generated OG images
 public/og/
