@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 444" font-family="-apple-system, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0L10,5L0,10z" fill="#7a92ad"/>
+    </marker>
+  </defs>
+
+  <!-- Q1 -->
+  <rect x="20" y="16" width="380" height="64" rx="32" fill="#f4f6f8" stroke="#7a92ad" stroke-width="1.5"/>
+  <text x="210" y="56" text-anchor="middle" font-size="19" font-weight="600" fill="#334155">Unsure the direction itself is right?</text>
+
+  <rect x="650" y="16" width="450" height="64" rx="10" fill="#eef4fb" stroke="#2a7ae2" stroke-width="1.5"/>
+  <text x="875" y="43" text-anchor="middle" font-size="19" font-weight="700" fill="#1e3a5f">/first-principles</text>
+  <text x="875" y="67" text-anchor="middle" font-size="14.5" fill="#55677d">Redefine the approach (first-principles thinking)</text>
+
+  <line x1="402" y1="48" x2="645" y2="48" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+  <text x="520" y="38" text-anchor="middle" font-size="15" font-weight="700" fill="#1d8348">YES</text>
+
+  <!-- Q1 -> Q2 -->
+  <line x1="210" y1="82" x2="210" y2="146" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+  <text x="232" y="120" font-size="15" font-weight="700" fill="#b03a2e">NO</text>
+
+  <!-- Q2 -->
+  <rect x="20" y="150" width="380" height="64" rx="32" fill="#f4f6f8" stroke="#7a92ad" stroke-width="1.5"/>
+  <text x="210" y="190" text-anchor="middle" font-size="19" font-weight="600" fill="#334155">Is what to build clearly defined?</text>
+
+  <rect x="650" y="150" width="450" height="64" rx="10" fill="#eef4fb" stroke="#2a7ae2" stroke-width="1.5"/>
+  <text x="875" y="177" text-anchor="middle" font-size="19" font-weight="700" fill="#1e3a5f">/why</text>
+  <text x="875" y="201" text-anchor="middle" font-size="14.5" fill="#55677d">Existential question loop → crystallize a spec</text>
+
+  <line x1="402" y1="182" x2="645" y2="182" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+  <text x="520" y="172" text-anchor="middle" font-size="15" font-weight="700" fill="#b03a2e">NO</text>
+
+  <!-- Q2 -> brainstorming (elbow) -->
+  <polyline points="210,216 210,300 645,300" fill="none" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+  <text x="232" y="262" font-size="15" font-weight="700" fill="#1d8348">YES</text>
+
+  <rect x="650" y="268" width="450" height="64" rx="10" fill="#eef4fb" stroke="#2a7ae2" stroke-width="1.5"/>
+  <text x="875" y="295" text-anchor="middle" font-size="19" font-weight="700" fill="#1e3a5f">/brainstorming</text>
+  <text x="875" y="319" text-anchor="middle" font-size="14.5" fill="#55677d">One question at a time, design exploration (HARD GATE)</text>
+
+  <!-- separator -->
+  <line x1="20" y1="356" x2="1100" y2="356" stroke="#c8d3de" stroke-width="1.5" stroke-dasharray="7 6"/>
+
+  <!-- autoloop -->
+  <rect x="20" y="374" width="430" height="56" rx="28" fill="#f4f6f8" stroke="#7a92ad" stroke-width="1.5"/>
+  <text x="235" y="409" text-anchor="middle" font-size="17" font-weight="600" fill="#334155">Have something working, goal is better numbers</text>
+
+  <line x1="452" y1="402" x2="645" y2="402" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+
+  <rect x="650" y="374" width="450" height="56" rx="10" fill="#eef4fb" stroke="#2a7ae2" stroke-width="1.5"/>
+  <text x="875" y="397" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a5f">/autoloop</text>
+  <text x="875" y="419" text-anchor="middle" font-size="14" fill="#55677d">Auto loop: mutate → measure → adopt</text>
+</svg>

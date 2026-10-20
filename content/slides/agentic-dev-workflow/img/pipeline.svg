@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 345" font-family="-apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0L10,5L0,10z" fill="#7a92ad"/>
+    </marker>
+  </defs>
+
+  <!-- top row: ① → ② → ③ → ④ -->
+  <rect x="0" y="10" width="250" height="92" rx="10" fill="#e9f6ee" stroke="#2e9e5b" stroke-width="1.5"/>
+  <text x="125" y="44" text-anchor="middle" font-size="19" font-weight="700" fill="#175c33">① GitHub 이슈</text>
+  <text x="125" y="68" text-anchor="middle" font-size="13.5" fill="#4a7a5c">AI가 이슈 등록</text>
+  <text x="125" y="88" text-anchor="middle" font-size="13.5" fill="#4a7a5c">어떤 작업 할지는 사람이 선정</text>
+
+  <rect x="290" y="10" width="250" height="92" rx="10" fill="#e9f6ee" stroke="#2e9e5b" stroke-width="1.5"/>
+  <text x="415" y="48" text-anchor="middle" font-size="19" font-weight="700" fill="#175c33">② /solve</text>
+  <text x="415" y="76" text-anchor="middle" font-size="14.5" fill="#4a7a5c">사고 스킬 라우팅</text>
+
+  <rect x="580" y="10" width="250" height="92" rx="10" fill="#e9f6ee" stroke="#2e9e5b" stroke-width="1.5"/>
+  <text x="705" y="44" text-anchor="middle" font-size="17.5" font-weight="700" fill="#175c33">③ SPEC→DESIGN→PLAN</text>
+  <text x="705" y="68" text-anchor="middle" font-size="13.5" fill="#4a7a5c">AI가 작성 · 사람이 컨펌</text>
+  <text x="705" y="88" text-anchor="middle" font-size="13.5" fill="#4a7a5c">vault 문서화</text>
+
+  <rect x="870" y="10" width="250" height="92" rx="10" fill="#eef4fb" stroke="#2a7ae2" stroke-width="1.5"/>
+  <text x="995" y="48" text-anchor="middle" font-size="19" font-weight="700" fill="#1e3a5f">④ Codex 위임</text>
+  <text x="995" y="76" text-anchor="middle" font-size="14.5" fill="#55677d">구현 · 자동 커밋</text>
+
+  <line x1="252" y1="56" x2="286" y2="56" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="542" y1="56" x2="576" y2="56" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="832" y1="56" x2="866" y2="56" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- ④ down to ⑤ -->
+  <line x1="995" y1="104" x2="995" y2="186" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- bottom row: ⑤ → ⑥ → 머지 → ⑦ (right to left) -->
+  <rect x="870" y="190" width="250" height="92" rx="10" fill="#eef4fb" stroke="#2a7ae2" stroke-width="1.5"/>
+  <text x="995" y="228" text-anchor="middle" font-size="19" font-weight="700" fill="#1e3a5f">⑤ 검증</text>
+  <text x="995" y="256" text-anchor="middle" font-size="14.5" fill="#55677d">컴파일 → 콘솔 → 런타임</text>
+
+  <rect x="580" y="190" width="250" height="92" rx="10" fill="#eef4fb" stroke="#2a7ae2" stroke-width="1.5"/>
+  <text x="705" y="228" text-anchor="middle" font-size="19" font-weight="700" fill="#1e3a5f">⑥ 독립 리뷰</text>
+  <text x="705" y="256" text-anchor="middle" font-size="14.5" fill="#55677d">구현 세션과 분리</text>
+
+  <rect x="290" y="190" width="250" height="92" rx="10" fill="#fdf3e0" stroke="#f5a623" stroke-width="1.8"/>
+  <text x="415" y="224" text-anchor="middle" font-size="19" font-weight="700" fill="#8a5a00">머지</text>
+  <text x="415" y="248" text-anchor="middle" font-size="13.5" fill="#8a6d3b">사람이 직접 런타임 테스트 (스킵 가능)</text>
+  <text x="415" y="268" text-anchor="middle" font-size="13.5" fill="#8a6d3b">사람 승인 — 예외 없음</text>
+
+  <rect x="0" y="190" width="250" height="92" rx="10" fill="#1e3a5f" stroke="#1e3a5f"/>
+  <text x="125" y="228" text-anchor="middle" font-size="19" font-weight="700" fill="#ffffff">⑦ issue-agent</text>
+  <text x="125" y="256" text-anchor="middle" font-size="14.5" fill="#c9d9ec">무인 자동 PR</text>
+
+  <line x1="868" y1="236" x2="834" y2="236" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="578" y1="236" x2="544" y2="236" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="288" y1="236" x2="254" y2="236" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- legend -->
+  <rect x="180" y="311" width="16" height="16" rx="4" fill="#eef4fb" stroke="#2a7ae2" stroke-width="1.5"/>
+  <text x="204" y="324" font-size="14" fill="#55677d">AI 수행</text>
+  <rect x="320" y="311" width="16" height="16" rx="4" fill="#e9f6ee" stroke="#2e9e5b" stroke-width="1.5"/>
+  <text x="344" y="324" font-size="14" fill="#55677d">사람 + AI 협업</text>
+  <rect x="510" y="311" width="16" height="16" rx="4" fill="#fdf3e0" stroke="#f5a623" stroke-width="1.5"/>
+  <text x="534" y="324" font-size="14" fill="#55677d">사람 게이트</text>
+  <rect x="670" y="311" width="16" height="16" rx="4" fill="#1e3a5f"/>
+  <text x="694" y="324" font-size="14" fill="#55677d">무인 에이전트</text>
+</svg>

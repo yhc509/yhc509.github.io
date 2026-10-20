@@ -154,6 +154,58 @@ test("harness-engineering is published in Korean and English", () => {
   }
 });
 
+test("agentic-dev-workflow is published ahead of harness", () => {
+  clearSlideCache();
+  const previous = process.env.SHOW_DRAFTS;
+  delete process.env.SHOW_DRAFTS;
+  try {
+    const published = readSlideDecks();
+    const korean = decksForLanguage("ko", published);
+    const english = decksForLanguage("en", published);
+    assert.deepEqual(
+      korean.map((deck) => deck.slug),
+      ["agentic-dev-workflow", "harness-engineering"],
+    );
+    assert.deepEqual(
+      english.map((deck) => deck.slug),
+      ["agentic-dev-workflow", "harness-engineering"],
+    );
+    const ko = korean[0];
+    const en = english[0];
+    assert.equal(ko.draft, false);
+    assert.equal(en.draft, false);
+    assert.equal(ko.title, "에이전틱 개발 워크플로");
+    assert.equal(en.title, "Agentic Dev Workflow");
+    assert.equal(ko.date, "2026-07");
+    assert.equal(en.date, "2026-07");
+    assert.equal(ko.description, "사람 1명 + AI 여러 대로 게임 만들기");
+    assert.equal(en.description, "Building a Game with One Human and Several AIs");
+    assert.equal(ko.slideCount, 29);
+    assert.equal(en.slideCount, 29);
+    assert.equal(marpCssIsScoped(ko.css), true);
+    assert.equal(marpCssIsScoped(en.css), true);
+    for (const name of [".term", ".gh", ".lb", ".pair", ".pr", ".dc", ".duo-t"]) {
+      assert.match(ko.css, new RegExp(name.replace(".", "\\.")));
+      assert.match(en.css, new RegExp(name.replace(".", "\\.")));
+    }
+    const koHtml = ko.slides.join("\n");
+    const enHtml = en.slides.join("\n");
+    assert.match(koHtml, /class="term"/);
+    assert.match(enHtml, /class="term"/);
+    assert.doesNotMatch(koHtml, /12-review/);
+    assert.doesNotMatch(enHtml, /12-review/);
+    assert.match(koHtml, /\/slides-assets\/agentic-dev-workflow\/img\/pipeline\.svg/);
+    assert.match(enHtml, /\/slides-assets\/agentic-dev-workflow\/img\/en\/pipeline\.svg/);
+  } finally {
+    if (previous === undefined) {
+      delete process.env.SHOW_DRAFTS;
+    } else {
+      process.env.SHOW_DRAFTS = previous;
+    }
+    clearSlideCache();
+  }
+});
+
 test("extra sample decks stay drafts and lists sort newest first", () => {
   clearSlideCache();
   const previous = process.env.SHOW_DRAFTS;

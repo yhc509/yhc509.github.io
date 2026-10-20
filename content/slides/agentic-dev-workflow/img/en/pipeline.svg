@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 345" font-family="-apple-system, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0L10,5L0,10z" fill="#7a92ad"/>
+    </marker>
+  </defs>
+
+  <!-- top row: ① → ② → ③ → ④ -->
+  <rect x="0" y="10" width="250" height="92" rx="10" fill="#e9f6ee" stroke="#2e9e5b" stroke-width="1.5"/>
+  <text x="125" y="44" text-anchor="middle" font-size="19" font-weight="700" fill="#175c33">① GitHub issues</text>
+  <text x="125" y="68" text-anchor="middle" font-size="13.5" fill="#4a7a5c">AI files the issues</text>
+  <text x="125" y="88" text-anchor="middle" font-size="13.5" fill="#4a7a5c">A human picks what to work on</text>
+
+  <rect x="290" y="10" width="250" height="92" rx="10" fill="#e9f6ee" stroke="#2e9e5b" stroke-width="1.5"/>
+  <text x="415" y="48" text-anchor="middle" font-size="19" font-weight="700" fill="#175c33">② /solve</text>
+  <text x="415" y="76" text-anchor="middle" font-size="14.5" fill="#4a7a5c">Routes to a thinking skill</text>
+
+  <rect x="580" y="10" width="250" height="92" rx="10" fill="#e9f6ee" stroke="#2e9e5b" stroke-width="1.5"/>
+  <text x="705" y="44" text-anchor="middle" font-size="17.5" font-weight="700" fill="#175c33">③ SPEC→DESIGN→PLAN</text>
+  <text x="705" y="68" text-anchor="middle" font-size="13.5" fill="#4a7a5c">AI writes, human confirms</text>
+  <text x="705" y="88" text-anchor="middle" font-size="13.5" fill="#4a7a5c">Documented in the vault</text>
+
+  <rect x="870" y="10" width="250" height="92" rx="10" fill="#eef4fb" stroke="#2a7ae2" stroke-width="1.5"/>
+  <text x="995" y="48" text-anchor="middle" font-size="19" font-weight="700" fill="#1e3a5f">④ Delegate to Codex</text>
+  <text x="995" y="76" text-anchor="middle" font-size="14.5" fill="#55677d">Implement, auto-commit</text>
+
+  <line x1="252" y1="56" x2="286" y2="56" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="542" y1="56" x2="576" y2="56" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="832" y1="56" x2="866" y2="56" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- ④ down to ⑤ -->
+  <line x1="995" y1="104" x2="995" y2="186" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- bottom row: ⑤ → ⑥ → merge → ⑦ (right to left) -->
+  <rect x="870" y="190" width="250" height="92" rx="10" fill="#eef4fb" stroke="#2a7ae2" stroke-width="1.5"/>
+  <text x="995" y="228" text-anchor="middle" font-size="19" font-weight="700" fill="#1e3a5f">⑤ Verify</text>
+  <text x="995" y="256" text-anchor="middle" font-size="14.5" fill="#55677d">Compile → console → runtime</text>
+
+  <rect x="580" y="190" width="250" height="92" rx="10" fill="#eef4fb" stroke="#2a7ae2" stroke-width="1.5"/>
+  <text x="705" y="228" text-anchor="middle" font-size="19" font-weight="700" fill="#1e3a5f">⑥ Independent review</text>
+  <text x="705" y="256" text-anchor="middle" font-size="14.5" fill="#55677d">Separate from the impl. session</text>
+
+  <rect x="290" y="190" width="250" height="92" rx="10" fill="#fdf3e0" stroke="#f5a623" stroke-width="1.8"/>
+  <text x="415" y="224" text-anchor="middle" font-size="19" font-weight="700" fill="#8a5a00">Merge</text>
+  <text x="415" y="248" text-anchor="middle" font-size="13.5" fill="#8a6d3b">Human runs a runtime test (optional)</text>
+  <text x="415" y="268" text-anchor="middle" font-size="13.5" fill="#8a6d3b">Human approval, no exceptions</text>
+
+  <rect x="0" y="190" width="250" height="92" rx="10" fill="#1e3a5f" stroke="#1e3a5f"/>
+  <text x="125" y="228" text-anchor="middle" font-size="19" font-weight="700" fill="#ffffff">⑦ issue-agent</text>
+  <text x="125" y="256" text-anchor="middle" font-size="14.5" fill="#c9d9ec">Unattended auto-PR</text>
+
+  <line x1="868" y1="236" x2="834" y2="236" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="578" y1="236" x2="544" y2="236" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="288" y1="236" x2="254" y2="236" stroke="#7a92ad" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- legend -->
+  <rect x="180" y="311" width="16" height="16" rx="4" fill="#eef4fb" stroke="#2a7ae2" stroke-width="1.5"/>
+  <text x="204" y="324" font-size="14" fill="#55677d">Done by AI</text>
+  <rect x="320" y="311" width="16" height="16" rx="4" fill="#e9f6ee" stroke="#2e9e5b" stroke-width="1.5"/>
+  <text x="344" y="324" font-size="14" fill="#55677d">Human + AI together</text>
+  <rect x="510" y="311" width="16" height="16" rx="4" fill="#fdf3e0" stroke="#f5a623" stroke-width="1.5"/>
+  <text x="534" y="324" font-size="14" fill="#55677d">Human gate</text>
+  <rect x="670" y="311" width="16" height="16" rx="4" fill="#1e3a5f"/>
+  <text x="694" y="324" font-size="14" fill="#55677d">Unattended agent</text>
+</svg>
