@@ -1,13 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { KoreanFallbackNote } from "@/components/KoreanFallbackNote";
-import type { DevLanguage } from "@/lib/devLanguage";
+import {
+  getToggledDevLanguage,
+  localizedPath,
+  persistDevLanguage,
+  type DevLanguage,
+} from "@/lib/devLanguage";
 
 type ViewMode = "scroll" | "presenter";
 
 const PORTRAIT_PHONE = "(orientation: portrait) and (max-width: 767px)";
+const SHORT_LANDSCAPE = "(orientation: landscape) and (max-height: 500px)";
+const CONTROLS_HIDE_MS = 2800;
 
 function readHash(total: number): number | null {
   const match = /^#(\d+)$/.exec(window.location.hash);
@@ -35,6 +43,16 @@ function portraitSnapshot() {
   return window.matchMedia(PORTRAIT_PHONE).matches;
 }
 
+function subscribeShortLandscape(onChange: () => void) {
+  const media = window.matchMedia(SHORT_LANDSCAPE);
+  media.addEventListener("change", onChange);
+  return () => media.removeEventListener("change", onChange);
+}
+
+function shortLandscapeSnapshot() {
+  return window.matchMedia(SHORT_LANDSCAPE).matches;
+}
+
 export function SlideViewer({
   slides,
   label,
@@ -57,13 +75,23 @@ export function SlideViewer({
   contentLanguage: DevLanguage;
 }) {
   const useEnglish = language === "en";
+  const pathname = usePathname();
+  const nextLanguage = getToggledDevLanguage(language);
+  const languageHref = localizedPath(pathname, nextLanguage);
   const total = slides.length;
   const rootRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const indexRef = useRef(0);
   const modeRef = useRef<ViewMode>("presenter");
+  const controlsOnRef = useRef(false);
+  const hideTimerRef = useRef<number | null>(null);
   const pointerRef = useRef<{ x: number; y: number; id: number } | null>(null);
   const portraitPhone = useSyncExternalStore(subscribePortrait, portraitSnapshot, () => false);
+  const shortLandscape = useSyncExternalStore(
+    subscribeShortLandscape,
+    shortLandscapeSnapshot,
+    () => false,
+  );
   const hashIndex = useSyncExternalStore(
     (onChange) => {
       window.addEventListener("hashchange", onChange);
@@ -77,13 +105,34 @@ export function SlideViewer({
   const index = manualIndex ?? hashIndex;
   const [pseudoFs, setPseudoFs] = useState(false);
   const [nativeFs, setNativeFs] = useState(false);
+  const [controlsOn, setControlsOn] = useState(false);
   const fullscreen = pseudoFs || nativeFs;
   const effectiveMode: ViewMode = modeOverride ?? (portraitPhone ? "scroll" : "presenter");
+  const stageChrome = effectiveMode === "presenter" && (portraitPhone || shortLandscape);
 
   useEffect(() => {
     modeRef.current = effectiveMode;
     indexRef.current = index;
-  }, [effectiveMode, index]);
+    controlsOnRef.current = controlsOn;
+  }, [effectiveMode, index, controlsOn]);
+
+  useEffect(() => {
+    return () => {
+      if (hideTimerRef.current != null) {
+        window.clearTimeout(hideTimerRef.current);
+      }
+    };
+  }, []);
+
+  const revealControls = useCallback(() => {
+    setControlsOn(true);
+    if (hideTimerRef.current != null) {
+      window.clearTimeout(hideTimerRef.current);
+    }
+    hideTimerRef.current = window.setTimeout(() => {
+      setControlsOn(false);
+    }, CONTROLS_HIDE_MS);
+  }, []);
 
   const writeHash = useCallback((next: number) => {
     const url = `${window.location.pathname}${window.location.search}#${next + 1}`;
@@ -284,8 +333,27 @@ export function SlideViewer({
     }
   };
 
+  const openInPresenter = useCallback(
+    (next: number) => {
+      const clamped = Math.max(0, Math.min(total - 1, next));
+      modeRef.current = "presenter";
+      indexRef.current = clamped;
+      setModeOverride("presenter");
+      setManualIndex(clamped);
+      writeHash(clamped);
+    },
+    [total, writeHash],
+  );
+
+  const switchLanguage = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    persistDevLanguage(nextLanguage);
+    const nextPath = localizedPath(window.location.pathname, nextLanguage);
+    window.location.assign(`${nextPath}${window.location.search}${window.location.hash}`);
+  };
+
   const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (event.button !== 0 || effectiveMode !== "presenter") {
+    if (event.button !== 0) {
       return;
     }
     const target = event.target;
@@ -301,29 +369,59 @@ export function SlideViewer({
   const onPointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
     const start = pointerRef.current;
     pointerRef.current = null;
-    if (!start || start.id !== event.pointerId || effectiveMode !== "presenter") {
-      return;
-    }
-    if (start.x < 24) {
+    if (!start || start.id !== event.pointerId) {
       return;
     }
     const dx = event.clientX - start.x;
     const dy = event.clientY - start.y;
-    if (Math.abs(dx) < 12 && Math.abs(dy) < 12) {
-      const rect = stageRef.current?.getBoundingClientRect();
-      if (!rect || rect.width === 0) {
+    const tapped = Math.abs(dx) < 12 && Math.abs(dy) < 12;
+
+    if (modeRef.current === "scroll") {
+      if (!tapped) {
         return;
       }
-      const ratio = (event.clientX - rect.left) / rect.width;
-      if (ratio < 0.3) {
-        go(indexRef.current - 1);
-      } else if (ratio > 0.7) {
-        go(indexRef.current + 1);
+      const target = event.target;
+      if (!(target instanceof Element)) {
+        return;
       }
+      const sheet = target.closest<HTMLElement>(".slide-sheet");
+      const slideNumber = Number(sheet?.dataset.slide);
+      if (!sheet || !Number.isInteger(slideNumber)) {
+        return;
+      }
+      openInPresenter(slideNumber - 1);
+      return;
+    }
+
+    if (start.x < 24) {
       return;
     }
     if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.2) {
       go(indexRef.current + (dx < 0 ? 1 : -1));
+      if (stageChrome) {
+        revealControls();
+      }
+      return;
+    }
+    if (!tapped) {
+      return;
+    }
+    if (stageChrome && !controlsOnRef.current) {
+      revealControls();
+      return;
+    }
+    const rect = stageRef.current?.getBoundingClientRect();
+    if (!rect || rect.width === 0) {
+      return;
+    }
+    const ratio = (event.clientX - rect.left) / rect.width;
+    if (ratio < 0.3) {
+      go(indexRef.current - 1);
+    } else if (ratio > 0.7) {
+      go(indexRef.current + 1);
+    }
+    if (stageChrome) {
+      revealControls();
     }
   };
 
@@ -336,6 +434,8 @@ export function SlideViewer({
         toScroll: "Show slides in a list",
         toPresenter: "Show one slide",
         position: `Slide ${index + 1} of ${total}`,
+        language: "Switch to Korean",
+        rotate: "Rotate your phone",
       }
     : {
         previous: "이전 슬라이드",
@@ -345,13 +445,16 @@ export function SlideViewer({
         toScroll: "슬라이드를 세로로 보기",
         toPresenter: "한 장씩 보기",
         position: `${index + 1} / ${total} 슬라이드`,
+        language: "영어로 전환",
+        rotate: "휴대폰을 가로로 돌리세요",
       };
 
   return (
     <div
       ref={rootRef}
-      className={`deck-page${fullscreen ? " is-fs" : ""}`}
+      className={`deck-page${fullscreen ? " is-fs" : ""}${stageChrome ? " is-stage" : ""}`}
       data-mode={modeOverride ?? undefined}
+      data-controls={controlsOn ? "on" : "off"}
     >
       <div className="deck-top">
         <Link href={backHref} className="deck-back">
@@ -361,7 +464,14 @@ export function SlideViewer({
         <time dateTime={date}>{date}</time>
       </div>
       <KoreanFallbackNote show={note != null} message={note ?? ""} />
-      <div className="slide-controls">
+      <div
+        className="slide-controls"
+        onPointerDown={() => {
+          if (stageChrome) {
+            revealControls();
+          }
+        }}
+      >
         <button
           type="button"
           onClick={() => go(index - 1)}
@@ -401,6 +511,15 @@ export function SlideViewer({
         >
           {effectiveMode === "scroll" ? <PresenterIcon /> : <ScrollIcon />}
         </button>
+        <a
+          href={languageHref}
+          className="slide-lang"
+          data-action="language"
+          aria-label={labels.language}
+          onClick={switchLanguage}
+        >
+          {nextLanguage === "en" ? "EN" : "KO"}
+        </a>
       </div>
       <div
         ref={stageRef}
@@ -410,6 +529,11 @@ export function SlideViewer({
         aria-roledescription={useEnglish ? "slideshow" : "발표"}
         aria-label={label}
       >
+        {effectiveMode === "presenter" && portraitPhone ? (
+          <p className="slide-rotate-hint" role="status">
+            {labels.rotate}
+          </p>
+        ) : null}
         <div className="slide-frame" lang={contentLanguage}>
           {slides.map((slide, slideIndex) => (
             <div
