@@ -1,5 +1,6 @@
 "use client";
 
+import { webkit } from "@marp-team/marpit-svg-polyfill";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
@@ -10,6 +11,7 @@ import {
   persistDevLanguage,
   type DevLanguage,
 } from "@/lib/devLanguage";
+import { sectionIsUnscaled } from "@/lib/slideFit.mjs";
 
 type ViewMode = "scroll" | "presenter";
 
@@ -55,6 +57,23 @@ function readHash(total: number): number | null {
 
 function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function marpSectionNeedsPolyfill(svg: SVGSVGElement) {
+  const section = svg.querySelector("section");
+  if (!(section instanceof HTMLElement)) {
+    return false;
+  }
+  const svgWidth = svg.getBoundingClientRect().width;
+  if (svgWidth < 2) {
+    return false;
+  }
+  const previous = section.style.transform;
+  section.style.transform = "none";
+  const sectionWidth = section.getBoundingClientRect().width;
+  section.style.transform = previous;
+  const userWidth = svg.viewBox.baseVal.width || 1280;
+  return sectionIsUnscaled(sectionWidth, svgWidth, userWidth);
 }
 
 function subscribePortrait(onChange: () => void) {
@@ -146,6 +165,52 @@ export function SlideViewer({
     indexRef.current = index;
     controlsOnRef.current = controlsOn;
   }, [effectiveMode, index, controlsOn]);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) {
+      return;
+    }
+    let frame = 0;
+    let stopped = false;
+
+    const apply = () => {
+      if (stopped) {
+        return;
+      }
+      const svgs = [...root.querySelectorAll<SVGSVGElement>("svg[data-marpit-svg]")];
+      if (!svgs.some((svg) => marpSectionNeedsPolyfill(svg))) {
+        for (const section of root.querySelectorAll<HTMLElement>("svg[data-marpit-svg] section")) {
+          if (section.style.transform.includes("translateZ(0.0001px)")) {
+            section.style.transform = "";
+          }
+        }
+        return;
+      }
+      webkit({ target: root });
+      frame = window.requestAnimationFrame(apply);
+    };
+
+    const schedule = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(apply);
+    };
+
+    schedule();
+    const observer = new ResizeObserver(schedule);
+    observer.observe(root);
+    window.addEventListener("resize", schedule);
+    window.addEventListener("orientationchange", schedule);
+    window.visualViewport?.addEventListener("resize", schedule);
+    return () => {
+      stopped = true;
+      window.cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("resize", schedule);
+      window.removeEventListener("orientationchange", schedule);
+      window.visualViewport?.removeEventListener("resize", schedule);
+    };
+  }, [slides, effectiveMode, fullscreen, index]);
 
   useEffect(() => {
     return () => {

@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { sectionIsUnscaled } from "./slideFit.mjs";
 import {
   clearSlideCache,
   deckAssetUrl,
@@ -11,6 +12,12 @@ import {
   scopeMarpCss,
   splitMarpSlides,
 } from "./slides.mjs";
+
+test("the slide polyfill runs only when the section is still at the SVG user size", () => {
+  assert.equal(sectionIsUnscaled(1280, 390, 1280), true);
+  assert.equal(sectionIsUnscaled(393, 393, 1280), false);
+  assert.equal(sectionIsUnscaled(400, 393, 1280), false);
+});
 
 test("raster images are published as webp and other files keep their names", () => {
   assert.equal(
