@@ -33,6 +33,17 @@
     "hasTagWord": false
   },
   {
+    "file": "chromium-en-projects-390-dark.png",
+    "path": "/projects",
+    "theme": "dark",
+    "viewportWidth": 390,
+    "scrollWidth": 390,
+    "equal": true,
+    "status": 200,
+    "goatHits": 1,
+    "hasTagWord": false
+  },
+  {
     "file": "chromium-ko-projects-360-light.png",
     "path": "/ko/projects",
     "theme": "light",
@@ -66,19 +77,63 @@
     "hasTagWord": false
   },
   {
-    "file": "webkit-iphone15-en-detail-light.png",
-    "path": "/projects/unity-cli-bridge",
-    "theme": "light",
-    "viewportWidth": 393,
-    "scrollWidth": 393,
+    "file": "chromium-ko-projects-390-dark.png",
+    "path": "/ko/projects",
+    "theme": "dark",
+    "viewportWidth": 390,
+    "scrollWidth": 390,
     "equal": true,
     "status": 200,
     "goatHits": 1,
     "hasTagWord": false
   },
   {
-    "file": "webkit-iphone15-ko-detail-light.png",
-    "path": "/ko/projects/unity-cli-bridge",
+    "file": "chromium-en-detail-flyingcat-390-light.png",
+    "path": "/projects/flyingcat",
+    "theme": "light",
+    "viewportWidth": 390,
+    "scrollWidth": 390,
+    "equal": true,
+    "status": 200,
+    "goatHits": 1,
+    "hasTagWord": false
+  },
+  {
+    "file": "chromium-en-detail-flyingcat-390-dark.png",
+    "path": "/projects/flyingcat",
+    "theme": "dark",
+    "viewportWidth": 390,
+    "scrollWidth": 390,
+    "equal": true,
+    "status": 200,
+    "goatHits": 1,
+    "hasTagWord": false
+  },
+  {
+    "file": "chromium-ko-detail-flyingcat-390-light.png",
+    "path": "/ko/projects/flyingcat",
+    "theme": "light",
+    "viewportWidth": 390,
+    "scrollWidth": 390,
+    "equal": true,
+    "status": 200,
+    "goatHits": 1,
+    "hasTagWord": false
+  },
+  {
+    "file": "chromium-ko-detail-flyingcat-390-dark.png",
+    "path": "/ko/projects/flyingcat",
+    "theme": "dark",
+    "viewportWidth": 390,
+    "scrollWidth": 390,
+    "equal": true,
+    "status": 200,
+    "goatHits": 1,
+    "hasTagWord": false
+  },
+  {
+    "file": "webkit-iphone15-ko-detail-flyingcat-light.png",
+    "path": "/ko/projects/flyingcat",
     "theme": "light",
     "viewportWidth": 393,
     "scrollWidth": 393,
