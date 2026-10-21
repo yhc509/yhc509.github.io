@@ -1,8 +1,84 @@
 [
   {
-    "file": "chromium-en-projects-360-light.png",
+    "file": "chromium-en-detail-360-dark.png",
     "browser": "chromium",
-    "path": "/projects",
+    "path": "/projects/unity-cli-bridge",
+    "theme": "dark",
+    "viewportWidth": 360,
+    "status": 200,
+    "scrollWidth": 360,
+    "clientWidth": 360,
+    "innerWidth": 360,
+    "equal": true,
+    "headerHeight": 69,
+    "headerRight": 360,
+    "navRight": 348,
+    "links": [
+      {
+        "label": "Posts",
+        "href": "/",
+        "x": 145,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 175
+      },
+      {
+        "label": "Projects",
+        "href": "/projects",
+        "x": 177,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 207
+      },
+      {
+        "label": "News",
+        "href": "/news",
+        "x": 209,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 239
+      },
+      {
+        "label": "Slides",
+        "href": "/slides",
+        "x": 241,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 271
+      },
+      {
+        "label": "About",
+        "href": "/about",
+        "x": 273,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 303
+      }
+    ],
+    "offenders": [],
+    "projectsNav": true,
+    "goatHits": 1,
+    "hangul": false,
+    "hasBenchmark": true,
+    "linkOrder": [
+      "GitHub",
+      "Docs",
+      "itch.io"
+    ],
+    "codeFit": {
+      "scroll": 320,
+      "client": 320
+    }
+  },
+  {
+    "file": "chromium-en-detail-360-light.png",
+    "browser": "chromium",
+    "path": "/projects/unity-cli-bridge",
     "theme": "light",
     "viewportWidth": 360,
     "status": 200,
@@ -64,9 +140,168 @@
     "projectsNav": true,
     "goatHits": 1,
     "hangul": false,
-    "hasBenchmark": false,
-    "linkOrder": [],
-    "codeFit": null
+    "hasBenchmark": true,
+    "linkOrder": [
+      "GitHub",
+      "Docs",
+      "itch.io"
+    ],
+    "codeFit": {
+      "scroll": 320,
+      "client": 320
+    }
+  },
+  {
+    "file": "chromium-en-detail-390-dark.png",
+    "browser": "chromium",
+    "path": "/projects/unity-cli-bridge",
+    "theme": "dark",
+    "viewportWidth": 390,
+    "status": 200,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "innerWidth": 390,
+    "equal": true,
+    "headerHeight": 69,
+    "headerRight": 390,
+    "navRight": 378,
+    "links": [
+      {
+        "label": "Posts",
+        "href": "/",
+        "x": 175,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 205
+      },
+      {
+        "label": "Projects",
+        "href": "/projects",
+        "x": 207,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 237
+      },
+      {
+        "label": "News",
+        "href": "/news",
+        "x": 239,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 269
+      },
+      {
+        "label": "Slides",
+        "href": "/slides",
+        "x": 271,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 301
+      },
+      {
+        "label": "About",
+        "href": "/about",
+        "x": 303,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 333
+      }
+    ],
+    "offenders": [],
+    "projectsNav": true,
+    "goatHits": 1,
+    "hangul": false,
+    "hasBenchmark": true,
+    "linkOrder": [
+      "GitHub",
+      "Docs",
+      "itch.io"
+    ],
+    "codeFit": {
+      "scroll": 350,
+      "client": 350
+    }
+  },
+  {
+    "file": "chromium-en-detail-390-light.png",
+    "browser": "chromium",
+    "path": "/projects/unity-cli-bridge",
+    "theme": "light",
+    "viewportWidth": 390,
+    "status": 200,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "innerWidth": 390,
+    "equal": true,
+    "headerHeight": 69,
+    "headerRight": 390,
+    "navRight": 378,
+    "links": [
+      {
+        "label": "Posts",
+        "href": "/",
+        "x": 175,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 205
+      },
+      {
+        "label": "Projects",
+        "href": "/projects",
+        "x": 207,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 237
+      },
+      {
+        "label": "News",
+        "href": "/news",
+        "x": 239,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 269
+      },
+      {
+        "label": "Slides",
+        "href": "/slides",
+        "x": 271,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 301
+      },
+      {
+        "label": "About",
+        "href": "/about",
+        "x": 303,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 333
+      }
+    ],
+    "offenders": [],
+    "projectsNav": true,
+    "goatHits": 1,
+    "hangul": false,
+    "hasBenchmark": true,
+    "linkOrder": [
+      "GitHub",
+      "Docs",
+      "itch.io"
+    ],
+    "codeFit": {
+      "scroll": 350,
+      "client": 350
+    }
   },
   {
     "file": "chromium-en-projects-360-dark.png",
@@ -138,64 +373,64 @@
     "codeFit": null
   },
   {
-    "file": "chromium-en-projects-390-light.png",
+    "file": "chromium-en-projects-360-light.png",
     "browser": "chromium",
     "path": "/projects",
     "theme": "light",
-    "viewportWidth": 390,
+    "viewportWidth": 360,
     "status": 200,
-    "scrollWidth": 390,
-    "clientWidth": 390,
-    "innerWidth": 390,
+    "scrollWidth": 360,
+    "clientWidth": 360,
+    "innerWidth": 360,
     "equal": true,
     "headerHeight": 69,
-    "headerRight": 390,
-    "navRight": 378,
+    "headerRight": 360,
+    "navRight": 348,
     "links": [
       {
         "label": "Posts",
         "href": "/",
-        "x": 175,
+        "x": 145,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 205
+        "right": 175
       },
       {
         "label": "Projects",
         "href": "/projects",
-        "x": 207,
+        "x": 177,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 237
+        "right": 207
       },
       {
         "label": "News",
         "href": "/news",
-        "x": 239,
+        "x": 209,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 269
+        "right": 239
       },
       {
         "label": "Slides",
         "href": "/slides",
-        "x": 271,
+        "x": 241,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 301
+        "right": 271
       },
       {
         "label": "About",
         "href": "/about",
-        "x": 303,
+        "x": 273,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 333
+        "right": 303
       }
     ],
     "offenders": [],
@@ -276,161 +511,9 @@
     "codeFit": null
   },
   {
-    "file": "chromium-en-detail-360-light.png",
+    "file": "chromium-en-projects-390-light.png",
     "browser": "chromium",
-    "path": "/projects/unity-cli-bridge",
-    "theme": "light",
-    "viewportWidth": 360,
-    "status": 200,
-    "scrollWidth": 360,
-    "clientWidth": 360,
-    "innerWidth": 360,
-    "equal": true,
-    "headerHeight": 69,
-    "headerRight": 360,
-    "navRight": 348,
-    "links": [
-      {
-        "label": "Posts",
-        "href": "/",
-        "x": 145,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 175
-      },
-      {
-        "label": "Projects",
-        "href": "/projects",
-        "x": 177,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 207
-      },
-      {
-        "label": "News",
-        "href": "/news",
-        "x": 209,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 239
-      },
-      {
-        "label": "Slides",
-        "href": "/slides",
-        "x": 241,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 271
-      },
-      {
-        "label": "About",
-        "href": "/about",
-        "x": 273,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 303
-      }
-    ],
-    "offenders": [],
-    "projectsNav": true,
-    "goatHits": 1,
-    "hangul": false,
-    "hasBenchmark": true,
-    "linkOrder": [
-      "GitHub",
-      "Docs",
-      "itch.io"
-    ],
-    "codeFit": {
-      "scroll": 320,
-      "client": 320
-    }
-  },
-  {
-    "file": "chromium-en-detail-360-dark.png",
-    "browser": "chromium",
-    "path": "/projects/unity-cli-bridge",
-    "theme": "dark",
-    "viewportWidth": 360,
-    "status": 200,
-    "scrollWidth": 360,
-    "clientWidth": 360,
-    "innerWidth": 360,
-    "equal": true,
-    "headerHeight": 69,
-    "headerRight": 360,
-    "navRight": 348,
-    "links": [
-      {
-        "label": "Posts",
-        "href": "/",
-        "x": 145,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 175
-      },
-      {
-        "label": "Projects",
-        "href": "/projects",
-        "x": 177,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 207
-      },
-      {
-        "label": "News",
-        "href": "/news",
-        "x": 209,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 239
-      },
-      {
-        "label": "Slides",
-        "href": "/slides",
-        "x": 241,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 271
-      },
-      {
-        "label": "About",
-        "href": "/about",
-        "x": 273,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 303
-      }
-    ],
-    "offenders": [],
-    "projectsNav": true,
-    "goatHits": 1,
-    "hangul": false,
-    "hasBenchmark": true,
-    "linkOrder": [
-      "GitHub",
-      "Docs",
-      "itch.io"
-    ],
-    "codeFit": {
-      "scroll": 320,
-      "client": 320
-    }
-  },
-  {
-    "file": "chromium-en-detail-390-light.png",
-    "browser": "chromium",
-    "path": "/projects/unity-cli-bridge",
+    "path": "/projects",
     "theme": "light",
     "viewportWidth": 390,
     "status": 200,
@@ -492,82 +575,75 @@
     "projectsNav": true,
     "goatHits": 1,
     "hangul": false,
-    "hasBenchmark": true,
-    "linkOrder": [
-      "GitHub",
-      "Docs",
-      "itch.io"
-    ],
-    "codeFit": {
-      "scroll": 350,
-      "client": 350
-    }
+    "hasBenchmark": false,
+    "linkOrder": [],
+    "codeFit": null
   },
   {
-    "file": "chromium-en-detail-390-dark.png",
+    "file": "chromium-ko-detail-360-dark.png",
     "browser": "chromium",
-    "path": "/projects/unity-cli-bridge",
+    "path": "/ko/projects/unity-cli-bridge",
     "theme": "dark",
-    "viewportWidth": 390,
+    "viewportWidth": 360,
     "status": 200,
-    "scrollWidth": 390,
-    "clientWidth": 390,
-    "innerWidth": 390,
+    "scrollWidth": 360,
+    "clientWidth": 360,
+    "innerWidth": 360,
     "equal": true,
     "headerHeight": 69,
-    "headerRight": 390,
-    "navRight": 378,
+    "headerRight": 360,
+    "navRight": 348,
     "links": [
       {
         "label": "Posts",
-        "href": "/",
-        "x": 175,
+        "href": "/ko",
+        "x": 145,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 205
+        "right": 175
       },
       {
         "label": "Projects",
-        "href": "/projects",
-        "x": 207,
+        "href": "/ko/projects",
+        "x": 177,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 237
+        "right": 207
       },
       {
         "label": "News",
-        "href": "/news",
-        "x": 239,
+        "href": "/ko/news",
+        "x": 209,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 269
+        "right": 239
       },
       {
         "label": "Slides",
-        "href": "/slides",
-        "x": 271,
+        "href": "/ko/slides",
+        "x": 241,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 301
+        "right": 271
       },
       {
         "label": "About",
-        "href": "/about",
-        "x": 303,
+        "href": "/ko/about",
+        "x": 273,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 333
+        "right": 303
       }
     ],
     "offenders": [],
     "projectsNav": true,
     "goatHits": 1,
-    "hangul": false,
+    "hangul": true,
     "hasBenchmark": true,
     "linkOrder": [
       "GitHub",
@@ -575,14 +651,14 @@
       "itch.io"
     ],
     "codeFit": {
-      "scroll": 350,
-      "client": 350
+      "scroll": 320,
+      "client": 320
     }
   },
   {
-    "file": "chromium-ko-projects-360-light.png",
+    "file": "chromium-ko-detail-360-light.png",
     "browser": "chromium",
-    "path": "/ko/projects",
+    "path": "/ko/projects/unity-cli-bridge",
     "theme": "light",
     "viewportWidth": 360,
     "status": 200,
@@ -644,9 +720,168 @@
     "projectsNav": true,
     "goatHits": 1,
     "hangul": true,
-    "hasBenchmark": false,
-    "linkOrder": [],
-    "codeFit": null
+    "hasBenchmark": true,
+    "linkOrder": [
+      "GitHub",
+      "Docs",
+      "itch.io"
+    ],
+    "codeFit": {
+      "scroll": 320,
+      "client": 320
+    }
+  },
+  {
+    "file": "chromium-ko-detail-390-dark.png",
+    "browser": "chromium",
+    "path": "/ko/projects/unity-cli-bridge",
+    "theme": "dark",
+    "viewportWidth": 390,
+    "status": 200,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "innerWidth": 390,
+    "equal": true,
+    "headerHeight": 69,
+    "headerRight": 390,
+    "navRight": 378,
+    "links": [
+      {
+        "label": "Posts",
+        "href": "/ko",
+        "x": 175,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 205
+      },
+      {
+        "label": "Projects",
+        "href": "/ko/projects",
+        "x": 207,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 237
+      },
+      {
+        "label": "News",
+        "href": "/ko/news",
+        "x": 239,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 269
+      },
+      {
+        "label": "Slides",
+        "href": "/ko/slides",
+        "x": 271,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 301
+      },
+      {
+        "label": "About",
+        "href": "/ko/about",
+        "x": 303,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 333
+      }
+    ],
+    "offenders": [],
+    "projectsNav": true,
+    "goatHits": 1,
+    "hangul": true,
+    "hasBenchmark": true,
+    "linkOrder": [
+      "GitHub",
+      "Docs",
+      "itch.io"
+    ],
+    "codeFit": {
+      "scroll": 350,
+      "client": 350
+    }
+  },
+  {
+    "file": "chromium-ko-detail-390-light.png",
+    "browser": "chromium",
+    "path": "/ko/projects/unity-cli-bridge",
+    "theme": "light",
+    "viewportWidth": 390,
+    "status": 200,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "innerWidth": 390,
+    "equal": true,
+    "headerHeight": 69,
+    "headerRight": 390,
+    "navRight": 378,
+    "links": [
+      {
+        "label": "Posts",
+        "href": "/ko",
+        "x": 175,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 205
+      },
+      {
+        "label": "Projects",
+        "href": "/ko/projects",
+        "x": 207,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 237
+      },
+      {
+        "label": "News",
+        "href": "/ko/news",
+        "x": 239,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 269
+      },
+      {
+        "label": "Slides",
+        "href": "/ko/slides",
+        "x": 271,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 301
+      },
+      {
+        "label": "About",
+        "href": "/ko/about",
+        "x": 303,
+        "y": 19,
+        "w": 30,
+        "h": 30,
+        "right": 333
+      }
+    ],
+    "offenders": [],
+    "projectsNav": true,
+    "goatHits": 1,
+    "hangul": true,
+    "hasBenchmark": true,
+    "linkOrder": [
+      "GitHub",
+      "Docs",
+      "itch.io"
+    ],
+    "codeFit": {
+      "scroll": 350,
+      "client": 350
+    }
   },
   {
     "file": "chromium-ko-projects-360-dark.png",
@@ -718,64 +953,64 @@
     "codeFit": null
   },
   {
-    "file": "chromium-ko-projects-390-light.png",
+    "file": "chromium-ko-projects-360-light.png",
     "browser": "chromium",
     "path": "/ko/projects",
     "theme": "light",
-    "viewportWidth": 390,
+    "viewportWidth": 360,
     "status": 200,
-    "scrollWidth": 390,
-    "clientWidth": 390,
-    "innerWidth": 390,
+    "scrollWidth": 360,
+    "clientWidth": 360,
+    "innerWidth": 360,
     "equal": true,
     "headerHeight": 69,
-    "headerRight": 390,
-    "navRight": 378,
+    "headerRight": 360,
+    "navRight": 348,
     "links": [
       {
         "label": "Posts",
         "href": "/ko",
-        "x": 175,
+        "x": 145,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 205
+        "right": 175
       },
       {
         "label": "Projects",
         "href": "/ko/projects",
-        "x": 207,
+        "x": 177,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 237
+        "right": 207
       },
       {
         "label": "News",
         "href": "/ko/news",
-        "x": 239,
+        "x": 209,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 269
+        "right": 239
       },
       {
         "label": "Slides",
         "href": "/ko/slides",
-        "x": 271,
+        "x": 241,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 301
+        "right": 271
       },
       {
         "label": "About",
         "href": "/ko/about",
-        "x": 303,
+        "x": 273,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 333
+        "right": 303
       }
     ],
     "offenders": [],
@@ -856,161 +1091,9 @@
     "codeFit": null
   },
   {
-    "file": "chromium-ko-detail-360-light.png",
+    "file": "chromium-ko-projects-390-light.png",
     "browser": "chromium",
-    "path": "/ko/projects/unity-cli-bridge",
-    "theme": "light",
-    "viewportWidth": 360,
-    "status": 200,
-    "scrollWidth": 360,
-    "clientWidth": 360,
-    "innerWidth": 360,
-    "equal": true,
-    "headerHeight": 69,
-    "headerRight": 360,
-    "navRight": 348,
-    "links": [
-      {
-        "label": "Posts",
-        "href": "/ko",
-        "x": 145,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 175
-      },
-      {
-        "label": "Projects",
-        "href": "/ko/projects",
-        "x": 177,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 207
-      },
-      {
-        "label": "News",
-        "href": "/ko/news",
-        "x": 209,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 239
-      },
-      {
-        "label": "Slides",
-        "href": "/ko/slides",
-        "x": 241,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 271
-      },
-      {
-        "label": "About",
-        "href": "/ko/about",
-        "x": 273,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 303
-      }
-    ],
-    "offenders": [],
-    "projectsNav": true,
-    "goatHits": 1,
-    "hangul": true,
-    "hasBenchmark": true,
-    "linkOrder": [
-      "GitHub",
-      "Docs",
-      "itch.io"
-    ],
-    "codeFit": {
-      "scroll": 320,
-      "client": 320
-    }
-  },
-  {
-    "file": "chromium-ko-detail-360-dark.png",
-    "browser": "chromium",
-    "path": "/ko/projects/unity-cli-bridge",
-    "theme": "dark",
-    "viewportWidth": 360,
-    "status": 200,
-    "scrollWidth": 360,
-    "clientWidth": 360,
-    "innerWidth": 360,
-    "equal": true,
-    "headerHeight": 69,
-    "headerRight": 360,
-    "navRight": 348,
-    "links": [
-      {
-        "label": "Posts",
-        "href": "/ko",
-        "x": 145,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 175
-      },
-      {
-        "label": "Projects",
-        "href": "/ko/projects",
-        "x": 177,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 207
-      },
-      {
-        "label": "News",
-        "href": "/ko/news",
-        "x": 209,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 239
-      },
-      {
-        "label": "Slides",
-        "href": "/ko/slides",
-        "x": 241,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 271
-      },
-      {
-        "label": "About",
-        "href": "/ko/about",
-        "x": 273,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 303
-      }
-    ],
-    "offenders": [],
-    "projectsNav": true,
-    "goatHits": 1,
-    "hangul": true,
-    "hasBenchmark": true,
-    "linkOrder": [
-      "GitHub",
-      "Docs",
-      "itch.io"
-    ],
-    "codeFit": {
-      "scroll": 320,
-      "client": 320
-    }
-  },
-  {
-    "file": "chromium-ko-detail-390-light.png",
-    "browser": "chromium",
-    "path": "/ko/projects/unity-cli-bridge",
+    "path": "/ko/projects",
     "theme": "light",
     "viewportWidth": 390,
     "status": 200,
@@ -1072,82 +1155,75 @@
     "projectsNav": true,
     "goatHits": 1,
     "hangul": true,
-    "hasBenchmark": true,
-    "linkOrder": [
-      "GitHub",
-      "Docs",
-      "itch.io"
-    ],
-    "codeFit": {
-      "scroll": 350,
-      "client": 350
-    }
+    "hasBenchmark": false,
+    "linkOrder": [],
+    "codeFit": null
   },
   {
-    "file": "chromium-ko-detail-390-dark.png",
-    "browser": "chromium",
-    "path": "/ko/projects/unity-cli-bridge",
+    "file": "webkit-iphone15-en-detail-dark.png",
+    "browser": "webkit",
+    "path": "/projects/unity-cli-bridge",
     "theme": "dark",
-    "viewportWidth": 390,
+    "viewportWidth": 393,
     "status": 200,
-    "scrollWidth": 390,
-    "clientWidth": 390,
-    "innerWidth": 390,
+    "scrollWidth": 393,
+    "clientWidth": 393,
+    "innerWidth": 393,
     "equal": true,
     "headerHeight": 69,
-    "headerRight": 390,
-    "navRight": 378,
+    "headerRight": 393,
+    "navRight": 381,
     "links": [
       {
         "label": "Posts",
-        "href": "/ko",
-        "x": 175,
+        "href": "/",
+        "x": 178,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 205
+        "right": 208
       },
       {
         "label": "Projects",
-        "href": "/ko/projects",
-        "x": 207,
+        "href": "/projects",
+        "x": 210,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 237
+        "right": 240
       },
       {
         "label": "News",
-        "href": "/ko/news",
-        "x": 239,
+        "href": "/news",
+        "x": 242,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 269
+        "right": 272
       },
       {
         "label": "Slides",
-        "href": "/ko/slides",
-        "x": 271,
+        "href": "/slides",
+        "x": 274,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 301
+        "right": 304
       },
       {
         "label": "About",
-        "href": "/ko/about",
-        "x": 303,
+        "href": "/about",
+        "x": 306,
         "y": 19,
         "w": 30,
         "h": 30,
-        "right": 333
+        "right": 336
       }
     ],
     "offenders": [],
     "projectsNav": true,
     "goatHits": 1,
-    "hangul": true,
+    "hangul": false,
     "hasBenchmark": true,
     "linkOrder": [
       "GitHub",
@@ -1155,8 +1231,8 @@
       "itch.io"
     ],
     "codeFit": {
-      "scroll": 350,
-      "client": 350
+      "scroll": 353,
+      "client": 353
     }
   },
   {
@@ -1236,86 +1312,10 @@
     }
   },
   {
-    "file": "webkit-iphone15-en-detail-dark.png",
-    "browser": "webkit",
-    "path": "/projects/unity-cli-bridge",
-    "theme": "dark",
-    "viewportWidth": 393,
-    "status": 200,
-    "scrollWidth": 393,
-    "clientWidth": 393,
-    "innerWidth": 393,
-    "equal": true,
-    "headerHeight": 69,
-    "headerRight": 393,
-    "navRight": 381,
-    "links": [
-      {
-        "label": "Posts",
-        "href": "/",
-        "x": 178,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 208
-      },
-      {
-        "label": "Projects",
-        "href": "/projects",
-        "x": 210,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 240
-      },
-      {
-        "label": "News",
-        "href": "/news",
-        "x": 242,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 272
-      },
-      {
-        "label": "Slides",
-        "href": "/slides",
-        "x": 274,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 304
-      },
-      {
-        "label": "About",
-        "href": "/about",
-        "x": 306,
-        "y": 19,
-        "w": 30,
-        "h": 30,
-        "right": 336
-      }
-    ],
-    "offenders": [],
-    "projectsNav": true,
-    "goatHits": 1,
-    "hangul": false,
-    "hasBenchmark": true,
-    "linkOrder": [
-      "GitHub",
-      "Docs",
-      "itch.io"
-    ],
-    "codeFit": {
-      "scroll": 353,
-      "client": 353
-    }
-  },
-  {
-    "file": "webkit-iphone15-ko-detail-light.png",
+    "file": "webkit-iphone15-ko-detail-dark.png",
     "browser": "webkit",
     "path": "/ko/projects/unity-cli-bridge",
-    "theme": "light",
+    "theme": "dark",
     "viewportWidth": 393,
     "status": 200,
     "scrollWidth": 393,
@@ -1388,10 +1388,10 @@
     }
   },
   {
-    "file": "webkit-iphone15-ko-detail-dark.png",
+    "file": "webkit-iphone15-ko-detail-light.png",
     "browser": "webkit",
     "path": "/ko/projects/unity-cli-bridge",
-    "theme": "dark",
+    "theme": "light",
     "viewportWidth": 393,
     "status": 200,
     "scrollWidth": 393,
