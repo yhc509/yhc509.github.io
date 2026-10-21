@@ -48,7 +48,7 @@ function ProjectGridCard({ project, href }: ProjectCardProps) {
         {project.description}
       </p>
       <div className="mt-2">
-        <ProjectExternalLinks links={project.links} compact dense variant="pill" />
+        <ProjectExternalLinks links={project.links} compact />
       </div>
     </article>
   );

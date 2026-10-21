@@ -99,7 +99,7 @@ export async function generateProjectMetadata(
     return {
       title: project.title,
       description,
-      keywords: [...project.tags, project.role],
+      keywords: [project.role],
       openGraph: {
         type: "article",
         locale: contentLanguage === "en" ? "en_US" : "ko_KR",
@@ -107,7 +107,6 @@ export async function generateProjectMetadata(
         description,
         url,
         publishedTime: project.date,
-        tags: project.tags,
         images: [
           {
             url: toSiteUrl(imagePath),
@@ -174,7 +173,6 @@ export async function ProjectScreen({
     datePublished: project.date,
     codeRepository: project.links.github,
     author: personReference(),
-    keywords: project.tags.join(", "),
     image: toSiteUrl(project.thumbnail),
   };
 
@@ -232,7 +230,7 @@ export async function ProjectScreen({
               <p className="text-sm leading-6">{project.role}</p>
 
               <p className="section-kicker sm:pt-1">{linksLabel}</p>
-              <ProjectExternalLinks links={project.links} variant="plain" />
+              <ProjectExternalLinks links={project.links} />
 
               <p className="section-kicker sm:pt-1">{highlightsLabel}</p>
               <ul className="space-y-2 text-sm leading-6">

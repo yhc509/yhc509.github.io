@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { useDevLanguage } from "@/components/DevLanguageProvider";
-import type { ProjectTagNode } from "@/lib/projects";
+import type { TagNode } from "@/lib/tagTree";
 
 interface ProjectTagFilterProps {
-  tagTree: ProjectTagNode[];
+  tagTree: TagNode[];
   selectedTags: string[];
   onTagsChange: (tags: string[]) => void;
 }
@@ -16,7 +16,7 @@ function TagItem({
   onToggle,
   depth = 0,
 }: {
-  node: ProjectTagNode;
+  node: TagNode;
   selectedTags: string[];
   onToggle: (tag: string) => void;
   depth?: number;

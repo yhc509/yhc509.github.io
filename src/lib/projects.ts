@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import type { DevLanguage } from "./devLanguage";
-import { buildTagTree, type TagNode } from "./tagTree";
 
 const projectsDirectory = path.join(process.cwd(), "content/projects");
 const projectFileExtensions = [".mdx", ".md"];
@@ -25,7 +24,6 @@ export interface ProjectMeta {
   date: string;
   description: string;
   thumbnail: string;
-  tags: string[];
   open: boolean;
   role: string;
   highlights: string[];
@@ -43,7 +41,6 @@ interface RawProject {
   date: string;
   description: string;
   thumbnail: string;
-  tags: string[];
   open: boolean;
   content: string;
   role?: string;
@@ -173,7 +170,6 @@ function readRawProjectBySlug(slug: string, language: DevLanguage): RawProject {
     description: readRequiredString(slug, "description", data.description),
     thumbnail:
       readOptionalString(data.thumbnail) || "/images/default-project.svg",
-    tags: data.tags ? readStringArray(slug, "tags", data.tags) : [],
     open,
     content,
     role: readOptionalString(data.role),
@@ -218,7 +214,6 @@ function toPublicProject(project: RawProject): Project {
     date: project.date,
     description: project.description,
     thumbnail: project.thumbnail,
-    tags: project.tags,
     open: project.open,
     role: project.role,
     highlights: project.highlights,
@@ -264,7 +259,6 @@ export function getAllProjects(language: DevLanguage = "en"): ProjectMeta[] {
         date: project.date,
         description: project.description,
         thumbnail: project.thumbnail,
-        tags: project.tags,
         open: project.open,
         role: project.role,
         highlights: project.highlights,
@@ -280,10 +274,4 @@ export function getAllProjects(language: DevLanguage = "en"): ProjectMeta[] {
 
       return a.title.localeCompare(b.title, "ko");
     });
-}
-
-export type ProjectTagNode = TagNode;
-
-export function buildProjectTagTree(projects: ProjectMeta[]): TagNode[] {
-  return buildTagTree(projects);
 }

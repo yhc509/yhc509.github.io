@@ -3,11 +3,6 @@ title: "unity-cli-bridge"
 date: "2026-04-05"
 description: "터미널에서 Unity 에디터를 다루는 명령줄 도구다. 스크립트와 AI 코딩 에이전트가 씬, 프리팹, 에셋, 테스트, 플레이 모드 점검을 명령 한 줄로 처리하고 결과를 JSON으로 받는다."
 thumbnail: "/images/projects/unity-cli-bridge.png"
-tags:
-  - "Unity"
-  - "CLI"
-  - "AI 에이전트"
-  - "에디터 자동화"
 role: "설계부터 개발, 배포까지 혼자 하는 개인 프로젝트"
 highlights:
   - "CLI가 열려 있는 Unity 에디터와 로컬 IPC로 바로 통신한다. 중간에 거치는 서버가 없다."
