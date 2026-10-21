@@ -4,6 +4,7 @@ date: "2026-10-21"
 description: "스크립트와 AI 에이전트가 터미널에서 Unity 에디터를 다룰 수 있게 unity-cli-bridge를 만들었다. 다른 도구 세 개와 비교해 보니 부족한 점이 드러났고, 그걸 고친 뒤 다시 측정했다."
 open: true
 type: article
+project: unity-cli-bridge
 ---
 
 ![터미널에서 Unity 에디터를 조작하는 unity-cli-bridge](https://raw.githubusercontent.com/yhc509/unity-cli-bridge/main/docs/assets/demo.gif)

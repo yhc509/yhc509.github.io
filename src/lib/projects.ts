@@ -2,16 +2,20 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import type { DevLanguage } from "./devLanguage";
-import { buildTagTree, type TagNode } from "./tagTree";
 
 const projectsDirectory = path.join(process.cwd(), "content/projects");
 const projectFileExtensions = [".mdx", ".md"];
+
+const projectLinkKeys = ["github", "demo", "docs", "devlog", "itch"] as const;
+
+type ProjectLinkKey = (typeof projectLinkKeys)[number];
 
 export interface ProjectLinks {
   github?: string;
   demo?: string;
   docs?: string;
   devlog?: string;
+  itch?: string;
 }
 
 export interface ProjectMeta {
@@ -20,7 +24,6 @@ export interface ProjectMeta {
   date: string;
   description: string;
   thumbnail: string;
-  tags: string[];
   open: boolean;
   role: string;
   highlights: string[];
@@ -38,7 +41,6 @@ interface RawProject {
   date: string;
   description: string;
   thumbnail: string;
-  tags: string[];
   open: boolean;
   content: string;
   role?: string;
@@ -99,21 +101,29 @@ function readOptionalLinks(slug: string, value: unknown): Partial<ProjectLinks> 
     failInvalidProject(slug, "links must be an object.");
   }
 
-  const github = readOptionalString(value.github);
-  const demo = readOptionalString(value.demo);
-  const docs = readOptionalString(value.docs);
-  const devlog = readOptionalString(value.devlog);
+  const unknownKey = Object.keys(value).find(
+    (key) => !projectLinkKeys.includes(key as ProjectLinkKey)
+  );
+  if (unknownKey) {
+    failInvalidProject(
+      slug,
+      `links.${unknownKey} is not an allowed link. Allowed links: ${projectLinkKeys.join(", ")}.`
+    );
+  }
 
-  if (!github && !demo && !docs && !devlog) {
+  const links: Partial<ProjectLinks> = {};
+  for (const key of projectLinkKeys) {
+    const href = readOptionalString(value[key]);
+    if (href) {
+      links[key] = href;
+    }
+  }
+
+  if (Object.keys(links).length === 0) {
     failInvalidProject(slug, "links must contain at least one valid URL.");
   }
 
-  return {
-    ...(github ? { github } : {}),
-    ...(demo ? { demo } : {}),
-    ...(docs ? { docs } : {}),
-    ...(devlog ? { devlog } : {}),
-  };
+  return links;
 }
 
 function findProjectPath(slug: string): string | null {
@@ -160,7 +170,6 @@ function readRawProjectBySlug(slug: string, language: DevLanguage): RawProject {
     description: readRequiredString(slug, "description", data.description),
     thumbnail:
       readOptionalString(data.thumbnail) || "/images/default-project.svg",
-    tags: data.tags ? readStringArray(slug, "tags", data.tags) : [],
     open,
     content,
     role: readOptionalString(data.role),
@@ -205,7 +214,6 @@ function toPublicProject(project: RawProject): Project {
     date: project.date,
     description: project.description,
     thumbnail: project.thumbnail,
-    tags: project.tags,
     open: project.open,
     role: project.role,
     highlights: project.highlights,
@@ -214,6 +222,7 @@ function toPublicProject(project: RawProject): Project {
       ...(project.links.demo ? { demo: project.links.demo } : {}),
       ...(project.links.docs ? { docs: project.links.docs } : {}),
       ...(project.links.devlog ? { devlog: project.links.devlog } : {}),
+      ...(project.links.itch ? { itch: project.links.itch } : {}),
     },
     missingEnglish: project.missingEnglish,
     content: project.content,
@@ -250,7 +259,6 @@ export function getAllProjects(language: DevLanguage = "en"): ProjectMeta[] {
         date: project.date,
         description: project.description,
         thumbnail: project.thumbnail,
-        tags: project.tags,
         open: project.open,
         role: project.role,
         highlights: project.highlights,
@@ -266,10 +274,4 @@ export function getAllProjects(language: DevLanguage = "en"): ProjectMeta[] {
 
       return a.title.localeCompare(b.title, "ko");
     });
-}
-
-export type ProjectTagNode = TagNode;
-
-export function buildProjectTagTree(projects: ProjectMeta[]): TagNode[] {
-  return buildTagTree(projects);
 }

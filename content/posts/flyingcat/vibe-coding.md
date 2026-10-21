@@ -4,6 +4,7 @@ date: "2025-12-20"
 description: "Antigravity와 Gemini 3.0 Pro로 FlyingCat을 만들며, 작은 게임과 UI, WebGL 배포, 랭킹 연동 정도는 AI에게 꽤 맡길 수 있다는 가능성을 확인했다."
 open: true
 type: article
+project: flyingcat
 ---
 
 FlyingCat은 내가 바이브 코딩을 다시 보게 된 첫 프로젝트였다. 이 글에서는 왜 이 게임이 내 기준을 바꿨는지 쪽에 조금 더 집중해 보려고 한다.

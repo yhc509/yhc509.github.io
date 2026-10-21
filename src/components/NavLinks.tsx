@@ -11,6 +11,8 @@ export function NavLinks() {
   const barePath = stripLanguagePrefix(pathname);
 
   const isPostsActive = barePath === "/" || barePath.startsWith("/posts");
+  const isProjectsActive =
+    barePath === "/projects" || barePath.startsWith("/projects/");
   const isNewsActive = barePath === "/news" || barePath.startsWith("/news/");
   const isSlidesActive = barePath === "/slides" || barePath.startsWith("/slides/");
   const isAboutActive = barePath === "/about";
@@ -19,7 +21,7 @@ export function NavLinks() {
     <>
       <Link
         href={localizedPath("/", language)}
-        className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-sm transition-colors"
+        className="flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-sm transition-colors"
         style={{
           backgroundColor: isPostsActive ? "var(--accent)" : "var(--card-bg)",
           color: isPostsActive ? "white" : "var(--foreground)",
@@ -45,8 +47,32 @@ export function NavLinks() {
         <span className="hidden sm:inline">Posts</span>
       </Link>
       <Link
+        href={localizedPath("/projects", language)}
+        className="flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-sm transition-colors"
+        style={{
+          backgroundColor: isProjectsActive ? "var(--accent)" : "var(--card-bg)",
+          color: isProjectsActive ? "white" : "var(--foreground)",
+        }}
+        aria-label="Projects"
+      >
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="flex-shrink-0"
+        >
+          <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+        </svg>
+        <span className="hidden sm:inline">Projects</span>
+      </Link>
+      <Link
         href={localizedPath("/news", language)}
-        className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-sm transition-colors"
+        className="flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-sm transition-colors"
         style={{
           backgroundColor: isNewsActive ? "var(--accent)" : "var(--card-bg)",
           color: isNewsActive ? "white" : "var(--foreground)",
@@ -73,7 +99,7 @@ export function NavLinks() {
       </Link>
       <Link
         href={localizedPath("/slides", language)}
-        className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-sm transition-colors"
+        className="flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-sm transition-colors"
         style={{
           backgroundColor: isSlidesActive ? "var(--accent)" : "var(--card-bg)",
           color: isSlidesActive ? "white" : "var(--foreground)",
@@ -99,7 +125,7 @@ export function NavLinks() {
       </Link>
       <Link
         href={localizedPath("/about", language)}
-        className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-sm transition-colors"
+        className="flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-sm transition-colors"
         style={{
           backgroundColor: isAboutActive ? "var(--accent)" : "var(--card-bg)",
           color: isAboutActive ? "white" : "var(--foreground)",

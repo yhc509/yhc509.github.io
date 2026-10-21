@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getAllProjects, buildProjectTagTree } from "@/lib/projects";
+import { getAllProjects } from "@/lib/projects";
 import { ProjectsHome } from "@/components/ProjectsHome";
 import type { DevLanguage } from "@/lib/devLanguage";
 import { clampMetaDescription } from "@/lib/metaDescription";
@@ -21,11 +21,10 @@ export function projectsMetadata(language: DevLanguage): Metadata {
 
 export function ProjectsScreen({ language }: { language: DevLanguage }) {
   const projects = getAllProjects(language);
-  const tagTree = buildProjectTagTree(projects);
 
   return (
     <>
-      <ProjectsHome projects={projects} tagTree={tagTree} />
+      <ProjectsHome projects={projects} />
     </>
   );
 }

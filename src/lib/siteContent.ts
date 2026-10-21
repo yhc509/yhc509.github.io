@@ -48,8 +48,8 @@ export const siteContent = {
     descriptionEn: "Only publicly shareable projects are listed here.",
     intro: "공개 가능한 프로젝트만 적어둡니다.",
     introEn: "Only publicly shareable projects are listed here.",
-    searchPlaceholder: "제목, 요약, 태그로 검색...",
-    searchPlaceholderEn: "Search by title, summary, or tag...",
+    searchPlaceholder: "제목, 요약으로 검색...",
+    searchPlaceholderEn: "Search by title or summary...",
     emptyStateTitle: "공개 가능한 프로젝트를 정리 중입니다.",
     emptyStateTitleEn: "Public projects are being organized.",
     emptyStateDescription:

@@ -99,7 +99,7 @@ export async function generateProjectMetadata(
     return {
       title: project.title,
       description,
-      keywords: [...project.tags, project.role],
+      keywords: [project.role],
       openGraph: {
         type: "article",
         locale: contentLanguage === "en" ? "en_US" : "ko_KR",
@@ -107,7 +107,6 @@ export async function generateProjectMetadata(
         description,
         url,
         publishedTime: project.date,
-        tags: project.tags,
         images: [
           {
             url: toSiteUrl(imagePath),
@@ -158,7 +157,6 @@ export async function ProjectScreen({
   const relatedPosts = getProjectPostGroups(slug, language);
   const contentLanguage = language === "ko" || project.missingEnglish ? "ko" : "en";
   const roleLabel = useEnglish ? "Role" : "역할";
-  const tagsLabel = useEnglish ? "Tags" : "태그";
   const linksLabel = useEnglish ? "Links" : "링크";
   const highlightsLabel = useEnglish ? "Highlights" : "구성";
   const projectLogsLabel = useEnglish ? "Project logs" : "프로젝트 기록";
@@ -175,7 +173,6 @@ export async function ProjectScreen({
     datePublished: project.date,
     codeRepository: project.links.github,
     author: personReference(),
-    keywords: project.tags.join(", "),
     image: toSiteUrl(project.thumbnail),
   };
 
@@ -197,14 +194,19 @@ export async function ProjectScreen({
           className="mb-8 pb-8 border-b"
           style={{ borderColor: "var(--card-border)" }}
         >
-          <div className="relative aspect-video rounded-xl overflow-hidden mb-6">
-            <Image
-              src={project.thumbnail}
-              alt={project.title}
-              fill
-              className="object-cover"
-              priority
-            />
+          <div className="mb-6 flex justify-center">
+            <div className="relative aspect-[315/250] w-full max-w-[420px] overflow-hidden rounded-xl border"
+              style={{ borderColor: "var(--card-border)" }}
+            >
+              <Image
+                src={project.thumbnail}
+                alt={project.title}
+                fill
+                className="object-contain"
+                priority
+                sizes="(max-width: 420px) 100vw, 420px"
+              />
+            </div>
           </div>
           <div
             className="mb-4 flex flex-wrap items-center gap-2 text-xs"
@@ -227,18 +229,8 @@ export async function ProjectScreen({
               <p className="section-kicker sm:pt-1">{roleLabel}</p>
               <p className="text-sm leading-6">{project.role}</p>
 
-              <p className="section-kicker sm:pt-1">{tagsLabel}</p>
-              <div
-                className="flex flex-wrap gap-x-3 gap-y-1 text-sm"
-                style={{ color: "var(--text-muted)" }}
-              >
-                {project.tags.map((tag) => (
-                  <span key={tag}>#{tag}</span>
-                ))}
-              </div>
-
               <p className="section-kicker sm:pt-1">{linksLabel}</p>
-              <ProjectExternalLinks links={project.links} variant="plain" />
+              <ProjectExternalLinks links={project.links} />
 
               <p className="section-kicker sm:pt-1">{highlightsLabel}</p>
               <ul className="space-y-2 text-sm leading-6">

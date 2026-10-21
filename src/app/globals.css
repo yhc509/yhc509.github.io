@@ -80,6 +80,8 @@ body {
 }
 
 .prose pre {
+  max-width: 100%;
+  overflow-x: auto;
   background: var(--code-bg);
   border-radius: 8px;
 }
@@ -124,6 +126,16 @@ body {
   padding: 0;
   color: var(--code-text);
   overflow-wrap: normal;
+}
+
+@media (max-width: 430px) {
+  .prose pre {
+    padding: 0.7rem 0.65rem;
+  }
+
+  .prose pre code {
+    font-size: 0.78em;
+  }
 }
 
 .prose a {

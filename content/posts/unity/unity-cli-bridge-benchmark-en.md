@@ -4,6 +4,7 @@ date: "2026-10-21"
 description: "I built unity-cli-bridge so scripts and AI agents could drive the Unity Editor from a terminal. A benchmark against three other tools showed where it fell short, I fixed that, and measured again."
 open: true
 type: article
+project: unity-cli-bridge
 ---
 
 ![unity-cli-bridge driving the Unity Editor from a terminal](https://raw.githubusercontent.com/yhc509/unity-cli-bridge/main/docs/assets/demo.gif)
