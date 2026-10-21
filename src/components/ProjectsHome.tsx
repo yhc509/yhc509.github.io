@@ -48,7 +48,7 @@ function ProjectGridCard({ project, href }: ProjectCardProps) {
         {project.description}
       </p>
       <div className="mt-2">
-        <ProjectExternalLinks links={project.links} compact variant="pill" />
+        <ProjectExternalLinks links={project.links} compact dense variant="pill" />
       </div>
     </article>
   );
@@ -82,7 +82,7 @@ export function ProjectsHome({ projects }: ProjectsHomeProps) {
       return true;
     }
 
-    return [project.title, project.description, project.role, ...project.highlights]
+    return [project.title, project.description]
       .join(" ")
       .toLowerCase()
       .includes(normalizedSearchQuery);
