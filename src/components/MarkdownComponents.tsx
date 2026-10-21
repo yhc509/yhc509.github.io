@@ -76,6 +76,14 @@ function MarkdownPre(props: ComponentPropsWithoutRef<"pre">) {
   return <pre {...props} />;
 }
 
+function MarkdownTable(props: ComponentPropsWithoutRef<"table">) {
+  return (
+    <div className="md-table-scroll">
+      <table {...props} />
+    </div>
+  );
+}
+
 export function createMarkdownComponents(
   options: MarkdownComponentOptions = {}
 ): MDXComponents {
@@ -83,6 +91,7 @@ export function createMarkdownComponents(
 
   return {
     pre: MarkdownPre,
+    table: MarkdownTable,
     img: (
       props: ComponentPropsWithoutRef<"img"> &
         ImgHTMLAttributes<HTMLImageElement>
