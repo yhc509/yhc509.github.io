@@ -1,12 +1,13 @@
 import Link from "next/link";
 import type { ProjectLinks } from "@/lib/projects";
 
-const linkOrder = ["github", "demo", "docs", "devlog"] as const;
+const linkOrder = ["github", "docs", "itch", "demo", "devlog"] as const;
 
 const linkLabels: Record<(typeof linkOrder)[number], string> = {
   github: "GitHub",
-  demo: "Demo",
   docs: "Docs",
+  itch: "itch.io",
+  demo: "Demo",
   devlog: "Devlog",
 };
 

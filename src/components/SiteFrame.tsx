@@ -77,7 +77,7 @@ export function SiteFrame({
                   <span className="hidden sm:inline">{siteTitle}</span>
                   <span className="sm:hidden">{siteTitle}</span>
                 </Link>
-                <nav className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+                <nav className="flex items-center gap-0.5 sm:gap-2 flex-shrink-0">
                   <NavLinks />
                   <div
                     className="w-px h-5 mx-0.5 sm:mx-1"

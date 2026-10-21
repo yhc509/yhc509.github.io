@@ -7,11 +7,16 @@ import { buildTagTree, type TagNode } from "./tagTree";
 const projectsDirectory = path.join(process.cwd(), "content/projects");
 const projectFileExtensions = [".mdx", ".md"];
 
+const projectLinkKeys = ["github", "demo", "docs", "devlog", "itch"] as const;
+
+type ProjectLinkKey = (typeof projectLinkKeys)[number];
+
 export interface ProjectLinks {
   github?: string;
   demo?: string;
   docs?: string;
   devlog?: string;
+  itch?: string;
 }
 
 export interface ProjectMeta {
@@ -99,21 +104,29 @@ function readOptionalLinks(slug: string, value: unknown): Partial<ProjectLinks> 
     failInvalidProject(slug, "links must be an object.");
   }
 
-  const github = readOptionalString(value.github);
-  const demo = readOptionalString(value.demo);
-  const docs = readOptionalString(value.docs);
-  const devlog = readOptionalString(value.devlog);
+  const unknownKey = Object.keys(value).find(
+    (key) => !projectLinkKeys.includes(key as ProjectLinkKey)
+  );
+  if (unknownKey) {
+    failInvalidProject(
+      slug,
+      `links.${unknownKey} is not an allowed link. Allowed links: ${projectLinkKeys.join(", ")}.`
+    );
+  }
 
-  if (!github && !demo && !docs && !devlog) {
+  const links: Partial<ProjectLinks> = {};
+  for (const key of projectLinkKeys) {
+    const href = readOptionalString(value[key]);
+    if (href) {
+      links[key] = href;
+    }
+  }
+
+  if (Object.keys(links).length === 0) {
     failInvalidProject(slug, "links must contain at least one valid URL.");
   }
 
-  return {
-    ...(github ? { github } : {}),
-    ...(demo ? { demo } : {}),
-    ...(docs ? { docs } : {}),
-    ...(devlog ? { devlog } : {}),
-  };
+  return links;
 }
 
 function findProjectPath(slug: string): string | null {
@@ -214,6 +227,7 @@ function toPublicProject(project: RawProject): Project {
       ...(project.links.demo ? { demo: project.links.demo } : {}),
       ...(project.links.docs ? { docs: project.links.docs } : {}),
       ...(project.links.devlog ? { devlog: project.links.devlog } : {}),
+      ...(project.links.itch ? { itch: project.links.itch } : {}),
     },
     missingEnglish: project.missingEnglish,
     content: project.content,
