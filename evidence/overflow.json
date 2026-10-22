@@ -1,0 +1,220 @@
+{
+  "iphone": {
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Mobile/15E148 Safari/604.1",
+    "viewport": {
+      "width": 393,
+      "height": 659
+    },
+    "screen": {
+      "width": 393,
+      "height": 852
+    },
+    "deviceScaleFactor": 3,
+    "isMobile": true,
+    "hasTouch": true,
+    "defaultBrowserType": "webkit"
+  },
+  "results": [
+    {
+      "name": "ko-issue-2026-10-22-390-light",
+      "url": "http://127.0.0.1:3456/ko/news/2026-10-22",
+      "status": 200,
+      "theme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "blocked": [
+        "https://gc.zgo.at/count.js"
+      ],
+      "file": "/tmp/news-evidence/ko-issue-2026-10-22-390-light.png",
+      "innerWidth": 390,
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "bodyClientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflowX": 0,
+      "offenderCount": 0,
+      "offenders": [],
+      "h1": "Anthropic, \uba3c\uc800 \ucc59\uaca8 \uc8fc\ub294 \ube44\uc11c \uc571 Claude Duet \ud504\ub9ac\ubdf0 \uacf5\uac1c",
+      "firstH2": "Claude Duet, \uba3c\uc800 \ub9d0\uc744 \uac70\ub294 \ube44\uc11c \uc571",
+      "thumb": "/og/ko/news/2026-10-22.png"
+    },
+    {
+      "name": "ko-issue-2026-10-22-390-dark",
+      "url": "http://127.0.0.1:3456/ko/news/2026-10-22",
+      "status": 200,
+      "theme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "blocked": [
+        "https://gc.zgo.at/count.js"
+      ],
+      "file": "/tmp/news-evidence/ko-issue-2026-10-22-390-dark.png",
+      "innerWidth": 390,
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "bodyClientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflowX": 0,
+      "offenderCount": 0,
+      "offenders": [],
+      "h1": "Anthropic, \uba3c\uc800 \ucc59\uaca8 \uc8fc\ub294 \ube44\uc11c \uc571 Claude Duet \ud504\ub9ac\ubdf0 \uacf5\uac1c",
+      "firstH2": "Claude Duet, \uba3c\uc800 \ub9d0\uc744 \uac70\ub294 \ube44\uc11c \uc571",
+      "thumb": "/og/ko/news/2026-10-22.png"
+    },
+    {
+      "name": "ko-news-list-390-light",
+      "url": "http://127.0.0.1:3456/ko/news",
+      "status": 200,
+      "theme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "blocked": [
+        "https://gc.zgo.at/count.js"
+      ],
+      "file": "/tmp/news-evidence/ko-news-list-390-light.png",
+      "innerWidth": 390,
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "bodyClientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflowX": 0,
+      "offenderCount": 0,
+      "offenders": [],
+      "h1": "AI \ub274\uc2a4",
+      "firstH2": "Anthropic, \uba3c\uc800 \ucc59\uaca8 \uc8fc\ub294 \ube44\uc11c \uc571 Claude Duet \ud504\ub9ac\ubdf0 \uacf5\uac1c",
+      "thumb": "/og/ko/news/2026-10-22.png"
+    },
+    {
+      "name": "ko-news-list-390-dark",
+      "url": "http://127.0.0.1:3456/ko/news",
+      "status": 200,
+      "theme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "blocked": [
+        "https://gc.zgo.at/count.js"
+      ],
+      "file": "/tmp/news-evidence/ko-news-list-390-dark.png",
+      "innerWidth": 390,
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "bodyClientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflowX": 0,
+      "offenderCount": 0,
+      "offenders": [],
+      "h1": "AI \ub274\uc2a4",
+      "firstH2": "Anthropic, \uba3c\uc800 \ucc59\uaca8 \uc8fc\ub294 \ube44\uc11c \uc571 Claude Duet \ud504\ub9ac\ubdf0 \uacf5\uac1c",
+      "thumb": "/og/ko/news/2026-10-22.png"
+    },
+    {
+      "name": "en-news-list-390-light",
+      "url": "http://127.0.0.1:3456/news",
+      "status": 200,
+      "theme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "blocked": [
+        "https://gc.zgo.at/count.js"
+      ],
+      "file": "/tmp/news-evidence/en-news-list-390-light.png",
+      "innerWidth": 390,
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "bodyClientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflowX": 0,
+      "offenderCount": 0,
+      "offenders": [],
+      "h1": "AI News",
+      "firstH2": "Anthropic opens a preview of Claude Duet, an assistant app that comes to you first",
+      "thumb": "/og/news/2026-10-22.png"
+    },
+    {
+      "name": "en-news-list-390-dark",
+      "url": "http://127.0.0.1:3456/news",
+      "status": 200,
+      "theme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "blocked": [
+        "https://gc.zgo.at/count.js"
+      ],
+      "file": "/tmp/news-evidence/en-news-list-390-dark.png",
+      "innerWidth": 390,
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "bodyClientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflowX": 0,
+      "offenderCount": 0,
+      "offenders": [],
+      "h1": "AI News",
+      "firstH2": "Anthropic opens a preview of Claude Duet, an assistant app that comes to you first",
+      "thumb": "/og/news/2026-10-22.png"
+    },
+    {
+      "name": "ko-issue-2026-10-15-390-dark",
+      "url": "http://127.0.0.1:3456/ko/news/2026-10-15",
+      "status": 200,
+      "theme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "blocked": [
+        "https://gc.zgo.at/count.js"
+      ],
+      "file": "/tmp/news-evidence/ko-issue-2026-10-15-390-dark.png",
+      "innerWidth": 390,
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "bodyClientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflowX": 0,
+      "offenderCount": 0,
+      "offenders": [],
+      "h1": "Claude Code, 54\ubd84 \uc790\ub9ac \ube44\uc6b0\uba74 \uce90\uc2dc \ub9cc\ub8cc \uc804\uc5d0 \uc54c\uc544\uc11c compact",
+      "firstH2": "v2.1.299: \uc790\ub9ac \ube44\uc6b0\uba74 \uc54c\uc544\uc11c compact",
+      "thumb": "/og/ko/news/2026-10-15.png"
+    },
+    {
+      "name": "ko-issue-2026-10-22-webkit-iphone15-dark",
+      "url": "http://127.0.0.1:3456/ko/news/2026-10-22",
+      "status": 200,
+      "theme": "dark",
+      "viewport": {
+        "width": 393,
+        "height": 659
+      },
+      "blocked": [
+        "https://gc.zgo.at/count.js"
+      ],
+      "file": "/tmp/news-evidence/ko-issue-2026-10-22-webkit-iphone15-dark.png",
+      "innerWidth": 393,
+      "clientWidth": 393,
+      "scrollWidth": 393,
+      "bodyClientWidth": 393,
+      "bodyScrollWidth": 393,
+      "overflowX": 0,
+      "offenderCount": 0,
+      "offenders": [],
+      "h1": "Anthropic, \uba3c\uc800 \ucc59\uaca8 \uc8fc\ub294 \ube44\uc11c \uc571 Claude Duet \ud504\ub9ac\ubdf0 \uacf5\uac1c",
+      "firstH2": "Claude Duet, \uba3c\uc800 \ub9d0\uc744 \uac70\ub294 \ube44\uc11c \uc571",
+      "thumb": "/og/ko/news/2026-10-22.png",
+      "note": "retaken after body background settled to rgb(28, 28, 30)"
+    }
+  ]
+}
