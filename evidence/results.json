@@ -1,0 +1,2092 @@
+{
+  "iphone15": {
+    "viewport": {
+      "width": 393,
+      "height": 659
+    },
+    "deviceScaleFactor": 3,
+    "isMobile": true,
+    "defaultBrowserType": "webkit",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Mobile/15E148 Safari/604.1"
+  },
+  "blockedRequestCount": 32,
+  "blockedHosts": [
+    "gc.zgo.at"
+  ],
+  "blockedSample": [
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js",
+    "https://gc.zgo.at/count.js"
+  ],
+  "failures": [
+    "link https://help.x.com/en/x-for-websites-ads-info-and-privacy -> 403 final=https://help.x.com/en/x-for-websites-ads-info-and-privacy",
+    "link https://help.x.com/en/x-for-websites-ads-info-and-privacy -> 403 final=https://help.x.com/en/x-for-websites-ads-info-and-privacy"
+  ],
+  "koLinks": [
+    {
+      "href": "https://claude.com/resources/articles/claude-duet",
+      "status": 200,
+      "final": "https://claude.com/resources/articles/claude-duet",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/claudeai/status/2112984669943968099",
+      "status": 200,
+      "final": "https://x.com/claudeai/status/2112984669943968099",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/claudeai/status/2112984664256241837",
+      "status": 200,
+      "final": "https://x.com/claudeai/status/2112984664256241837",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/testingcatalog/status/2112986070874812923",
+      "status": 200,
+      "final": "https://x.com/testingcatalog/status/2112986070874812923",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/canva/status/2113032486569775465",
+      "status": 200,
+      "final": "https://x.com/canva/status/2113032486569775465",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/airtable/status/2113006192536465891",
+      "status": 200,
+      "final": "https://x.com/airtable/status/2113006192536465891",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/lydiahallie/status/2113002610806730780",
+      "status": 200,
+      "final": "https://x.com/lydiahallie/status/2113002610806730780",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/intent/follow?screen_name=lydiahallie",
+      "status": 200,
+      "final": "https://x.com/lydiahallie?_intent=%7B%22type%22%3A%22follow%22%2C%22userId%22%3A%22879696238953865217%22%2C%22screenName%22%3A%22lydiahallie%22%7D",
+      "ok": true
+    },
+    {
+      "href": "https://help.x.com/en/x-for-websites-ads-info-and-privacy",
+      "status": 403,
+      "final": "https://help.x.com/en/x-for-websites-ads-info-and-privacy",
+      "ok": false
+    },
+    {
+      "href": "https://x.com/intent/like?tweet_id=2113002610806730780",
+      "status": 200,
+      "final": "https://x.com/lydiahallie/status/2113002610806730780?tweet_id=2113002610806730780&_intent=%7B%22type%22%3A%22like%22%2C%22tweetId%22%3A%222113002610806730780%22%7D",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/intent/tweet?in_reply_to=2113002610806730780",
+      "status": 200,
+      "final": "https://x.com/i/jf/onboarding/web?redirect_after_login=%2Fintent%2Ftweet%3Fin_reply_to%3D2113002610806730780&mode=login",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/linasbeliunas/status/2113003447574306955",
+      "status": 200,
+      "final": "https://x.com/linasbeliunas/status/2113003447574306955",
+      "ok": true
+    },
+    {
+      "href": "http://127.0.0.1:4173/ko/posts/agentic/grokbot-usage",
+      "status": 200,
+      "final": "http://127.0.0.1:4173/ko/posts/agentic/grokbot-usage",
+      "ok": true
+    }
+  ],
+  "enLinks": [
+    {
+      "href": "https://claude.com/resources/articles/claude-duet",
+      "status": 200,
+      "final": "https://claude.com/resources/articles/claude-duet",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/claudeai/status/2112984669943968099",
+      "status": 200,
+      "final": "https://x.com/claudeai/status/2112984669943968099",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/claudeai/status/2112984664256241837",
+      "status": 200,
+      "final": "https://x.com/claudeai/status/2112984664256241837",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/testingcatalog/status/2112986070874812923",
+      "status": 200,
+      "final": "https://x.com/testingcatalog/status/2112986070874812923",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/canva/status/2113032486569775465",
+      "status": 200,
+      "final": "https://x.com/canva/status/2113032486569775465",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/airtable/status/2113006192536465891",
+      "status": 200,
+      "final": "https://x.com/airtable/status/2113006192536465891",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/lydiahallie/status/2113002610806730780",
+      "status": 200,
+      "final": "https://x.com/lydiahallie/status/2113002610806730780",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/intent/follow?screen_name=lydiahallie",
+      "status": 200,
+      "final": "https://x.com/lydiahallie?_intent=%7B%22type%22%3A%22follow%22%2C%22userId%22%3A%22879696238953865217%22%2C%22screenName%22%3A%22lydiahallie%22%7D",
+      "ok": true
+    },
+    {
+      "href": "https://help.x.com/en/x-for-websites-ads-info-and-privacy",
+      "status": 403,
+      "final": "https://help.x.com/en/x-for-websites-ads-info-and-privacy",
+      "ok": false
+    },
+    {
+      "href": "https://x.com/intent/like?tweet_id=2113002610806730780",
+      "status": 200,
+      "final": "https://x.com/lydiahallie/status/2113002610806730780?tweet_id=2113002610806730780&_intent=%7B%22type%22%3A%22like%22%2C%22tweetId%22%3A%222113002610806730780%22%7D",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/intent/tweet?in_reply_to=2113002610806730780",
+      "status": 200,
+      "final": "https://x.com/i/jf/onboarding/web?redirect_after_login=%2Fintent%2Ftweet%3Fin_reply_to%3D2113002610806730780&mode=login",
+      "ok": true
+    },
+    {
+      "href": "https://x.com/linasbeliunas/status/2113003447574306955",
+      "status": 200,
+      "final": "https://x.com/linasbeliunas/status/2113003447574306955",
+      "ok": true
+    },
+    {
+      "href": "http://127.0.0.1:4173/posts/agentic/grokbot-usage",
+      "status": 200,
+      "final": "http://127.0.0.1:4173/posts/agentic/grokbot-usage",
+      "ok": true
+    }
+  ],
+  "assetLinks": [
+    {
+      "href": "http://127.0.0.1:4173/og/ko/news/2026-10-22.png",
+      "status": 200,
+      "final": "http://127.0.0.1:4173/og/ko/news/2026-10-22.png",
+      "ok": true
+    },
+    {
+      "href": "http://127.0.0.1:4173/og/news/2026-10-22.png",
+      "status": 200,
+      "final": "http://127.0.0.1:4173/og/news/2026-10-22.png",
+      "ok": true
+    },
+    {
+      "href": "http://127.0.0.1:4173/news-img/2026-10-22.png",
+      "status": 200,
+      "final": "http://127.0.0.1:4173/news-img/2026-10-22.png",
+      "ok": true
+    },
+    {
+      "href": "http://127.0.0.1:4173/ko/posts/agentic/grokbot-usage",
+      "status": 200,
+      "final": "http://127.0.0.1:4173/ko/posts/agentic/grokbot-usage",
+      "ok": true
+    },
+    {
+      "href": "http://127.0.0.1:4173/posts/agentic/grokbot-usage",
+      "status": 200,
+      "final": "http://127.0.0.1:4173/posts/agentic/grokbot-usage",
+      "ok": true
+    }
+  ],
+  "results": [
+    {
+      "page": "/ko/news/2026-10-22",
+      "config": "360-light",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "ko-issue-360-light.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 360,
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "bodyScrollWidth": 360,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "Anthropic, 먼저 챙겨 주는 비서 앱 Claude Duet 미리보기 공개 | kinkeep.dev",
+      "cards": [
+        {
+          "labels": [
+            "챙길 일을 먼저 알림",
+            "맡긴 일 처리",
+            "자리 비워도 계속",
+            "대신 하기 전에 확인"
+          ],
+          "cards": 4
+        },
+        {
+          "labels": [
+            "메시지 보내기",
+            "결제",
+            "문서 서명",
+            "삭제"
+          ],
+          "cards": 4
+        }
+      ],
+      "og": "https://kinkeep.dev/og/ko/news/2026-10-22.png",
+      "imgs": [
+        {
+          "src": "/og/ko/news/2026-10-22.png",
+          "alt": "Claude Duet 공개",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/news/2026-10-22",
+      "listImg": null,
+      "articleLinkCount": 23
+    },
+    {
+      "page": "/news/2026-10-22",
+      "config": "360-light",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "en-issue-360-light.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 360,
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "bodyScrollWidth": 360,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "Anthropic opens a preview of Claude Duet, an assistant app that comes to you first | kinkeep.dev",
+      "cards": [
+        {
+          "labels": [
+            "Flags what needs you",
+            "Does what you ask",
+            "Keeps working while you're away",
+            "Asks before acting for you"
+          ],
+          "cards": 4
+        },
+        {
+          "labels": [
+            "Send a message",
+            "Pay",
+            "Sign a document",
+            "Delete"
+          ],
+          "cards": 4
+        }
+      ],
+      "og": "https://kinkeep.dev/og/news/2026-10-22.png",
+      "imgs": [
+        {
+          "src": "/og/news/2026-10-22.png",
+          "alt": "Claude Duet preview",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/ko/news/2026-10-22",
+      "listImg": null,
+      "articleLinkCount": 23
+    },
+    {
+      "page": "/ko/news",
+      "config": "360-light",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "ko-list-360-light.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 360,
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "bodyScrollWidth": 360,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "kinkeep.dev | 내가 쓰는 AI 도구 뉴스 요약",
+      "cards": [],
+      "og": "https://kinkeep.dev/profile.png",
+      "imgs": [
+        {
+          "src": "/og/ko/news/2026-10-22.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-20.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-15.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-14.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-13.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/ko/news/2026-10-22",
+      "listImg": {
+        "src": "/og/ko/news/2026-10-22.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 630,
+        "complete": true
+      },
+      "articleLinkCount": 0
+    },
+    {
+      "page": "/news",
+      "config": "360-light",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "en-list-360-light.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 360,
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "bodyScrollWidth": 360,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "kinkeep.dev | News on the AI Tools I Actually Use",
+      "cards": [],
+      "og": "https://kinkeep.dev/profile.png",
+      "imgs": [
+        {
+          "src": "/og/news/2026-10-22.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-20.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-15.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-14.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-13.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/news/2026-10-22",
+      "listImg": {
+        "src": "/og/news/2026-10-22.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 630,
+        "complete": true
+      },
+      "articleLinkCount": 0
+    },
+    {
+      "page": "/ko/news/2026-10-22",
+      "config": "360-dark",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "ko-issue-360-dark.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 360,
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "bodyScrollWidth": 360,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "Anthropic, 먼저 챙겨 주는 비서 앱 Claude Duet 미리보기 공개 | kinkeep.dev",
+      "cards": [
+        {
+          "labels": [
+            "챙길 일을 먼저 알림",
+            "맡긴 일 처리",
+            "자리 비워도 계속",
+            "대신 하기 전에 확인"
+          ],
+          "cards": 4
+        },
+        {
+          "labels": [
+            "메시지 보내기",
+            "결제",
+            "문서 서명",
+            "삭제"
+          ],
+          "cards": 4
+        }
+      ],
+      "og": "https://kinkeep.dev/og/ko/news/2026-10-22.png",
+      "imgs": [
+        {
+          "src": "/og/ko/news/2026-10-22.png",
+          "alt": "Claude Duet 공개",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/news/2026-10-22",
+      "listImg": null,
+      "articleLinkCount": 23
+    },
+    {
+      "page": "/news/2026-10-22",
+      "config": "360-dark",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "en-issue-360-dark.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 360,
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "bodyScrollWidth": 360,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "Anthropic opens a preview of Claude Duet, an assistant app that comes to you first | kinkeep.dev",
+      "cards": [
+        {
+          "labels": [
+            "Flags what needs you",
+            "Does what you ask",
+            "Keeps working while you're away",
+            "Asks before acting for you"
+          ],
+          "cards": 4
+        },
+        {
+          "labels": [
+            "Send a message",
+            "Pay",
+            "Sign a document",
+            "Delete"
+          ],
+          "cards": 4
+        }
+      ],
+      "og": "https://kinkeep.dev/og/news/2026-10-22.png",
+      "imgs": [
+        {
+          "src": "/og/news/2026-10-22.png",
+          "alt": "Claude Duet preview",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/ko/news/2026-10-22",
+      "listImg": null,
+      "articleLinkCount": 23
+    },
+    {
+      "page": "/ko/news",
+      "config": "360-dark",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "ko-list-360-dark.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 360,
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "bodyScrollWidth": 360,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "kinkeep.dev | 내가 쓰는 AI 도구 뉴스 요약",
+      "cards": [],
+      "og": "https://kinkeep.dev/profile.png",
+      "imgs": [
+        {
+          "src": "/og/ko/news/2026-10-22.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-20.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-15.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-14.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-13.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/ko/news/2026-10-22",
+      "listImg": {
+        "src": "/og/ko/news/2026-10-22.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 630,
+        "complete": true
+      },
+      "articleLinkCount": 0
+    },
+    {
+      "page": "/news",
+      "config": "360-dark",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "en-list-360-dark.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 360,
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "bodyScrollWidth": 360,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "kinkeep.dev | News on the AI Tools I Actually Use",
+      "cards": [],
+      "og": "https://kinkeep.dev/profile.png",
+      "imgs": [
+        {
+          "src": "/og/news/2026-10-22.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-20.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-15.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-14.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-13.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/news/2026-10-22",
+      "listImg": {
+        "src": "/og/news/2026-10-22.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 630,
+        "complete": true
+      },
+      "articleLinkCount": 0
+    },
+    {
+      "page": "/ko/news/2026-10-22",
+      "config": "390-light",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "ko-issue-390-light.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "Anthropic, 먼저 챙겨 주는 비서 앱 Claude Duet 미리보기 공개 | kinkeep.dev",
+      "cards": [
+        {
+          "labels": [
+            "챙길 일을 먼저 알림",
+            "맡긴 일 처리",
+            "자리 비워도 계속",
+            "대신 하기 전에 확인"
+          ],
+          "cards": 4
+        },
+        {
+          "labels": [
+            "메시지 보내기",
+            "결제",
+            "문서 서명",
+            "삭제"
+          ],
+          "cards": 4
+        }
+      ],
+      "og": "https://kinkeep.dev/og/ko/news/2026-10-22.png",
+      "imgs": [
+        {
+          "src": "/og/ko/news/2026-10-22.png",
+          "alt": "Claude Duet 공개",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/news/2026-10-22",
+      "listImg": null,
+      "articleLinkCount": 23
+    },
+    {
+      "page": "/news/2026-10-22",
+      "config": "390-light",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "en-issue-390-light.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "Anthropic opens a preview of Claude Duet, an assistant app that comes to you first | kinkeep.dev",
+      "cards": [
+        {
+          "labels": [
+            "Flags what needs you",
+            "Does what you ask",
+            "Keeps working while you're away",
+            "Asks before acting for you"
+          ],
+          "cards": 4
+        },
+        {
+          "labels": [
+            "Send a message",
+            "Pay",
+            "Sign a document",
+            "Delete"
+          ],
+          "cards": 4
+        }
+      ],
+      "og": "https://kinkeep.dev/og/news/2026-10-22.png",
+      "imgs": [
+        {
+          "src": "/og/news/2026-10-22.png",
+          "alt": "Claude Duet preview",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/ko/news/2026-10-22",
+      "listImg": null,
+      "articleLinkCount": 23
+    },
+    {
+      "page": "/ko/news",
+      "config": "390-light",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "ko-list-390-light.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "kinkeep.dev | 내가 쓰는 AI 도구 뉴스 요약",
+      "cards": [],
+      "og": "https://kinkeep.dev/profile.png",
+      "imgs": [
+        {
+          "src": "/og/ko/news/2026-10-22.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-20.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-15.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-14.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-13.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/ko/news/2026-10-22",
+      "listImg": {
+        "src": "/og/ko/news/2026-10-22.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 630,
+        "complete": true
+      },
+      "articleLinkCount": 0
+    },
+    {
+      "page": "/news",
+      "config": "390-light",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "en-list-390-light.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "kinkeep.dev | News on the AI Tools I Actually Use",
+      "cards": [],
+      "og": "https://kinkeep.dev/profile.png",
+      "imgs": [
+        {
+          "src": "/og/news/2026-10-22.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-20.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-15.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-14.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-13.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/news/2026-10-22",
+      "listImg": {
+        "src": "/og/news/2026-10-22.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 630,
+        "complete": true
+      },
+      "articleLinkCount": 0
+    },
+    {
+      "page": "/ko/news/2026-10-22",
+      "config": "390-dark",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "ko-issue-390-dark.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "Anthropic, 먼저 챙겨 주는 비서 앱 Claude Duet 미리보기 공개 | kinkeep.dev",
+      "cards": [
+        {
+          "labels": [
+            "챙길 일을 먼저 알림",
+            "맡긴 일 처리",
+            "자리 비워도 계속",
+            "대신 하기 전에 확인"
+          ],
+          "cards": 4
+        },
+        {
+          "labels": [
+            "메시지 보내기",
+            "결제",
+            "문서 서명",
+            "삭제"
+          ],
+          "cards": 4
+        }
+      ],
+      "og": "https://kinkeep.dev/og/ko/news/2026-10-22.png",
+      "imgs": [
+        {
+          "src": "/og/ko/news/2026-10-22.png",
+          "alt": "Claude Duet 공개",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/news/2026-10-22",
+      "listImg": null,
+      "articleLinkCount": 23
+    },
+    {
+      "page": "/news/2026-10-22",
+      "config": "390-dark",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "en-issue-390-dark.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "Anthropic opens a preview of Claude Duet, an assistant app that comes to you first | kinkeep.dev",
+      "cards": [
+        {
+          "labels": [
+            "Flags what needs you",
+            "Does what you ask",
+            "Keeps working while you're away",
+            "Asks before acting for you"
+          ],
+          "cards": 4
+        },
+        {
+          "labels": [
+            "Send a message",
+            "Pay",
+            "Sign a document",
+            "Delete"
+          ],
+          "cards": 4
+        }
+      ],
+      "og": "https://kinkeep.dev/og/news/2026-10-22.png",
+      "imgs": [
+        {
+          "src": "/og/news/2026-10-22.png",
+          "alt": "Claude Duet preview",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/ko/news/2026-10-22",
+      "listImg": null,
+      "articleLinkCount": 23
+    },
+    {
+      "page": "/ko/news",
+      "config": "390-dark",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "ko-list-390-dark.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "kinkeep.dev | 내가 쓰는 AI 도구 뉴스 요약",
+      "cards": [],
+      "og": "https://kinkeep.dev/profile.png",
+      "imgs": [
+        {
+          "src": "/og/ko/news/2026-10-22.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-20.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-15.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-14.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-13.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/ko/news/2026-10-22",
+      "listImg": {
+        "src": "/og/ko/news/2026-10-22.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 630,
+        "complete": true
+      },
+      "articleLinkCount": 0
+    },
+    {
+      "page": "/news",
+      "config": "390-dark",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "en-list-390-dark.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "kinkeep.dev | News on the AI Tools I Actually Use",
+      "cards": [],
+      "og": "https://kinkeep.dev/profile.png",
+      "imgs": [
+        {
+          "src": "/og/news/2026-10-22.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-20.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-15.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-14.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-13.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/news/2026-10-22",
+      "listImg": {
+        "src": "/og/news/2026-10-22.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 630,
+        "complete": true
+      },
+      "articleLinkCount": 0
+    },
+    {
+      "page": "/ko/news/2026-10-22",
+      "config": "1280-light",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "ko-issue-1280-light.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 1280,
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "Anthropic, 먼저 챙겨 주는 비서 앱 Claude Duet 미리보기 공개 | kinkeep.dev",
+      "cards": [
+        {
+          "labels": [
+            "챙길 일을 먼저 알림",
+            "맡긴 일 처리",
+            "자리 비워도 계속",
+            "대신 하기 전에 확인"
+          ],
+          "cards": 4
+        },
+        {
+          "labels": [
+            "메시지 보내기",
+            "결제",
+            "문서 서명",
+            "삭제"
+          ],
+          "cards": 4
+        }
+      ],
+      "og": "https://kinkeep.dev/og/ko/news/2026-10-22.png",
+      "imgs": [
+        {
+          "src": "/og/ko/news/2026-10-22.png",
+          "alt": "Claude Duet 공개",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/news/2026-10-22",
+      "listImg": null,
+      "articleLinkCount": 23
+    },
+    {
+      "page": "/news/2026-10-22",
+      "config": "1280-light",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "en-issue-1280-light.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 1280,
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "Anthropic opens a preview of Claude Duet, an assistant app that comes to you first | kinkeep.dev",
+      "cards": [
+        {
+          "labels": [
+            "Flags what needs you",
+            "Does what you ask",
+            "Keeps working while you're away",
+            "Asks before acting for you"
+          ],
+          "cards": 4
+        },
+        {
+          "labels": [
+            "Send a message",
+            "Pay",
+            "Sign a document",
+            "Delete"
+          ],
+          "cards": 4
+        }
+      ],
+      "og": "https://kinkeep.dev/og/news/2026-10-22.png",
+      "imgs": [
+        {
+          "src": "/og/news/2026-10-22.png",
+          "alt": "Claude Duet preview",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/ko/news/2026-10-22",
+      "listImg": null,
+      "articleLinkCount": 23
+    },
+    {
+      "page": "/ko/news",
+      "config": "1280-light",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "ko-list-1280-light.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 1280,
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "kinkeep.dev | 내가 쓰는 AI 도구 뉴스 요약",
+      "cards": [],
+      "og": "https://kinkeep.dev/profile.png",
+      "imgs": [
+        {
+          "src": "/og/ko/news/2026-10-22.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-20.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-15.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-14.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-13.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/ko/news/2026-10-22",
+      "listImg": {
+        "src": "/og/ko/news/2026-10-22.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 630,
+        "complete": true
+      },
+      "articleLinkCount": 0
+    },
+    {
+      "page": "/news",
+      "config": "1280-light",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "en-list-1280-light.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 1280,
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "kinkeep.dev | News on the AI Tools I Actually Use",
+      "cards": [],
+      "og": "https://kinkeep.dev/profile.png",
+      "imgs": [
+        {
+          "src": "/og/news/2026-10-22.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-20.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-15.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-14.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-13.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/news/2026-10-22",
+      "listImg": {
+        "src": "/og/news/2026-10-22.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 630,
+        "complete": true
+      },
+      "articleLinkCount": 0
+    },
+    {
+      "page": "/ko/news/2026-10-22",
+      "config": "1280-dark",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "ko-issue-1280-dark.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 1280,
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "Anthropic, 먼저 챙겨 주는 비서 앱 Claude Duet 미리보기 공개 | kinkeep.dev",
+      "cards": [
+        {
+          "labels": [
+            "챙길 일을 먼저 알림",
+            "맡긴 일 처리",
+            "자리 비워도 계속",
+            "대신 하기 전에 확인"
+          ],
+          "cards": 4
+        },
+        {
+          "labels": [
+            "메시지 보내기",
+            "결제",
+            "문서 서명",
+            "삭제"
+          ],
+          "cards": 4
+        }
+      ],
+      "og": "https://kinkeep.dev/og/ko/news/2026-10-22.png",
+      "imgs": [
+        {
+          "src": "/og/ko/news/2026-10-22.png",
+          "alt": "Claude Duet 공개",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/news/2026-10-22",
+      "listImg": null,
+      "articleLinkCount": 23
+    },
+    {
+      "page": "/news/2026-10-22",
+      "config": "1280-dark",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "en-issue-1280-dark.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 1280,
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "Anthropic opens a preview of Claude Duet, an assistant app that comes to you first | kinkeep.dev",
+      "cards": [
+        {
+          "labels": [
+            "Flags what needs you",
+            "Does what you ask",
+            "Keeps working while you're away",
+            "Asks before acting for you"
+          ],
+          "cards": 4
+        },
+        {
+          "labels": [
+            "Send a message",
+            "Pay",
+            "Sign a document",
+            "Delete"
+          ],
+          "cards": 4
+        }
+      ],
+      "og": "https://kinkeep.dev/og/news/2026-10-22.png",
+      "imgs": [
+        {
+          "src": "/og/news/2026-10-22.png",
+          "alt": "Claude Duet preview",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/ko/news/2026-10-22",
+      "listImg": null,
+      "articleLinkCount": 23
+    },
+    {
+      "page": "/ko/news",
+      "config": "1280-dark",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "ko-list-1280-dark.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 1280,
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "kinkeep.dev | 내가 쓰는 AI 도구 뉴스 요약",
+      "cards": [],
+      "og": "https://kinkeep.dev/profile.png",
+      "imgs": [
+        {
+          "src": "/og/ko/news/2026-10-22.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-20.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-15.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-14.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-13.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/ko/news/2026-10-22",
+      "listImg": {
+        "src": "/og/ko/news/2026-10-22.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 630,
+        "complete": true
+      },
+      "articleLinkCount": 0
+    },
+    {
+      "page": "/news",
+      "config": "1280-dark",
+      "browser": "chromium",
+      "httpStatus": 200,
+      "file": "en-list-1280-dark.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 1280,
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "kinkeep.dev | News on the AI Tools I Actually Use",
+      "cards": [],
+      "og": "https://kinkeep.dev/profile.png",
+      "imgs": [
+        {
+          "src": "/og/news/2026-10-22.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-20.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-15.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-14.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-13.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/news/2026-10-22",
+      "listImg": {
+        "src": "/og/news/2026-10-22.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 630,
+        "complete": true
+      },
+      "articleLinkCount": 0
+    },
+    {
+      "page": "/ko/news/2026-10-22",
+      "config": "webkit-iphone15-light",
+      "browser": "webkit",
+      "httpStatus": 200,
+      "file": "ko-issue-webkit-iphone15-light.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 393,
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "bodyScrollWidth": 393,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "Anthropic, 먼저 챙겨 주는 비서 앱 Claude Duet 미리보기 공개 | kinkeep.dev",
+      "cards": [
+        {
+          "labels": [
+            "챙길 일을 먼저 알림",
+            "맡긴 일 처리",
+            "자리 비워도 계속",
+            "대신 하기 전에 확인"
+          ],
+          "cards": 4
+        },
+        {
+          "labels": [
+            "메시지 보내기",
+            "결제",
+            "문서 서명",
+            "삭제"
+          ],
+          "cards": 4
+        }
+      ],
+      "og": "https://kinkeep.dev/og/ko/news/2026-10-22.png",
+      "imgs": [
+        {
+          "src": "/og/ko/news/2026-10-22.png",
+          "alt": "Claude Duet 공개",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/news/2026-10-22",
+      "listImg": null,
+      "articleLinkCount": 23
+    },
+    {
+      "page": "/news/2026-10-22",
+      "config": "webkit-iphone15-light",
+      "browser": "webkit",
+      "httpStatus": 200,
+      "file": "en-issue-webkit-iphone15-light.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 393,
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "bodyScrollWidth": 393,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "Anthropic opens a preview of Claude Duet, an assistant app that comes to you first | kinkeep.dev",
+      "cards": [
+        {
+          "labels": [
+            "Flags what needs you",
+            "Does what you ask",
+            "Keeps working while you're away",
+            "Asks before acting for you"
+          ],
+          "cards": 4
+        },
+        {
+          "labels": [
+            "Send a message",
+            "Pay",
+            "Sign a document",
+            "Delete"
+          ],
+          "cards": 4
+        }
+      ],
+      "og": "https://kinkeep.dev/og/news/2026-10-22.png",
+      "imgs": [
+        {
+          "src": "/og/news/2026-10-22.png",
+          "alt": "Claude Duet preview",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/ko/news/2026-10-22",
+      "listImg": null,
+      "articleLinkCount": 23
+    },
+    {
+      "page": "/ko/news",
+      "config": "webkit-iphone15-light",
+      "browser": "webkit",
+      "httpStatus": 200,
+      "file": "ko-list-webkit-iphone15-light.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 393,
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "bodyScrollWidth": 393,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "kinkeep.dev | 내가 쓰는 AI 도구 뉴스 요약",
+      "cards": [],
+      "og": "https://kinkeep.dev/profile.png",
+      "imgs": [
+        {
+          "src": "/og/ko/news/2026-10-22.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-20.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-15.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-14.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-13.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/ko/news/2026-10-22",
+      "listImg": {
+        "src": "/og/ko/news/2026-10-22.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 630,
+        "complete": true
+      },
+      "articleLinkCount": 0
+    },
+    {
+      "page": "/news",
+      "config": "webkit-iphone15-light",
+      "browser": "webkit",
+      "httpStatus": 200,
+      "file": "en-list-webkit-iphone15-light.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 393,
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "bodyScrollWidth": 393,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "kinkeep.dev | News on the AI Tools I Actually Use",
+      "cards": [],
+      "og": "https://kinkeep.dev/profile.png",
+      "imgs": [
+        {
+          "src": "/og/news/2026-10-22.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-20.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-15.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-14.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-13.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/news/2026-10-22",
+      "listImg": {
+        "src": "/og/news/2026-10-22.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 630,
+        "complete": true
+      },
+      "articleLinkCount": 0
+    },
+    {
+      "page": "/ko/news/2026-10-22",
+      "config": "webkit-iphone15-dark",
+      "browser": "webkit",
+      "httpStatus": 200,
+      "file": "ko-issue-webkit-iphone15-dark.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 393,
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "bodyScrollWidth": 393,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "Anthropic, 먼저 챙겨 주는 비서 앱 Claude Duet 미리보기 공개 | kinkeep.dev",
+      "cards": [
+        {
+          "labels": [
+            "챙길 일을 먼저 알림",
+            "맡긴 일 처리",
+            "자리 비워도 계속",
+            "대신 하기 전에 확인"
+          ],
+          "cards": 4
+        },
+        {
+          "labels": [
+            "메시지 보내기",
+            "결제",
+            "문서 서명",
+            "삭제"
+          ],
+          "cards": 4
+        }
+      ],
+      "og": "https://kinkeep.dev/og/ko/news/2026-10-22.png",
+      "imgs": [
+        {
+          "src": "/og/ko/news/2026-10-22.png",
+          "alt": "Claude Duet 공개",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/news/2026-10-22",
+      "listImg": null,
+      "articleLinkCount": 23
+    },
+    {
+      "page": "/news/2026-10-22",
+      "config": "webkit-iphone15-dark",
+      "browser": "webkit",
+      "httpStatus": 200,
+      "file": "en-issue-webkit-iphone15-dark.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 393,
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "bodyScrollWidth": 393,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "Anthropic opens a preview of Claude Duet, an assistant app that comes to you first | kinkeep.dev",
+      "cards": [
+        {
+          "labels": [
+            "Flags what needs you",
+            "Does what you ask",
+            "Keeps working while you're away",
+            "Asks before acting for you"
+          ],
+          "cards": 4
+        },
+        {
+          "labels": [
+            "Send a message",
+            "Pay",
+            "Sign a document",
+            "Delete"
+          ],
+          "cards": 4
+        }
+      ],
+      "og": "https://kinkeep.dev/og/news/2026-10-22.png",
+      "imgs": [
+        {
+          "src": "/og/news/2026-10-22.png",
+          "alt": "Claude Duet preview",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/ko/news/2026-10-22",
+      "listImg": null,
+      "articleLinkCount": 23
+    },
+    {
+      "page": "/ko/news",
+      "config": "webkit-iphone15-dark",
+      "browser": "webkit",
+      "httpStatus": 200,
+      "file": "ko-list-webkit-iphone15-dark.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 393,
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "bodyScrollWidth": 393,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "kinkeep.dev | 내가 쓰는 AI 도구 뉴스 요약",
+      "cards": [],
+      "og": "https://kinkeep.dev/profile.png",
+      "imgs": [
+        {
+          "src": "/og/ko/news/2026-10-22.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-20.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-15.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-14.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/ko/news/2026-10-13.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/ko/news/2026-10-22",
+      "listImg": {
+        "src": "/og/ko/news/2026-10-22.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 630,
+        "complete": true
+      },
+      "articleLinkCount": 0
+    },
+    {
+      "page": "/news",
+      "config": "webkit-iphone15-dark",
+      "browser": "webkit",
+      "httpStatus": 200,
+      "file": "en-list-webkit-iphone15-dark.png",
+      "overflow": 0,
+      "metrics": {
+        "innerWidth": 393,
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "bodyScrollWidth": 393,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "title": "kinkeep.dev | News on the AI Tools I Actually Use",
+      "cards": [],
+      "og": "https://kinkeep.dev/profile.png",
+      "imgs": [
+        {
+          "src": "/og/news/2026-10-22.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-20.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-15.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-14.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        },
+        {
+          "src": "/og/news/2026-10-13.png",
+          "alt": "",
+          "naturalWidth": 1200,
+          "naturalHeight": 630,
+          "complete": true
+        }
+      ],
+      "listHref": "/news/2026-10-22",
+      "listImg": {
+        "src": "/og/news/2026-10-22.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 630,
+        "complete": true
+      },
+      "articleLinkCount": 0
+    }
+  ]
+}
