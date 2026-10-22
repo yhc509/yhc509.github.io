@@ -1,0 +1,1171 @@
+{
+  "blockedRequestCount": 14,
+  "blockedHosts": [
+    "gc.zgo.at"
+  ],
+  "failures": [],
+  "results": [
+    {
+      "page": "/ko/news/2026-10-22",
+      "config": "360-light",
+      "file": "v2-ko-issue-360-light.png",
+      "httpStatus": 200,
+      "metrics": {
+        "innerWidth": 360,
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "afterScroll": {
+        "innerWidth": 360,
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "viewportHeight": 2141
+      },
+      "facts": {
+        "items": [
+          {
+            "title": "Claude Duet, 먼저 말을 거는 비서 앱",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "미국 Pro, Max 구독자부터 대기 명단으로",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "사용량은 기존 Claude 한도를 같이 쓴다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "보내기, 결제, 서명, 삭제 전에는 승인을 받는다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "headings": [
+          "무엇이 나왔나",
+          "민감한 정보를 다루는 방식",
+          "출시 첫날 붙은 연동",
+          "반응",
+          "아직 확실하지 않은 것",
+          "내 생각"
+        ],
+        "summaryChecks": [
+          {
+            "title": "미국 Pro, Max 구독자부터 대기 명단으로",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "사용량은 기존 Claude 한도를 같이 쓴다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "hasReactions": true,
+        "hasUnclear": true,
+        "takeCount": 1
+      },
+      "visible": {
+        "reactions": {
+          "y": 5747.8125,
+          "inView": true
+        },
+        "unclear": {
+          "y": 7052.546875,
+          "inView": true
+        },
+        "take": {
+          "y": 7340.53125,
+          "inView": true
+        },
+        "viewTop": 5740,
+        "viewBottom": 7881
+      }
+    },
+    {
+      "page": "/news/2026-10-22",
+      "config": "360-light",
+      "file": "v2-en-issue-360-light.png",
+      "httpStatus": 200,
+      "metrics": {
+        "innerWidth": 360,
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "afterScroll": {
+        "innerWidth": 360,
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "viewportHeight": 2393
+      },
+      "facts": {
+        "items": [
+          {
+            "title": "Claude Duet, an assistant that speaks up first",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "US Pro and Max subscribers first, by waitlist",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Duet shares your existing Claude usage limits",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Approval before sending, paying, signing or deleting",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "headings": [
+          "What shipped",
+          "How it handles sensitive information",
+          "Launch-day integrations",
+          "Reactions",
+          "Still unclear",
+          "My take"
+        ],
+        "summaryChecks": [
+          {
+            "title": "US Pro and Max subscribers first, by waitlist",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Duet shares your existing Claude usage limits",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "hasReactions": true,
+        "hasUnclear": true,
+        "takeCount": 1
+      },
+      "visible": {
+        "reactions": {
+          "y": 7052.75,
+          "inView": true
+        },
+        "unclear": {
+          "y": 8441.484375,
+          "inView": true
+        },
+        "take": {
+          "y": 8785.46875,
+          "inView": true
+        },
+        "viewTop": 7045,
+        "viewBottom": 9438
+      }
+    },
+    {
+      "page": "/ko/news/2026-10-22",
+      "config": "360-dark",
+      "file": "v2-ko-issue-360-dark.png",
+      "httpStatus": 200,
+      "metrics": {
+        "innerWidth": 360,
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "afterScroll": {
+        "innerWidth": 360,
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "viewportHeight": 2141
+      },
+      "facts": {
+        "items": [
+          {
+            "title": "Claude Duet, 먼저 말을 거는 비서 앱",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "미국 Pro, Max 구독자부터 대기 명단으로",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "사용량은 기존 Claude 한도를 같이 쓴다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "보내기, 결제, 서명, 삭제 전에는 승인을 받는다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "headings": [
+          "무엇이 나왔나",
+          "민감한 정보를 다루는 방식",
+          "출시 첫날 붙은 연동",
+          "반응",
+          "아직 확실하지 않은 것",
+          "내 생각"
+        ],
+        "summaryChecks": [
+          {
+            "title": "미국 Pro, Max 구독자부터 대기 명단으로",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "사용량은 기존 Claude 한도를 같이 쓴다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "hasReactions": true,
+        "hasUnclear": true,
+        "takeCount": 1
+      },
+      "visible": {
+        "reactions": {
+          "y": 5747.8125,
+          "inView": true
+        },
+        "unclear": {
+          "y": 7052.546875,
+          "inView": true
+        },
+        "take": {
+          "y": 7340.53125,
+          "inView": true
+        },
+        "viewTop": 5740,
+        "viewBottom": 7881
+      }
+    },
+    {
+      "page": "/news/2026-10-22",
+      "config": "360-dark",
+      "file": "v2-en-issue-360-dark.png",
+      "httpStatus": 200,
+      "metrics": {
+        "innerWidth": 360,
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "afterScroll": {
+        "innerWidth": 360,
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "viewportHeight": 2393
+      },
+      "facts": {
+        "items": [
+          {
+            "title": "Claude Duet, an assistant that speaks up first",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "US Pro and Max subscribers first, by waitlist",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Duet shares your existing Claude usage limits",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Approval before sending, paying, signing or deleting",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "headings": [
+          "What shipped",
+          "How it handles sensitive information",
+          "Launch-day integrations",
+          "Reactions",
+          "Still unclear",
+          "My take"
+        ],
+        "summaryChecks": [
+          {
+            "title": "US Pro and Max subscribers first, by waitlist",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Duet shares your existing Claude usage limits",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "hasReactions": true,
+        "hasUnclear": true,
+        "takeCount": 1
+      },
+      "visible": {
+        "reactions": {
+          "y": 7052.75,
+          "inView": true
+        },
+        "unclear": {
+          "y": 8441.484375,
+          "inView": true
+        },
+        "take": {
+          "y": 8785.46875,
+          "inView": true
+        },
+        "viewTop": 7045,
+        "viewBottom": 9438
+      }
+    },
+    {
+      "page": "/ko/news/2026-10-22",
+      "config": "390-light",
+      "file": "v2-ko-issue-390-light.png",
+      "httpStatus": 200,
+      "metrics": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "afterScroll": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "viewportHeight": 2054
+      },
+      "facts": {
+        "items": [
+          {
+            "title": "Claude Duet, 먼저 말을 거는 비서 앱",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "미국 Pro, Max 구독자부터 대기 명단으로",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "사용량은 기존 Claude 한도를 같이 쓴다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "보내기, 결제, 서명, 삭제 전에는 승인을 받는다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "headings": [
+          "무엇이 나왔나",
+          "민감한 정보를 다루는 방식",
+          "출시 첫날 붙은 연동",
+          "반응",
+          "아직 확실하지 않은 것",
+          "내 생각"
+        ],
+        "summaryChecks": [
+          {
+            "title": "미국 Pro, Max 구독자부터 대기 명단으로",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "사용량은 기존 Claude 한도를 같이 쓴다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "hasReactions": true,
+        "hasUnclear": true,
+        "takeCount": 1
+      },
+      "visible": {
+        "reactions": {
+          "y": 5408.0625,
+          "inView": true
+        },
+        "unclear": {
+          "y": 6681.671875,
+          "inView": true
+        },
+        "take": {
+          "y": 6941.65625,
+          "inView": true
+        },
+        "viewTop": 5400,
+        "viewBottom": 7454
+      }
+    },
+    {
+      "page": "/news/2026-10-22",
+      "config": "390-light",
+      "file": "v2-en-issue-390-light.png",
+      "httpStatus": 200,
+      "metrics": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "afterScroll": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "viewportHeight": 2278
+      },
+      "facts": {
+        "items": [
+          {
+            "title": "Claude Duet, an assistant that speaks up first",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "US Pro and Max subscribers first, by waitlist",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Duet shares your existing Claude usage limits",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Approval before sending, paying, signing or deleting",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "headings": [
+          "What shipped",
+          "How it handles sensitive information",
+          "Launch-day integrations",
+          "Reactions",
+          "Still unclear",
+          "My take"
+        ],
+        "summaryChecks": [
+          {
+            "title": "US Pro and Max subscribers first, by waitlist",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Duet shares your existing Claude usage limits",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "hasReactions": true,
+        "hasUnclear": true,
+        "takeCount": 1
+      },
+      "visible": {
+        "reactions": {
+          "y": 6752.5,
+          "inView": true
+        },
+        "unclear": {
+          "y": 8082.109375,
+          "inView": true
+        },
+        "take": {
+          "y": 8426.09375,
+          "inView": true
+        },
+        "viewTop": 6745,
+        "viewBottom": 9023
+      }
+    },
+    {
+      "page": "/ko/news/2026-10-22",
+      "config": "390-dark",
+      "file": "v2-ko-issue-390-dark.png",
+      "httpStatus": 200,
+      "metrics": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "afterScroll": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "viewportHeight": 2054
+      },
+      "facts": {
+        "items": [
+          {
+            "title": "Claude Duet, 먼저 말을 거는 비서 앱",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "미국 Pro, Max 구독자부터 대기 명단으로",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "사용량은 기존 Claude 한도를 같이 쓴다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "보내기, 결제, 서명, 삭제 전에는 승인을 받는다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "headings": [
+          "무엇이 나왔나",
+          "민감한 정보를 다루는 방식",
+          "출시 첫날 붙은 연동",
+          "반응",
+          "아직 확실하지 않은 것",
+          "내 생각"
+        ],
+        "summaryChecks": [
+          {
+            "title": "미국 Pro, Max 구독자부터 대기 명단으로",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "사용량은 기존 Claude 한도를 같이 쓴다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "hasReactions": true,
+        "hasUnclear": true,
+        "takeCount": 1
+      },
+      "visible": {
+        "reactions": {
+          "y": 5408.0625,
+          "inView": true
+        },
+        "unclear": {
+          "y": 6681.671875,
+          "inView": true
+        },
+        "take": {
+          "y": 6941.65625,
+          "inView": true
+        },
+        "viewTop": 5400,
+        "viewBottom": 7454
+      }
+    },
+    {
+      "page": "/news/2026-10-22",
+      "config": "390-dark",
+      "file": "v2-en-issue-390-dark.png",
+      "httpStatus": 200,
+      "metrics": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "afterScroll": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "viewportHeight": 2278
+      },
+      "facts": {
+        "items": [
+          {
+            "title": "Claude Duet, an assistant that speaks up first",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "US Pro and Max subscribers first, by waitlist",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Duet shares your existing Claude usage limits",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Approval before sending, paying, signing or deleting",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "headings": [
+          "What shipped",
+          "How it handles sensitive information",
+          "Launch-day integrations",
+          "Reactions",
+          "Still unclear",
+          "My take"
+        ],
+        "summaryChecks": [
+          {
+            "title": "US Pro and Max subscribers first, by waitlist",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Duet shares your existing Claude usage limits",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "hasReactions": true,
+        "hasUnclear": true,
+        "takeCount": 1
+      },
+      "visible": {
+        "reactions": {
+          "y": 6752.5,
+          "inView": true
+        },
+        "unclear": {
+          "y": 8082.109375,
+          "inView": true
+        },
+        "take": {
+          "y": 8426.09375,
+          "inView": true
+        },
+        "viewTop": 6745,
+        "viewBottom": 9023
+      }
+    },
+    {
+      "page": "/ko/news/2026-10-22",
+      "config": "1280-light",
+      "file": "v2-ko-issue-1280-light.png",
+      "httpStatus": 200,
+      "metrics": {
+        "innerWidth": 1280,
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "afterScroll": {
+        "innerWidth": 1280,
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "viewportHeight": 1667
+      },
+      "facts": {
+        "items": [
+          {
+            "title": "Claude Duet, 먼저 말을 거는 비서 앱",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "미국 Pro, Max 구독자부터 대기 명단으로",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "사용량은 기존 Claude 한도를 같이 쓴다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "보내기, 결제, 서명, 삭제 전에는 승인을 받는다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "headings": [
+          "무엇이 나왔나",
+          "민감한 정보를 다루는 방식",
+          "출시 첫날 붙은 연동",
+          "반응",
+          "아직 확실하지 않은 것",
+          "내 생각"
+        ],
+        "summaryChecks": [
+          {
+            "title": "미국 Pro, Max 구독자부터 대기 명단으로",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "사용량은 기존 Claude 한도를 같이 쓴다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "hasReactions": true,
+        "hasUnclear": true,
+        "takeCount": 1
+      },
+      "visible": {
+        "reactions": {
+          "y": 3822.828125,
+          "inView": true
+        },
+        "unclear": {
+          "y": 4960.9375,
+          "inView": true
+        },
+        "take": {
+          "y": 5164.921875,
+          "inView": true
+        },
+        "viewTop": 3815,
+        "viewBottom": 5482
+      }
+    },
+    {
+      "page": "/news/2026-10-22",
+      "config": "1280-light",
+      "file": "v2-en-issue-1280-light.png",
+      "httpStatus": 200,
+      "metrics": {
+        "innerWidth": 1280,
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "afterScroll": {
+        "innerWidth": 1280,
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "viewportHeight": 1779
+      },
+      "facts": {
+        "items": [
+          {
+            "title": "Claude Duet, an assistant that speaks up first",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "US Pro and Max subscribers first, by waitlist",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Duet shares your existing Claude usage limits",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Approval before sending, paying, signing or deleting",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "headings": [
+          "What shipped",
+          "How it handles sensitive information",
+          "Launch-day integrations",
+          "Reactions",
+          "Still unclear",
+          "My take"
+        ],
+        "summaryChecks": [
+          {
+            "title": "US Pro and Max subscribers first, by waitlist",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Duet shares your existing Claude usage limits",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "hasReactions": true,
+        "hasUnclear": true,
+        "takeCount": 1
+      },
+      "visible": {
+        "reactions": {
+          "y": 4270.828125,
+          "inView": true
+        },
+        "unclear": {
+          "y": 5436.9375,
+          "inView": true
+        },
+        "take": {
+          "y": 5668.921875,
+          "inView": true
+        },
+        "viewTop": 4263,
+        "viewBottom": 6042
+      }
+    },
+    {
+      "page": "/ko/news/2026-10-22",
+      "config": "webkit-iphone15-light",
+      "file": "v2-ko-issue-webkit-iphone15-light.png",
+      "httpStatus": 200,
+      "metrics": {
+        "innerWidth": 393,
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "afterScroll": {
+        "innerWidth": 393,
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "viewportHeight": 2053
+      },
+      "facts": {
+        "items": [
+          {
+            "title": "Claude Duet, 먼저 말을 거는 비서 앱",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "미국 Pro, Max 구독자부터 대기 명단으로",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "사용량은 기존 Claude 한도를 같이 쓴다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "보내기, 결제, 서명, 삭제 전에는 승인을 받는다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "headings": [
+          "무엇이 나왔나",
+          "민감한 정보를 다루는 방식",
+          "출시 첫날 붙은 연동",
+          "반응",
+          "아직 확실하지 않은 것",
+          "내 생각"
+        ],
+        "summaryChecks": [
+          {
+            "title": "미국 Pro, Max 구독자부터 대기 명단으로",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "사용량은 기존 Claude 한도를 같이 쓴다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "hasReactions": true,
+        "hasUnclear": true,
+        "takeCount": 1
+      },
+      "visible": {
+        "reactions": {
+          "y": 5355.21875,
+          "inView": true
+        },
+        "unclear": {
+          "y": 6629.53125,
+          "inView": true
+        },
+        "take": {
+          "y": 6888.53125,
+          "inView": true
+        },
+        "viewTop": 5347,
+        "viewBottom": 7400
+      }
+    },
+    {
+      "page": "/news/2026-10-22",
+      "config": "webkit-iphone15-light",
+      "file": "v2-en-issue-webkit-iphone15-light.png",
+      "httpStatus": 200,
+      "metrics": {
+        "innerWidth": 393,
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "theme": "light",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "afterScroll": {
+        "innerWidth": 393,
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "viewportHeight": 2249
+      },
+      "facts": {
+        "items": [
+          {
+            "title": "Claude Duet, an assistant that speaks up first",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "US Pro and Max subscribers first, by waitlist",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Duet shares your existing Claude usage limits",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Approval before sending, paying, signing or deleting",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "headings": [
+          "What shipped",
+          "How it handles sensitive information",
+          "Launch-day integrations",
+          "Reactions",
+          "Still unclear",
+          "My take"
+        ],
+        "summaryChecks": [
+          {
+            "title": "US Pro and Max subscribers first, by waitlist",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Duet shares your existing Claude usage limits",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "hasReactions": true,
+        "hasUnclear": true,
+        "takeCount": 1
+      },
+      "visible": {
+        "reactions": {
+          "y": 6574.21875,
+          "inView": true
+        },
+        "unclear": {
+          "y": 7876.53125,
+          "inView": true
+        },
+        "take": {
+          "y": 8219.53125,
+          "inView": true
+        },
+        "viewTop": 6566,
+        "viewBottom": 8815
+      }
+    },
+    {
+      "page": "/ko/news/2026-10-22",
+      "config": "webkit-iphone15-dark",
+      "file": "v2-ko-issue-webkit-iphone15-dark.png",
+      "httpStatus": 200,
+      "metrics": {
+        "innerWidth": 393,
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "afterScroll": {
+        "innerWidth": 393,
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "viewportHeight": 2053
+      },
+      "facts": {
+        "items": [
+          {
+            "title": "Claude Duet, 먼저 말을 거는 비서 앱",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "미국 Pro, Max 구독자부터 대기 명단으로",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "사용량은 기존 Claude 한도를 같이 쓴다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "보내기, 결제, 서명, 삭제 전에는 승인을 받는다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "headings": [
+          "무엇이 나왔나",
+          "민감한 정보를 다루는 방식",
+          "출시 첫날 붙은 연동",
+          "반응",
+          "아직 확실하지 않은 것",
+          "내 생각"
+        ],
+        "summaryChecks": [
+          {
+            "title": "미국 Pro, Max 구독자부터 대기 명단으로",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "사용량은 기존 Claude 한도를 같이 쓴다",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "hasReactions": true,
+        "hasUnclear": true,
+        "takeCount": 1
+      },
+      "visible": {
+        "reactions": {
+          "y": 5355.21875,
+          "inView": true
+        },
+        "unclear": {
+          "y": 6629.53125,
+          "inView": true
+        },
+        "take": {
+          "y": 6888.53125,
+          "inView": true
+        },
+        "viewTop": 5347,
+        "viewBottom": 7400
+      }
+    },
+    {
+      "page": "/news/2026-10-22",
+      "config": "webkit-iphone15-dark",
+      "file": "v2-en-issue-webkit-iphone15-dark.png",
+      "httpStatus": 200,
+      "metrics": {
+        "innerWidth": 393,
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "theme": "dark",
+        "offenderCount": 0,
+        "offenders": []
+      },
+      "afterScroll": {
+        "innerWidth": 393,
+        "clientWidth": 393,
+        "scrollWidth": 393,
+        "viewportHeight": 2249
+      },
+      "facts": {
+        "items": [
+          {
+            "title": "Claude Duet, an assistant that speaks up first",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "US Pro and Max subscribers first, by waitlist",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Duet shares your existing Claude usage limits",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Approval before sending, paying, signing or deleting",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "headings": [
+          "What shipped",
+          "How it handles sensitive information",
+          "Launch-day integrations",
+          "Reactions",
+          "Still unclear",
+          "My take"
+        ],
+        "summaryChecks": [
+          {
+            "title": "US Pro and Max subscribers first, by waitlist",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          },
+          {
+            "title": "Duet shares your existing Claude usage limits",
+            "hasTakeLabel": false,
+            "hasCommentBox": false
+          }
+        ],
+        "hasReactions": true,
+        "hasUnclear": true,
+        "takeCount": 1
+      },
+      "visible": {
+        "reactions": {
+          "y": 6574.21875,
+          "inView": true
+        },
+        "unclear": {
+          "y": 7876.53125,
+          "inView": true
+        },
+        "take": {
+          "y": 8219.53125,
+          "inView": true
+        },
+        "viewTop": 6566,
+        "viewBottom": 8815
+      }
+    }
+  ]
+}
