@@ -5,7 +5,7 @@ import Image from "next/image";
 import { localizedPath } from "@/lib/devLanguage";
 import { useLocationSearch } from "@/lib/useLocationSearch";
 import { useDevLanguage } from "@/components/DevLanguageProvider";
-import type { ProjectMeta } from "@/lib/projects";
+import type { ProjectKind, ProjectMeta } from "@/lib/projects";
 import { getProjectsCopy } from "@/lib/siteContent";
 import { ProjectExternalLinks } from "@/components/ProjectExternalLinks";
 
@@ -95,6 +95,15 @@ export function ProjectsHome({ projects }: ProjectsHomeProps) {
   const emptySearchResultLabel = useEnglish
     ? "No results found."
     : "검색 결과가 없습니다.";
+  const sectionLabels: Record<ProjectKind, string> = {
+    game: useEnglish ? "Games" : "게임",
+    tool: useEnglish ? "Tools" : "툴",
+  };
+  const projectSections = (["game", "tool"] as const).map((kind) => ({
+    kind,
+    label: sectionLabels[kind],
+    projects: filteredProjects.filter((project) => project.kind === kind),
+  }));
 
   return (
     <div className="max-w-3xl mx-auto px-5 py-10">
@@ -172,15 +181,24 @@ export function ProjectsHome({ projects }: ProjectsHomeProps) {
 
       {hasProjects &&
         (filteredProjects.length > 0 ? (
-          <section className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5">
-            {filteredProjects.map((project) => (
-              <ProjectGridCard
-                key={project.slug}
-                project={project}
-                href={getProjectHref(project.slug)}
-              />
-            ))}
-          </section>
+          <div className="space-y-10">
+            {projectSections.map((section) =>
+              section.projects.length > 0 ? (
+                <section key={section.kind}>
+                  <h2 className="section-kicker mb-4">{section.label}</h2>
+                  <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5">
+                    {section.projects.map((project) => (
+                      <ProjectGridCard
+                        key={project.slug}
+                        project={project}
+                        href={getProjectHref(project.slug)}
+                      />
+                    ))}
+                  </div>
+                </section>
+              ) : null
+            )}
+          </div>
         ) : (
           <div
             className="py-8 text-center text-sm"

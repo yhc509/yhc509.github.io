@@ -1,6 +1,7 @@
 ---
 title: "unity-cli-bridge"
 date: "2026-04-05"
+kind: tool
 description: "A command-line interface for the Unity Editor. Scripts and AI coding agents handle scenes, prefabs, assets, tests, and Play Mode checks with one command each and get the result back as JSON."
 thumbnail: "/images/projects/unity-cli-bridge.png"
 role: "Solo side project, from design and development to release"
