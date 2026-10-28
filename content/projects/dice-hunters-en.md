@@ -1,6 +1,7 @@
 ---
 title: "Dice Hunters"
 date: "2026-10-28"
+kind: game
 description: "A vertical 3D roguelike where the poker-like hand you roll with five dice becomes your attack."
 thumbnail: "/images/projects/dice-hunters.png"
 role: "Solo side project. I handled design, programming and art direction."

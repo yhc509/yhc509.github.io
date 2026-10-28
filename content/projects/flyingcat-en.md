@@ -1,6 +1,7 @@
 ---
 title: "FlyingCat"
 date: "2025-12-20"
+kind: game
 description: "A browser physics game about launching a cat as far as it will fly. Set the angle and power, then use skills mid-air to stretch the distance."
 thumbnail: "/images/projects/flyingcat.png"
 role: "Solo side project from concept to release. AI wrote the implementation, and I set the direction and reviewed the work."

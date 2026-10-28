@@ -1,6 +1,7 @@
 ---
 title: "FlyingCat"
 date: "2025-12-20"
+kind: game
 description: "고양이를 날려 얼마나 멀리 가는지 겨루는 브라우저 물리 게임이다. 각도와 파워를 잡아 날리고, 날아가는 동안 스킬을 써서 거리를 늘린다."
 thumbnail: "/images/projects/flyingcat.png"
 role: "기획부터 배포까지 혼자 만든 개인 프로젝트. 코드는 AI가 짜고, 나는 방향을 잡고 결과를 검수했다."

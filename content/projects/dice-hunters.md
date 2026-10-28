@@ -1,6 +1,7 @@
 ---
 title: "Dice Hunters"
 date: "2026-10-28"
+kind: game
 description: "주사위 다섯 개를 굴려 나온 족보가 그대로 공격이 되는 세로형 3D 로그라이크다. 한국어 이름은 주사위 용병단이다."
 thumbnail: "/images/projects/dice-hunters.png"
 role: "기획, 프로그래밍, 아트 디렉션을 혼자 맡은 개인 프로젝트"

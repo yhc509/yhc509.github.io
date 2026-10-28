@@ -7,8 +7,10 @@ const projectsDirectory = path.join(process.cwd(), "content/projects");
 const projectFileExtensions = [".mdx", ".md"];
 
 const projectLinkKeys = ["github", "demo", "docs", "devlog", "itch"] as const;
+const projectKinds = ["game", "tool"] as const;
 
 type ProjectLinkKey = (typeof projectLinkKeys)[number];
+export type ProjectKind = (typeof projectKinds)[number];
 
 export interface ProjectLinks {
   github?: string;
@@ -25,6 +27,7 @@ export interface ProjectMeta {
   description: string;
   thumbnail: string;
   open: boolean;
+  kind: ProjectKind;
   role: string;
   highlights: string[];
   links: ProjectLinks;
@@ -42,6 +45,7 @@ interface RawProject {
   description: string;
   thumbnail: string;
   open: boolean;
+  kind: ProjectKind;
   content: string;
   role?: string;
   highlights?: string[];
@@ -67,6 +71,18 @@ function readRequiredString(
   }
 
   return value.trim();
+}
+
+function readProjectKind(slug: string, value: unknown): ProjectKind {
+  const kind = readRequiredString(slug, "kind", value);
+  if (kind !== "game" && kind !== "tool") {
+    failInvalidProject(
+      slug,
+      `kind must be one of: ${projectKinds.join(", ")}.`
+    );
+  }
+
+  return kind;
 }
 
 function readOptionalString(value: unknown): string | undefined {
@@ -171,6 +187,7 @@ function readRawProjectBySlug(slug: string, language: DevLanguage): RawProject {
     thumbnail:
       readOptionalString(data.thumbnail) || "/images/default-project.svg",
     open,
+    kind: readProjectKind(slug, data.kind),
     content,
     role: readOptionalString(data.role),
     highlights: Array.isArray(data.highlights)
@@ -215,6 +232,7 @@ function toPublicProject(project: RawProject): Project {
     description: project.description,
     thumbnail: project.thumbnail,
     open: project.open,
+    kind: project.kind,
     role: project.role,
     highlights: project.highlights,
     links: {
@@ -260,6 +278,7 @@ export function getAllProjects(language: DevLanguage = "en"): ProjectMeta[] {
         description: project.description,
         thumbnail: project.thumbnail,
         open: project.open,
+        kind: project.kind,
         role: project.role,
         highlights: project.highlights,
         links: project.links,
