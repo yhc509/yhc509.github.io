@@ -3,15 +3,17 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { formatPostDate } from "./postAssets.mjs";
+import { statusIdFromUrl } from "./remarkXPost.mjs";
 
 export const NEWS_DIR = path.join(process.cwd(), "content/news");
-export const MIN_ITEMS = 3;
+export const MIN_ITEMS = 2;
 export const MAX_ITEMS = 5;
 
 const ISSUE_FILE = /^(\d{4}-\d{2}-\d{2})(-en)?\.md$/;
 
 /**
- * @typedef {{ title: string, url: string, source: string, summary?: string, points?: string[], image?: string, imageAlt?: string, figure?: string, comment?: string }} NewsItem
+ * @typedef {{ after: number, id: string }} NewsXPost an X post card shown after `points[after]`
+ * @typedef {{ title: string, url: string, source: string, summary?: string, points?: string[], xPosts?: NewsXPost[], image?: string, imageAlt?: string, figure?: string, comment?: string }} NewsItem
  * @typedef {{ id: string, issue: number, date: string, modified: string, title: string, description: string,
  *   open: boolean, thumbnail: string | null, thumbnailBase: string | null,
  *   thumbnailLabel: string | null, thumbnailLanguage: "ko" | "en", items: NewsItem[], content: string, missingEnglish: boolean }} NewsIssue
@@ -46,6 +48,17 @@ function nextH2(rest, from) {
     index = lineEnd + 1;
   }
   return rest.length;
+}
+
+/**
+ * Status id when the line at `pos` is only an x.com / twitter.com status URL, else null.
+ * @param {string} rest @param {number} pos @returns {string | null}
+ */
+function xPostIdAt(rest, pos) {
+  const end = rest.indexOf("\n", pos);
+  const line = rest.slice(pos, end === -1 ? rest.length : end);
+  if (end === -1 || !/^https?:\/\/\S+$/.test(line)) return null;
+  return statusIdFromUrl(line);
 }
 
 /** @param {unknown} value @param {string} where */
@@ -149,18 +162,34 @@ function parseItemAt(rest, offset, file, language) {
     assertNews(!summary.includes("\n") && summary.trim() !== "", `${where}: a summary must be one paragraph`);
     pos = blank + 2;
   }
+  /** @type {NewsXPost[]} */
+  const xPosts = [];
   if (rest.startsWith("- ", pos)) {
     points = [];
-    while (rest.startsWith("- ", pos)) {
-      const end = rest.indexOf("\n", pos);
-      assertNews(end !== -1, `${where}: a bullet is not closed`);
-      points.push(requireString(rest.slice(pos + 2, end), `${where}.points`));
-      pos = end + 1;
+    let morePoints = true;
+    while (morePoints) {
+      while (rest.startsWith("- ", pos)) {
+        const end = rest.indexOf("\n", pos);
+        assertNews(end !== -1, `${where}: a bullet is not closed`);
+        points.push(requireString(rest.slice(pos + 2, end), `${where}.points`));
+        pos = end + 1;
+      }
+      assertNews(rest.startsWith("\n", pos), `${where}: expected a blank line after the bullets`);
+      pos += 1;
+      let id = xPostIdAt(rest, pos);
+      morePoints = id !== null;
+      while (id !== null) {
+        xPosts.push({ after: points.length - 1, id });
+        pos = rest.indexOf("\n", pos) + 1;
+        assertNews(rest.startsWith("\n", pos), `${where}: expected a blank line after an X post`);
+        pos += 1;
+        id = xPostIdAt(rest, pos);
+      }
+      morePoints = morePoints && rest.startsWith("- ", pos);
     }
-    assertNews(rest.startsWith("\n", pos), `${where}: expected a blank line after the bullets`);
-    pos += 1;
   }
   assertNews(Boolean(summary || points), `${where}: needs a paragraph or bullets`);
+  assertNews(xPostIdAt(rest, pos) === null, `${where}: an X post line must follow a bullet`);
 
   const sourceHeading = `### ${labels.source}\n\n`;
   assertNews(rest.startsWith(sourceHeading, pos), `${where}: expected ### ${labels.source}`);
@@ -191,6 +220,7 @@ function parseItemAt(rest, offset, file, language) {
       source,
       ...(summary ? { summary } : {}),
       ...(points ? { points } : {}),
+      ...(xPosts.length > 0 ? { xPosts } : {}),
       ...(image ? { image, imageAlt } : {}),
       ...(figure ? { figure } : {}),
       ...(comment ? { comment } : {}),

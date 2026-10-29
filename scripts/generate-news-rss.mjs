@@ -25,6 +25,9 @@ function issueHtml(issue) {
         `<li><p><a href="${escapeXml(item.url)}">${escapeXml(item.title)}</a> (${escapeXml(item.source)})</p>` +
         (item.summary ? `<p>${escapeXml(item.summary)}</p>` : "") +
         (item.points ? `<ul>${item.points.map((point) => `<li>${escapeXml(point)}</li>`).join("")}</ul>` : "") +
+        (item.xPosts ?? [])
+          .map(({ id }) => `<p><a href="https://x.com/i/status/${escapeXml(id)}">https://x.com/i/status/${escapeXml(id)}</a></p>`)
+          .join("") +
         `${item.comment ? `<p><em>${escapeXml(item.comment)}</em></p>` : ""}</li>`
     )
     .join("");

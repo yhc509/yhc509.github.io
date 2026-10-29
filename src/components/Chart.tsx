@@ -663,35 +663,38 @@ function ChartSvg({ spec, variant }: { spec: ChartSpec; variant: Variant }) {
 }
 
 function ChartTable({ spec }: { spec: ChartSpec }) {
+  // The class sits on a wrapper. A table ignores width: 1px and widens the page.
   return (
-    <table className="chart-sr">
-      <caption>
-        {spec.title}
-        {spec.source ? `. ${spec.source}` : ""}
-      </caption>
-      <thead>
-        <tr>
-          <th scope="col">{spec.title}</th>
-          {spec.series.map((series, index) => (
-            <th key={series.name || index} scope="col">
-              {series.name || spec.unit || spec.title}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {spec.labels.map((label, index) => (
-          <tr key={`${label}-${index}`}>
-            <th scope="row">{label}</th>
-            {spec.series.map((series, seriesIndex) => (
-              <td key={series.name || seriesIndex}>
-                {cellText(series.texts[index], spec.unit)}
-              </td>
+    <div className="chart-sr">
+      <table>
+        <caption>
+          {spec.title}
+          {spec.source ? `. ${spec.source}` : ""}
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">{spec.title}</th>
+            {spec.series.map((series, index) => (
+              <th key={series.name || index} scope="col">
+                {series.name || spec.unit || spec.title}
+              </th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {spec.labels.map((label, index) => (
+            <tr key={`${label}-${index}`}>
+              <th scope="row">{label}</th>
+              {spec.series.map((series, seriesIndex) => (
+                <td key={series.name || seriesIndex}>
+                  {cellText(series.texts[index], spec.unit)}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
