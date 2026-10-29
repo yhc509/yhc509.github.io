@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Fragment, Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -20,6 +20,7 @@ import {
   getAdjacentNewsIssues,
   getAllNewsIssues,
   getNewsIssue,
+  type NewsItem,
 } from "@/lib/news";
 import { newsItemImagePath } from "@/lib/newsIssues.mjs";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
@@ -110,6 +111,21 @@ const ENGLISH_MONTHS = [
   "Nov",
   "Dec",
 ];
+
+/** Bullets split into runs, each followed by the X posts placed after its last bullet. */
+function pointRuns(points: string[], xPosts: NonNullable<NewsItem["xPosts"]> = []) {
+  const runs: { points: string[]; postIds: string[] }[] = [];
+  let current: string[] = [];
+  points.forEach((point, index) => {
+    current.push(point);
+    const postIds = xPosts.filter((post) => post.after === index).map((post) => post.id);
+    if (postIds.length > 0 || index === points.length - 1) {
+      runs.push({ points: current, postIds });
+      current = [];
+    }
+  });
+  return runs;
+}
 
 /** "2026-10-13" -> "Oct 13, 2026" / "2026년 10월 13일". */
 function formatIssueDate(date: string, useEnglish: boolean) {
@@ -248,13 +264,19 @@ export async function NewsIssueScreen({
               {item.summary && (
                 <p className="news-copy mt-3 leading-7">{item.summary}</p>
               )}
-              {item.points && (
-                <ul className="news-copy mt-3 list-disc space-y-1 pl-5 leading-7">
-                  {item.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-              )}
+              {item.points &&
+                pointRuns(item.points, item.xPosts).map((run, runIndex) => (
+                  <Fragment key={runIndex}>
+                    <ul className="news-copy mt-3 list-disc space-y-1 pl-5 leading-7">
+                      {run.points.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                    {run.postIds.map((postId) => (
+                      <XPost key={postId} id={postId} />
+                    ))}
+                  </Fragment>
+                ))}
               <p
                 className="mt-2 text-xs"
                 style={{ color: "var(--text-muted)" }}
