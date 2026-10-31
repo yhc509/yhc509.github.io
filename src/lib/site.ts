@@ -5,6 +5,11 @@ import { siteContent } from "./siteContent";
 export const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL || "https://kinkeep.dev";
 
+/** True for a Vercel build, including preview deployments. Canonicals stay on SITE_URL. */
+export function isVercelBuild() {
+  return Boolean(process.env.VERCEL || process.env.VERCEL_ENV);
+}
+
 export function toSiteUrl(path = "/") {
   return new URL(path, SITE_URL).toString();
 }

@@ -1,14 +1,15 @@
 import { existsSync, readFileSync } from "fs";
-import { mkdir } from "fs/promises";
+import { copyFile, mkdir } from "fs/promises";
 import path from "path";
 import puppeteer from "puppeteer-core";
 import sharp from "sharp";
 import { readSlideDecks } from "../src/lib/slides.mjs";
 
 const outputRoot = path.join(process.cwd(), "public/slides-assets");
+const thumbCacheRoot = path.join(process.cwd(), "content/slide-thumbnails");
 const fontDir = path.join(process.cwd(), "content/slides/theme/fonts");
 
-function chromePath() {
+function findChrome() {
   const candidates = [
     process.env.CHROME_PATH,
     "/usr/local/bin/google-chrome",
@@ -17,13 +18,42 @@ function chromePath() {
     "/usr/bin/chromium",
     "/usr/bin/chromium-browser",
   ].filter(Boolean);
-  const found = candidates.find((candidate) => existsSync(candidate));
-  if (!found) {
-    throw new Error(
-      "Chrome is required to render slide thumbnails. Set CHROME_PATH or install google-chrome.",
+  return candidates.find((candidate) => existsSync(candidate)) ?? null;
+}
+
+function isVercelBuild() {
+  return Boolean(process.env.VERCEL || process.env.VERCEL_ENV);
+}
+
+function thumbPaths(deck) {
+  const filename = `thumb-${deck.lang}.webp`;
+  return {
+    destination: path.join(outputRoot, deck.slug, filename),
+    cache: path.join(thumbCacheRoot, deck.slug, filename),
+  };
+}
+
+async function reuseCachedThumbnails(decks) {
+  const missing = [];
+  let reused = 0;
+  for (const deck of decks) {
+    const { destination, cache } = thumbPaths(deck);
+    if (!existsSync(cache)) {
+      missing.push(path.relative(process.cwd(), cache));
+      continue;
+    }
+    await mkdir(path.dirname(destination), { recursive: true });
+    await copyFile(cache, destination);
+    reused += 1;
+  }
+  console.log(
+    `Skipped Chrome slide thumbnails on Vercel. Reused ${reused} cached file(s) from content/slide-thumbnails.`,
+  );
+  if (missing.length > 0) {
+    console.warn(
+      `Missing cached slide thumbnails (gallery images will 404 until committed):\n${missing.join("\n")}`,
     );
   }
-  return found;
 }
 
 function hangulFaceCss() {
@@ -128,9 +158,20 @@ async function main() {
     return;
   }
 
+  const executablePath = findChrome();
+  if (!executablePath) {
+    if (isVercelBuild()) {
+      await reuseCachedThumbnails(decks);
+      return;
+    }
+    throw new Error(
+      "Chrome is required to render slide thumbnails. Set CHROME_PATH or install google-chrome.",
+    );
+  }
+
   const faces = hangulFaceCss();
   const browser = await puppeteer.launch({
-    executablePath: chromePath(),
+    executablePath,
     headless: true,
     args: ["--no-sandbox", "--disable-dev-shm-usage", "--hide-scrollbars"],
   });
@@ -138,7 +179,7 @@ async function main() {
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 720, deviceScaleFactor: 2 });
     for (const deck of decks) {
-      const destination = path.join(outputRoot, deck.slug, `thumb-${deck.lang}.webp`);
+      const { destination } = thumbPaths(deck);
       await mkdir(path.dirname(destination), { recursive: true });
       await page.setContent(thumbnailDocument(deck, faces), { waitUntil: "load" });
       const checked = await paintHangul(page, deck);
