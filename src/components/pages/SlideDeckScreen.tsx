@@ -4,7 +4,7 @@ import { SlideViewer } from "@/components/SlideViewer";
 import { getSlide, getSlideSlugs } from "@/lib/slides";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
 import { clampMetaDescription } from "@/lib/metaDescription";
-import { pageAlternates, toSiteUrl } from "@/lib/site";
+import { isVercelBuild, pageAlternates, toSiteUrl } from "@/lib/site";
 import {
   breadcrumbList,
   jsonLdGraph,
@@ -43,7 +43,10 @@ export async function generateSlideMetadata(
   return {
     title: deck.title,
     description,
-    robots: deck.draft ? { index: false, follow: false } : undefined,
+    robots:
+      deck.draft || isVercelBuild()
+        ? { index: false, follow: false }
+        : undefined,
     openGraph: {
       type: "article",
       locale: inEnglish ? "en_US" : "ko_KR",

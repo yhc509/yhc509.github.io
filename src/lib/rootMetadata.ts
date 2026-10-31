@@ -2,7 +2,7 @@ import { AUTHOR_NAME } from "./author";
 import type { Metadata } from "next";
 import type { DevLanguage } from "@/lib/devLanguage";
 import { clampMetaDescription } from "@/lib/metaDescription";
-import { rssAlternateTypes, SITE_URL, toSiteUrl } from "@/lib/site";
+import { isVercelBuild, rssAlternateTypes, SITE_URL, toSiteUrl } from "@/lib/site";
 import { siteContent } from "@/lib/siteContent";
 
 const siteTitle = siteContent.name;
@@ -44,16 +44,21 @@ export function rootMetadata(language: DevLanguage): Metadata {
       description: siteDescription,
       images: [toSiteUrl("/profile.png")],
     },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
-    },
+    robots: isVercelBuild()
+      ? {
+          index: false,
+          follow: false,
+        }
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-video-preview": -1,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+          },
+        },
   };
 }

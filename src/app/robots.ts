@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { toSiteUrl } from "@/lib/site";
+import { isVercelBuild, toSiteUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -16,6 +16,15 @@ const AI_CRAWLERS = [
 ];
 
 export default function robots(): MetadataRoute.Robots {
+  if (isVercelBuild()) {
+    return {
+      rules: {
+        userAgent: "*",
+        disallow: "/",
+      },
+    };
+  }
+
   return {
     rules: [
       ...AI_CRAWLERS.map((userAgent) => ({

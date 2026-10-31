@@ -446,3 +446,16 @@ ISO 8601 형식 사용:
 - ✅ `2025-12-17`
 - ❌ `2025/12/17`
 - ❌ `December 17, 2025`
+
+## 발행 전 프리뷰
+
+공개 전에 PR에서 글을 확인합니다.
+
+1. 브랜치를 만들고 PR을 엽니다.
+2. Vercel이 PR에 프리뷰 URL을 댓글로 남깁니다.
+3. 그 주소에서 글과 이미지를 확인합니다.
+4. `main`에 머지하면 GitHub Actions가 kinkeep.dev에 배포합니다. `main`은 Vercel에 배포되지 않습니다.
+
+프리뷰 페이지는 `noindex, nofollow`이고 `robots.txt`는 전체 크롤링을 막습니다. canonical은 `https://kinkeep.dev`를 가리킵니다.
+
+Vercel 빌드 이미지에는 Chrome이 없습니다. 슬라이드 목록 썸네일은 `content/slide-thumbnails/<slug>/thumb-ko.webp`, `thumb-en.webp`를 씁니다. 첫 슬라이드를 바꾸면 로컬에서 썸네일을 다시 만들어 그 경로에 커밋합니다.
