@@ -6,7 +6,7 @@ import { formatPostDate } from "./postAssets.mjs";
 import { statusIdFromUrl } from "./remarkXPost.mjs";
 
 export const NEWS_DIR = path.join(process.cwd(), "content/news");
-export const MIN_ITEMS = 2;
+export const MIN_ITEMS = 1;
 export const MAX_ITEMS = 5;
 
 const ISSUE_FILE = /^(\d{4}-\d{2}-\d{2})(-en)?\.md$/;

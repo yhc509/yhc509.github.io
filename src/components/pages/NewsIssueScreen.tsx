@@ -1,4 +1,4 @@
-import { Fragment, Suspense } from "react";
+import { Fragment, Suspense, type ReactNode } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -125,6 +125,37 @@ function pointRuns(points: string[], xPosts: NonNullable<NewsItem["xPosts"]> = [
     }
   });
   return runs;
+}
+
+const COMMENT_LINK =
+  /\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[^\s)]+)\)/g;
+
+/** Plain text, or anchors when the paragraph contains markdown links. */
+function commentNodes(text: string): string | ReactNode[] {
+  if (!text.includes("](")) return text;
+  const nodes: ReactNode[] = [];
+  let last = 0;
+  let index = 0;
+  for (const match of text.matchAll(COMMENT_LINK)) {
+    const start = match.index ?? 0;
+    if (start > last) nodes.push(text.slice(last, start));
+    const href = match[2];
+    const external = href.startsWith("http");
+    nodes.push(
+      <a
+        key={`${href}-${index}`}
+        href={href}
+        className="underline underline-offset-2 hover:opacity-75"
+        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      >
+        {match[1]}
+      </a>,
+    );
+    last = start + match[0].length;
+    index += 1;
+  }
+  if (last < text.length) nodes.push(text.slice(last));
+  return nodes;
 }
 
 /** "2026-10-13" -> "Oct 13, 2026" / "2026년 10월 13일". */
@@ -305,7 +336,7 @@ export async function NewsIssueScreen({
                   >
                     {useEnglish ? "My take" : "내 생각"}
                   </div>
-                  <p className="news-copy">{item.comment}</p>
+                  <p className="news-copy">{commentNodes(item.comment)}</p>
                 </div>
               )}
             </li>
