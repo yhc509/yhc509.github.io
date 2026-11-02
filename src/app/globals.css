@@ -110,15 +110,26 @@ body {
 }
 
 .prose :not(pre) > code,
-.news-copy {
+.news-copy,
+.news-copy code {
   overflow-wrap: anywhere;
 }
 
-.prose code {
+.prose code,
+.news-copy code {
   background: var(--card-border);
   padding: 0.2em 0.4em;
   border-radius: 4px;
   font-size: 0.875em;
+}
+
+.news-copy code {
+  font-weight: 600;
+}
+
+.news-copy code::before,
+.news-copy code::after {
+  content: "`";
 }
 
 .prose pre code {
