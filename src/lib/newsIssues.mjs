@@ -6,7 +6,7 @@ import { formatPostDate } from "./postAssets.mjs";
 import { statusIdFromUrl } from "./remarkXPost.mjs";
 
 export const NEWS_DIR = path.join(process.cwd(), "content/news");
-export const MIN_ITEMS = 2;
+export const MIN_ITEMS = 1;
 export const MAX_ITEMS = 5;
 
 const ISSUE_FILE = /^(\d{4}-\d{2}-\d{2})(-en)?\.md$/;
@@ -136,7 +136,10 @@ function parseItemAt(rest, offset, file, language) {
   if (rest.startsWith("```", pos)) {
     const fenceLineEnd = rest.indexOf("\n", pos);
     const lang = rest.slice(pos + 3, fenceLineEnd);
-    assertNews(/^(?:chart|cards|matrix)$/.test(lang), `${where}: a figure fence must be chart, cards, or matrix`);
+    assertNews(
+      /^(?:chart|cards|matrix|timeline)$/.test(lang),
+      `${where}: a figure fence must be chart, cards, matrix, or timeline`,
+    );
     const closeAt = rest.indexOf("\n```\n", pos);
     assertNews(closeAt !== -1, `${where}: a figure fence is not closed`);
     figure = rest.slice(pos, closeAt + 4);

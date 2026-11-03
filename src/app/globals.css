@@ -110,15 +110,26 @@ body {
 }
 
 .prose :not(pre) > code,
-.news-copy {
+.news-copy,
+.news-copy code {
   overflow-wrap: anywhere;
 }
 
-.prose code {
+.prose code,
+.news-copy code {
   background: var(--card-border);
   padding: 0.2em 0.4em;
   border-radius: 4px;
   font-size: 0.875em;
+}
+
+.news-copy code {
+  font-weight: 600;
+}
+
+.news-copy code::before,
+.news-copy code::after {
+  content: "`";
 }
 
 .prose pre code {
@@ -379,6 +390,8 @@ body {
   font-size: 0.95rem;
   font-weight: 700;
   line-height: 1.3;
+  overflow-wrap: break-word;
+  word-break: keep-all;
 }
 
 .mark-matrix {
@@ -506,6 +519,107 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+.mark-timeline-list {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mark-timeline-list::before {
+  content: "";
+  position: absolute;
+  left: calc(0.35rem - 0.5px);
+  top: 0.7rem;
+  bottom: 0.7rem;
+  width: 1px;
+  background: var(--card-border);
+}
+
+.mark-timeline-item {
+  display: grid;
+  grid-template-columns: 0.7rem minmax(0, 1fr);
+  column-gap: 0.75rem;
+  align-items: start;
+  padding: 0.28rem 0;
+}
+
+.mark-timeline-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-top: 0.22rem;
+  border-radius: 999px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.mark-timeline-dot-confirmed {
+  background: var(--mark-gold);
+}
+
+.mark-timeline-dot-claim {
+  background: var(--background);
+  border: 2px solid var(--mark-gold);
+}
+
+.mark-timeline-dot-none {
+  background: var(--background);
+  border: 2px dashed var(--text-muted);
+}
+
+.mark-timeline-dot-plain {
+  background: var(--text-muted);
+}
+
+.mark-timeline-body {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.mark-timeline-time {
+  flex: none;
+  min-width: 6.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+}
+
+.mark-timeline-event {
+  min-width: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  overflow-wrap: break-word;
+  word-break: keep-all;
+}
+
+.mark-timeline-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  margin: 0.45rem 0 0;
+  padding-left: 1.45rem;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.mark-timeline-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.mark-timeline-legend .mark-timeline-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-top: 0;
+  flex: none;
 }
 
 @media (max-width: 640px) {

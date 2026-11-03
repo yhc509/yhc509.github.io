@@ -1,4 +1,4 @@
-import { Fragment, Suspense } from "react";
+import { Fragment, Suspense, type ReactNode } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -12,9 +12,10 @@ import { createMarkdownComponents } from "@/components/MarkdownComponents";
 import { Cards } from "@/components/Cards";
 import { Chart } from "@/components/Chart";
 import { Matrix } from "@/components/Matrix";
+import { Timeline } from "@/components/Timeline";
 import { XPost } from "@/components/XPost";
 import { remarkChart } from "@/lib/remarkChart.mjs";
-import { remarkCards, remarkMatrix } from "@/lib/remarkSpec.mjs";
+import { remarkCards, remarkMatrix, remarkTimeline } from "@/lib/remarkSpec.mjs";
 import { remarkXPost } from "@/lib/remarkXPost.mjs";
 import {
   getAdjacentNewsIssues,
@@ -125,6 +126,45 @@ function pointRuns(points: string[], xPosts: NonNullable<NewsItem["xPosts"]> = [
     }
   });
   return runs;
+}
+
+const COPY_INLINE =
+  /(`([^`\n]+)`)|(\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[^\s)]+)\))/g;
+
+/**
+ * Plain text when there is no inline code or markdown link.
+ * Topic bullets are not MDX, so backticks would otherwise show as characters.
+ */
+function copyNodes(text: string): string | ReactNode[] {
+  if (!text.includes("`") && !text.includes("](")) return text;
+  const nodes: ReactNode[] = [];
+  let last = 0;
+  let index = 0;
+  for (const match of text.matchAll(COPY_INLINE)) {
+    const start = match.index ?? 0;
+    if (start > last) nodes.push(text.slice(last, start));
+    if (match[1]) {
+      nodes.push(<code key={`c-${index}`}>{match[2]}</code>);
+    } else {
+      const href = match[5];
+      const external = href.startsWith("http");
+      nodes.push(
+        <a
+          key={`a-${index}`}
+          href={href}
+          className="underline underline-offset-2 hover:opacity-75"
+          {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        >
+          {match[4]}
+        </a>,
+      );
+    }
+    last = start + match[0].length;
+    index += 1;
+  }
+  if (index === 0) return text;
+  if (last < text.length) nodes.push(text.slice(last));
+  return nodes;
 }
 
 /** "2026-10-13" -> "Oct 13, 2026" / "2026년 10월 13일". */
@@ -244,10 +284,10 @@ export async function NewsIssueScreen({
                 <div className="news-figure">
                   <MDXRemote
                     source={item.figure}
-                    components={{ Chart, Cards, Matrix }}
+                    components={{ Chart, Cards, Matrix, Timeline }}
                     options={{
                       mdxOptions: {
-                        remarkPlugins: [remarkChart, remarkCards, remarkMatrix],
+                        remarkPlugins: [remarkChart, remarkCards, remarkMatrix, remarkTimeline],
                       },
                     }}
                   />
@@ -262,14 +302,14 @@ export async function NewsIssueScreen({
                 />
               ) : null}
               {item.summary && (
-                <p className="news-copy mt-3 leading-7">{item.summary}</p>
+                <p className="news-copy mt-3 leading-7">{copyNodes(item.summary)}</p>
               )}
               {item.points &&
                 pointRuns(item.points, item.xPosts).map((run, runIndex) => (
                   <Fragment key={runIndex}>
                     <ul className="news-copy mt-3 list-disc space-y-1 pl-5 leading-7">
                       {run.points.map((point) => (
-                        <li key={point}>{point}</li>
+                        <li key={point}>{copyNodes(point)}</li>
                       ))}
                     </ul>
                     {run.postIds.map((postId) => (
@@ -305,7 +345,7 @@ export async function NewsIssueScreen({
                   >
                     {useEnglish ? "My take" : "내 생각"}
                   </div>
-                  <p className="news-copy">{item.comment}</p>
+                  <p className="news-copy">{copyNodes(item.comment)}</p>
                 </div>
               )}
             </li>
@@ -315,10 +355,10 @@ export async function NewsIssueScreen({
           <div className="prose max-w-none mt-8 overflow-x-auto">
             <MDXRemote
               source={issue.content}
-              components={{ ...createMarkdownComponents(), XPost, Chart, Cards, Matrix }}
+              components={{ ...createMarkdownComponents(), XPost, Chart, Cards, Matrix, Timeline }}
               options={{
                 mdxOptions: {
-                  remarkPlugins: [remarkGfm, remarkChart, remarkCards, remarkMatrix, remarkXPost],
+                  remarkPlugins: [remarkGfm, remarkChart, remarkCards, remarkMatrix, remarkTimeline, remarkXPost],
                 },
               }}
             />

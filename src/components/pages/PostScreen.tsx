@@ -17,9 +17,10 @@ import { createMarkdownComponents } from "@/components/MarkdownComponents";
 import { Cards } from "@/components/Cards";
 import { Chart } from "@/components/Chart";
 import { Matrix } from "@/components/Matrix";
+import { Timeline } from "@/components/Timeline";
 import { XPost } from "@/components/XPost";
 import { remarkChart } from "@/lib/remarkChart.mjs";
-import { remarkCards, remarkMatrix } from "@/lib/remarkSpec.mjs";
+import { remarkCards, remarkMatrix, remarkTimeline } from "@/lib/remarkSpec.mjs";
 import { remarkXPost } from "@/lib/remarkXPost.mjs";
 import { localizedPath, type DevLanguage } from "@/lib/devLanguage";
 import { clampMetaDescription } from "@/lib/metaDescription";
@@ -164,6 +165,7 @@ export async function PostScreen({
     Chart,
     Cards,
     Matrix,
+    Timeline,
   };
   const postNavigationLabel = useEnglish ? "Post navigation" : "포스트 탐색";
   const previousPostLabel = useEnglish ? "← Previous post" : "← 이전 글";
@@ -207,6 +209,7 @@ export async function PostScreen({
                   remarkChart,
                   remarkCards,
                   remarkMatrix,
+                  remarkTimeline,
                   remarkXPost,
                   createPostAssetRemarkPlugin(postDir),
                 ],
