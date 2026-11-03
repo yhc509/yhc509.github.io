@@ -152,7 +152,7 @@ frontmatter에는 호 메타만 둡니다. 꼭지 글은 본문에 적습니다.
 
 꼭지는 1개에서 5개입니다. 각 꼭지는 `##` 제목으로 시작합니다.
 
-1. 그림이 있으면 `chart`, `cards`, `matrix` 펜스 또는 `![설명](img/파일.png)` 한 줄을 둡니다.
+1. 그림이 있으면 `chart`, `cards`, `matrix`, `timeline` 펜스 또는 `![설명](img/파일.png)` 한 줄을 둡니다.
 2. 요약은 한 문단입니다. 문단 안에 빈 줄을 넣지 않습니다. 불릿은 `- `로 적습니다. 문단과 불릿 중 하나는 있어야 하고, 둘 다 있어도 됩니다.
 3. X 글은 불릿 뒤에 주소만 있는 한 줄로 둡니다. 주소 줄 앞뒤에는 빈 줄을 둡니다. 카드는 바로 앞 불릿 아래에 그려지고, 카드 뒤에 불릿을 이어 쓸 수 있습니다. 불릿 없이 요약 문단 바로 뒤에는 둘 수 없습니다.
 4. 출처는 `### 출처` 다음에 `[표시 이름](https://...)` 한 줄입니다. 영어 파일은 `### Source`입니다.
@@ -295,7 +295,7 @@ console.log(greeting);
 
 ### 카드와 비교표
 
-포스트와 뉴스 본문에서 `cards`, `matrix` 펜스로 그립니다. 보이는 문구는 그 언어 파일에 그대로 적습니다. 빌드 때 HTML과 SVG가 되고, 라이트와 다크는 사이트 `data-theme`를 따릅니다. 브라우저 스크립트는 없습니다.
+포스트와 뉴스 본문에서 `cards`, `matrix`, `timeline` 펜스로 그립니다. 보이는 문구는 그 언어 파일에 그대로 적습니다. 빌드 때 HTML과 SVG가 되고, 라이트와 다크는 사이트 `data-theme`를 따릅니다. 브라우저 스크립트는 없습니다.
 
 브랜드 아이콘은 `grok`, `cursor`, `x`, `gemini`, `openai`, `anthropic`입니다. 그 외 이름은 [Lucide](https://lucide.dev/icons/) 아이콘 이름입니다. 로고 줄에 Lucide 아이콘을 쓰면 `label`이 필요합니다.
 
@@ -347,6 +347,24 @@ notes:
 ````
 
 셀은 `check`, `none`, `{ limited: 짧은말 }`, 또는 그대로 보일 문장입니다. 범례는 쓰인 기호와 `notes`로 만들어집니다. `check`나 `none`을 쓰면 `legend`에 그 언어의 말을 적습니다.
+
+````markdown
+```timeline
+items:
+  - time: "10/28 05:26"
+    event: 정상 2.1.312 공개
+    evidence: confirmed
+  - time: "10/30 19:08"
+    event: "'검증 계정' 주장"
+    evidence: claim
+legend:
+  confirmed: 확인됨
+  claim: 주장
+  none: 아직 없음
+```
+````
+
+`timeline`은 세로선과 점입니다. 항목은 1개에서 12개입니다. `time`과 `event`는 필수입니다. `evidence`는 `confirmed`, `claim`, `none` 중 하나이고 생략할 수 있습니다. 쓴 근거는 `legend`에 그 언어의 말을 적습니다. 그림 아래에는 그 한 줄만 나옵니다.
 
 뉴스 꼭지의 그림도 본문에 같은 펜스를 그대로 넣습니다.
 

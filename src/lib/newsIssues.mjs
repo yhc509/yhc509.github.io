@@ -136,7 +136,10 @@ function parseItemAt(rest, offset, file, language) {
   if (rest.startsWith("```", pos)) {
     const fenceLineEnd = rest.indexOf("\n", pos);
     const lang = rest.slice(pos + 3, fenceLineEnd);
-    assertNews(/^(?:chart|cards|matrix)$/.test(lang), `${where}: a figure fence must be chart, cards, or matrix`);
+    assertNews(
+      /^(?:chart|cards|matrix|timeline)$/.test(lang),
+      `${where}: a figure fence must be chart, cards, matrix, or timeline`,
+    );
     const closeAt = rest.indexOf("\n```\n", pos);
     assertNews(closeAt !== -1, `${where}: a figure fence is not closed`);
     figure = rest.slice(pos, closeAt + 4);

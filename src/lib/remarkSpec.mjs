@@ -27,3 +27,4 @@ export function remarkSpecBlock(lang, componentName) {
 
 export const remarkCards = remarkSpecBlock("cards", "Cards");
 export const remarkMatrix = remarkSpecBlock("matrix", "Matrix");
+export const remarkTimeline = remarkSpecBlock("timeline", "Timeline");

@@ -12,9 +12,10 @@ import { createMarkdownComponents } from "@/components/MarkdownComponents";
 import { Cards } from "@/components/Cards";
 import { Chart } from "@/components/Chart";
 import { Matrix } from "@/components/Matrix";
+import { Timeline } from "@/components/Timeline";
 import { XPost } from "@/components/XPost";
 import { remarkChart } from "@/lib/remarkChart.mjs";
-import { remarkCards, remarkMatrix } from "@/lib/remarkSpec.mjs";
+import { remarkCards, remarkMatrix, remarkTimeline } from "@/lib/remarkSpec.mjs";
 import { remarkXPost } from "@/lib/remarkXPost.mjs";
 import {
   getAdjacentNewsIssues,
@@ -283,10 +284,10 @@ export async function NewsIssueScreen({
                 <div className="news-figure">
                   <MDXRemote
                     source={item.figure}
-                    components={{ Chart, Cards, Matrix }}
+                    components={{ Chart, Cards, Matrix, Timeline }}
                     options={{
                       mdxOptions: {
-                        remarkPlugins: [remarkChart, remarkCards, remarkMatrix],
+                        remarkPlugins: [remarkChart, remarkCards, remarkMatrix, remarkTimeline],
                       },
                     }}
                   />
@@ -354,10 +355,10 @@ export async function NewsIssueScreen({
           <div className="prose max-w-none mt-8 overflow-x-auto">
             <MDXRemote
               source={issue.content}
-              components={{ ...createMarkdownComponents(), XPost, Chart, Cards, Matrix }}
+              components={{ ...createMarkdownComponents(), XPost, Chart, Cards, Matrix, Timeline }}
               options={{
                 mdxOptions: {
-                  remarkPlugins: [remarkGfm, remarkChart, remarkCards, remarkMatrix, remarkXPost],
+                  remarkPlugins: [remarkGfm, remarkChart, remarkCards, remarkMatrix, remarkTimeline, remarkXPost],
                 },
               }}
             />
