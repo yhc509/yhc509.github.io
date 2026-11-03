@@ -5,6 +5,7 @@ import readingTime from "reading-time";
 export { filterPostsBySearch } from "./postFilters";
 import type { DevLanguage } from "./devLanguage";
 import { formatPostDate } from "./postAssets.mjs";
+import { isProjectDevlog } from "./projectDevlog.mjs";
 import { endOfSeoulDay, resolveModifiedDate } from "./contentDates.mjs";
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
@@ -190,11 +191,16 @@ export function getAllPosts(language: DevLanguage = "en"): PostMeta[] {
   return posts;
 }
 
+/** Posts shown on the home list and in feeds. Project devlogs stay on the project page. */
+export function getFeedPosts(language: DevLanguage = "en"): PostMeta[] {
+  return getAllPosts(language).filter((post) => !isProjectDevlog(post));
+}
+
 export function getAdjacentPosts(
   slug: string,
   language: DevLanguage = "en"
 ): { prev: PostMeta | null; next: PostMeta | null } {
-  const posts = getAllPosts(language);
+  const posts = getFeedPosts(language);
   const index = posts.findIndex((post) => post.slug === slug);
 
   if (index === -1) {

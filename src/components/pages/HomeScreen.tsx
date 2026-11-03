@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getAllProjects } from "@/lib/projects";
-import { getAllPosts, buildPostProjectOptions } from "@/lib/posts";
+import { getFeedPosts, buildPostProjectOptions } from "@/lib/posts";
 import { BlogHome } from "@/components/BlogHome";
 import { HomeHero } from "@/components/HomeHero";
 import type { DevLanguage } from "@/lib/devLanguage";
@@ -17,7 +17,7 @@ export function homeMetadata(language: DevLanguage): Metadata {
 }
 
 export function HomeScreen({ language }: { language: DevLanguage }) {
-  const posts = getAllPosts(language);
+  const posts = getFeedPosts(language);
   const projects = getAllProjects(language);
   const projectTitleMap = Object.fromEntries(
     projects.map((project) => [project.slug, project.title])
