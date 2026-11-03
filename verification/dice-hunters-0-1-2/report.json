@@ -1,0 +1,258 @@
+[
+  {
+    "name": "ko-desktop",
+    "status": 200,
+    "title": "Dice Hunters 0.1.2: 새 영웅 모델, 더 빠른 로딩, 카드 드래그 수정",
+    "date": "2026-11-03",
+    "projectHref": [
+      "/ko/projects/dice-hunters"
+    ],
+    "imageCount": 5,
+    "broken": 0,
+    "images": [
+      {
+        "alt": "Dice Hunters 0.1.2 타이틀 화면",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-title.png",
+        "naturalWidth": 480,
+        "naturalHeight": 854,
+        "complete": true,
+        "renderedWidth": 480,
+        "renderedHeight": 854
+      },
+      {
+        "alt": "킵한 주사위. 이전은 얇은 테두리뿐이고, 0.1.2는 두꺼운 테두리와 금색 빛, 자물쇠가 있다.",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-kept-dice.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 343,
+        "complete": true,
+        "renderedWidth": 727.96875,
+        "renderedHeight": 208.078125
+      },
+      {
+        "alt": "Sera Hunter, Brook Tank, Mirel Mage. 일러스트, 이전 모델, 0.1.2 모델",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-heroes-1.png",
+        "naturalWidth": 1088,
+        "naturalHeight": 1483,
+        "complete": true,
+        "renderedWidth": 727.984375,
+        "renderedHeight": 992.296875
+      },
+      {
+        "alt": "Fin Archer, Orga Rogue, Father Teo Priest. 일러스트, 이전 모델, 0.1.2 모델",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-heroes-2.png",
+        "naturalWidth": 1088,
+        "naturalHeight": 1483,
+        "complete": true,
+        "renderedWidth": 727.984375,
+        "renderedHeight": 992.296875
+      },
+      {
+        "alt": "Brook Tank. 왼쪽은 게임에서 보이는 뒤쪽이고, 오른쪽은 앞모습이다. 앞 얼굴은 거칠다.",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-brook-face.png",
+        "naturalWidth": 1192,
+        "naturalHeight": 684,
+        "complete": true,
+        "renderedWidth": 727.96875,
+        "renderedHeight": 417.734375
+      }
+    ]
+  },
+  {
+    "name": "ko-mobile",
+    "status": 304,
+    "title": "Dice Hunters 0.1.2: 새 영웅 모델, 더 빠른 로딩, 카드 드래그 수정",
+    "date": "2026-11-03",
+    "projectHref": [
+      "/ko/projects/dice-hunters"
+    ],
+    "imageCount": 5,
+    "broken": 0,
+    "images": [
+      {
+        "alt": "Dice Hunters 0.1.2 타이틀 화면",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-title.png",
+        "naturalWidth": 480,
+        "naturalHeight": 854,
+        "complete": true,
+        "renderedWidth": 349.984375,
+        "renderedHeight": 622.703125
+      },
+      {
+        "alt": "킵한 주사위. 이전은 얇은 테두리뿐이고, 0.1.2는 두꺼운 테두리와 금색 빛, 자물쇠가 있다.",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-kept-dice.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 343,
+        "complete": true,
+        "renderedWidth": 349.953125,
+        "renderedHeight": 100.03125
+      },
+      {
+        "alt": "Sera Hunter, Brook Tank, Mirel Mage. 일러스트, 이전 모델, 0.1.2 모델",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-heroes-1.png",
+        "naturalWidth": 1088,
+        "naturalHeight": 1483,
+        "complete": true,
+        "renderedWidth": 349.984375,
+        "renderedHeight": 477.0625
+      },
+      {
+        "alt": "Fin Archer, Orga Rogue, Father Teo Priest. 일러스트, 이전 모델, 0.1.2 모델",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-heroes-2.png",
+        "naturalWidth": 1088,
+        "naturalHeight": 1483,
+        "complete": true,
+        "renderedWidth": 349.984375,
+        "renderedHeight": 477.0625
+      },
+      {
+        "alt": "Brook Tank. 왼쪽은 게임에서 보이는 뒤쪽이고, 오른쪽은 앞모습이다. 앞 얼굴은 거칠다.",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-brook-face.png",
+        "naturalWidth": 1192,
+        "naturalHeight": 684,
+        "complete": true,
+        "renderedWidth": 349.96875,
+        "renderedHeight": 200.828125
+      }
+    ]
+  },
+  {
+    "name": "en-desktop",
+    "status": 200,
+    "title": "Dice Hunters 0.1.2: new hero models, faster loading, card drag fix",
+    "date": "2026-11-03",
+    "projectHref": [
+      "/projects/dice-hunters"
+    ],
+    "imageCount": 5,
+    "broken": 0,
+    "images": [
+      {
+        "alt": "Dice Hunters 0.1.2 title screen",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-title.png",
+        "naturalWidth": 480,
+        "naturalHeight": 854,
+        "complete": true,
+        "renderedWidth": 480,
+        "renderedHeight": 854
+      },
+      {
+        "alt": "Kept dice before and after. The previous dice have only a thin border. The 0.1.2 dice have a thick border, a gold glow, and a lock icon.",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-kept-dice.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 343,
+        "complete": true,
+        "renderedWidth": 727.96875,
+        "renderedHeight": 208.078125
+      },
+      {
+        "alt": "Sera Hunter, Brook Tank, and Mirel Mage: illustration, previous model, and 0.1.2 model",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-heroes-1.png",
+        "naturalWidth": 1088,
+        "naturalHeight": 1483,
+        "complete": true,
+        "renderedWidth": 727.984375,
+        "renderedHeight": 992.296875
+      },
+      {
+        "alt": "Fin Archer, Orga Rogue, and Father Teo Priest: illustration, previous model, and 0.1.2 model",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-heroes-2.png",
+        "naturalWidth": 1088,
+        "naturalHeight": 1483,
+        "complete": true,
+        "renderedWidth": 727.984375,
+        "renderedHeight": 992.296875
+      },
+      {
+        "alt": "Brook Tank from behind, as seen in the game, and from the front. The front face is rough.",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-brook-face.png",
+        "naturalWidth": 1192,
+        "naturalHeight": 684,
+        "complete": true,
+        "renderedWidth": 727.96875,
+        "renderedHeight": 417.734375
+      }
+    ]
+  },
+  {
+    "name": "en-mobile",
+    "status": 304,
+    "title": "Dice Hunters 0.1.2: new hero models, faster loading, card drag fix",
+    "date": "2026-11-03",
+    "projectHref": [
+      "/projects/dice-hunters"
+    ],
+    "imageCount": 5,
+    "broken": 0,
+    "images": [
+      {
+        "alt": "Dice Hunters 0.1.2 title screen",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-title.png",
+        "naturalWidth": 480,
+        "naturalHeight": 854,
+        "complete": true,
+        "renderedWidth": 349.984375,
+        "renderedHeight": 622.703125
+      },
+      {
+        "alt": "Kept dice before and after. The previous dice have only a thin border. The 0.1.2 dice have a thick border, a gold glow, and a lock icon.",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-kept-dice.png",
+        "naturalWidth": 1200,
+        "naturalHeight": 343,
+        "complete": true,
+        "renderedWidth": 349.953125,
+        "renderedHeight": 100.03125
+      },
+      {
+        "alt": "Sera Hunter, Brook Tank, and Mirel Mage: illustration, previous model, and 0.1.2 model",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-heroes-1.png",
+        "naturalWidth": 1088,
+        "naturalHeight": 1483,
+        "complete": true,
+        "renderedWidth": 349.984375,
+        "renderedHeight": 477.0625
+      },
+      {
+        "alt": "Fin Archer, Orga Rogue, and Father Teo Priest: illustration, previous model, and 0.1.2 model",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-heroes-2.png",
+        "naturalWidth": 1088,
+        "naturalHeight": 1483,
+        "complete": true,
+        "renderedWidth": 349.984375,
+        "renderedHeight": 477.0625
+      },
+      {
+        "alt": "Brook Tank from behind, as seen in the game, and from the front. The front face is rough.",
+        "src": "http://localhost:3456/posts-images/dicehunters/img/dh012-brook-face.png",
+        "naturalWidth": 1192,
+        "naturalHeight": 684,
+        "complete": true,
+        "renderedWidth": 349.96875,
+        "renderedHeight": 200.828125
+      }
+    ]
+  },
+  {
+    "name": "ko-project",
+    "status": 200,
+    "found": true,
+    "expect": "새 영웅 모델"
+  },
+  {
+    "name": "en-project",
+    "status": 200,
+    "found": true,
+    "expect": "new hero models"
+  },
+  {
+    "name": "ko-home",
+    "status": 200,
+    "found": true,
+    "expect": "새 영웅 모델"
+  },
+  {
+    "name": "en-home",
+    "status": 200,
+    "found": true,
+    "expect": "new hero models"
+  }
+]
