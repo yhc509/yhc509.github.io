@@ -9,9 +9,10 @@ const LIST_QUERY_KEYS = ["month", "q", "page", "limit", "tags"] as const;
 
 interface BackButtonProps {
   basePath?: string;
+  label?: string;
 }
 
-export function BackButton({ basePath = "/" }: BackButtonProps) {
+export function BackButton({ basePath = "/", label }: BackButtonProps) {
   const language = useDevLanguage();
   const useEnglish = language === "en";
   const searchParams = useSearchParams();
@@ -22,7 +23,8 @@ export function BackButton({ basePath = "/" }: BackButtonProps) {
   }
   const queryString = params.toString();
   const localizedBasePath = localizedPath(basePath, language);
-  const backUrl = queryString ? `${localizedBasePath}?${queryString}` : localizedBasePath;
+  const backUrl =
+    basePath === "/" && queryString ? `${localizedBasePath}?${queryString}` : localizedBasePath;
 
   return (
     <Link
@@ -43,7 +45,7 @@ export function BackButton({ basePath = "/" }: BackButtonProps) {
         <path d="M19 12H5" />
         <path d="M12 19l-7-7 7-7" />
       </svg>
-      {useEnglish ? "Back to list" : "목록으로"}
+      {label ?? (useEnglish ? "Back to list" : "목록으로")}
     </Link>
   );
 }

@@ -2,6 +2,7 @@ import { promises as fs } from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { endOfSeoulDay } from "../src/lib/contentDates.mjs";
+import { isProjectDevlog } from "../src/lib/projectDevlog.mjs";
 import { readNewsIssues } from "../src/lib/newsIssues.mjs";
 import { readSlideDecks } from "../src/lib/slides.mjs";
 
@@ -68,7 +69,11 @@ async function posts() {
       }
 
       const korean = await readMarkdown(koreanPath);
-      if (korean.data.open === false || !isPublishable(dateString(korean.data.date))) {
+      if (
+        korean.data.open === false ||
+        !isPublishable(dateString(korean.data.date)) ||
+        isProjectDevlog(korean.data)
+      ) {
         continue;
       }
 

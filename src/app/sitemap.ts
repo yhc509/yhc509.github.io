@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { getAllPosts } from "@/lib/posts";
+import { getFeedPosts } from "@/lib/posts";
 import { getAllProjects } from "@/lib/projects";
 import { getAllNewsIssues } from "@/lib/news";
 import { getAllSlides, getSlideSlugs } from "@/lib/slides";
@@ -40,7 +40,7 @@ function languageEntry(
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const posts = getAllPosts("en");
+  const posts = getFeedPosts("en");
   const projects = getAllProjects("en");
   const newsIssues = getAllNewsIssues("ko");
   const slideDecks = getAllSlides();

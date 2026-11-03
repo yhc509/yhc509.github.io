@@ -6,6 +6,7 @@ import matter from "gray-matter";
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { createPostAssetRemarkPlugin, resolvePostAssetSrc } from "../src/lib/postAssets.mjs";
+import { isProjectDevlog } from "../src/lib/projectDevlog.mjs";
 
 const SITE_URL = "https://kinkeep.dev";
 const SITE_TITLE = "kinkeep.dev";
@@ -176,7 +177,7 @@ async function readPostItem(filePath, slug = canonicalSlug(filePath)) {
   const source = await fs.readFile(filePath, "utf8");
   const { data, content } = matter(source);
 
-  if (data.open === false) {
+  if (data.open === false || isProjectDevlog(data)) {
     return null;
   }
 

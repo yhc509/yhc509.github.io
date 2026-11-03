@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAdjacentPosts, getAllPostSlugs, getPostBySlug } from "@/lib/posts";
+import { getProjectBySlug } from "@/lib/projects";
+import { isProjectDevlog } from "@/lib/projectDevlog.mjs";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { BackButton } from "@/components/BackButton";
@@ -46,6 +48,14 @@ function postPaths(slug: string) {
 
 function postImagePath(slug: string, language: DevLanguage) {
   return language === "ko" ? `/og/ko/${slug}.png` : `/og/${slug}.png`;
+}
+
+function projectCrumbName(slug: string, language: DevLanguage) {
+  try {
+    return getProjectBySlug(slug, language).title;
+  } catch {
+    return slug;
+  }
 }
 
 export function generatePostStaticParams() {
@@ -123,6 +133,7 @@ export async function PostScreen({
     notFound();
   }
 
+  const projectDevlog = isProjectDevlog(post) ? post.project : undefined;
   const { prev, next } = getAdjacentPosts(currentSlug, language);
   const { englishPath } = postPaths(currentSlug);
   const pagePath = localizedPath(englishPath, language);
@@ -130,6 +141,15 @@ export async function PostScreen({
   const imagePath = postImagePath(currentSlug, language);
 
   const pageUrl = toSiteUrl(pagePath);
+  const parentCrumb = projectDevlog
+    ? {
+        name: projectCrumbName(projectDevlog, language),
+        item: toSiteUrl(localizedPath(`/projects/${projectDevlog}`, language)),
+      }
+    : {
+        name: useEnglish ? "Home" : "홈",
+        item: toSiteUrl(localizedPath("/", language)),
+      };
   const jsonLd = jsonLdGraph([
     {
       "@type": "BlogPosting",
@@ -146,13 +166,7 @@ export async function PostScreen({
       isPartOf: websiteReference(),
       wordCount: post.content.split(/\s+/).length,
     },
-    breadcrumbList([
-      {
-        name: useEnglish ? "Home" : "홈",
-        item: toSiteUrl(localizedPath("/", language)),
-      },
-      { name: post.title, item: pageUrl },
-    ]),
+    breadcrumbList([parentCrumb, { name: post.title, item: pageUrl }]),
   ]);
 
   const postDir = slug.length > 1 ? slug.slice(0, -1).join("/") : "";
@@ -178,7 +192,12 @@ export async function PostScreen({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Suspense>
-        <BackButton />
+        <BackButton
+          basePath={projectDevlog ? `/projects/${projectDevlog}` : "/"}
+          label={
+            projectDevlog ? (useEnglish ? "Back to project" : "프로젝트로") : undefined
+          }
+        />
       </Suspense>
       <KoreanFallbackNote
         show={useEnglish && post.missingEnglish}
