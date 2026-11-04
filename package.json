@@ -3,11 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "node scripts/sync-post-assets.mjs && node scripts/sync-slide-assets.mjs && node scripts/generate-slide-thumbnails.mjs && node scripts/generate-og-images.mjs && node scripts/generate-rss.mjs && node scripts/generate-news-rss.mjs && node scripts/generate-news-og.mjs && node scripts/generate-llms.mjs",
-    "dev": "next dev",
-    "prebuild": "node scripts/sync-post-assets.mjs && node scripts/sync-slide-assets.mjs && node scripts/generate-slide-thumbnails.mjs && node scripts/generate-og-images.mjs && node scripts/generate-rss.mjs && node scripts/generate-news-rss.mjs && node scripts/generate-news-og.mjs && node scripts/generate-llms.mjs && node scripts/preview-static-html.mjs",
-    "postbuild": "node scripts/preview-static-html.mjs --restore",
-    "build": "next build",
+    "sync-generated": "node scripts/sync-post-assets.mjs && node scripts/sync-slide-assets.mjs && node scripts/generate-slide-thumbnails.mjs && node scripts/generate-og-images.mjs && node scripts/generate-rss.mjs && node scripts/generate-news-rss.mjs && node scripts/generate-news-og.mjs && node scripts/generate-llms.mjs",
+    "dev": "npm run sync-generated && next dev",
+    "build": "npm run sync-generated && node scripts/preview-static-html.mjs && next build && node scripts/preview-static-html.mjs --restore",
     "lint": "eslint",
     "test": "node --test src/lib/slides.test.mjs src/lib/projectDevlog.test.mjs",
     "preview": "serve out"

@@ -9,6 +9,7 @@ Next.js 16 + MDX 기반 정적 블로그입니다.
 - [프로젝트 구조](./project-structure.md)
 - [설정 가이드](./configuration.md)
 - [콘텐츠 작성 가이드](./content-guide.md)
+- [의존성 공급망](./supply-chain.md)
 
 ## 빠른 시작
 

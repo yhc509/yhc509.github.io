@@ -33,7 +33,7 @@ Posts support `type: article | devlog | archive_candidate` and optional `project
 
 ### Post Asset Pipeline
 
-Images/videos placed alongside markdown files in `content/posts/` are copied to `public/posts-images/` by `scripts/sync-post-assets.mjs` (runs automatically as `predev`/`prebuild` hook). A custom remark plugin (`src/lib/postAssets.ts`) rewrites relative asset paths in MDX to point to `/posts-images/`.
+Images/videos placed alongside markdown files in `content/posts/` are copied to `public/posts-images/` by `scripts/sync-post-assets.mjs` (runs from `sync-generated`, which `dev` and `build` call). A custom remark plugin (`src/lib/postAssets.ts`) rewrites relative asset paths in MDX to point to `/posts-images/`.
 
 ### Key Libraries
 
