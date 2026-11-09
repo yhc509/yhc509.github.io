@@ -23,14 +23,6 @@ export function rssAlternateTypes(
         url: toSiteUrl("/feed.xml"),
         title: language === "ko" ? "글" : "Posts",
       },
-      {
-        url: toSiteUrl("/news/feed.xml"),
-        title: "AI News",
-      },
-      {
-        url: toSiteUrl("/ko/news/feed.xml"),
-        title: language === "ko" ? "AI 뉴스" : "AI News, Korean",
-      },
     ],
   };
 }

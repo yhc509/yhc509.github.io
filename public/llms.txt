@@ -4,12 +4,9 @@
 
 English URLs are primary. Korean pages live under /ko.
 
-News is published on Tuesday and Thursday.
-
 ## Key pages
 
 - [About](https://kinkeep.dev/about): Unity client programmer. Korean: https://kinkeep.dev/ko/about
-- [AI News](https://kinkeep.dev/news): Tuesday and Thursday notes on AI tools I use. Korean: https://kinkeep.dev/ko/news
 
 ## Game development
 
