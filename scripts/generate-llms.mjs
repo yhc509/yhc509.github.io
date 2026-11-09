@@ -3,7 +3,6 @@ import path from "path";
 import matter from "gray-matter";
 import { endOfSeoulDay } from "../src/lib/contentDates.mjs";
 import { isProjectDevlog } from "../src/lib/projectDevlog.mjs";
-import { readNewsIssues } from "../src/lib/newsIssues.mjs";
 import { readSlideDecks } from "../src/lib/slides.mjs";
 
 const SITE_URL = "https://kinkeep.dev";
@@ -113,17 +112,6 @@ function slideDecks() {
   });
 }
 
-function newsIssues() {
-  return readNewsIssues("en").map((issue) => ({
-    id: issue.id,
-    title: issue.title,
-    date: issue.date,
-    description: issue.description.replace(/\s+/g, " ").trim(),
-    body: issue.content.trim(),
-    koreanOnly: issue.missingEnglish,
-  }));
-}
-
 function section(title, lines) {
   return [`## ${title}`, "", ...lines, ""].join("\n");
 }
@@ -150,7 +138,6 @@ async function assertLlmsLinks(publishedPosts) {
 }
 
 const publishedPosts = await posts();
-const issues = await newsIssues();
 const decks = slideDecks();
 await assertLlmsLinks(publishedPosts);
 
@@ -161,11 +148,8 @@ const full = [
   "",
   "English URLs are primary. Korean pages live under /ko.",
   "",
-  "News is published on Tuesday and Thursday.",
-  "",
   section("Key pages", [
     `- About: ${SITE_URL}/about (Korean: ${SITE_URL}/ko/about)`,
-    `- AI News: ${SITE_URL}/news (Korean: ${SITE_URL}/ko/news)`,
     `- Slides: ${SITE_URL}/slides (Korean: ${SITE_URL}/ko/slides)`,
   ]),
   ...decks.map((deck) =>
@@ -178,17 +162,6 @@ const full = [
       deck.koreanOnly ? "Language: Korean only" : "Language: English and Korean",
       "",
       deck.description,
-    ]),
-  ),
-  ...issues.map((issue) =>
-    entry(issue.title, `${SITE_URL}/news/${issue.id}`, [
-      `Date: ${issue.date}`,
-      `Korean: ${SITE_URL}/ko/news/${issue.id}`,
-      issue.koreanOnly ? "Language: Korean only" : "Language: English",
-      "",
-      issue.description,
-      "",
-      issue.body,
     ]),
   ),
   ...publishedPosts.map((post) =>
@@ -206,5 +179,5 @@ const full = [
 
 await fs.writeFile(FULL_PATH, `${full.trim()}\n`, "utf8");
 console.log(
-  `Generated llms-full.txt with ${publishedPosts.length} posts, ${issues.length} news issues, and ${decks.length} slide decks`,
+  `Generated llms-full.txt with ${publishedPosts.length} posts and ${decks.length} slide decks`,
 );
